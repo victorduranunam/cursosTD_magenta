@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//Prueba -> Funciona!
+//Route::get('division', "App\Http\Controllers\DivisionController@index")->name("division.consulta");
