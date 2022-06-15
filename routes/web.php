@@ -17,4 +17,44 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Prueba -> Funciona!
-//Route::get('division', "App\Http\Controllers\DivisionController@index")->name("division.consulta");
+Route::get('division', "DivisionController@index")->name("division.consulta");
+
+//Route Account
+
+//Route Activity
+
+//Route Activity Evaluation
+
+//Route Administrator
+
+//Route Career
+
+//Route Category
+
+//Route Department
+
+//Route Diploma
+
+//Route Division
+
+//Route Faculty
+
+//Route Instructor
+
+//Route Instructor Evaluation
+
+//Route Participant
+
+//Route Professor Career
+
+//Route Professor Category
+
+//Route Professor
+
+//Route Professor Division
+
+//Route Professor Faculty
+
+//Route Seminar Topic
+
+//Route Venue
