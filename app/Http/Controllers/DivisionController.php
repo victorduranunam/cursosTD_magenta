@@ -13,7 +13,7 @@ class DivisionController extends Controller
         $users = Division::all()->first();
         return view("pages.home")
             ->with("users",$users)
-            ->with("success", '1');
+            ->with("warning", '1');
     }
 
 }

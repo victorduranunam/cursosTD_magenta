@@ -4,20 +4,20 @@
     </div>
 @endif
 
-@if (Session::has('danger'))
+@if (isSet($danger))
     <div class="alert alert-danger" role=alert>
-        <strong> {{Session::get('danger')}}</strong>
+        <strong> {!! $danger !!}</strong>
     </div>
 @endif
 
-@if (Session::has('info'))
+@if (isSet($info))
     <div class="alert alert-info" role=alert>
-        <strong> {{Session::get('info')}}</strong>
+        <strong> {!! $info !!}</strong>
     </div>
 @endif
 
-@if (Session::has('warning'))
+@if (isSet($warning))
     <div class="alert alert-warning" role=alert>
-        <strong> {{Session::get('warning')}}</strong>
+        <strong> {!! $warning !!}</strong>
     </div>
 @endif
