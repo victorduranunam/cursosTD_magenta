@@ -11,7 +11,9 @@
 </head>
 <body>
   <div>
-    <a href="" class="prueba">Hola</a>
+    <div>
+      @yield('content')
+    </div>
   </div>
 
   <script src={!! asset('bootstrap/js/bootstrap.min.js') !!} ></script>

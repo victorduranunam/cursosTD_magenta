@@ -11,8 +11,9 @@ class DivisionController extends Controller
     public function index()
     {
         $users = Division::all()->first();
-        return view("welcome")
-            ->with("users",$users);
+        return view("pages.home")
+            ->with("users",$users)
+            ->with("success", '1');
     }
 
 }
