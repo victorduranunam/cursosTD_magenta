@@ -11,22 +11,22 @@
   <title>MagestiCD | Centro de Docencia</title>
 </head>
 <body class="home">
-  
-<div class="flex-center position-ref full-height">
-           
-  <div class="top-right links">             
-    <a href="">Hogar</a>             
-    <a href="">Ingresar</a>              
-  </div>
-          
-  <div class="content">
-    <div class="title m-b-md">
-      MAGESTICD
-    </div>               
+
+  <div class="flex-center position-ref full-height">
+
+    <div class="top-right links">
+      <a href="{{ route('home') }}">Hogar</a>
+      <a href="">Ingresar</a>
+    </div>
+
+    <div class="content">
+      <div class="title m-b-md">
+        MAGESTICD
+      </div>
+    </div>
+
   </div>
 
-</div>
-
-  <script src={!! asset('bootstrap/js/bootstrap.min.js') !!} ></script>
+  <script src={!! asset('bootstrap/js/bootstrap.min.js') !!}></script>
 </body>
 </html>
