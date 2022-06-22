@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <link rel="stylesheet" href={!! asset('bootstrap/css/bootstrap.min.css') !!}>
-  <link rel="stylesheet" href={!! asset('css/app.css') !!}>
+  <link rel="stylesheet" href={!! asset('css/welcome.css') !!}>
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
