@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href={!! asset('bootstrap/css/bootstrap.min.css') !!}>
   <link rel="stylesheet" href={!! asset('css/app.css') !!}>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
 
   <title>MagestiCD | Centro de Docencia</title>
@@ -16,9 +17,21 @@
   <div>
 
     <!-- Header -->
-   <nav>
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">MagestiCD</a>
+        
+        <!-- User Dashboard -->
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle usr-dashboard" data-bs-toggle="dropdown">UserName &nbsp;<i class="bi bi-person"></i></a>
+            <div class="dropdown-menu dropleft dropdown-menu-end">
+                <a href="#" class="dropdown-item">Ver Usuarios</a>
+                <a href="#" class="dropdown-item">Cerrar Sesión</a>
+            </div>
+        </div>
 
-   </nav>
+      </div>
+    </nav>
     
 
     <!-- Side menu -->
@@ -67,5 +80,6 @@
   </div>
 
   <script src={!! asset('bootstrap/js/bootstrap.min.js') !!}></script>
+  <script src={!! asset('bootstrap/js/bootstrap.bundle.js') !!}></script>
 </body>
 </html>

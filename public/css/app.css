@@ -6,8 +6,17 @@
   background-color: #e0e0e0;
 }
 
-.logoMg {
-  float: left;
+.navbar {
+  display: flex;
+}
+
+.usr-dashboard{
+  text-decoration: none;
+  color: #e0e0e0;
+}
+
+.dropdown-toggle::after .usr-dashboard{
+  display: none;
 }
 
 .unica-logo {
@@ -15,7 +24,7 @@
 }
 
 .footer-link .nav-link{
-  color: #134ae4;
+  color: #003353;
 }
 
 .footer-link .nav-link:hover{
