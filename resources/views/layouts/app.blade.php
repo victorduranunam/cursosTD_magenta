@@ -35,7 +35,14 @@
     
 
     <!-- Side menu -->
-    @yield('content')
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-10 col-lg-3 side-menu">....</div>
+        <div class="col-lg-9 main-info">....</div>
+      </div>
+    </div>
+
+    <!-- @yield('content') -->
 
     <footer class="text-center footer footer-link">
       <!-- Grid container -->

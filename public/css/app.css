@@ -2,8 +2,25 @@
   position: relative;
 }
 
+.side-menu{
+  position: fixed;
+  background: #043858;
+  top: 56px;
+  height: 1000px;
+}
+.main-info{
+  position: fixed;
+  background-color: aquamarine;
+  top: 56px;
+  left: 23.6em;
+  width: 100%;
+}
+
 .footer {
   background-color: #e0e0e0;
+  width: 100%;
+  position: fixed;
+  top: 474px;
 }
 
 .navbar {
