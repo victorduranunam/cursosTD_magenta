@@ -1,9 +1,9 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 @section('content')
 
   @include('partials.messages')
-  equisde
-  <!-- <div class="card">
+  
+  <div class="card">
     <div class="card-header"><br>
       <h3>Bienvenid@</h3>
     </div>
@@ -17,6 +17,6 @@
       
     </div>
   
-  </div> -->
+  </div>
   
 @endsection

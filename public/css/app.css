@@ -1,19 +1,50 @@
 .wrap{
-  background-color: #486C68;
-  width: 100vw;
+  background-color: white;
+  width: 99vw;
   height: 100vh;
-  display: block !important;
+  display: block;
   margin: 0%;
+  
+}
+.header{
+  height: 5%;
+  position: static !important;
+}
+.sidebar{
+  background: #043858;
+  width: 20%;
+  height: 95%;
+  float: left;
+}
+.wrap .card {
+  width: 93%;
+  height: 90%;
+  margin: 2%;
+}
+.main{
+  background-color: transparent;
+  width: 80%;
+  height: 95%;
+  float: right;
 }
 
-/* .side-menu{
-  position: relative;
-  background: #043858;
-  top: 56px;
-  height: 100vh;
-  width: 100vw;
-} */
+.wrap .ft{
+  background-color: #e0e0e0;
+  position: static;
+  clear: both;
+}
+.unica-logo {
+  width: 5%;
+}
 
+.footer-link .nav-link{
+  color: #003353;
+}
+
+.footer-link .nav-link:hover{
+  color: #7393ec;
+  text-decoration: underline;
+}
 .wrap ul.accordion {
   width: 100%;
   background: transparent;
@@ -93,18 +124,9 @@
   background:#486C68;
   color: #A0D3E8;
 }
-.main-info{
-  position: fixed;
-  top: 72px;
-  left: 24em;
-  width: 73vw;
-  height: 80vh;
-}
 
-.wrap .card {
-  width: 100%;
-  height: 100%;
-}
+
+
 
 .img-escudo{
   width: 100px;
@@ -114,12 +136,7 @@
   font-size: 20px;
   float: none;
 }
-.footer {
-  background-color: #e0e0e0;
-  width: 100%;
-  position: fixed;
-  top: 474px;
-}
+
 
 .navbar {
   display: flex;
@@ -134,44 +151,4 @@
   display: none;
 }
 
-.unica-logo {
-  width: 5%;
-}
-
-.footer-link .nav-link{
-  color: #003353;
-}
-
-.footer-link .nav-link:hover{
-  color: #7393ec;
-  text-decoration: underline;
-}
-
-/* Colors */
-
-.header{
-  background-color: red;
-  width: 100%;
-  height: 5%;
-  position: static !important;
-}
-.sidebar{
-  background: #043858;
-  width: 20%;
-  height: 85%;
-  float: left;
-}
-
-.main{
-  background-color: aquamarine;
-  width: 80%;
-  height: 85%;
-  float: right;
-
-}
-.ft{
-  background-color: gray;
-  width: 100%;
-  height: 20%;
-}
 
