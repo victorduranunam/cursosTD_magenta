@@ -1,5 +1,5 @@
 .wrap {
-  position:relative;
+  position:fixed;
   display: block;
   width: 377px;
 }
@@ -15,6 +15,7 @@
 .wrap ul.accordion {
   width: 100%;
   background: transparent;
+  overflow-y: unset;
 }
 .wrap ul.accordion .link {
   cursor: pointer;
