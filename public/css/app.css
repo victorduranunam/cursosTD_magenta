@@ -9,6 +9,7 @@
   background: #043858;
   top: 56px;
   height: 100vh;
+  width: 100vw;
 }
 
 .wrap ul.accordion {
@@ -89,13 +90,25 @@
 }
 .main-info{
   position: fixed;
-  background-color: aquamarine;
-  top: 56px;
-  left: 23.6em;
-  width: 100%;
+  top: 72px;
+  left: 24em;
+  width: 73vw;
+  height: 80vh;
 }
 
+.wrap .card {
+  width: 100%;
+  height: 100%;
+}
 
+.img-escudo{
+  width: 100px;
+  height: 100px;
+}
+.logos{
+  font-size: 20px;
+  float: none;
+}
 .footer {
   background-color: #e0e0e0;
   width: 100%;

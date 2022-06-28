@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div>
+  <div class="wrap">
 
     <!-- Header -->
     <nav class="navbar fixed-top navbar-dark bg-dark">
@@ -38,7 +38,7 @@
     <div class="container-fluid">
       <div class="row">
         <!-- Side menu Content -->
-        <div class="wrap col-10 col-lg-3 side-menu">
+        <div class="col-10 col-lg-3 side-menu">
           <aside id="side-menu" class="aside" role="navigation">
               <ul class="nav nav-list accordion">
                   <li class="nav-header">
@@ -123,11 +123,11 @@
     </div>
 
     
-    <!-- <footer class="text-center footer footer-link"> -->
+    <footer class="text-center footer footer-link">
       <!-- Grid container -->
-      <!-- <div class="container"> -->
+      <div class="container">
         <!-- Section: Links -->
-        <!-- <section class="mt-5">
+        <section class="mt-5">
 
           <div class="row text-center d-flex justify-content-center pt-5">
             <div class="col-md-2">
@@ -162,7 +162,7 @@
           </div>
         </section>
       </div>
-    </footer> -->
+    </footer>
   </div>
   <script src={!! asset('bootstrap/js/jquery.js') !!}></script>
   <script src={!! asset('bootstrap/js/admin.js') !!}></script>
