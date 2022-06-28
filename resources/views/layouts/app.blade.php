@@ -70,7 +70,7 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-building"></i>Salones<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Consulta Salones</a></li>
+                            <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
                             <li><a href="">Alta de Salón</a></li>
                         </ul>
                     </li>
@@ -98,7 +98,7 @@
                         <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
                             <li><a href="">Alta de División</a></li>
-                            <li><a href="">Consulta de Divisiones</a></li>
+                            <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
                         </ul>
                     </li>
                     <li class="nav-header">

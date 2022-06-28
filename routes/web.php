@@ -22,7 +22,7 @@ Route::get('/home', function () {
 })->name('home');
 
 //Prueba -> Funciona!
-Route::get('division', "DivisionController@index")->name("division.consulta");
+Route::get('division', "DivisionController@index")->name("view.divisions");
 
 //Route Account
 
@@ -63,3 +63,4 @@ Route::get('division', "DivisionController@index")->name("division.consulta");
 //Route Seminar Topic
 
 //Route Venue
+Route::get('salones', "VenueController@index")->name("view.venues");

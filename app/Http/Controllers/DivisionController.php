@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Division;
 class DivisionController extends Controller
 {
-    //Prueba -> Funciona!
     public function index()
     {
-        $users = Division::all()->first();
-        return view("pages.home")
-            ->with("users",$users)
-            ->with("warning", '1');
+        $divisions = Division::all();
+        return view("pages.view-divisions")
+            ->with("divisions",$divisions)
+            ->with("danger", 'Prueba de mensaje');
     }
 
 }
