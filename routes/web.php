@@ -21,9 +21,6 @@ Route::get('/home', function () {
   return view('pages.home');
 })->name('home');
 
-//Prueba -> Funciona!
-Route::get('division', "DivisionController@index")->name("view.divisions");
-
 //Route Account
 
 //Route Activity
@@ -33,15 +30,15 @@ Route::get('division', "DivisionController@index")->name("view.divisions");
 //Route Administrator
 
 //Route Career
-
+Route::get('carreras', "CareerController@index")->name("view.careers");
 //Route Category
 
 //Route Department
-
+Route::get('coordinaciones', "DepartmentController@index")->name("view.departments");
 //Route Diploma
 
 //Route Division
-
+Route::get('divisiones', "DivisionController@index")->name("view.divisions");
 //Route Faculty
 
 //Route Instructor

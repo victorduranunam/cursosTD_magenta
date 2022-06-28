@@ -4,14 +4,14 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Ver Salones <i class="bi bi-building"></i></h3>
+    <h3>Ver Coordinaciones <i class="bi bi-geo-alt"></i></h3>
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
-      @foreach ($venues as $venue)
+      @foreach ($departments as $department)
       <div class="row" style="margin: 1%">
         <div class="col-6">
-          {!! $venue->name !!}
+          {!! $department->name !!}
         </div>
         <div class="col-2">
           <a href="" class="btn btn-outline-info">Actualizar</a>

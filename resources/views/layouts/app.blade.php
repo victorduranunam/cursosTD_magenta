@@ -40,11 +40,11 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-send"></i> Diplomados<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Ver Diplomados</a></li>
                             <li><a href="">Alta de diplomado</a></li>
+                            <li><a href="">Ver Diplomados</a></li>
+                            <li><a href="">Alta de módulo</a></li>
                             <li><a href="">Ver Módulos Programados</a></li>
                             <li><a href="">Ver Catálogo de Módulos</a></li>
-                            <li><a href="">Alta de módulo</a></li>
 
                         </ul>
                     </li>
@@ -52,9 +52,9 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-journals"></i>Cursos<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Cursos programados</a></li>
-                            <li><a href="">Catálogo de cursos</a></li>
                             <li><a href="">Alta Catálogo</a></li>
+                            <li><a href="">Catálogo de cursos</a></li>
+                            <li><a href="">Cursos programados</a></li>
                         </ul>
                     </li>
 
@@ -70,15 +70,15 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-building"></i>Salones<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
                             <li><a href="">Alta de Salón</a></li>
+                            <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
                         </ul>
                     </li>
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-mortarboard"></i>Carreras<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Consulta Carreras</a></li>
                             <li><a href="">Alta de Carreras</a></li>
+                            <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
                             <!--<li><a href="#">Baja de Salon</a></li>-->
                         </ul>
                     </li>
@@ -86,7 +86,7 @@
                         <div class="link"><i class="bi bi-geo-alt"></i>Coordinaciones<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
                             <li><a href="">Alta de Coordinación</a></li>
-                            <li><a href="">Consulta de coordinaciones</a></li>
+                            <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
                             <li><a href="">Coordinación del Centro de Docencia</a></li>
                             <li><a href="">Secretaría de apoyo</a></li>
                             <li><a href="">Dirección</a></li>
