@@ -6,16 +6,18 @@
   margin: 0%;
   
 }
-.header{
+.header .navbar{
   height: 5%;
   position: static !important;
 }
 .sidebar{
   background: #043858;
-  width: 20%;
-  height: 95%;
+  width: 25%;
+  height: 100%;
   float: left;
+  z-index: 1;
 }
+
 .wrap .card {
   width: 93%;
   height: 94%;
@@ -26,7 +28,7 @@
 }
 .main{
   background-color: transparent;
-  width: 80%;
+  width: 75%;
   height: 95%;
   float: right;
 }
@@ -77,7 +79,7 @@
 }
 .wrap ul.accordion li i {
   position: absolute;
-  top: 16px;
+  top: 14px;
   left: 12px;
   font-size: 18px;
   color: #999;
@@ -128,9 +130,6 @@
   color: #A0D3E8;
 }
 
-
-
-
 .img-escudo{
   width: 100px;
   height: 100px;
@@ -139,7 +138,6 @@
   font-size: 20px;
   float: none;
 }
-
 
 .navbar {
   display: flex;
@@ -159,4 +157,31 @@
   margin-left: 2%;
   margin-right: 2%;
   font-size: 16px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+  .sidebar{
+    height: 100%;
+    overflow-y: auto;
+  }
+  .wrap ul.accordion .link {
+    font-size: 12px;
+    font-weight: 650;
+  }
+}
+
+@media screen and (min-height:480px) and (max-height:600px){
+  .sidebar{
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .wrap ul.accordion .link {
+    font-size: 13px;
+    font-weight: 650;
+  }
+  .wrap ul.accordion ul.submenu {
+    font-size: 12px;
+  }
+  
 }
