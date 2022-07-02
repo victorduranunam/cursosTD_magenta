@@ -18,6 +18,7 @@
         <div class="header">
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
+                    <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
                     <a class="navbar-brand" href="#">MagestiCD</a>
                     
                     <!-- User Dashboard -->
@@ -36,6 +37,7 @@
         <div class="sidebar">
         <!-- Side menu Content -->
             <aside id="side-menu" class="aside" role="navigation">
+            <button class="btn btn-outline-light btn-sm mobile" style="float:right; margin:10px; margin-right:20px;" href="" onclick=closeNav();><i class="bi bi-x"></i></button>
                 <ul class="nav nav-list accordion">
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-send"></i> Diplomados<i class="bi bi-chevron-down"></i></div>
@@ -113,7 +115,7 @@
            
         </div>
         <!-- Main Info -->
-        <div class="main">
+        <div class="main" id="main">
             @yield('content')
         </div>
         <div class="ft">
@@ -167,5 +169,22 @@
     <script src={!! asset ('/dist/jquery.fancybox.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.bundle.js') !!}></script>
+    <script>
+        function openNav() {
+            document.getElementsByClassName("sidebar")[0].style.display='block';
+            document.getElementsByClassName("sidebar")[0].style.width = "100%";
+            document.getElementById("side-menu").style.display='block';
+            document.getElementById("side-menu").style.width = "100%";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+            function closeNav() {
+            document.getElementsByClassName("sidebar")[0].style.display='none';
+            document.getElementsByClassName("sidebar")[0].style.width = '0';
+            document.getElementById("side-menu").style.display='none';
+            document.getElementById("side-menu").style.width = '0';
+            document.getElementById("main").style.marginLeft= "0";
+        }
+    </script>
 </body>
 </html>
