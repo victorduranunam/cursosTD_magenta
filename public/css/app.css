@@ -22,6 +22,10 @@
   height: 100%;
   float: left;
   z-index: 1;
+  display: inline;
+}
+.sidebar #side-menu{
+  display: inline;
 }
 
 .wrap .card {
@@ -169,6 +173,10 @@
   .sidebar{
     height: 100%;
     overflow-y: auto;
+    display: inline;
+  }
+  .sidebar #side-menu{
+    display: inline;
   }
   .wrap ul.accordion .link {
     font-size: 12px;
@@ -186,6 +194,10 @@
   .sidebar{
     height: 100%;
     overflow-y: auto;
+    display: inline;
+  }
+  .sidebar #side-menu{
+    display: inline;
   }
   
   .wrap ul.accordion .link {
@@ -205,13 +217,13 @@
 }
 
 @media screen and (min-width: 360px) and (max-width: 414px){
-  /* .sidebar{
-    background: none;
+  .sidebar{
+    background: #043858;
     display: none;
   }
   .sidebar #side-menu{
     display: none;
-  } */
+  }
   .wrap .main{
     width: 100%;
   }
