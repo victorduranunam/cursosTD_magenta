@@ -33,6 +33,12 @@
   height: 94%;
   margin: 2%;
 }
+
+.wrap .card a{
+  width: 100%;
+  height: auto;
+}
+
 .wrap .card .card-body{
   overflow-y: auto;
 }
@@ -200,7 +206,17 @@
   .sidebar #side-menu{
     display: inline;
   }
-  
+
+  /* .card a{
+    font-size: 12px;
+    width: 110px;
+    height: auto;
+    margin-bottom: 13px;
+  }
+  .card .row {
+    display: inline-block; 
+  } */
+
   .wrap ul.accordion .link {
     font-size: 13px;
     font-weight: 650;
@@ -228,15 +244,16 @@
   .wrap .main{
     width: 100%;
   }
+  .card .card-body, .card .row{
+    width: 100%;
+  }
   .card a{
     font-size: 12px;
-    width: 110px;
+    width: 100%;
     height: auto;
-    margin-bottom: 13px;
+    margin: 3px;
   }
-  .card .row {
-    display: inline-block; 
-  }
+ 
   .wrap .header .mobile{
     display: inline;
   }
