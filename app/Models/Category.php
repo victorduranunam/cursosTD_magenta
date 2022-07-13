@@ -15,4 +15,6 @@ class Category extends Model
         'name',
         'abbreviation'
     ];
+
+    protected $primaryKey = 'category_id';
 }

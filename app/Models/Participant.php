@@ -30,4 +30,6 @@ class Participant extends Model
         'professor_id',
         'activity_id'
     ];
+
+    protected $primaryKey = 'participant_id';
 }

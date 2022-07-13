@@ -15,4 +15,6 @@ class Career extends Model
         'name',
         'key'
     ];
+
+    protected $primaryKey = 'career_id';
 }

@@ -17,4 +17,6 @@ class Instructor extends Model
         'professor_id',
         'activity_id'
     ];
+
+    protected $primaryKey = 'instructor_id';
 }

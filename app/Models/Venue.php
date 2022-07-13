@@ -16,4 +16,6 @@ class Venue extends Model
         'capacity',
         'location'
     ];
+
+    protected $primaryKey = "venue_id";
 }

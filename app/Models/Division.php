@@ -15,4 +15,7 @@ class Division extends Model
         'name',
         'abbreviation'
     ];
+    
+    protected $primaryKey = 'division_id';
+    
 }

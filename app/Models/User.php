@@ -1,3 +1,8 @@
+/**
+* TODO: Por defecto, es necesario basarnos en este modelo para 
+* la autenticación en Account -->
+*/ 
+
 <?php
 
 namespace App\Models;

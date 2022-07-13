@@ -16,4 +16,6 @@ class ProfessorCategory extends Model
         'professor_id',
         'category_id'
     ];
+
+    protected $primaryKey = 'professor_category_id';
 }

@@ -19,4 +19,5 @@ class Account extends Model
         'department_id'
     ];
     
+    protected $primaryKey = 'account_id';
 }

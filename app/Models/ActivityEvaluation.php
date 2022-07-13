@@ -36,4 +36,6 @@ class ActivityEvaluation extends Model
         'int_schedule',
         'participant_id'
     ];
+
+    protected $primaryKey = 'activity_evaluation_id';
 }

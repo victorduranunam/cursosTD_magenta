@@ -26,4 +26,6 @@ class InstructorEvaluation extends Model
         'instructor_id',
         'participant_id'
     ];
+
+    protected $primaryKey = 'instructor_evaluation_id';
 }

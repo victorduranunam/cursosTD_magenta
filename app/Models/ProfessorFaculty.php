@@ -15,4 +15,6 @@ class ProfessorFaculty extends Model
         'professor_id',
         'faculty_id'
     ];
+
+    protected $primaryKey = 'professor_faculty_id';
 }

@@ -15,4 +15,6 @@ class ProfessorCareer extends Model
         'career_id',
         'professor_id'
     ];
+
+    protected $primaryKey = 'professor_career_id';
 }

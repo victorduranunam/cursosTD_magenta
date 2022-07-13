@@ -19,4 +19,6 @@ class Administrator extends Model
         'gender',
         'job'
     ];
+
+    protected $primaryKey = 'administrator_id';
 }

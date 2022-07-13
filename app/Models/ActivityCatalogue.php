@@ -26,4 +26,6 @@ class ActivityCatalogue extends Model
         'department_id', 
         'diploma_id'
     ];
+
+    protected $primaryKey = 'activity_catalogue_id';
 }

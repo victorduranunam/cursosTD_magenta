@@ -15,5 +15,6 @@ class ProfessorDivision extends Model
         'division_id',
         'professor_id'
     ];
-
+    
+    protected $primaryKey = 'professor_division_id';
 }

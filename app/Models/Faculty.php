@@ -14,4 +14,6 @@ class Faculty extends Model
         'faculty_id',
         'name'
     ];
+
+    protected $primaryKey = 'faculty_id';
 }

@@ -25,4 +25,5 @@ class Activity extends Model
         'venue_id', 
         'activity_catalogue_id'
     ];
+    protected $primaryKey = 'activity_id';
 }

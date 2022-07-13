@@ -18,4 +18,6 @@ class SeminarTopic extends Model
         'instructor_id',
         'activity_id'
     ];
+
+    protected $primaryKey = 'seminar_topic_id';
 }

@@ -28,4 +28,6 @@ class Professor extends Model
         'is_unam',
         'provenance'
     ];
+
+    protected $primaryKey = 'professor_id';
 }

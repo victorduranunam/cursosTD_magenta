@@ -14,4 +14,7 @@ class Diploma extends Model
         'diploma_id',
         'name'
     ];
+
+    protected $primaryKey = 'diploma_id';
+    
 }

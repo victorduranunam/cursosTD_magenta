@@ -16,4 +16,5 @@ class Department extends Model
         'name',
         'administrator_id'
     ];
+    protected $primaryKey = 'department_id';
 }
