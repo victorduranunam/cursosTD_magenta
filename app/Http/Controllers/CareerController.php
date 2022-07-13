@@ -9,7 +9,7 @@ class CareerController extends Controller
     public function index()
     {
         $careers = Career::all();
-        return view("pages.view-career")
+        return view("pages.view-careers")
             ->with("careers",$careers);
     }
 }

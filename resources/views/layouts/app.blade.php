@@ -19,7 +19,7 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
-                    <a class="navbar-brand" href="#">MagestiCD</a>
+                    <a class="navbar-brand" href={!! route('home') !!}>MagestiCD</a>
                     
                     <!-- User Dashboard -->
                     <div class="dropdown">
@@ -85,9 +85,9 @@
                         </ul>
                     </li>
                     <li class="nav-header">
-                        <div class="link"><i class="bi bi-geo-alt"></i>Coordinaciones<i class="bi bi-chevron-down"></i></div>
+                        <div class="link"><i class="bi bi-bank"></i>Coordinaciones<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Alta de Coordinación</a></li>
+                            <li><a href={!! route('create.department') !!}>Alta de Coordinación</a></li>
                             <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
                             <li><a href="">Coordinación del Centro de Docencia</a></li>
                             <li><a href="">Secretaría de apoyo</a></li>

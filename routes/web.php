@@ -35,6 +35,11 @@ Route::get('carreras', "CareerController@index")->name("view.careers");
 
 //Route Department
 Route::get('coordinaciones', "DepartmentController@index")->name("view.departments");
+Route::get('coordinaciones/crear', "DepartmentController@create")->name("create.department");
+Route::get('coordinaciones/actualizar/{id}', "DepartmentController@update")->name("update.department");
+
+Route::get('coordinaciones/eliminar/{id}', "DepartmentController@delete")->name("delete.department");
+
 //Route Diploma
 
 //Route Division

@@ -21,32 +21,6 @@
         </div>
       </div>
       @endforeach
-      @foreach ($divisions as $division)
-      <div class="row" style="margin: 1%">
-        <div class="col-6">
-          {!! $division->name !!}
-        </div>
-        <div class="col-2">
-          <a href="" class="btn btn-outline-info">Actualizar</a>
-        </div>
-        <div class="col-2">
-          <a href="" class="btn btn-outline-danger">Eliminar</a>
-        </div>
-      </div>
-      @endforeach
-      @foreach ($divisions as $division)
-      <div class="row" style="margin: 1%">
-        <div class="col-6">
-          {!! $division->name !!}
-        </div>
-        <div class="col-2">
-          <a href="" class="btn btn-outline-info">Actualizar</a>
-        </div>
-        <div class="col-2">
-          <a href="" class="btn btn-outline-danger">Eliminar</a>
-        </div>
-      </div>
-      @endforeach
     </div>
   </div>
 @endsection
