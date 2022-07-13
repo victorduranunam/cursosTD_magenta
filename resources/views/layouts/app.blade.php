@@ -179,11 +179,18 @@
         }
 
             function closeNav() {
-            document.getElementsByClassName("sidebar")[0].style.display='none';
-            document.getElementsByClassName("sidebar")[0].style.width = '0';
-            document.getElementById("side-menu").style.display='none';
-            document.getElementById("side-menu").style.width = '0';
+            // document.getElementsByClassName("sidebar")[0].style.display='none';
+            document.getElementsByClassName("sidebar")[0].style.width = '25%';
+            // document.getElementById("side-menu").style.display='none';
+            document.getElementById("side-menu").style.width = '100%';
             document.getElementById("main").style.marginLeft= "0";
+            if (window.innerWidth >= 360 &&  window.innerWidth <= 414){
+                document.getElementsByClassName("sidebar")[0].style.display='none';
+                document.getElementsByClassName("sidebar")[0].style.width = '0';
+                document.getElementById("side-menu").style.display='none';
+                document.getElementById("side-menu").style.width = '0';
+                document.getElementById("main").style.marginLeft= "0";
+            }
         }
     </script>
 </body>
