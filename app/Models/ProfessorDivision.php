@@ -17,4 +17,5 @@ class ProfessorDivision extends Model
     ];
     
     protected $primaryKey = 'professor_division_id';
+    public $timestamps = false;
 }

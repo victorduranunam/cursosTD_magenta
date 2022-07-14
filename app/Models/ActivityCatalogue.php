@@ -28,4 +28,5 @@ class ActivityCatalogue extends Model
     ];
 
     protected $primaryKey = 'activity_catalogue_id';
+    public $timestamps = false;
 }

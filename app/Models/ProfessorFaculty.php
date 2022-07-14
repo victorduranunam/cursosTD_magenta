@@ -17,4 +17,5 @@ class ProfessorFaculty extends Model
     ];
 
     protected $primaryKey = 'professor_faculty_id';
+    public $timestamps = false;
 }

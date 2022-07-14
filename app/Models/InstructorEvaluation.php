@@ -28,4 +28,5 @@ class InstructorEvaluation extends Model
     ];
 
     protected $primaryKey = 'instructor_evaluation_id';
+    public $timestamps = false;
 }

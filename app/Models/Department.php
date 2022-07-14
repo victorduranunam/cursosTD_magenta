@@ -17,4 +17,5 @@ class Department extends Model
         'administrator_id'
     ];
     protected $primaryKey = 'department_id';
+    public $timestamps = false;
 }

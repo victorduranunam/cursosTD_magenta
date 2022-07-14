@@ -19,4 +19,5 @@ class Instructor extends Model
     ];
 
     protected $primaryKey = 'instructor_id';
+    public $timestamps = false;
 }

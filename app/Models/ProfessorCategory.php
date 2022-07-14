@@ -18,4 +18,5 @@ class ProfessorCategory extends Model
     ];
 
     protected $primaryKey = 'professor_category_id';
+    public $timestamps = false;
 }

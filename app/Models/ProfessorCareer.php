@@ -17,4 +17,5 @@ class ProfessorCareer extends Model
     ];
 
     protected $primaryKey = 'professor_career_id';
+    public $timestamps = false;
 }

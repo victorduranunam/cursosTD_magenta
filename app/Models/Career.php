@@ -17,4 +17,5 @@ class Career extends Model
     ];
 
     protected $primaryKey = 'career_id';
+    public $timestamps = false;
 }

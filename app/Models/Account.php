@@ -20,4 +20,5 @@ class Account extends Model
     ];
     
     protected $primaryKey = 'account_id';
+    public $timestamps = false;
 }

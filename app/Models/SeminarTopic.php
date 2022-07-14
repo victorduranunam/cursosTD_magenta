@@ -20,4 +20,5 @@ class SeminarTopic extends Model
     ];
 
     protected $primaryKey = 'seminar_topic_id';
+    public $timestamps = false;
 }

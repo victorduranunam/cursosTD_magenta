@@ -21,4 +21,5 @@ class Administrator extends Model
     ];
 
     protected $primaryKey = 'administrator_id';
+    public $timestamps = false;
 }

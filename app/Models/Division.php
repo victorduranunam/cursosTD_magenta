@@ -17,5 +17,5 @@ class Division extends Model
     ];
     
     protected $primaryKey = 'division_id';
-    
+    public $timestamps = false;
 }

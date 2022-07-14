@@ -16,5 +16,5 @@ class Diploma extends Model
     ];
 
     protected $primaryKey = 'diploma_id';
-    
+    public $timestamps = false;
 }

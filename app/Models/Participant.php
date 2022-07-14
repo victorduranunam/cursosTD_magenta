@@ -32,4 +32,5 @@ class Participant extends Model
     ];
 
     protected $primaryKey = 'participant_id';
+    public $timestamps = false;
 }

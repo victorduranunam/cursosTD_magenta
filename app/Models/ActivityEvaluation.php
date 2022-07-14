@@ -38,4 +38,5 @@ class ActivityEvaluation extends Model
     ];
 
     protected $primaryKey = 'activity_evaluation_id';
+    public $timestamps = false;
 }

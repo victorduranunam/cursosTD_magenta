@@ -18,4 +18,5 @@ class Venue extends Model
     ];
 
     protected $primaryKey = "venue_id";
+    public $timestamps = false;
 }

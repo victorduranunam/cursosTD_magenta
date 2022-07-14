@@ -17,4 +17,5 @@ class Category extends Model
     ];
 
     protected $primaryKey = 'category_id';
+    public $timestamps = false;
 }
