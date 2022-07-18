@@ -1,3 +1,14 @@
+.btn-outline-warning:hover {
+  background-color: #dcd1b4;
+  border-color: #dcd1b4;
+}
+
+.btn-outline-warning {
+  border-color: #dcd1b4;
+  color: #dcd1b4;
+
+}
+
 .card .row {
   margin: 1%;
 }
