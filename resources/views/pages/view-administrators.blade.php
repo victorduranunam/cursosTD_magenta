@@ -13,8 +13,11 @@
       @if($administrators->isNotEmpty())
         @foreach ($administrators as $administrator)
         <div class="row">
-          <div class="col-xl-6">
+          <div class="col-xl-4">
             {!! $administrator->last_name.' '.$administrator->mothers_last_name.' '.$administrator->name !!}
+          </div>
+          <div class="col-xl-4">
+            {!! $administrator->getJob() !!}
           </div>
           <div class="col-xl-2">
             <a href={!! route('edit.administrator', $administrator->administrator_id) !!} class="btn btn-outline-info">Actualizar</a>
