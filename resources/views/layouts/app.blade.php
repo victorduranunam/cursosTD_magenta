@@ -81,7 +81,6 @@
                         <ul class="submenu">
                             <li><a href="">Alta de Carreras</a></li>
                             <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
-                            <!--<li><a href="#">Baja de Salon</a></li>-->
                         </ul>
                     </li>
                     <li class="nav-header">
@@ -89,6 +88,8 @@
                         <ul class="submenu">
                             <li><a href={!! route('create.department') !!}>Alta de Coordinación</a></li>
                             <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
+                            <li><a href={!! route('create.administrator') !!}>Alta de administrador</a></li>
+                            <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
                             <li><a href="">Coordinación del Centro de Docencia</a></li>
                             <li><a href="">Secretaría de apoyo</a></li>
                             <li><a href="">Dirección</a></li>

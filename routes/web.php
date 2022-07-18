@@ -28,6 +28,12 @@ Route::get('/home', function () {
 //Route Activity Evaluation
 
 //Route Administrator
+Route::get('administradores', 'AdministratorController@index')->name('view.administrators');
+Route::get('administrador/crear', 'AdministratorController@create')->name('create.administrator');
+Route::post('administrador/almacenar', 'AdministratorController@store')->name('store.administrator');
+Route::get('administrador/actualizar/{administrator_id}', 'AdministratorController@edit')->name('edit.administrator');
+Route::put('administrador/guardar/{administrator_id}', 'AdministratorController@update')->name('update.administrator');
+Route::delete('administrador/eliminar/{administrator_id}', 'AdministratorController@delete')->name('delete.administrator');
 
 //Route Career
 Route::get('carreras', "CareerController@index")->name("view.careers");
@@ -36,9 +42,10 @@ Route::get('carreras', "CareerController@index")->name("view.careers");
 //Route Department
 Route::get('coordinaciones', "DepartmentController@index")->name("view.departments");
 Route::get('coordinaciones/crear', "DepartmentController@create")->name("create.department");
-Route::get('coordinaciones/actualizar/{id}', "DepartmentController@update")->name("update.department");
-
-Route::get('coordinaciones/eliminar/{id}', "DepartmentController@delete")->name("delete.department");
+Route::post('coordinaciones/almacenar', "DepartmentController@store")->name("store.department");
+Route::get('coordinaciones/actualizar/{department_id}', "DepartmentController@edit")->name("edit.department");
+Route::put('coordinaciones/guardar/{department_id}', "DepartmentController@update")->name('update.department');
+Route::delete('coordinaciones/eliminar/{department_id}', "DepartmentController@delete")->name("delete.department");
 
 //Route Diploma
 

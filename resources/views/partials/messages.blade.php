@@ -1,23 +1,23 @@
-@if (isSet($success))
+@if (Session::has('success'))
     <div class="alert alert-success message" role=alert>
-        <strong> {!! $success !!}</strong>
+        <strong> {{Session::get('success')}}</strong>
     </div>
 @endif
 
-@if (isSet($danger))
+@if (Session::has('danger'))
     <div class="alert alert-danger message" role=alert>
-        <strong> {!! $danger !!}</strong>
+        <strong> {{Session::get('danger')}}</strong>
     </div>
 @endif
 
-@if (isSet($info))
+@if (Session::has('info'))
     <div class="alert alert-info message" role=alert>
-        <strong> {!! $info !!}</strong>
+        <strong> {{Session::get('info')}}</strong>
     </div>
 @endif
 
-@if (isSet($warning))
+@if (Session::has('warning'))
     <div class="alert alert-warning message" role=alert>
-        <strong> {!! $warning !!}</strong>
+        <strong> {{Session::get('warning')}}</strong>
     </div>
 @endif
