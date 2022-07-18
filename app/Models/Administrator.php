@@ -42,4 +42,8 @@ class Administrator extends Model
         return 'Director';
       return '';
     }
+
+    public function getFullName(){
+      return $this->name.' '.$this->last_name.' '.$this->mothers_last_name;
+    }
 }

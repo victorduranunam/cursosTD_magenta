@@ -1,3 +1,5 @@
+{{-- TODO: Modal de eliminación --}}
+
 @extends('layouts.app')
 @section('content')
 
@@ -15,10 +17,14 @@
             {!! $department->name !!}
           </div>
           <div class="col-xl-2">
-            <a href={!! route('update.department', $department->department_id) !!} class="btn btn-outline-info">Actualizar</a>
+            <a href={!! route('edit.department', $department->department_id) !!} class="btn btn-outline-info">Actualizar</a>
           </div>
           <div class="col-xl-2">
-            <a href={!! route('delete.department', $department->department_id) !!} class="btn btn-outline-danger">Eliminar</a>
+            <form method="POST" action="{!! route('delete.department', $department->department_id) !!}">
+              @csrf
+              @method('delete')
+              <input type='submit' value=Eliminar class="btn btn-outline-danger">
+            </form>
           </div>
         </div>
         @endforeach
@@ -28,15 +34,15 @@
             No hay coordinaciones en la base de datos.
           </div>
         </div>
+        @endif
         <div class="row">
           <div class="col-xl-3">
-            <a href={!! route('create.department') !!} class="btn btn-outline-info">Alta de coordinación</a>
+            <a href={!! route('create.department') !!} class="btn btn-outline-success">Alta de coordinación</a>
           </div>
           <div class="col-xl-2">
-            <a href={!! route('home') !!} class="btn btn-outline-danger">Regresar</a>
+            <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
           </div>
         </div>
-      @endif
       
     </div>
   </div>
