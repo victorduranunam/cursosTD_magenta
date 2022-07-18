@@ -10,13 +10,13 @@
     <div class="card-body"><br>
       @foreach ($careers as $career)
       <div class="row" style="margin: 1%">
-        <div class="col-6">
+        <div class="col-xl-6">
           {!! $career->name !!}
         </div>
-        <div class="col-2">
+        <div class="col-xl-2">
           <a href="" class="btn btn-outline-info">Actualizar</a>
         </div>
-        <div class="col-2">
+        <div class="col-xl-2">
           <a href="" class="btn btn-outline-danger">Eliminar</a>
         </div>
       </div>

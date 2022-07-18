@@ -11,8 +11,7 @@ class DivisionController extends Controller
     {
         $divisions = Division::all();
         return view("pages.view-divisions")
-            ->with("divisions",$divisions)
-            ->with("danger", 'Prueba de mensaje');
+            ->with("divisions",$divisions);
     }
 
 }
