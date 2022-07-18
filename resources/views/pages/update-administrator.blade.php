@@ -64,7 +64,28 @@
             <a href="{!! route("view.administrators") !!}" class="btn btn-outline-warning">Cancelar</a>
           </div>
           <div class="col-2">
-            <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $administrator->administrator_id !!}">Eliminar</button>
+            <div class="modal fade" id="myModal{!! $administrator->administrator_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar administrador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>¿Está seguro de eliminar al administrador {!! $administrator->getFullName() !!}? 
+                      Esto borrará todos los registros
+                      que dependan de él, como coordinaciones, cursos y evaluaciones. 
+                      Si no quiere perder estos registros primero modifíquelos.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </form>

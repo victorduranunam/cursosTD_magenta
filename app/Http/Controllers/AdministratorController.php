@@ -1,5 +1,5 @@
 <?php
-
+//TODO: Verificar que ocurre al cambiar el cargo en un update, que coordinaciones se quedan sin admin y asi
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

@@ -1,5 +1,5 @@
 <?php
-
+//TODO:Verificar reglas de negocio, quien puede ser coordinador de que
 namespace App\Http\Controllers;
 
 use App\Models\Administrator;
