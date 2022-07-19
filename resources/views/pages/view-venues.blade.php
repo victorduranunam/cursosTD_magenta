@@ -47,10 +47,10 @@
             </div>
           </div>
           @endforeach
-        @elseif($departments->isEmpty())
+        @elseif($venues->isEmpty())
           <div class="row">
             <div class="col-xl-6">
-              No hay coordinaciones en la base de datos.
+              No hay salones en la base de datos.
             </div>
           </div>
         @endif

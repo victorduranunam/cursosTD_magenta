@@ -105,7 +105,7 @@ class VenueController extends Controller
           else
             return redirect()
               ->back()
-              ->with('warning', 'Error al eliminar la coordinación.');
+              ->with('warning', 'Error al eliminar el salón.');
         }
       }
    

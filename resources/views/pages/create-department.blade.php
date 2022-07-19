@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Crear Coordinación <i class="bi bi-mortarboard"></i></h3>
+    <h3>Crear Coordinación <i class="bi bi-bank"></i></h3>
   </div>
   @include('partials.messages')
   <div class="card-body"><br>
@@ -17,7 +17,7 @@
           <input required class="form-control" type="text" name="name" id="name" placeholder="Ej. Formación Académica" value="{!! old('name') !!}">
         </div>
         <div class="col-xl-3">
-          <label class="form-label" for="abbreviation">*Abreviación:</label>
+          <label class="form-label" for="abbreviation">*Abreviatura:</label>
           <input required class="form-control" type="text" name="abbreviation" id="abbreviation" placeholder="Ej. FA" value="{!! old('abbreviation') !!}">
         </div>
       </div>

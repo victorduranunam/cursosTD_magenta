@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Actualizar Coordinación <i class="bi bi-mortarboard"></i></h3>
+    <h3>Actualizar Coordinación <i class="bi bi-bank"></i></h3>
     <h4> {!! $department->name !!} </h4>
   </div>
   @include('partials.messages')

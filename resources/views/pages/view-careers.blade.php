@@ -47,13 +47,13 @@
           @elseif($departments->isEmpty())
             <div class="row">
               <div class="col-xl-6">
-                No hay coordinaciones en la base de datos.
+                No hay carreras en la base de datos.
               </div>
             </div>
           @endif
             <div class="row">
               <div class="col-xl-3">
-                <a href={!! route('create.career') !!} class="btn btn-outline-success">Alta de salón</a>
+                <a href={!! route('create.career') !!} class="btn btn-outline-success">Alta de carrera</a>
               </div>
               <div class="col-xl-2">
                 <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>

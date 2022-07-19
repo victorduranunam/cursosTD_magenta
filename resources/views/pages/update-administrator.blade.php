@@ -6,7 +6,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Actualizar Administrador <i class="bi bi-mortarboard"></i></h3>
+    <h3>Actualizar Administrador <i class="bi bi-person"></i></h3>
     <h4> {!! $administrator->getJob() !!} </h4>
   </div>
   @include('partials.messages')

@@ -6,7 +6,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Ver Administradores <i class="bi bi-bank"></i></h3>
+    <h3>Ver Administradores <i class="bi bi-person"></i></h3>
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
