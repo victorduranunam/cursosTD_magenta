@@ -73,3 +73,8 @@ Route::get('divisiones', "DivisionController@index")->name("view.divisions");
 
 //Route Venue
 Route::get('salones', "VenueController@index")->name("view.venues");
+Route::get('salones/crear', "VenueController@create")->name("create.venue");
+Route::post('salones/almacenar', "VenueController@store")->name("store.venue");
+Route::get('salones/actualizar/{venue_id}', "VenueController@edit")->name("edit.venue");
+Route::put('salones/guardar/{venue_id}', "VenueController@update")->name('update.venue');
+Route::delete('salones/eliminar/{venue_id}', "VenueController@delete")->name("delete.venue");
