@@ -37,6 +37,11 @@ Route::delete('administrador/eliminar/{administrator_id}', 'AdministratorControl
 
 //Route Career
 Route::get('carreras', "CareerController@index")->name("view.careers");
+Route::get('carreras/crear', "CareerController@create")->name("create.career");
+Route::post('carreras/almacenar', "CareerController@store")->name("store.career");
+Route::get('carreras/actualizar/{career_id}', "CareerController@edit")->name("edit.career");
+Route::put('carreras/guardar/{career_id}', "CareerController@update")->name('update.career');
+Route::delete('carreras/eliminar/{career_id}', "CareerController@delete")->name("delete.career");
 //Route Category
 
 //Route Department

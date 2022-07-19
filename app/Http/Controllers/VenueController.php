@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Venue;
 use Illuminate\Support\Facades\DB;
+
 class VenueController extends Controller
 {
     public function index()
@@ -87,9 +88,7 @@ class VenueController extends Controller
     }
 
     public function delete($venue_id){
-    
         try {
-          
           $venue = Venue::findOrFail($venue_id);
           $venue->delete();
           

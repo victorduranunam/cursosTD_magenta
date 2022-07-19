@@ -79,7 +79,7 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-mortarboard"></i>Carreras<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Alta de Carreras</a></li>
+                            <li><a href={!! route('create.career') !!}>Alta de Carreras</a></li>
                             <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
                         </ul>
                     </li>
