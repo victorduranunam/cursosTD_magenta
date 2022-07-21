@@ -18,7 +18,7 @@
         </div>
         <div class="col-xl-3">
           <label class="form-label" for="capacity">Capacidad:</label>
-          <input required class="form-control" type="text" name="capacity" id="capacity" placeholder="Ej. 50" value="{!! old('capacity') !!}">
+          <input required class="form-control" type="number" min="1" name="capacity" id="capacity" placeholder="Ej. 50" value="{!! old('capacity') !!}">
         </div>
       </div>
       <div class="row">

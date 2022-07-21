@@ -19,7 +19,7 @@
           </div>
           <div class="col-xl-3">
             <label class="form-label" for="capacity">Capacidad:</label>
-            <input required class="form-control" type="text" name="capacity" id="capacity" value="{!! $venue->capacity !!}">
+            <input required class="form-control" type="number" min="1" name="capacity" id="capacity" value="{!! $venue->capacity !!}">
           </div>
         </div>
         <div class="row">
@@ -53,7 +53,7 @@
               <div class="modal-body">
                 <p>¿Está seguro de eliminar el salón {!! $venue->name !!}? 
                   Esto borrará todos los registros
-                  que dependan de ella, como cursos. 
+                  que dependan de él, como cursos. 
                   Si no quiere perder estos registros primero modifíquelos.
                 </p>
               </div>
