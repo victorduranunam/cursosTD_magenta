@@ -21,7 +21,7 @@
             <a href="" class="btn btn-outline-dark">Dar de alta módulo de diplomado</a>
           </div>
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Dar de alta profesor</a>
+            <a href={!! route('create.professor') !!} class="btn btn-outline-dark">Dar de alta profesor</a>
           </div>
         </div>
         <div class="row" style="margin: 1%">
@@ -32,7 +32,7 @@
             <a href="" class="btn btn-outline-dark">Ver diplomados</a>
           </div>
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Ver profesores</a>
+            <a href={!! route('view.professors') !!} class="btn btn-outline-dark">Ver profesores</a>
           </div>
         </div>
         <div class="row" style="margin: 1%">

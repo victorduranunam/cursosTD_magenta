@@ -63,8 +63,8 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-person-lines-fill"></i>Profesores<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Alta Profesor</a></li>
-                            <li><a href="">Consulta de profesores</a></li>
+                            <li><a href={!! route('create.professor') !!}>Alta Profesor</a></li>
+                            <li><a href={!! route('view.professors') !!}>Consulta de profesores</a></li>
                             <li><a href="">Categoría y Nivel</a></li>
                         </ul>
                     </li>

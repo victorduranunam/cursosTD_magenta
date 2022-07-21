@@ -74,6 +74,12 @@ Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")-
 //Route Professor Category
 
 //Route Professor
+Route::get('profesores', "ProfessorController@index")->name("view.professors");
+Route::get('profesores/crear', "ProfessorController@create")->name("create.professor");
+Route::post('profesores/almacenar', "ProfessorController@store")->name("store.professor");
+Route::get('profesores/actualizar/{professor_id}', "ProfessorController@edit")->name("edit.professor");
+Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->name('update.professor');
+Route::delete('profesores/eliminar/{professor_id}', "ProfessorController@delete")->name("delete.professor");
 
 //Route Professor Division
 
