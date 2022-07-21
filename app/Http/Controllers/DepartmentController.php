@@ -13,8 +13,7 @@ class DepartmentController extends Controller
   {
       try {
 
-        $departments = Department::where('abbreviation', '<>', 'CDD')
-          ->get()
+        $departments = Department::all()
           ->sortByDesc('name');
 
         return view("pages.view-departments")
@@ -64,25 +63,26 @@ class DepartmentController extends Controller
     }
   }
 
-  public function edit($department_id){
-    
-    try {
-      
-      $department = Department::findOrFail($department_id);
-      $administrators = Administrator::where('job', 'C')
-        ->orderByRaw('last_name || mothers_last_name || name')
-        ->get();
-      
-      return view("pages.update-department")
-        ->with("department", $department)
-        ->with('administrators', $administrators);
+  public function edit($type, $department_id){
 
-    } catch (\Illuminate\Database\QueryException $th) {
-      
-      return redirect()
-        ->route('view.departments')
-        ->with('danger', 'Problema con la base de datos');
-    }
+    try {
+
+        $department = Department::findOrFail($department_id);
+        $administrators = Administrator::where('job', 'C')
+          ->orderByRaw('last_name || mothers_last_name || name')
+          ->get();
+        
+        return view("pages.update-department")
+          ->with("department", $department)
+          ->with('administrators', $administrators);
+  
+      } catch (\Illuminate\Database\QueryException $th) {
+        
+        return redirect()
+          ->route('view.departments')
+          ->with('danger', 'Problema con la base de datos');
+      }
+
   }
 
   public function update(Request $req, $department_id){

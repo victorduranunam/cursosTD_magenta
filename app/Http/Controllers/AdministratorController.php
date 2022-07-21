@@ -31,7 +31,6 @@ class AdministratorController extends Controller
   }
 
   public function store(Request $req){
-    
     try{
 
       $administrator = new Administrator();
@@ -44,6 +43,38 @@ class AdministratorController extends Controller
         $administrator->degree = $req->degree;
       if($req->gender)
         $administrator->gender = $req->gender;
+      
+      // Double if for skipping the query when is not required.
+      if ( $req->job === 'S' )
+        if(Administrator::where('job', 'S')->first())
+          return redirect()
+            ->back()
+            ->withInput()
+            ->with('danger', 'No es posible crear a más de un '      .
+            'Secretario de Apoyo a la Docencia. ' .
+            'Por favor elimine al administrador con el puesto que '.
+            'desea crear para continuar o simplemente edítelo en lugar de ' .
+            'crear uno nuevo.');
+      if ( $req->job === 'O' )
+        if(Administrator::where('job', 'O')->first())
+          return redirect()
+            ->back()
+            ->withInput()
+            ->with('danger', 'No es posible crear a más de un '      .
+            'Coordinador del Centro de Docencia. ' .
+            'Por favor elimine al administrador con el puesto que '.
+            'desea crear para continuar o simplemente edítelo en lugar de ' .
+            'crear uno nuevo.');
+      if ( $req->job === 'D' )
+        if(Administrator::where('job', 'D')->first())
+          return redirect()
+            ->back()
+            ->withInput()
+            ->with('danger', 'No es posible crear a más de un Director. '.
+            'Por favor elimine al administrador con el puesto que '.
+            'desea crear para continuar o simplemente edítelo en lugar de ' .
+            'crear uno nuevo.');
+
       $administrator->job = $req->job;
       $administrator->save();
 

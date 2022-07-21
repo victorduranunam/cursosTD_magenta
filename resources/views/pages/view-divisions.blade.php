@@ -30,7 +30,9 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>¿Está seguro de eliminar la división {!! $division->name !!}? 
+                          <p>¿Está seguro de eliminar la división {!! $division->name !!}?
+                            Esto borrará los registros que relacionan a un profesor
+                            con esta división.
                           </p>
                         </div>
                         <div class="modal-footer">

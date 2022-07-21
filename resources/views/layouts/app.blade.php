@@ -90,10 +90,6 @@
                             <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
                             <li><a href={!! route('create.administrator') !!}>Alta de administrador</a></li>
                             <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
-                            <li><a href="">Coordinación del Centro de Docencia</a></li>
-                            <li><a href="">Secretaría de apoyo</a></li>
-                            <li><a href="">Dirección</a></li>
-
                         </ul>
                     </li>
 

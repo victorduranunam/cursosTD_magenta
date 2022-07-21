@@ -46,6 +46,8 @@
               </div>
               <div class="modal-body">
                 <p>¿Está seguro de eliminar la división {!! $division->name !!}?
+                  Esto borrará los registros que relacionan a un profesor
+                  con esta división.
                 </p>
               </div>
               <div class="modal-footer">

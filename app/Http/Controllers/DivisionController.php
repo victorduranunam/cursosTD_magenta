@@ -72,6 +72,7 @@ class DivisionController extends Controller
             return redirect()
               ->route('edit.division',$division->division_id)
               ->with('success', 'Cambios realizados.');
+              
         } catch (\Illuminate\Database\QueryException $th) {
             if($th->getCode() == 7)
                 return redirect()
