@@ -23,7 +23,7 @@
             <form method="POST" action="{!! route('delete.department', $department->department_id) !!}">
               @csrf
               @method('delete')
-              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $department->department_id !!}">Eliminar</button>
+              <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $department->department_id !!}">Eliminar</a>
               <div class="modal fade" id="myModal{!! $department->department_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">

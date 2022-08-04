@@ -36,8 +36,10 @@
               @endforeach
             </select>
           </div>
-          <div class="col-xl-2 mt-auto">
-            <input type="submit" id='save-btn' class="btn btn-outline-info" value='Guardar'>
+        </div>
+        <div class="row">
+          <div class="d-grid gap-2 col-xl-2">
+              <button type="submit" id='save-btn' class="btn btn-outline-info"> Guardar </button>
           </div>
         </div>
       </form>
@@ -45,11 +47,11 @@
         @csrf
         @method('delete')
         <div class="row">
-          <div class="col-2">
+          <div class="col-xl-2">
             <a href="{!! route("view.departments") !!}" class="btn btn-outline-warning">Cancelar</a>
           </div>
-          <div class="col-2">
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $department->department_id !!}">Eliminar</button>
+          <div class="col-xl-2">
+            <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $department->department_id !!}">Eliminar</a>
           </div>
         </div>
         <div class="modal fade" id="myModal{!! $department->department_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">

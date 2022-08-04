@@ -63,7 +63,7 @@ class DepartmentController extends Controller
     }
   }
 
-  public function edit($type, $department_id){
+  public function edit($department_id){
 
     try {
 

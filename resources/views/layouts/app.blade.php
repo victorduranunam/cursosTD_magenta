@@ -65,8 +65,15 @@
                         <ul class="submenu">
                             <li><a href={!! route('create.professor') !!}>Alta Profesor</a></li>
                             <li><a href={!! route('view.professors') !!}>Consulta de profesores</a></li>
-                            <li><a href="">Categoría y Nivel</a></li>
                         </ul>
+                    </li>
+
+                    <li class="nav-bar">
+                      <div class="link"><i class="bi bi-newspaper"></i>Categorías y Niveles <i class="bi bi-chevron-down"></i></div>
+                      <ul class="submenu">
+                        <li><a href={!! route('create.category') !!}>Alta de Categoría y Nivel</a></li>
+                        <li><a href={!! route('view.categories') !!}>Consulta de Categorías y Niveles</a></li>
+                      </ul>
                     </li>
 
                     <li class="nav-header">

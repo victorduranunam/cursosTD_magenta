@@ -42,7 +42,14 @@ Route::post('carreras/almacenar', "CareerController@store")->name("store.career"
 Route::get('carreras/actualizar/{career_id}', "CareerController@edit")->name("edit.career");
 Route::put('carreras/guardar/{career_id}', "CareerController@update")->name('update.career');
 Route::delete('carreras/eliminar/{career_id}', "CareerController@delete")->name("delete.career");
+
 //Route Category
+Route::get('categorias', "CategoryController@index")->name("view.categories");
+Route::get('categoria/crear', "CategoryController@create")->name("create.category");
+Route::post('categoria/almacenar', "CategoryController@store")->name("store.category");
+Route::get('categoria/actualizar/{category_id}', "CategoryController@edit")->name("edit.category");
+Route::put('categoria/guardar/{category_id}', "CategoryController@update")->name('update.category');
+Route::delete('categoria/eliminar/{category_id}', "CategoryController@delete")->name("delete.category");
 
 //Route Department
 Route::get('coordinaciones', "DepartmentController@index")->name("view.departments");

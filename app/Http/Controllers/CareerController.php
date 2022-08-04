@@ -11,7 +11,8 @@ class CareerController extends Controller
   public function index()
   {
     try {
-      $careers = Career::all();
+      $careers = Career::all()
+        ->sortBy('name');
       return view("pages.view-careers")
         ->with("careers", $careers);
     } catch (\Illuminate\Database\QueryException $th) {
