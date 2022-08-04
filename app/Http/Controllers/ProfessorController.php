@@ -40,7 +40,7 @@ class ProfessorController extends Controller
             $professor->degree = $req->degree;
             $professor->email = $req->email;
             $professor->gender = $req->gender;
-            $prodessor->semblance = $req->semblance;
+            $professor->semblance = $req->semblance;
             $professor->facebook = $req->facebook;
             $professor->is_instructor = $req->is_instructor;
             $professor->is_unam = $req->is_unam;
@@ -89,7 +89,7 @@ class ProfessorController extends Controller
             $professor->degree = $req->degree;
             $professor->email = $req->email;
             $professor->gender = $req->gender;
-            $prodessor->semblance = $req->semblance;
+            $professor->semblance = $req->semblance;
             $professor->facebook = $req->facebook;
             $professor->is_instructor = $req->is_instructor;
             $professor->is_unam = $req->is_unam;
@@ -99,6 +99,7 @@ class ProfessorController extends Controller
             return redirect()
               ->route('edit.professor',$professor->professor_id)
               ->with('success', 'Cambios realizados.');
+              
         } catch (\Illuminate\Database\QueryException $th) {
             if($th->getCode() == 7)
                 return redirect()

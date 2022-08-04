@@ -14,11 +14,11 @@
         @method('put')
         <div class="row">
           <div class="col-xl-6">
-            <label class="form-label" for="name">Nombre:</label>
+            <label class="form-label" for="name">*Nombre:</label>
             <input required class="form-control" type="text" name="name" id="name" value="{!! $department->name !!}">
           </div>
           <div class="col-xl-3">
-            <label class="form-label" for="abbreviation">Abreviación:</label>
+            <label class="form-label" for="abbreviation">*Abreviación:</label>
             <input required class="form-control" type="text" name="abbreviation" id="abbreviation" value="{!! $department->abbreviation !!}">
           </div>
         </div>

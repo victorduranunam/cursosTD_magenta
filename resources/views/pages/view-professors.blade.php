@@ -9,10 +9,10 @@
   @include('partials.messages')
     <div class="card-body"><br>
       <div class="row">
-        <div class="col-xl-2">
+        <div class="col-xl-3">
           <h6>Nombre</h6>
         </div>
-        <div class="col-xl-2">
+        <div class="col-xl-3">
           <h6>Correo</h6>
         </div>
         <div class="col-xl-2">
@@ -27,12 +27,12 @@
 
         @foreach ($professors as $professor)
       
-          <div class="row" style="margin: 1%">
+          <div class="row row-list" style="margin: 1%">
 
-            <div class="col-xl-2">
+            <div class="col-xl-3">
               {!! $professor->getFullName() !!}
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-3">
               {!! $professor->email !!}
             </div>
             <div class="col-xl-2">
@@ -44,7 +44,7 @@
             
             <div class="col-xl-2">
               <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-outline-secondary dropdown-toggle mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Opciones
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -79,23 +79,26 @@
                   </form>
                 </ul>
               </div>
-      </div>
-      @endforeach
-    @elseif($departments->isEmpty())
+            </div>
+          </div>
+        @endforeach
+
+      @elseif($departments->isEmpty())
+        <div class="row">
+          <div class="col-xl-6">
+            No hay profesores en la base de datos.
+          </div>
+        </div>
+      @endif
+
       <div class="row">
-        <div class="col-xl-6">
-          No hay profesores en la base de datos.
+        <div class="col-xl-3">
+          <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de profesor</a>
+        </div>
+        <div class="col-xl-2">
+          <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
         </div>
       </div>
-    @endif
-    <div class="row">
-      <div class="col-xl-3">
-        <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de profesor</a>
-      </div>
-      <div class="col-xl-2">
-        <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
-      </div>
-    </div>
     </div>
   </div>
 @endsection

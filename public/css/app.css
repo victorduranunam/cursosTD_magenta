@@ -1,3 +1,11 @@
+.row-list:hover {
+  background-color: #dedede;
+  border-color: #dedede;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;  
+}
+
 .btn-outline-warning:hover {
   background-color: #dcd1b4;
   border-color: #dcd1b4;
