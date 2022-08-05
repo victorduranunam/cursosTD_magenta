@@ -120,8 +120,7 @@ class AdministratorController extends Controller
       $administrator = Administrator::findOrFail($administrator_id);
       $administrator->name = $req->name;
       $administrator->last_name = $req->last_name;
-      if($req->mothers_last_name)
-        $administrator->mothers_last_name = $req->mothers_last_name;
+      $administrator->mothers_last_name = $req->mothers_last_name;
       if($req->degree)
         $administrator->degree = $req->degree;
       if($req->gender)

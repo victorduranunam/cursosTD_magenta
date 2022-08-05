@@ -23,6 +23,14 @@ Route::get('/home', function () {
 
 //Route Account
 
+//Route Activity Catalogue
+Route::get('catalogo-cursos', 'ActivityCatalogueController@index')->name('view.activities.catalogue');
+Route::get('catalogo-cursos/crear', 'ActivityCatalogueController@create')->name('create.activity.catalogue');
+Route::post('catalogo-cursos/almacenar', 'ActivityCatalogueController@store')->name('store.activity.catalogue');
+Route::get('catalogo-cursos/actualizar/{activity_catalogue_id}', 'ActivityCatalogueController@edit')->name('edit.activity.catalogue');
+Route::put('catalogo-cursos/guardar/{activity_catalogue_id}', 'ActivityCatalogueController@update')->name('update.activity.catalogue');
+Route::delete('catalogo-cursos/eliminar/{activity_catalogue_id}', 'ActivityCatalogueController@delete')->name('delete.activity.catalogue');
+
 //Route Activity
 
 //Route Activity Evaluation
@@ -68,6 +76,7 @@ Route::post('divisiones/almacenar', "DivisionController@store")->name("store.div
 Route::get('divisiones/actualizar/{division_id}', "DivisionController@edit")->name("edit.division");
 Route::put('divisiones/guardar/{division_id}', "DivisionController@update")->name('update.division');
 Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")->name("delete.division");
+
 //Route Faculty
 
 //Route Instructor
@@ -76,10 +85,6 @@ Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")-
 
 //Route Participant
 
-//Route Professor Career
-
-//Route Professor Category
-
 //Route Professor
 Route::get('profesores', "ProfessorController@index")->name("view.professors");
 Route::get('profesores/crear', "ProfessorController@create")->name("create.professor");
@@ -87,6 +92,10 @@ Route::post('profesores/almacenar', "ProfessorController@store")->name("store.pr
 Route::get('profesores/actualizar/{professor_id}', "ProfessorController@edit")->name("edit.professor");
 Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->name('update.professor');
 Route::delete('profesores/eliminar/{professor_id}', "ProfessorController@delete")->name("delete.professor");
+
+//Route Professor Career
+
+//Route Professor Category
 
 //Route Professor Division
 

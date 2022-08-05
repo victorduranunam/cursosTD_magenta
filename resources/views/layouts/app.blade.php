@@ -54,9 +54,9 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-journals"></i>Cursos<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Alta Catálogo</a></li>
-                            <li><a href="">Catálogo de cursos</a></li>
-                            <li><a href="">Cursos programados</a></li>
+                            <li><a href={!! route('create.activity.catalogue') !!}>Alta Catálogo</a></li>
+                            <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de cursos</a></li>
+                            <li><a href=''>Cursos programados</a></li>
                         </ul>
                     </li>
 
