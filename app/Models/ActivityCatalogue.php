@@ -29,4 +29,12 @@ class ActivityCatalogue extends Model
 
     protected $primaryKey = 'activity_catalogue_id';
     public $timestamps = false;
+
+    public function getDepartmentName(){
+      return Department::findOrFail($this->department_id)->name;
+    }
+
+    public function getDepartmentAbbreviation(){
+      return Department::findOrFail($this->department_id)->abbreviation;
+    }
 }

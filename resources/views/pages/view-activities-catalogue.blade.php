@@ -9,10 +9,27 @@
   @include('partials.messages')
     <div class="card-body"><br>
       @if($activities_cat->isNotEmpty())
-        @foreach ($activities_cat as $activity_cat)
         <div class="row">
+          <div class="col-xl-2">
+            <h6>Clave</h6>
+          </div>
+          <div class="col-xl-4">
+            <h6>Nombre</h6>
+          </div>
+          <div class="col-xl-2">
+            <h6>Coordinación</h6>
+          </div>
+        </div>
+        @foreach ($activities_cat as $activity_cat)
+        <div class="row row-list">
+          <div class="col-xl-2">
+            {!! $activity_cat->key !!}
+          </div>
           <div class="col-xl-4">
             {!! $activity_cat->name !!}
+          </div>
+          <div class="col-xl-1">
+            {!! $activity_cat->getDepartmentAbbreviation() !!}
           </div>
           <div class="col-xl-2">
             <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-info">Actualizar</a>
