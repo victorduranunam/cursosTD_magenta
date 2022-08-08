@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ActivityCatalogue;
+use App\Models\Diploma;
+use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 
 class ActivityCatalogueController extends Controller
@@ -28,15 +30,25 @@ class ActivityCatalogueController extends Controller
 
   public function create()
   {
-    return view("pages.create-activity-catalogue");
+    $diplomas = Diploma::all()
+      ->sortBy('name');
+    $departments = Department::all()
+      ->sortBy('name');
+    if($departments->isEmpty())
+      return redirect()
+        ->route('home')
+        ->with('danger', 'Es necesario crear una coordinación antes de crear un catálogo de curso.');
+    return view("pages.create-activity-catalogue")
+      ->with('diplomas', $diplomas)
+      ->with('departments', $departments);
   }
 
   public function store(Request $req)
   {
     try {
-      
+      //TODO: Que funcione el almacenamiento de modulos y verificar que el numero no se repita
       $activity_cat = new ActivityCatalogue();
-      $activity_cat->activit_catalogue_id = DB::select("select nextval('activity_catalogue_seq')")[0]->nextval;
+      $activity_cat->activity_catalogue_id = DB::select("select nextval('activity_catalogue_seq')")[0]->nextval;
       $activity_cat->key = $req->key;
       $activity_cat->name = $req->name;
       $activity_cat->hours = $req->hours;
@@ -82,10 +94,8 @@ class ActivityCatalogueController extends Controller
           ->with('activity_cat', $activity_cat)
           ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada catálogo de curso.');
       else
-        return redirect()
-          ->back()
-          ->with('warning', 'Error al almacenar, verifique sus datos.')
-          ->withInput();
+        return dd($th);
+        
     }
   }
 

@@ -27,9 +27,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-3">
           <label for="type" class='form-label'>*Tipo:</label>
-          <select name="type" id="type" class="form-select" required>
+          <select name="type" id="type" class="form-select" required onchange="viewRowDiploma()">
             <option {!! old('type') == 'CU' ? "selected" : "" !!} value="CU">Curso</option>
             <option {!! old('type') == 'CT' ? "selected" : "" !!} value="CT">Curso - Taller</option>
             <option {!! old('type') == 'TA' ? "selected" : "" !!} value="TA">Taller</option>
@@ -40,17 +40,29 @@
             <option {!! old('type') == 'CO' ? "selected" : "" !!} value="CO">Conferencia</option>
           </select>
         </div>
-        <div class="col-xl-3">
+        <div class="col-xl-2">
           <label for="institution" class='form-label'>Institución:</label>
           <select name="institution" id="institution0" class="form-select">
             <option {!! old('institution') == 'DGAPA' ? "selected" : "" !!} value="DGAPA">DGAPA</option>
             <option {!! old('institution') == 'CDD' ? "selected" : "" !!} value="CDD">CDD</option>
           </select>
         </div>
+        <div class="col-xl-2">
+          <label for="creation_date" class="form-label">*Fecha de creación:</label>
+          <input type="date" class="form-control" required name="creation_date" id="creation_date" placeholder="22/07/22" value="{!! old('creation_date') !!}">
+        </div>
+        <div class="col-xl-5">
+          <label for="department_id" class="form-label">*Coordinación:</label>
+          <select name="department_id" id="department_id" class="form-select">
+            @foreach($departments as $department)
+              <option value={!! $department->department_id !!}>{!! $department->name !!}</option>
+            @endforeach
+          </select>
+        </div>
       </div>
       <div class="row">
         <div class="col-xl-6">
-          <label for="aimed_at" class="fomr-label">Dirijido a:</label>
+          <label for="aimed_at" class="form-label">Dirijido a:</label>
           <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirijido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos" value="{!! old('aimed_at') !!}"></textarea>
         </div>
         <div class="col-xl-6">
@@ -60,7 +72,7 @@
       </div>
       <div class="row">
         <div class="col-xl-6">
-          <label for="content" class="fomr-label">Contenido:</label>
+          <label for="content" class="form-label">Contenido:</label>
           <textarea rows="4" max="2000" name="content" id="content" class="form-control" placeholder="Ej. 1. Introducción, 2. Fundamentos del cálculo...." value="{!! old('content') !!}"></textarea>
         </div>
         <div class="col-xl-6">
@@ -68,35 +80,65 @@
           <textarea rows="4" max="500" name="background" id="background" class="form-control" placeholder="Ej. Para cursar esta actividad es necesario contar con antecedentes sobre..." value="{!! old('background') !!}"></textarea>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xl-2">
-          <label for="creation_date">*Fecha de creación:</label>
-          <input type="date" class="form-control" required name="creation_date" id="creation_date" placeholder="22/07/22" value="{!! old('creation_date') !!}">
+
+      @if($diplomas->isNotEmpty())
+        <div class="row" id='row_diploma_select' style="visibility: hidden">
+          <div class="col-xl-3">
+            <label for="module" class="form-label">*Número de módulo:</label>
+            <input type="number" name="module" id="module" min="1" max="100" class="form-control">
+          </div> 
+          
+          <div class="col-xl-6">
+            <label for="diploma_id" class="form-label">*Diplomado:</label>
+            <select name="diploma_id" id="diploma_id" class="form-select">
+              @foreach($diplomas as $diploma)
+              <option value={!! $diploma->id !!}>{!! $diploma->name !!}</option>
+              @endforeach
+            </select>
+          </div>
         </div>
 
-        {{-- TODO: JS para activar esta fila --}}
-        <div class="col-xl-3">
-          <label for="module" class="form-label">*Número de módulo:</label>
-          <input type="number" name="module" id="module" min="1" max="100" class="form-control">
+      @else
+        <div class="row" id='row_diploma_advice' style="visibility: hidden; color: red">
+          <p>No existe ningún diplomado, es necesario primero crear uno.</p>
         </div>
-        {{-- TODO:Imprimir todos los diplomados --}}
-        <div class="col-xl-6">
-          <label for="diploma_id" class="form-label">*Diplomado:</label>
-          <select name="diploma_id" id="diploma_id" class="form-select">
-            <option value="1">Diplomado en sistemas operativos</option>
-            <option value="2">Diplomado en sistemas termodinamicos</option>
-          </select>
-        </div>
-      </div>
+      @endif
+
       <div class="row">
-        <div class="col-xl-2 mt-auto">
+        <div class="col-xl-2 mt-auto" id='btn_save' style="visibility: visible">
           <input type="submit" id='save-btn' class="btn btn-outline-info" value='Guardar'>
         </div>
         <div class="col-xl-2">
           <a href="{!! route("view.activities.catalogue") !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
       </div>
+
     </form>
   </div>
 </div>
+
+<script>
+  function viewRowDiploma(){
+    const type = document.getElementById('type')
+    const btn = document.getElementById('btn_save')
+    console.log(type.value);
+    if(type.value === 'DI'){
+      if(document.getElementById('row_diploma_advice')){
+        diploma = document.getElementById('row_diploma_advice')
+        btn.style.visibility = 'hidden'
+      }
+      else if (document.getElementById('row_diploma_select')){
+        console.log('dentro');
+        diploma = document.getElementById('row_diploma_select')
+        btn.style.visibility = 'visible'
+      }
+      diploma.style.visibility = 'visible'
+    }
+    else{
+      btn.style.visibility = 'visible'
+      diploma.style.visibility = 'hidden'
+    }
+  }
+</script>
+
 @endsection
