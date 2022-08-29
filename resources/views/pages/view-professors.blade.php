@@ -52,7 +52,7 @@
                     @csrf
                     @method('delete')
                     
-                    <li><a class="dropdown-item" href="#">Cursos</a></li>
+                    <li><a class="dropdown-item" href="#">Actividades</a></li>
                     <li><a class="dropdown-item" href="#">Historial</a></li>
                     <li><a class="dropdown-item" href={!! route('edit.professor', $professor->professor_id) !!}>Actualizar</a></li>
                     <li><a data-bs-toggle="modal" data-bs-target="#myModal{!! $professor->professor_id !!}" class="dropdown-item">Eliminar</a></li>

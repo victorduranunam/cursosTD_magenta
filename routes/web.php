@@ -24,12 +24,12 @@ Route::get('/home', function () {
 //Route Account
 
 //Route Activity Catalogue
-Route::get('catalogo-cursos', 'ActivityCatalogueController@index')->name('view.activities.catalogue');
-Route::get('catalogo-cursos/crear', 'ActivityCatalogueController@create')->name('create.activity.catalogue');
-Route::post('catalogo-cursos/almacenar', 'ActivityCatalogueController@store')->name('store.activity.catalogue');
-Route::get('catalogo-cursos/actualizar/{activity_catalogue_id}', 'ActivityCatalogueController@edit')->name('edit.activity.catalogue');
-Route::put('catalogo-cursos/guardar/{activity_catalogue_id}', 'ActivityCatalogueController@update')->name('update.activity.catalogue');
-Route::delete('catalogo-cursos/eliminar/{activity_catalogue_id}', 'ActivityCatalogueController@delete')->name('delete.activity.catalogue');
+Route::get('catalogo-actividades', 'ActivityCatalogueController@index')->name('view.activities.catalogue');
+Route::get('catalogo-actividades/crear', 'ActivityCatalogueController@create')->name('create.activity.catalogue');
+Route::post('catalogo-actividades/almacenar', 'ActivityCatalogueController@store')->name('store.activity.catalogue');
+Route::get('catalogo-actividades/actualizar/{activity_catalogue_id}', 'ActivityCatalogueController@edit')->name('edit.activity.catalogue');
+Route::put('catalogo-actividades/guardar/{activity_catalogue_id}', 'ActivityCatalogueController@update')->name('update.activity.catalogue');
+Route::delete('catalogo-actividades/eliminar/{activity_catalogue_id}', 'ActivityCatalogueController@delete')->name('delete.activity.catalogue');
 
 //Route Activity
 

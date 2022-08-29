@@ -3,7 +3,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Crear Catálogo de Curso <i class="bi bi-journals"></i></h3>
+    <h3>Crear Catálogo de Actividades <i class="bi bi-journals"></i></h3>
   </div>
   
   @include('partials.messages')

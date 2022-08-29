@@ -35,7 +35,7 @@
                     <div class="modal-body">
                       <p>¿Está seguro de eliminar al administrador {!! $administrator->getFullName() !!}? 
                         Esto borrará todos los registros
-                        que dependan de él, como coordinaciones, cursos y evaluaciones. 
+                        que dependan de él, como coordinaciones, Actividades y evaluaciones. 
                         Si no quiere perder estos registros primero modifíquelos.
                       </p>
                     </div>

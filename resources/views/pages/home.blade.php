@@ -26,7 +26,7 @@
         </div>
         <div class="row" style="margin: 1%">
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Ver cursos programados</a>
+            <a href="" class="btn btn-outline-dark">Ver Actividades programados</a>
           </div>
           <div class="col-4">
             <a href="" class="btn btn-outline-dark">Ver diplomados</a>
@@ -37,7 +37,7 @@
         </div>
         <div class="row" style="margin: 1%">
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Crear nuevo catálogo de cursos</a>
+            <a href="" class="btn btn-outline-dark">Crear nuevo Catálogo de Actividadess</a>
           </div>
           <div class="col-4">
             <a href="" class="btn btn-outline-dark">Crear diplomado</a>

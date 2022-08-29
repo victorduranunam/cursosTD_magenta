@@ -52,11 +52,11 @@
                     </li>
 
                     <li class="nav-header">
-                        <div class="link"><i class="bi bi-journals"></i>Cursos<i class="bi bi-chevron-down"></i></div>
+                        <div class="link"><i class="bi bi-journals"></i>Actividades<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
                             <li><a href={!! route('create.activity.catalogue') !!}>Alta Catálogo</a></li>
-                            <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de cursos</a></li>
-                            <li><a href=''>Cursos programados</a></li>
+                            <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de Actividades</a></li>
+                            <li><a href=''>Actividades programadas</a></li>
                         </ul>
                     </li>
 

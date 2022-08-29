@@ -37,7 +37,7 @@ class ActivityCatalogueController extends Controller
     if($departments->isEmpty())
       return redirect()
         ->route('home')
-        ->with('danger', 'Es necesario crear una coordinación antes de crear un catálogo de curso.');
+        ->with('danger', 'Es necesario crear una coordinación antes de crear un Catálogo de Actividades.');
     return view("pages.create-activity-catalogue")
       ->with('diplomas', $diplomas)
       ->with('departments', $departments);
@@ -86,7 +86,7 @@ class ActivityCatalogueController extends Controller
 
       return redirect()
         ->route('view.activities.catalogue')
-        ->with('success', 'Catálogo de curso creado correctamente');
+        ->with('success', 'Catálogo de Actividades creado correctamente');
 
     } catch (\Illuminate\Database\QueryException $th) {
       if ($th->getCode() == 7)
@@ -98,7 +98,7 @@ class ActivityCatalogueController extends Controller
         return redirect()
           ->back()
           ->with('activity_cat', $activity_cat)
-          ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada catálogo de curso.');
+          ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada Catálogo de Actividades.');
       else
         return dd($th);
         
@@ -171,7 +171,7 @@ class ActivityCatalogueController extends Controller
         return redirect()
           ->back()
           ->with('activity_cat', $activity_cat)
-          ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada catálogo de curso.');
+          ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada Catálogo de Actividades.');
 
       else
         return redirect()
@@ -201,7 +201,7 @@ class ActivityCatalogueController extends Controller
       else
         return redirect()
           ->back()
-          ->with('warning', 'Error al eliminar el catálogo de curso.');
+          ->with('warning', 'Error al eliminar el Catálogo de Actividades.');
     }
   }
 }
