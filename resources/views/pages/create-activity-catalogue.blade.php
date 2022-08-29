@@ -49,13 +49,16 @@
         </div>
         <div class="col-xl-2">
           <label for="creation_date" class="form-label">*Fecha de creación:</label>
-          <input type="date" class="form-control" required name="creation_date" id="creation_date" placeholder="22/07/22" value="{!! old('creation_date') !!}">
+          <input type="date" class="form-control" required name="creation_date" 
+            id="creation_date" placeholder="22/07/22" 
+            value="{!! old('creation_date') !!}"
+          >
         </div>
         <div class="col-xl-5">
           <label for="department_id" class="form-label">*Coordinación:</label>
           <select name="department_id" id="department_id" class="form-select">
             @foreach($departments as $department)
-              <option value={!! $department->department_id !!}>{!! $department->name !!}</option>
+              <option {!! old('department_id') == $department->department_id ? "selected" : "" !!} value={!! $department->department_id !!}> {!! $department->name !!} </option>
             @endforeach
           </select>
         </div>
@@ -85,14 +88,14 @@
         <div class="row" id='row_diploma_select' style="visibility: hidden">
           <div class="col-xl-3">
             <label for="module" class="form-label">*Número de módulo:</label>
-            <input type="number" name="module" id="module" min="1" max="100" class="form-control">
+            <input type="number" name="module" id="module" min="1" max="100" class="form-control" value="{!! old('module') !!}">
           </div> 
           
           <div class="col-xl-6">
             <label for="diploma_id" class="form-label">*Diplomado:</label>
             <select name="diploma_id" id="diploma_id" class="form-select">
               @foreach($diplomas as $diploma)
-              <option value={!! $diploma->id !!}>{!! $diploma->name !!}</option>
+              <option {!! old('diploma_id') == $diploma->diploma_id ? "selected" : "" !!} value={!! $diploma->diploma_id !!}>{!! $diploma->name !!}</option>
               @endforeach
             </select>
           </div>
@@ -118,6 +121,8 @@
 </div>
 
 <script>
+  viewRowDiploma();
+
   function viewRowDiploma(){
     const type = document.getElementById('type')
     const btn = document.getElementById('btn_save')

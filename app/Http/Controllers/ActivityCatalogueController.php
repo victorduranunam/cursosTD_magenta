@@ -46,7 +46,7 @@ class ActivityCatalogueController extends Controller
   public function store(Request $req)
   {
     try {
-      //TODO: Que funcione el almacenamiento de modulos y verificar que el numero no se repita
+
       $activity_cat = new ActivityCatalogue();
       $activity_cat->activity_catalogue_id = DB::select("select nextval('activity_catalogue_seq')")[0]->nextval;
       $activity_cat->key = $req->key;
@@ -66,11 +66,17 @@ class ActivityCatalogueController extends Controller
         $activity_cat->content = $req->content;
       if($req->background)
         $activity_cat->background = $req->background;
+
       if($req->type === 'DI'){
         if(!$req->module OR !$req->diploma_id)
           return redirect()
             ->back()
             ->with('warning', 'Error al almacenar, verifique haber ingresado el número de módulo y el diplomado asociado.')
+            ->withInput();
+        if(ActivityCatalogue::where('module', $req->module)->where('diploma_id', $req->diploma_id)->get()->isNotEmpty())
+          return redirect()
+            ->back()
+            ->with('warning', 'Error al almacenar, el número de módulo no debe repetirse para el mismo diplomado.')
             ->withInput();
         $activity_cat->diploma_id = $req->diploma_id;
         $activity_cat->module = $req->module;
