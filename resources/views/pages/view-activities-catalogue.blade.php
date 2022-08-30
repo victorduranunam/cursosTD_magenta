@@ -21,10 +21,10 @@
           <div class="col-xl-2">
             <h6>Clave</h6>
           </div>
-          <div class="col-xl-4">
+          <div class="col-xl-3">
             <h6>Nombre</h6>
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl">
             <h6>Coordinación</h6>
           </div>
         </div>

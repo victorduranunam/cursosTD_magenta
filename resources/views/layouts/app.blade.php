@@ -102,7 +102,6 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href={!! route('create.division') !!}>Alta de División</a></li>
                             <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
                         </ul>
                     </li>

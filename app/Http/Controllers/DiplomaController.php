@@ -45,6 +45,7 @@ class DiplomaController extends Controller
 
   public function update(Request $req, $diploma_id){
     try {
+
       $diploma = Diploma::findOrFail($diploma_id);
       $diploma->name = $req->name;
       $diploma->save();
@@ -54,15 +55,18 @@ class DiplomaController extends Controller
         ->with('success', 'Cambios realizados.');
 
     } catch (\Illuminate\Database\QueryException $th) {
+      
       if($th->getCode() == 7)
         return redirect()
           ->route('home')
           ->with('danger', 'Problema con la base de datos.');
+      
       else
         return redirect()
           ->back()
           ->with('diploma',$diploma)
           ->with('warning', 'Error al almacenar, verifique sus datos.');
+
     }
   }
 
@@ -75,6 +79,7 @@ class DiplomaController extends Controller
       return redirect()
         ->route('view.diplomas')
         ->with('success', 'Eliminado correctamente.');
+
     } catch (\Illuminate\Database\QueryException $th) {
 
       if ($th->getCode() == 7)
