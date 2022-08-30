@@ -39,7 +39,7 @@
         </div>
         <div class="row">
           <div class="d-grid gap-2 col-xl-2">
-              <button type="submit" id='save-btn' class="btn btn-outline-info"> Guardar </button>
+              <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
           </div>
         </div>
       </form>
@@ -69,7 +69,7 @@
                 </p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
                 <input type="submit" value="Eliminar" class="btn btn-outline-danger">
               </div>
             </div>

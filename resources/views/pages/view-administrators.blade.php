@@ -26,7 +26,7 @@
         {!! $administrator->getJob() !!}
       </div>
       <div class="col-xl-2">
-        <a href={!! route('edit.administrator', $administrator->administrator_id) !!} class="btn btn-outline-info">Actualizar</a>
+        <a href={!! route('edit.administrator', $administrator->administrator_id) !!} class="btn btn-outline-primary">Actualizar</a>
       </div>
       <div class="col-xl-2">
         <form method="POST" action="{!! route('delete.administrator', $administrator->administrator_id) !!}">

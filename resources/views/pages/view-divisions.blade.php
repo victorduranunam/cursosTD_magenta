@@ -22,7 +22,7 @@
               {!! $division->name !!}
             </div>
             <div class="col-xl-2">
-              <a href={!! route('edit.division', $division->division_id) !!} class="btn btn-outline-info">Actualizar</a>
+              <a href={!! route('edit.division', $division->division_id) !!} class="btn btn-outline-primary">Actualizar</a>
             </div>
             <div class="col-xl-2">
               <form method="POST" action="{!! route('delete.division', $division->division_id) !!}">

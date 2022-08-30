@@ -109,7 +109,7 @@
 
       <div class="row">
         <div class="col-xl-2 mt-auto" id='btn_save' style="visibility: visible">
-          <input type="submit" id='save-btn' class="btn btn-outline-info" value='Guardar'>
+          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
         </div>
         <div class="col-xl-2">
           <a href="{!! route("view.activities.catalogue") !!}" class="btn btn-outline-warning">Cancelar</a>

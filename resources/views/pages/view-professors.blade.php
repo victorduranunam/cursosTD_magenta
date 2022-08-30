@@ -52,7 +52,7 @@
             
             <div class="col-xl-2">
               <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-outline-primary dropdown-toggle mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Opciones
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

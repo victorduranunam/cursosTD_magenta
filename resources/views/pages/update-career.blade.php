@@ -22,7 +22,7 @@
           <input required class="form-control" type="text" name="key" id="key" value="{!! $career->key !!}">
         </div>
         <div class="col-xl-2 mt-auto">
-          <input type="submit" id='save-btn' class="btn btn-outline-info" value='Guardar'>
+          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
               </p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
               <input type="submit" value="Eliminar" class="btn btn-outline-danger">
             </div>
           </div>
