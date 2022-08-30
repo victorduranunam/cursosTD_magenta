@@ -37,82 +37,77 @@
         <div class="sidebar">
         <!-- Side menu Content -->
             <aside id="side-menu" class="aside" role="navigation">
-            <button class="btn btn-outline-light btn-sm mobile" style="float:right; margin:10px; margin-right:20px;" href="" onclick=closeNav();><i class="bi bi-x"></i></button>
-                <ul class="nav nav-list accordion">
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-send"></i> Diplomados<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>
-                            <li><a href="">Alta de módulo</a></li>
-                            <li><a href="">Ver Módulos Programados</a></li>
-                            <li><a href="">Ver Catálogo de Módulos</a></li>
+              <button class="btn btn-outline-light btn-sm mobile" style="float:right; margin:10px; margin-right:20px;" href="" onclick=closeNav();><i class="bi bi-x"></i></button>
+              <ul class="nav nav-list accordion">
 
-                        </ul>
-                    </li>
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-journals"></i>Actividades<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('create.activity.catalogue') !!}>Alta Catálogo</a></li>
+                        <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de Actividades</a></li>
+                        <li><a href=''>Actividades programadas</a></li>
+                        <li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>
+                    </ul>
+                </li>
 
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-journals"></i>Actividades<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href={!! route('create.activity.catalogue') !!}>Alta Catálogo</a></li>
-                            <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de Actividades</a></li>
-                            <li><a href=''>Actividades programadas</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-person-lines-fill"></i>Profesores<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('create.professor') !!}>Alta Profesor</a></li>
+                        <li><a href={!! route('view.professors') !!}>Consulta de profesores</a></li>
+                    </ul>
+                </li>
 
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-person-lines-fill"></i>Profesores<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href={!! route('create.professor') !!}>Alta Profesor</a></li>
-                            <li><a href={!! route('view.professors') !!}>Consulta de profesores</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-bar">
+                  <div class="link"><i class="bi bi-newspaper"></i>Categorías y Niveles <i class="bi bi-chevron-down"></i></div>
+                  <ul class="submenu">
+                    <li><a href={!! route('create.category') !!}>Alta de Categoría y Nivel</a></li>
+                    <li><a href={!! route('view.categories') !!}>Consulta de Categorías y Niveles</a></li>
+                  </ul>
+                </li>
 
-                    <li class="nav-bar">
-                      <div class="link"><i class="bi bi-newspaper"></i>Categorías y Niveles <i class="bi bi-chevron-down"></i></div>
-                      <ul class="submenu">
-                        <li><a href={!! route('create.category') !!}>Alta de Categoría y Nivel</a></li>
-                        <li><a href={!! route('view.categories') !!}>Consulta de Categorías y Niveles</a></li>
-                      </ul>
-                    </li>
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-building"></i>Salones<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('create.venue') !!}>Alta de Salón</a></li>
+                        <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
+                    </ul>
+                </li>
 
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-building"></i>Salones<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href={!! route('create.venue') !!}>Alta de Salón</a></li>
-                            <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-mortarboard"></i>Carreras<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href={!! route('create.career') !!}>Alta de Carreras</a></li>
-                            <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-bank"></i>Coordinaciones<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href={!! route('create.department') !!}>Alta de Coordinación</a></li>
-                            <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
-                            <li><a href={!! route('create.administrator') !!}>Alta de administrador</a></li>
-                            <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-mortarboard"></i>Carreras<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('create.career') !!}>Alta de Carreras</a></li>
+                        <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
+                    </ul>
+                </li>
 
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-header">
-                        <div class="link"><i class="bi bi-journal-check"></i>Evaluaciones<i class="bi bi-chevron-down"></i></div>
-                        <ul class="submenu">
-                            <li><a href="">Área 1</a></li>
-                            <li><a href="">Área 2</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-bank"></i>Coordinaciones<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('create.department') !!}>Alta de Coordinación</a></li>
+                        <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
+                        <li><a href={!! route('create.administrator') !!}>Alta de administrador</a></li>
+                        <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-header">
+                    <div class="link"><i class="bi bi-journal-check"></i>Evaluaciones<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href="">Área 1</a></li>
+                        <li><a href="">Área 2</a></li>
+                    </ul>
+                </li>
+
+              </ul>
             </aside>
            
         </div>
