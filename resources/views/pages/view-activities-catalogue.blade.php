@@ -33,14 +33,17 @@
           <div class="col-xl-2">
             {!! $activity_cat->key !!}
           </div>
-          <div class="col-xl-4">
+          <div class="col-xl-3">
             {!! $activity_cat->name !!}
           </div>
           <div class="col-xl-1">
             {!! $activity_cat->getDepartmentAbbreviation() !!}
           </div>
           <div class="col-xl-2">
-            <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-info">Actualizar</a>
+            <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-primary">Programar</a>
+          </div>
+          <div class="col-xl-2">
+            <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-secondary">Actualizar</a>
           </div>
           <div class="col-xl-2">
             <form method="POST" action="{!! route('delete.activity.catalogue', $activity_cat->activity_catalogue_id) !!}">

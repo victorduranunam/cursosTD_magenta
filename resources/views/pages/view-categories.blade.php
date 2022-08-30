@@ -23,7 +23,7 @@
           {!! $category->name !!}
         </div>
         <div class="col-xl-2">
-          <a href={!! route('edit.category', $category->category_id) !!} class="btn btn-outline-info">Actualizar</a>
+          <a href={!! route('edit.category', $category->category_id) !!} class="btn btn-outline-primary">Actualizar</a>
         </div>
         <div class="col-xl-2">
           <form method="POST" action="{!! route('delete.category', $category->category_id) !!}">
