@@ -5,23 +5,31 @@
 <div class="card">
   <div class="card-header"><br>
     <h3>Ver Administradores <i class="bi bi-person"></i></h3>
+    <div class="row justify-content-end">
+      <div class="col-xl-3">
+        <a href={!! route('create.administrator') !!} class="btn btn-outline-success">Alta de administrador</a>
+      </div>
+      <div class="col-xl-2">
+        <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
+      </div>
+    </div>
   </div>
   @include('partials.messages')
-    <div class="card-body"><br>
-      @if($administrators->isNotEmpty())
-        @foreach ($administrators as $administrator)
-        <div class="row">
-          <div class="col-xl-4">
-            {!! $administrator->last_name.' '.$administrator->mothers_last_name.' '.$administrator->name !!}
-          </div>
-          <div class="col-xl-4">
-            {!! $administrator->getJob() !!}
-          </div>
-          <div class="col-xl-2">
-            <a href={!! route('edit.administrator', $administrator->administrator_id) !!} class="btn btn-outline-info">Actualizar</a>
-          </div>
-          <div class="col-xl-2">
-            <form method="POST" action="{!! route('delete.administrator', $administrator->administrator_id) !!}">
+  <div class="card-body"><br>
+    @if($administrators->isNotEmpty())
+    @foreach ($administrators as $administrator)
+    <div class="row">
+      <div class="col-xl-4">
+        {!! $administrator->last_name.' '.$administrator->mothers_last_name.' '.$administrator->name !!}
+      </div>
+      <div class="col-xl-4">
+        {!! $administrator->getJob() !!}
+      </div>
+      <div class="col-xl-2">
+        <a href={!! route('edit.administrator', $administrator->administrator_id) !!} class="btn btn-outline-info">Actualizar</a>
+      </div>
+      <div class="col-xl-2">
+        <form method="POST" action="{!! route('delete.administrator', $administrator->administrator_id) !!}">
               @csrf
               @method('delete')
               <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $administrator->administrator_id !!}">Eliminar</a>
@@ -57,14 +65,6 @@
           </div>
         </div>
         @endif
-        <div class="row">
-          <div class="col-xl-3">
-            <a href={!! route('create.administrator') !!} class="btn btn-outline-success">Alta de administrador</a>
-          </div>
-          <div class="col-xl-2">
-            <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
-          </div>
-        </div>
       
     </div>
   </div>

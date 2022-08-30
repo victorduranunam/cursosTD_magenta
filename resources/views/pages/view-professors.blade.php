@@ -5,6 +5,14 @@
 <div class="card">
   <div class="card-header"><br>
     <h3>Ver Profesores <i class="bi bi-person-lines-fill"></i></h3>
+    <div class="row justify-content-end">
+      <div class="col-xl-3">
+        <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de profesor</a>
+      </div>
+      <div class="col-xl-2">
+        <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
+      </div>
+    </div>
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
@@ -91,14 +99,6 @@
         </div>
       @endif
 
-      <div class="row">
-        <div class="col-xl-3">
-          <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de profesor</a>
-        </div>
-        <div class="col-xl-2">
-          <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
-        </div>
-      </div>
     </div>
   </div>
 @endsection

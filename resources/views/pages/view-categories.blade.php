@@ -5,6 +5,14 @@
 <div class="card">
   <div class="card-header"><br>
     <h3>Ver Categorías y Niveles <i class="bi bi-mortarboard"></i></h3>
+    <div class="row justify-content-end">
+      <div class="col-xl-3">
+        <a href={!! route('create.category') !!} class="btn btn-outline-success">Alta de categorías</a>
+      </div>
+      <div class="col-xl-2">
+        <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
+      </div>
+    </div>
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
@@ -53,14 +61,6 @@
         </div>
       </div>
     @endif
-      <div class="row">
-        <div class="col-xl-3">
-          <a href={!! route('create.category') !!} class="btn btn-outline-success">Alta de categorías</a>
-        </div>
-        <div class="col-xl-2">
-          <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
-        </div>
-      </div>
     </div>
   </div>
 @endsection
