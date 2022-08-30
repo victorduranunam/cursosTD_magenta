@@ -54,7 +54,7 @@
               </div>
             </div>
             @endforeach
-          @elseif($departments->isEmpty())
+          @elseif($careers->isEmpty())
             <div class="row">
               <div class="col-xl-6">
                 No hay carreras en la base de datos.

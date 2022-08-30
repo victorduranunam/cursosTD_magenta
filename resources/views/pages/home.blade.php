@@ -26,10 +26,10 @@
         </div>
         <div class="row" style="margin: 1%">
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Ver Actividades programados</a>
+            <a href={!! route('view.activities.catalogue') !!} class="btn btn-outline-dark">Ver Actividades programados</a>
           </div>
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Ver diplomados</a>
+            <a href={!! route('view.diplomas') !!} class="btn btn-outline-dark">Ver diplomados</a>
           </div>
           <div class="col-4">
             <a href={!! route('view.professors') !!} class="btn btn-outline-dark">Ver profesores</a>
@@ -37,7 +37,7 @@
         </div>
         <div class="row" style="margin: 1%">
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Crear nuevo Catálogo de Actividadess</a>
+            <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-dark">Crear nuevo Catálogo de Actividades</a>
           </div>
           <div class="col-4">
             <a href="" class="btn btn-outline-dark">Crear diplomado</a>

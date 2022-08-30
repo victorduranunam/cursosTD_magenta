@@ -78,7 +78,7 @@
       @elseif($activities_cat->isEmpty())
         <div class="row">
           <div class="col-xl-6">
-            No hay administradores en la base de datos.
+            No hay actividades en la base de datos.
           </div>
         </div>
         @endif

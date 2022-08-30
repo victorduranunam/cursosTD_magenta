@@ -100,7 +100,7 @@
                 </li>
 
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-journal-check"></i>Evaluaciones<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-clipboard-check"></i>Evaluaciones<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
                         <li><a href="">Área 1</a></li>
                         <li><a href="">Área 2</a></li>
