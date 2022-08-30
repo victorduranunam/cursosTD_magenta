@@ -68,7 +68,10 @@ Route::put('coordinaciones/guardar/{department_id}', "DepartmentController@updat
 Route::delete('coordinaciones/eliminar/{department_id}', "DepartmentController@delete")->name("delete.department");
 
 //Route Diploma
-
+Route::get('diplomas', "DiplomaController@index")->name("view.diplomas");
+Route::post('diplomas/almacenar', "DiplomaController@store")->name("store.diploma");
+Route::put('diplomas/guardar/{diploma_id}', "DiplomaController@update")->name('update.diploma');
+Route::delete('diplomas/eliminar/{diploma_id}', "DiplomaController@delete")->name("delete.diploma");
 //Route Division
 Route::get('divisiones', "DivisionController@index")->name("view.divisions");
 Route::get('divisiones/crear', "DivisionController@create")->name("create.division");

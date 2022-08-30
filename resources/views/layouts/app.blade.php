@@ -42,8 +42,7 @@
                     <li class="nav-header">
                         <div class="link"><i class="bi bi-send"></i> Diplomados<i class="bi bi-chevron-down"></i></div>
                         <ul class="submenu">
-                            <li><a href="">Alta de diplomado</a></li>
-                            <li><a href="">Ver Diplomados</a></li>
+                            <li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>
                             <li><a href="">Alta de módulo</a></li>
                             <li><a href="">Ver Módulos Programados</a></li>
                             <li><a href="">Ver Catálogo de Módulos</a></li>
