@@ -61,7 +61,6 @@
                 <li class="nav-bar">
                   <div class="link"><i class="bi bi-newspaper"></i>Categorías y Niveles <i class="bi bi-chevron-down"></i></div>
                   <ul class="submenu">
-                    <li><a href={!! route('create.category') !!}>Alta de Categoría y Nivel</a></li>
                     <li><a href={!! route('view.categories') !!}>Consulta de Categorías y Niveles</a></li>
                   </ul>
                 </li>
@@ -77,7 +76,6 @@
                 <li class="nav-header">
                     <div class="link"><i class="bi bi-mortarboard"></i>Carreras<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.career') !!}>Alta de Carreras</a></li>
                         <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
                     </ul>
                 </li>

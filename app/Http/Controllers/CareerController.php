@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CareerController extends Controller
 {
+
   public function index()
   {
     try {
@@ -20,11 +21,6 @@ class CareerController extends Controller
         ->route('home')
         ->with('danger', 'Problema con la base de datos.');
     }
-  }
-
-  public function create()
-  {
-    return view("pages.create-career");
   }
 
   public function store(Request $req)
@@ -57,19 +53,6 @@ class CareerController extends Controller
     }
   }
 
-  public function edit($career_id)
-  {
-    try {
-      $career = Career::findOrFail($career_id);
-      return view("pages.update-career")
-        ->with("career", $career);
-    } catch (\Illuminate\Database\QueryException $th) {
-      return redirect()
-        ->route('view.careers')
-        ->with('danger', 'Problema con la base de datos.');
-    }
-  }
-
   public function update(Request $req, $career_id)
   {
     try {
@@ -79,9 +62,11 @@ class CareerController extends Controller
       $career->save();
 
       return redirect()
-        ->route('edit.career', $career->career_id)
+        ->route('view.careers', $career->career_id)
         ->with('success', 'Cambios realizados.');
+
     } catch (\Illuminate\Database\QueryException $th) {
+      
       if ($th->getCode() == 7)
         return redirect()
           ->route('home')

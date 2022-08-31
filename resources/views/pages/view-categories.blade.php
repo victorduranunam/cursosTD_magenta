@@ -3,64 +3,151 @@
 
 
 <div class="card">
+
+  {{-- Header and Title--}}
   <div class="card-header"><br>
     <h3>Ver Categorías y Niveles <i class="bi bi-mortarboard"></i></h3>
     <div class="row justify-content-end">
       <div class="col-xl-3">
-        <a href={!! route('create.category') !!} class="btn btn-outline-success">Alta de categorías</a>
+        <a class="btn btn-outline-success" onclick="blockCreateDiv()">Crear</a>
       </div>
       <div class="col-xl-2">
         <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
     </div>
   </div>
+
   @include('partials.messages')
-    <div class="card-body"><br>
+  <div class="card-body"><br>
+
+    {{-- Form for create --}}
+    <div id="create-div" style="display:none;">
+      <form method="POST" action="{!! route('store.category') !!}">
+        <h5>Alta de categorías</h5>
+        @csrf
+        @method('post')
+        <div class="row">
+          <div class="col-xl-6">
+            <label class="form-label" for="name">Nombre:</label>
+            <input required class="form-control" type="text" name="name" id="name" value="{!! old('name') !!}">
+          </div>
+          <div class="col-xl-3">
+            <label class="form-label" for="abbreviation">Abreviación:</label>
+            <input required class="form-control" type="text" name="abbreviation" id="abbreviation" value="{!! old('abbreviation') !!}">
+          </div>
+          <div class="col-xl-2 mt-auto">
+            <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+          </div>
+        </div>
+        <hr>
+      </form>
+    </div>
+
+    {{-- List of elements --}}
     @if($categories->isNotEmpty())
-      @foreach ($categories as $category)
-      <div class="row" style="margin: 1%">
+
+      <div class="row">
         <div class="col-xl-6">
-          {!! $category->name !!}
+          <h6>Nombre</h6>
         </div>
-        <div class="col-xl-2">
-          <a href={!! route('edit.category', $category->category_id) !!} class="btn btn-outline-primary">Actualizar</a>
+        <div class="col-xl-6">
+          <h6>Abreviación</h6>
         </div>
-        <div class="col-xl-2">
-          <form method="POST" action="{!! route('delete.category', $category->category_id) !!}">
-            @csrf
-            @method('delete')
-            <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $category->category_id !!}">Eliminar</a>
-            <div class="modal fade" id="myModal{!! $category->category_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Eliminar categoría</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p>¿Está seguro de eliminar la categoría {!! $category->name !!}?
-                      Esto borrará los registros que existan entre profesores
-                      con ella.
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+      </div>
+
+      @foreach ($categories as $category)
+
+        <div class="row" style="margin: 1%">
+
+          {{-- Name of the element --}}
+          <div class="col-xl-6">
+            {!! $category->name !!}
+          </div>
+
+          {{-- Abbreviation of the element --}}
+          <div class="col-xl-2">
+            {!! $category->abbreviation !!}
+          </div>
+
+          {{-- Form for update --}}
+          <div class="col-xl-2">
+            <form method="POST" action="{!! route('update.category', $category->category_id) !!}">
+              @csrf
+              @method('put')
+              <a type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#myModalu{!! $category->category_id !!}">Actualizar</a>
+              <div class="modal fade" id="myModalu{!! $category->category_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Actualizar Categoría</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <label class="form-label" for="name">Nombre:</label>
+                      <input required class="form-control" type="text" name="name" id="name" value="{!! $category->name !!}">
+                      <label class="form-label" for="abbreviation">Abreviación:</label>
+                      <input required class="form-control" type="text" name="abbreviation" id="abbreviation" value="{!! $category->abbreviation !!}">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
+                      <input type="submit" value="Guardar" class="btn btn-outline-success">
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+
+          {{-- Form for delete --}}
+          <div class="col-xl-2">
+            <form method="POST" action="{!! route('delete.category', $category->category_id) !!}">
+              @csrf
+              @method('delete')
+              <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $category->category_id !!}">Eliminar</a>
+              <div class="modal fade" id="myModal{!! $category->category_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Eliminar categoría</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>¿Está seguro de eliminar la categoría {!! $category->name !!}?
+                        Esto borrará los registros que existan entre profesores
+                        con ella.
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
         </div>
-      </div>
+
       @endforeach
+
     @elseif($departments->isEmpty())
+
       <div class="row">
         <div class="col-xl-6">
           No hay categorías en la base de datos.
         </div>
       </div>
+
     @endif
-    </div>
+
   </div>
+</div>
+
+<script>
+  function blockCreateDiv() {
+    document.getElementById('create-div').style.display = "block";
+  }
+</script>
+
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+
   public function index()
   {
     try {
@@ -24,11 +25,6 @@ class CategoryController extends Controller
         ->route('home')
         ->with('danger', 'Problema con la base de datos.');
     }
-  }
-
-  public function create()
-  {
-    return view("pages.create-category");
   }
 
   public function store(Request $req)
@@ -57,23 +53,6 @@ class CategoryController extends Controller
     }
   }
 
-  public function edit($category_id)
-  {
-    try {
-      
-      $category = Category::findOrFail($category_id);
-
-      return view("pages.update-category")
-        ->with("category", $category);
-
-    } catch (\Illuminate\Database\QueryException $th) {
-      
-      return redirect()
-        ->route('view.categories')
-        ->with('danger', 'Problema con la base de datos.');
-    }
-  }
-
   public function update(Request $req, $category_id)
   {
     
@@ -85,10 +64,11 @@ class CategoryController extends Controller
       $category->save();
 
       return redirect()
-        ->route('edit.category', $category->category_id)
+        ->route('view.categories', $category->category_id)
         ->with('success', 'Cambios realizados.');
 
     } catch (\Illuminate\Database\QueryException $th) {
+
       if ($th->getCode() == 7)
         return redirect()
           ->route('home')
