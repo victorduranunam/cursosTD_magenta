@@ -40,7 +40,7 @@
             {!! $activity_cat->getDepartmentAbbreviation() !!}
           </div>
           <div class="col-xl-2">
-            <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-primary">Programar</a>
+            <a href={!! route('create.activity', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-primary">Programar</a>
           </div>
           <div class="col-xl-2">
             <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-secondary">Actualizar</a>

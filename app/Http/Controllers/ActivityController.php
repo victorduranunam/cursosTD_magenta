@@ -1,10 +1,97 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Activity;
+use App\Models\ActivityCatalogue;
+use App\Models\Venue;
+use App\Models\Instructor;
+use App\Models\Professor;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
-    //
+    public function index(){
+        try {
+            $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
+                                    ->join('instructor','instructor.activity_id','=','activity.activity_id')
+                                    ->join('professor','professor.professor_id','=','instructor.professor_id')
+                                    ->get(['activity_catalogue.name','activity.activity_id','activity.sem_year','activity.sem_num','activity.sem_type']);
+      
+            return view("pages.view-activities")
+              ->with("activities", $activities);
+      
+          } catch (\Illuminate\Database\QueryException $th) {
+            
+            return redirect()
+              ->route('home')
+              ->with('danger', 'Problema con la base de datos.');
+          }
+    }
+
+    public function create($activity_catalogue_id){
+        try{
+            $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
+            $venues = Venue::all();
+            return view('pages.create-activity')
+                ->with("activity_cat", $activity_cat)
+                ->with("venues",$venues);
+        } catch (\Illuminate\Database\QueryException $th){
+            return redirect()
+              ->route('view.activities.catalogue')
+              ->with('danger','Problema con la base de datos.');
+        }
+
+    }
+
+    public function store(Request $req){
+        try{
+            $activity = new Activity(); 
+            $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
+            $activity->sem_year = $req->sem_year;
+            $activity->sem_num = $req->sem_num;
+            $activity->sem_type = $req->sem_type;
+            $activity->start_date = $req->start_date;
+            $activity->end_date = $req->end_date;
+            $activity->manual_date = $req->manual_date;
+            $activity->day = "[".collect($req->day)->implode(",")."]";
+            $activity->ctc = $req->ctc;
+            $activity->cost = $req->cost;
+            $activity->max_quota = $req->max_quota;
+            $activity->min_quota = $req->min_quota;
+            $activity->activity_catalogue_id = $req->activity_catalogue_id;
+            $activity->venue_id = $req->venue_id;
+            $activity->save();
+            return redirect()
+                ->route('view.activities')
+                ->with('success', 'Actividad creada correctamente');
+        }catch (\Illuminate\Database\QueryException $th) {
+            if ($th->getCode() == 7)
+              return redirect()
+                ->route('home')
+                ->with('danger', 'Problema con la base de datos.');
+      
+            elseif ($th->getCode() == 23505)
+              return redirect()
+                ->back()
+                ->with('activity_cat', $activity_cat)
+                ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada Catálogo de Actividades.');
+            else
+              return dd($th);   
+          }
+
+    }
+
+    // public function edit(){
+
+    // }
+
+    // public function update(){
+
+    // }
+
+    // public function delete(){
+
+    // }
+
 }
