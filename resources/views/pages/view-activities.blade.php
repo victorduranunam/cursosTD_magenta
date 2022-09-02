@@ -31,7 +31,7 @@
         @foreach ($activities as $activity)
         <div class="row row-list">
           <div class="col-xl-4">
-            {!! $activity->name !!}
+            {!! $activity->getName() !!}
           </div>
           <div class="col-xl-4">
             {!! $activity->getProfessors() !!}
@@ -40,7 +40,7 @@
           {!! $activity->getSemester() !!}
           </div>
           
-          <div class="col-xl-2 mt-auto">
+          <div class="col-xl-2">
               <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Opciones
@@ -52,7 +52,7 @@
                     
                     <li><a class="dropdown-item" href="#">Ver Curso</a></li>
                     <li><a class="dropdown-item" href="#">Inscribir participantes</a></li>
-                    <li><a class="dropdown-item" href="#">Instructores</a></li>
+                    <li><a class="dropdown-item" href={!! route('view.instructors', $activity->activity_id) !!}>Instructores</a></li>
                     <li><a class="dropdown-item" href={!! route('edit.activity', $activity->activity_id) !!}>Actualizar</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a data-bs-toggle="modal" data-bs-target="#myModal{!! $activity->activity_id !!}" class="dropdown-item">Eliminar</a></li>

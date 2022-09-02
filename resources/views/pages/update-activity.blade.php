@@ -5,7 +5,7 @@
 <div class="card">
   <div class="card-header"><br>
     <h3>Actualizar Actividad <i class="bi bi-journals"></i></h3>
-    <h4> {!! $activity->name !!} </h4>
+    <h4> {!! $activity->getName() !!} </h4>
   </div>
   @include('partials.messages')
   <div class="card-body"><br>
@@ -179,7 +179,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>¿Está seguro de eliminar la actividad {!! $activity->name !!}?
+              <p>¿Está seguro de eliminar la actividad {!! $activity->getName() !!}?
                 Esto borrará los registros que existan entre instructores y participantes
                 con ella.
               </p>

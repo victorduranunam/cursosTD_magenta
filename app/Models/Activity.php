@@ -30,6 +30,12 @@ class Activity extends Model
     protected $casts = [
         'day' => 'array'
     ];
+    public function getName(){
+        $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
+                                    ->where('activity_catalogue.activity_catalogue_id',$this->activity_catalogue_id)
+                                    ->get(['activity_catalogue.name']);
+        return $activities[0]->name;
+    }
 
     public function getProfessors(){
         $professors = Professor::join('instructor','instructor.professor_id','=','professor.professor_id')
