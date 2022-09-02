@@ -36,7 +36,7 @@ Route::get('actividades','ActivityController@index')->name('view.activities');
 Route::get('actividades/crear/{activity_catalogue_id}','ActivityController@create')->name('create.activity');
 Route::post('actividades/almacenar','ActivityController@store')->name('store.activity');
 Route::get('actividades/actualizar/{activity_id}','ActivityController@edit')->name('edit.activity');
-Route::put('actividades/guardar/{activity_id','ActivityController@update')->name('update.activity');
+Route::put('actividades/guardar/{activity_id}','ActivityController@update')->name('update.activity');
 Route::delete('actividades/eliminar/{activity_id}','ActivityController@delete')->name('delete.activity');
 
 //Route Activity Evaluation

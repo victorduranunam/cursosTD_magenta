@@ -37,7 +37,7 @@
             {!! $activity->getProfessors() !!}
           </div>
           <div class="col-xl-2">
-          {!! $activity->sem_year."-".$activity->sem_num." ".$activity->sem_type !!}
+          {!! $activity->getSemester() !!}
           </div>
           
           <div class="col-xl-2 mt-auto">
@@ -81,34 +81,6 @@
               </div>
             </div>
           
-          <!-- <div class="col-xl-2">
-            <form method="POST" action="{!! route('delete.activity', $activity->activity_id) !!}">
-              @csrf
-              @method('delete')
-              <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $activity->activity_id !!}">Eliminar</a>
-              <div class="modal fade" id="myModal{!! $activity->activity_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Eliminar Catálogo de Actividades</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>¿Está seguro de eliminar el Catálogo de Actividades {!! $activity->activity_id !!}? 
-                        Esto borrará todos los registros
-                        que dependan de él, como Actividades programadas, evaluaciones, participantes e instructores. 
-                        Si no quiere perder estos registros, primero modifíquelos o genere un reporte histórico.
-                      </p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <input type="submit" value="Eliminar" class="btn btn-outline-danger">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div> -->
         </div>
         @endforeach
       @elseif($activities->isEmpty())

@@ -14,10 +14,7 @@ class ActivityController extends Controller
     public function index(){
         try {
             $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-                                    ->join('instructor','instructor.activity_id','=','activity.activity_id')
-                                    ->join('professor','professor.professor_id','=','instructor.professor_id')
-                                    ->get(['activity_catalogue.name','activity.activity_id','activity.sem_year','activity.sem_num','activity.sem_type']);
-      
+                                    ->get();
             return view("pages.view-activities")
               ->with("activities", $activities);
       
@@ -82,16 +79,77 @@ class ActivityController extends Controller
 
     }
 
-    // public function edit(){
+    public function edit($activity_id){
+      try{
+        $activity = Activity::findOrFail($activity_id);
+        $venues = Venue::all();
 
-    // }
+        return view("pages.update-activity")
+          ->with("activity",$activity)
+          ->with("venues",$venues);
+      }catch (\Illuminate\Database\QueryException $th) {
+        return redirect()
+          ->route('view.activities')
+          ->with('danger', 'Problema con la base de datos.');
+      }
 
-    // public function update(){
+    }
 
-    // }
+    public function update(Request $req, $activity_id){
+      try{
+        $activity = Activity::findOrFail($activity_id);
 
-    // public function delete(){
+        $activity->sem_year = $req->sem_year;
+        $activity->sem_num = $req->sem_num;
+        $activity->sem_type = $req->sem_type;
+        $activity->start_date = $req->start_date;
+        $activity->end_date = $req->end_date;
+        $activity->manual_date = $req->manual_date;
+        $activity->day = "[".collect($req->day)->implode(",")."]";
+        $activity->ctc = $req->ctc;
+        $activity->cost = $req->cost;
+        $activity->max_quota = $req->max_quota;
+        $activity->min_quota = $req->min_quota;
+        $activity->venue_id = $req->venue_id;
+        $activity->save();
+        return redirect()
+        ->route('edit.activity', $activity->activity_id)
+        ->with('success', 'Cambios realizados.');
 
-    // }
+      }catch (\Illuminate\Database\QueryException $th) {
+        if ($th->getCode() == 7)
+          return redirect()
+            ->route('home')
+            ->with('danger', 'Problema con la base de datos.');
+        else
+          return redirect()
+            ->back()
+            ->with('activity', $activity)
+            ->with('warning', 'Error al almacenar, verifique sus datos.');
+      }
+    }
+
+    public function delete($activity_id){
+      try {
+      
+        $activity = Activity::findOrFail($activity_id);
+        $activity->delete();
+  
+        return redirect()
+          ->route('view.activities')
+          ->with('success', 'Eliminado correctamente.');
+  
+      } catch (\Illuminate\Database\QueryException $th) {
+  
+        if ($th->getCode() == 7)
+          return redirect()
+            ->route('home')
+            ->with('danger', 'Problema con la base de datos.');
+        else
+          return redirect()
+            ->back()
+            ->with('warning', 'Error al eliminar la Actividad.');
+      }
+    }
 
 }

@@ -47,23 +47,23 @@
           <label for="day" class="form-label">*Días de la semana:</label><br>
           <div class="form-check form-check-inline">
             <label for="day" class="form-check-label">Lunes</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'L' ? "selected" : "" !!} value=L>
+            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'L' ? "selected" : "" !!} value="L">
           </div>
           <div class="form-check form-check-inline">
             <label for="day" class="form-check-label">Martes</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'M' ? "selected" : "" !!} value=M>
+            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'M' ? "selected" : "" !!} value="M">
           </div>
           <div class="form-check form-check-inline">
             <label for="day" class="form-check-label">Miércoles</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'I' ? "selected" : "" !!} value=I>
+            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'I' ? "selected" : "" !!} value="I">
           </div>
           <div class="form-check form-check-inline">
             <label for="day" class="form-check-label">Jueves</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'J' ? "selected" : "" !!} value=J>
+            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'J' ? "selected" : "" !!} value="J">
           </div>
           <div class="form-check form-check-inline">
             <label for="day" class="form-check-label">Viernes</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'V' ? "selected" : "" !!} value=V>
+            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'V' ? "selected" : "" !!} value="V">
           </div>
           <div class="form-check form-check-inline">
             <label for="day" class="form-check-label">Sábado</label>
