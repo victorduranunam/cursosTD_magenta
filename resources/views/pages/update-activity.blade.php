@@ -55,61 +55,61 @@
 
       <div class="row">
         <div class="col-xl-12">
-          <label for="day" class="form-label">*Días de la semana:</label><br>
+          <label for="days_week" class="form-label">*Días de la semana:</label><br>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Lunes</label>
-            @if (strpos($activity->day,'L') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="L">
+            <label for="days_week" class="form-check-label">Lunes</label>
+            @if (str_contains($activity->days_week,'L') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="L">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="L">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="L">
             @endif
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Martes</label>
-            @if (strpos($activity->day,'M') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="M">
+            <label for="days_week" class="form-check-label">Martes</label>
+            @if (str_contains($activity->days_week,'M') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="M">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="M">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="M">
             @endif
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Miércoles</label>
-            @if (strpos($activity->day,'I') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="I">
+            <label for="days_week" class="form-check-label">Miércoles</label>
+            @if (str_contains($activity->days_week,'I') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="I">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="I">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="I">
             @endif
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Jueves</label>
-            @if (strpos($activity->day,'J') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="J">
+            <label for="days_week" class="form-check-label">Jueves</label>
+            @if (str_contains($activity->days_week,'J') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="J">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="J">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="J">
             @endif
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Viernes</label>
-            @if (strpos($activity->day,'V') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="V">
+            <label for="days_week" class="form-check-label">Viernes</label>
+            @if (str_contains($activity->days_week,'V') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="V">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="V">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="V">
             @endif
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Sábado</label>
-            @if (strpos($activity->day,'S') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="S">
+            <label for="days_week" class="form-check-label">Sábado</label>
+            @if (str_contains($activity->days_week,'S') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="S">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="S">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="S">
             @endif
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Domingo</label>
-            @if (strpos($activity->day,'D') == true)
-            <input name="day[]" checked class="form-check-input" type="checkbox" id="day" value="D">
+            <label for="days_week" class="form-check-label">Domingo</label>
+            @if (str_contains($activity->days_week,'D') == true)
+            <input name="days_week[]" checked class="form-check-input" type="checkbox" id="days_week" value="D">
             @else
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" value="D">
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" value="D">
             @endif
           </div>
         </div>

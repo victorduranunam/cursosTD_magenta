@@ -26,8 +26,8 @@ class ActivityController extends Controller
           }
     }
 
-    public function create($activity_catalogue_id){
-        try{
+    public function create($activity_catalogue_id){  
+      try{
             $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
             $venues = Venue::all();
             return view('pages.create-activity')
@@ -43,6 +43,7 @@ class ActivityController extends Controller
 
     public function store(Request $req){
         try{
+          // 
             $activity = new Activity(); 
             $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
             $activity->sem_year = $req->sem_year;
@@ -51,7 +52,7 @@ class ActivityController extends Controller
             $activity->start_date = $req->start_date;
             $activity->end_date = $req->end_date;
             $activity->manual_date = $req->manual_date;
-            $activity->day = "[".collect($req->day)->implode(",")."]";
+            $activity->days_week = implode('', $req->days_week);
             $activity->ctc = $req->ctc;
             $activity->cost = $req->cost;
             $activity->max_quota = $req->max_quota;
@@ -67,12 +68,6 @@ class ActivityController extends Controller
               return redirect()
                 ->route('home')
                 ->with('danger', 'Problema con la base de datos.');
-      
-            elseif ($th->getCode() == 23505)
-              return redirect()
-                ->back()
-                ->with('activity_cat', $activity_cat)
-                ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada Catálogo de Actividades.');
             else
               return dd($th);   
           }
@@ -105,7 +100,7 @@ class ActivityController extends Controller
         $activity->start_date = $req->start_date;
         $activity->end_date = $req->end_date;
         $activity->manual_date = $req->manual_date;
-        $activity->day = "[".collect($req->day)->implode(",")."]";
+        $activity->days_week = implode('', $req->days_week);
         $activity->ctc = $req->ctc;
         $activity->cost = $req->cost;
         $activity->max_quota = $req->max_quota;

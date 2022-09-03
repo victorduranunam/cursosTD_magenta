@@ -17,7 +17,7 @@ class Activity extends Model
         'start_date', 
         'end_date',
         'manual_date', 
-        'day', 
+        'days_week', 
         'ctc', 
         'cost', 
         'max_quota', 

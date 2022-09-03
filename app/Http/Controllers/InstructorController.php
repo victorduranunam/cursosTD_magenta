@@ -22,6 +22,7 @@ class InstructorController extends Controller
             $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
                                 ->where('activity.activity_id',$activity_id)
                                 ->get(['activity.activity_id','activity_catalogue.name']);
+
             return view("pages.view-instructors")
             ->with("professors",$professors)
             ->with("instructors",$instructors)
@@ -33,13 +34,13 @@ class InstructorController extends Controller
           }
     }
 
-    public function store(Request $req){
+    // TODO: QUE FUNCIONE
+    public function store($activity_id, $professor_id){
         try{
-            
             $instructor = new Instructor();
             $instructor->instructor_id = DB::select("select nextval('instructor_seq')")[0]->nextval;
-            $instructor->professor_id = $req->professor_id;
-            $instructor->activity_id = $req->activity_id;
+            $instructor->professor_id = $professor_id;
+            $instructor->activity_id = $activity_id;
             $instructor->save();
             return redirect()
                 ->route('view.activities')
@@ -50,7 +51,7 @@ class InstructorController extends Controller
                 ->route('home')
                 ->with('danger', 'Problema con la base de datos.');
             else
-              return dd($th);   
+              return dd($th);
           }
     }
 

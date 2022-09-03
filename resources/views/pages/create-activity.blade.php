@@ -44,34 +44,34 @@
       </div>
       <div class="row">
         <div class="col-xl-12">
-          <label for="day" class="form-label">*Días de la semana:</label><br>
+          <label for="days_week" class="form-label">*Días de la semana:</label><br>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Lunes</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'L' ? "selected" : "" !!} value="L">
+            <label for="days_week" class="form-check-label">Lunes</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'L' ? "selected" : "" !!} value="L">
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Martes</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'M' ? "selected" : "" !!} value="M">
+            <label for="days_week" class="form-check-label">Martes</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'M' ? "selected" : "" !!} value="M">
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Miércoles</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'I' ? "selected" : "" !!} value="I">
+            <label for="days_week" class="form-check-label">Miércoles</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'I' ? "selected" : "" !!} value="I">
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Jueves</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'J' ? "selected" : "" !!} value="J">
+            <label for="days_week" class="form-check-label">Jueves</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'J' ? "selected" : "" !!} value="J">
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Viernes</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'V' ? "selected" : "" !!} value="V">
+            <label for="days_week" class="form-check-label">Viernes</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'V' ? "selected" : "" !!} value="V">
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Sábado</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'S' ? "selected" : "" !!} value="S">
+            <label for="days_week" class="form-check-label">Sábado</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'S' ? "selected" : "" !!} value="S">
           </div>
           <div class="form-check form-check-inline">
-            <label for="day" class="form-check-label">Domingo</label>
-            <input name="day[]" class="form-check-input" type="checkbox" id="day" {!! old('day') == 'D' ? "selected" : "" !!} value="D">
+            <label for="days_week" class="form-check-label">Domingo</label>
+            <input name="days_week[]" class="form-check-input" type="checkbox" id="days_week" {!! old('days_week') == 'D' ? "selected" : "" !!} value="D">
           </div>
         </div>
       </div>
