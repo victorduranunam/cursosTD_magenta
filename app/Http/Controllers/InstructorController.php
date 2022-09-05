@@ -13,6 +13,7 @@ class InstructorController extends Controller
       try{   
             $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
                                     ->where('is_instructor',true)
+                                    ->whereNotIn('professor_id',Instructor::select('professor_id')->get())
                                     ->get();
             $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
                                     ->where('instructor.activity_id',$activity_id)
