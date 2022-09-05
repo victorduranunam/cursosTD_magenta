@@ -10,11 +10,10 @@ use Illuminate\Http\Request;
 class InstructorController extends Controller
 {
     public function index($activity_id){
-        try{
+      try{   
             $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
                                     ->where('is_instructor',true)
                                     ->get();
-
             $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
                                     ->where('instructor.activity_id',$activity_id)
                                     ->get();
@@ -34,13 +33,13 @@ class InstructorController extends Controller
           }
     }
 
-    // TODO: QUE FUNCIONE
-    public function store($activity_id, $professor_id){
+    public function store(Request $re, $professor_id){
+      
         try{
             $instructor = new Instructor();
             $instructor->instructor_id = DB::select("select nextval('instructor_seq')")[0]->nextval;
             $instructor->professor_id = $professor_id;
-            $instructor->activity_id = $activity_id;
+            $instructor->activity_id = $re->activity_id;
             $instructor->save();
             return redirect()
                 ->route('view.activities')

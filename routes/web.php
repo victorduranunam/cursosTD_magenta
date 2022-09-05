@@ -85,7 +85,7 @@ Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")-
 
 //Route Instructor
 Route::get('instructores/{activity_id}', "InstructorController@index")->name("view.instructors");
-Route::post('instructores/almacenar/{activity_id}/{professor_id}', "InstructorController@store")->name("store.instructor");
+Route::post('instructores/almacenar/{professor_id}', "InstructorController@store")->name("store.instructor");
 Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@delete")->name("delete.instructor");
 
 //Route Instructor Evaluation

@@ -54,7 +54,7 @@ class Activity extends Model
             $p=Professor::find($p->professor_id);
             $professor_name.=$p->name." ";
             $professor_name.=$p->last_name." ";
-            $professor_name.=$p->mothers_last_name."\n";
+            $professor_name.=$p->mothers_last_name." / ";
         }
         $professor_name= substr($professor_name, 0, -1);
         return $professor_name;

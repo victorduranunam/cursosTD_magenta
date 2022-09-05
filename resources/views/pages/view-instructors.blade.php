@@ -104,10 +104,11 @@
 
       </div>
 
-      {{-- TODO QUE FUNCIONE --}}
       @foreach ($professors as $professor)
-      <form action="{!! route('store.instructor', $activity->activity_id, $professor->professor_id) !!}" method="POST">
-        <div class="row row-list">
+      <form action="{!! route('store.instructor', $professor->professor_id) !!}" method="POST">
+      
+      <input id="activity_id" type="hidden" class="form-control" name="activity_id" value="{!! $activity->activity_id !!}" required>  
+      <div class="row row-list">
         @csrf
         @method('post')
           <div class="col-xl-4">
@@ -120,7 +121,7 @@
             {!! $professor->rfc !!}
           </div>
           <div class="col-xl-2">
-            {!! $professor->professor_id !!}
+            {!! $professor->worker_number !!}
           </div>
           <div class="col-xl-1">
             <button type="submit" id='save-btn' class="btn btn-outline-success"><i class="bi bi-person-plus"></i></button>
@@ -128,7 +129,6 @@
         </div>
       </form>
       @endforeach
-
     @elseif($professors->isEmpty())
       <div class="row">
         <div class="col-xl-6">
