@@ -92,7 +92,10 @@ Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@del
 
 //Route Participant
 Route::get('participantes/{activity_id}',"ParticipantController@index")->name("view.participants");
+Route::get('coordinaciones/crear/{activity_id}', "ParticipantController@create")->name("create.participant");
 Route::post('participantes/almacenar/{professor_id}', "ParticipantController@store")->name("store.participant");
+Route::get('participantes/actualizar/{activity_id}', 'ParticipantController@edit')->name('edit.participant');
+Route::put('participantes/guardar/{participant_id}', "ParticipantController@update")->name('update.participant');
 Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@delete")->name("delete.participant");
 
 //Route Professor

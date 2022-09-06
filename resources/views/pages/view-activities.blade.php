@@ -50,8 +50,8 @@
                     @csrf
                     @method('delete')
                     
-                    <li><a class="dropdown-item" href="#">Ver Curso</a></li>
-                    <li><a class="dropdown-item" href="#">Inscribir participantes</a></li>
+                    <li><a class="dropdown-item" href={!! route('edit.participant', $activity->activity_id) !!}>Ver Curso</a></li>
+                    <li><a class="dropdown-item" href={!! route('create.participant', $activity->activity_id) !!}>Inscribir participantes</a></li>
                     <li><a class="dropdown-item" href={!! route('view.instructors', $activity->activity_id) !!}>Instructores</a></li>
                     <li><a class="dropdown-item" href={!! route('edit.activity', $activity->activity_id) !!}>Actualizar</a></li>
                     <div class="dropdown-divider"></div>
