@@ -56,7 +56,7 @@ class Activity extends Model
             $professor_name.=$p->last_name." ";
             $professor_name.=$p->mothers_last_name." / ";
         }
-        $professor_name= substr($professor_name, 0, -1);
+        $professor_name= substr($professor_name, 0, -2);
         return $professor_name;
     }
 

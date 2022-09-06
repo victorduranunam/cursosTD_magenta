@@ -91,6 +91,9 @@ Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@del
 //Route Instructor Evaluation
 
 //Route Participant
+Route::get('participantes/{activity_id}',"ParticipantController@index")->name("view.participants");
+Route::post('participantes/almacenar/{professor_id}', "ParticipantController@store")->name("store.participant");
+Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@delete")->name("delete.participant");
 
 //Route Professor
 Route::get('profesores', "ProfessorController@index")->name("view.professors");
