@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header"><br>
-        <h3>Asignar Participantes <i class="bi bi-person-video3"></i></h3>
+        <h3>Asignar Participantes <i class="bi bi-person-check"></i></h3>
         <h4>{!! $activity->name !!}</h4><br>
         <h5>Instructor(es):</h5>
         @if($instructors->isNotEmpty())
