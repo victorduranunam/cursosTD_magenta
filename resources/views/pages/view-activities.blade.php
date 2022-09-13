@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Ver Actividades <i class="bi bi-journals"></i></h3>
+    <h3>Actividades Programadas <i class="bi bi-journals"></i></h3>
     <div class="row justify-content-end">
       <div class="col-xl-3" style='width: auto'>
           <a href={!! route('view.activities.catalogue') !!} class="btn btn-outline-success">Alta de Catálogo de Actividades</a>
@@ -50,7 +50,7 @@
                     @csrf
                     @method('delete')
                     
-                    <li><a class="dropdown-item" href={!! route('edit.participant', $activity->activity_id) !!}>Ver Curso</a></li>
+                    <li><a class="dropdown-item" href={!! route('edit.participant', $activity->activity_id) !!}>Ver participantes inscritos</a></li>
                     <li><a class="dropdown-item" href={!! route('create.participant', $activity->activity_id) !!}>Inscribir participantes</a></li>
                     <li><a class="dropdown-item" href={!! route('view.instructors', $activity->activity_id) !!}>Instructores</a></li>
                     <li><a class="dropdown-item" href={!! route('edit.activity', $activity->activity_id) !!}>Actualizar</a></li>
