@@ -21,10 +21,15 @@ class ActivityCatalogueController extends Controller
         ->with("activities_cat", $activities_cat);
 
     } catch (\Illuminate\Database\QueryException $th) {
-      
-      return redirect()
-        ->route('home')
-        ->with('danger', 'Problema con la base de datos.');
+
+        if ($th->getCode() == 7)
+          return redirect()
+            ->route('home')
+            ->with('danger', 'No hay conexión con la base de datos.');
+        else
+          return redirect()
+            ->route('home')
+            ->with('danger', 'Problema con la base de datos.');
     }
   }
 
@@ -92,7 +97,7 @@ class ActivityCatalogueController extends Controller
       if ($th->getCode() == 7)
         return redirect()
           ->route('home')
-          ->with('danger', 'Problema con la base de datos.');
+          ->with('danger', 'No hay conexión con la base de datos.');
 
       elseif ($th->getCode() == 23505)
         return redirect()
@@ -100,7 +105,9 @@ class ActivityCatalogueController extends Controller
           ->with('activity_cat', $activity_cat)
           ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada Catálogo de Actividades.');
       else
-        return dd($th);
+        return redirect()
+            ->back()
+            ->with('danger', 'Problema al almacenar datos.');
         
     }
   }
@@ -116,9 +123,14 @@ class ActivityCatalogueController extends Controller
 
     } catch (\Illuminate\Database\QueryException $th) {
       
-      return redirect()
-        ->route('view.activities.catalogue')
-        ->with('danger', 'Problema con la base de datos.');
+      if ($th->getCode() == 7)
+          return redirect()
+            ->route('home')
+            ->with('danger', 'No hay conexión con la base de datos.');
+      else
+        return redirect()
+          ->route('view.activities.catalogue')
+          ->with('danger', 'Problema con la base de datos.');
     }
   }
 
@@ -165,7 +177,7 @@ class ActivityCatalogueController extends Controller
       if ($th->getCode() == 7)
         return redirect()
           ->route('home')
-          ->with('danger', 'Problema con la base de datos.');
+          ->with('danger', 'No hay conexión con la base de datos.');
 
       elseif ($th->getCode() == 23505)
         return redirect()
@@ -197,7 +209,7 @@ class ActivityCatalogueController extends Controller
       if ($th->getCode() == 7)
         return redirect()
           ->route('home')
-          ->with('danger', 'Problema con la base de datos.');
+          ->with('danger', 'No hay conexión con la base de datos.');
       else
         return redirect()
           ->back()

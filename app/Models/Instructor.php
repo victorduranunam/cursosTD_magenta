@@ -21,4 +21,7 @@ class Instructor extends Model
     protected $primaryKey = 'instructor_id';
     public $timestamps = false;
 
+    public function getName(){
+      return Professor::select('name')->where('professor_id', $this->professor_id);
+    }
 }

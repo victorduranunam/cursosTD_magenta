@@ -19,7 +19,7 @@
             <a href={!! route('view.participants', $activity->activity_id) !!} class="btn btn-outline-primary">Ver Inscritos</a>
           </div>
           <div class="col-xl-2">
-              <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
+            <a href={!! route('view.activities') !!} class="btn btn-outline-warning">Regresar</a>
           </div>
         </div>
     </div>

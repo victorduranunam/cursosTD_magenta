@@ -9,7 +9,7 @@
     <div class="row justify-content-end">
      
       <div class="col-xl-2">
-        <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
+        <a href={!! route('view.activities') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
     </div>
   </div>

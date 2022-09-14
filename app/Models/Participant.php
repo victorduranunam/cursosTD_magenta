@@ -17,7 +17,6 @@ class Participant extends Model
         'accredited',
         'confirmation',
         'canceled',
-        'free',
         'discount',
         'deposit',
         'wl_was',
@@ -33,4 +32,46 @@ class Participant extends Model
 
     protected $primaryKey = 'participant_id';
     public $timestamps = false;
+
+    public function getGradeSummary(){
+      $summary = '';
+      
+      if($this->grade === NULL and $this->accredited === NULL)
+        
+        $summary =+ 'El participante no ha sido evaluado.';
+
+      else{
+
+        if($this->grade != NULL)
+          $summary =+ 'Calificación: '.$this->grade.'. ';
+        if($this->accredited == true)
+          $summary =+ 'Acreditó.';
+        if($this->accredited == false and $this->nac)
+          $summary =+ 'No acreditó: '.$this->nac;
+        if($this->accredited == false and !$this->nac)
+          $summary =+ 'No acreditó: No hay causa.';
+
+      }
+
+      return $summary;
+    }
+
+    public function getWL(){
+      $wl = '';
+      
+      if($this->wl_was === NULL and $this->wl_number === NULL)
+        
+        $wl =+ 'No se ha especificado lista de espera.';
+
+      else{
+
+        if($this->wl_was and $this->wl_number)
+          $wl =+ 'Posición en lista de espera: '.$this->wl_number;
+        if(!$this->wl_was)
+          $wl =+ 'Inscrito';
+      }
+
+      return $wl;
+
+    }
 }

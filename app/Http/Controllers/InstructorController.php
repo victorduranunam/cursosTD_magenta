@@ -43,13 +43,13 @@ class InstructorController extends Controller
             $instructor->activity_id = $re->activity_id;
             $instructor->save();
             return redirect()
-                ->route('view.activities')
+                ->back()
                 ->with('success', 'Instructores asignados correctamente');
         }catch (\Illuminate\Database\QueryException $th) {
             if ($th->getCode() == 7)
               return redirect()
                 ->route('home')
-                ->with('danger', 'Problema con la base de datos.');
+                ->with('danger', 'No hay conexión con la base de datos.');
             else
               return dd($th);
           }
@@ -69,7 +69,7 @@ class InstructorController extends Controller
             if ($th->getCode() == 7)
               return redirect()
                 ->route('home')
-                ->with('danger', 'Problema con la base de datos.');
+                ->with('danger', 'No hay conexión con la base de datos.');
             else
               return redirect()
                 ->back()

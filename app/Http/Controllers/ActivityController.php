@@ -13,27 +13,41 @@ class ActivityController extends Controller
 {
     public function index(){
         try {
-            $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-                                    ->get();
-            return view("pages.view-activities")
-              ->with("activities", $activities);
-      
-          } catch (\Illuminate\Database\QueryException $th) {
-            
+          $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
+                                  ->get();
+          return view("pages.view-activities")
+            ->with("activities", $activities);
+    
+        } catch (\Illuminate\Database\QueryException $th) {
+          if ($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
             return redirect()
               ->route('home')
               ->with('danger', 'Problema con la base de datos.');
-          }
+        }
     }
 
     public function create($activity_catalogue_id){  
       try{
-            $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
-            $venues = Venue::all();
-            return view('pages.create-activity')
-                ->with("activity_cat", $activity_cat)
-                ->with("venues",$venues);
+
+        $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
+        $venues = Venue::all();
+
+        return view('pages.create-activity')
+            ->with("activity_cat", $activity_cat)
+            ->with("venues",$venues);
+
         } catch (\Illuminate\Database\QueryException $th){
+            
+          if ($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          
+          else
             return redirect()
               ->route('view.activities.catalogue')
               ->with('danger','Problema con la base de datos.');
@@ -67,7 +81,7 @@ class ActivityController extends Controller
             if ($th->getCode() == 7)
               return redirect()
                 ->route('home')
-                ->with('danger', 'Problema con la base de datos.');
+                ->with('danger', 'No hay conexión con la base de datos.');
             else
               return dd($th);   
           }
@@ -115,7 +129,7 @@ class ActivityController extends Controller
         if ($th->getCode() == 7)
           return redirect()
             ->route('home')
-            ->with('danger', 'Problema con la base de datos.');
+            ->with('danger', 'No hay conexión con la base de datos.');
         else
           return redirect()
             ->back()
@@ -139,7 +153,7 @@ class ActivityController extends Controller
         if ($th->getCode() == 7)
           return redirect()
             ->route('home')
-            ->with('danger', 'Problema con la base de datos.');
+            ->with('danger', 'No hay conexión con la base de datos.');
         else
           return redirect()
             ->back()
