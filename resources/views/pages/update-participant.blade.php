@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Modificar participante <i class="bi bi-briefcase"></i></h3>
+    <h3>Modificar participante <i class="bi bi-person-check"></i></h3>
     <h4> {!! $participant->getActivityName() !!} </h4>
 
     <form method="POST" action="{!! route("delete.participant", $participant->participant_id) !!}">

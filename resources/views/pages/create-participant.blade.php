@@ -14,6 +14,8 @@
         @elseif($instructors->isEmpty())
             <h6>No hay instructores asignados.</h6>
         @endif
+        <br>
+        <h5>Inscritos: {!! $count !!}/{!! $max_count->max_quota !!}</h5>
         <div class="row justify-content-end">
           <div class="col-xl-2">
             <a href={!! route('view.participants', $activity->activity_id) !!} class="btn btn-outline-primary">Ver Inscritos</a>
@@ -24,6 +26,12 @@
         </div>
     </div>
   @include('partials.messages')
+
+  @if($count >= $max_count->max_quota)
+  <div class="alert alert-warning message" role='alert'>
+    <strong>La actividad alcanzó el cupo máximo, las siguientes inscripciones entrarán como adicionales.</strong>
+  </div>
+  @endif
     <div class="card-body"><br>
     
         @if($professors->isNotEmpty())

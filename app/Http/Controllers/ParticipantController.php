@@ -56,10 +56,22 @@ class ParticipantController extends Controller
                                 ->where('activity.activity_id',$activity_id)
                                 ->first(['activity.activity_id','activity_catalogue.name']);
 
+            $max_count = Activity::select('max_quota')
+                ->where('activity_id',$activity_id)
+                ->get()->first();
+            $count = Participant::select('participant_id')
+                ->where('activity_id', $activity_id)
+                ->count() - Participant::select('participant_id')
+                ->where('activity_id', $activity_id)
+                ->where('canceled',true)
+                ->count();
+
             return view("pages.create-participant")
               ->with("professors",$professors)
               ->with("instructors",$instructors)
-              ->with('activity',$activity);
+              ->with('activity',$activity)
+              ->with('max_count',$max_count)
+              ->with('count',$count);
 
         }catch (\Illuminate\Database\QueryException $th) {
           return dd($th);
@@ -83,7 +95,20 @@ class ParticipantController extends Controller
             $participant->participant_id = DB::select("select nextval('participant_seq')")[0]->nextval;
             $participant->professor_id = $professor_id;
             $participant->activity_id = $re->activity_id;
+
+            $max_count = Activity::select('max_quota')
+                ->where('activity_id',$re->activity_id)
+                ->get()->first();
             
+            $count = Participant::select('participant_id')
+                ->where('activity_id', (int)$re->activity_id)
+                ->count() - Participant::select('participant_id')
+                ->where('activity_id', (int)$re->activity_id)
+                ->where('canceled',true)
+                ->count();
+
+            if ($count >= $max_count->max_quota)
+              $participant->additional = true;
             $participant->save();
 
             return redirect()

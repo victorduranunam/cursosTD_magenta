@@ -5,7 +5,7 @@
 
   {{-- Header and Title--}}
   <div class="card-header"><br>
-    <h3>Ver Participantes Inscritos <i class="bi bi-briefcase"></i></h3>
+    <h3>Ver Participantes Inscritos <i class="bi bi-person-check"></i></h3>
     <div class="row">
       <div class="col-xl-6">
         <h4>{!! $activity->name !!}</h4>
