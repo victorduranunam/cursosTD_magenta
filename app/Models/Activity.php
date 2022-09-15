@@ -41,6 +41,10 @@ class Activity extends Model
         $professors = Professor::join('instructor','instructor.professor_id','=','professor.professor_id')
                                 ->where('instructor.activity_id',$this->activity_id)
                                 ->get();
+        
+        if($professors->isEmpty())
+          return 'No hay instructores asignados.';
+        
         $professor_name="";
 
         if ( count($professors) == 1 ){
