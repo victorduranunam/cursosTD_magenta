@@ -11,9 +11,9 @@ class Activity extends Model
     protected $table = "activity";
     protected $fillable = [
         'activity_id', 
-        'sem_year', 
-        'sem_num', 
-        'sem_type', 
+        'year', 
+        'num', 
+        'type', 
         'start_date', 
         'end_date',
         'manual_date', 
@@ -64,7 +64,7 @@ class Activity extends Model
         return $professor_name;
     }
 
-    public function getSemester(){
-        return $this->sem_year."-".$this->sem_num." ".$this->sem_type;
+    public function getPeriod(){
+        return $this->year."-".$this->num.$this->type;
     }
 }

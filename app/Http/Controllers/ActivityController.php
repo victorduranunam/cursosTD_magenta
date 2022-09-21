@@ -13,8 +13,7 @@ class ActivityController extends Controller
 {
     public function index(){
         try {
-          $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-                                  ->get();
+          $activities = Activity::all();
           return view("pages.view-activities")
             ->with("activities", $activities);
     
@@ -60,9 +59,9 @@ class ActivityController extends Controller
           // 
             $activity = new Activity(); 
             $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
-            $activity->sem_year = $req->sem_year;
-            $activity->sem_num = $req->sem_num;
-            $activity->sem_type = $req->sem_type;
+            $activity->year = $req->year;
+            $activity->num = $req->num;
+            $activity->type = $req->type;
             $activity->start_date = $req->start_date;
             $activity->end_date = $req->end_date;
             $activity->manual_date = $req->manual_date;
@@ -108,9 +107,9 @@ class ActivityController extends Controller
       try{
         $activity = Activity::findOrFail($activity_id);
 
-        $activity->sem_year = $req->sem_year;
-        $activity->sem_num = $req->sem_num;
-        $activity->sem_type = $req->sem_type;
+        $activity->year = $req->year;
+        $activity->num = $req->num;
+        $activity->type = $req->type;
         $activity->start_date = $req->start_date;
         $activity->end_date = $req->end_date;
         $activity->manual_date = $req->manual_date;

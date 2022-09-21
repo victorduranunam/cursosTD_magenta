@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\WorkPosition;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class WorkPositionController extends Controller
 {
 
   public function index()
   {
     try {
 
-      $categories = Category::all()
+      $work_positions = WorkPosition::all()
         ->sortBy('name');
 
-      return view("pages.view-categories")
-        ->with("categories", $categories);
+      return view("pages.view-work-positions")
+        ->with("work_positions", $work_positions);
 
     } catch (\Illuminate\Database\QueryException $th) {
       
@@ -30,14 +30,14 @@ class CategoryController extends Controller
   public function store(Request $req)
   {
     try {
-      $category = new Category();
-      $category->category_id = DB::select("select nextval('category_seq')")[0]->nextval;
-      $category->name = $req->name;
-      $category->abbreviation = $req->abbreviation;
-      $category->save();
+      $work_position = new WorkPosition();
+      $work_position->work_position_id = DB::select("select nextval('work_position_seq')")[0]->nextval;
+      $work_position->name = $req->name;
+      $work_position->abbreviation = $req->abbreviation;
+      $work_position->save();
 
       return redirect()
-        ->route('view.categories')
+        ->route('view.work-positions')
         ->with('success', 'Categoría creada correctamente');
 
     } catch (\Illuminate\Database\QueryException $th) {
@@ -53,18 +53,18 @@ class CategoryController extends Controller
     }
   }
 
-  public function update(Request $req, $category_id)
+  public function update(Request $req, $work_position_id)
   {
     
     try {
      
-      $category = Category::findOrFail($category_id);
-      $category->name = $req->name;
-      $category->abbreviation = $req->abbreviation;
-      $category->save();
+      $work_position = WorkPosition::findOrFail($work_position_id);
+      $work_position->name = $req->name;
+      $work_position->abbreviation = $req->abbreviation;
+      $work_position->save();
 
       return redirect()
-        ->route('view.categories', $category->category_id)
+        ->route('view.work-positions', $work_position->work_position_id)
         ->with('success', 'Cambios realizados.');
 
     } catch (\Illuminate\Database\QueryException $th) {
@@ -76,20 +76,20 @@ class CategoryController extends Controller
       else
         return redirect()
           ->back()
-          ->with('category', $category)
+          ->with('work_position', $work_position)
           ->with('warning', 'Error al almacenar, verifique sus datos.');
     }
   }
 
-  public function delete($category_id)
+  public function delete($work_position_id)
   {
     try {
       
-      $category = Category::findOrFail($category_id);
-      $category->delete();
+      $work_position = WorkPosition::findOrFail($work_position_id);
+      $work_position->delete();
 
       return redirect()
-        ->route('view.categories')
+        ->route('view.work-positions')
         ->with('success', 'Eliminado correctamente.');
 
     } catch (\Illuminate\Database\QueryException $th) {

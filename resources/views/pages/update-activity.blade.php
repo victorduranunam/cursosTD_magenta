@@ -14,30 +14,30 @@
       @method('put')
       <div class="row">
         <div class="col-xl-2">
-          <label class="form-label" for="sem_year">*Periodo:</label>
-          <input required class="form-control" type="text" name="sem_year" id="sem_year" value="{!! $activity->sem_year !!}">
+          <label class="form-label" for="year">*Periodo:</label>
+          <input required class="form-control" type="text" name="year" id="year" value="{!! $activity->year !!}">
         </div>
         <div class="col-xl-2 mt-auto">
-              @if ($activity->sem_num == '1')
-              <select name="sem_num" id="sem_num" class="form-select">
+              @if ($activity->num == '1')
+              <select name="num" id="num" class="form-select">
                   <option value="1" selected>1 </option>
                   <option value="2">2 </option>
               </select>
               @else
-              <select name="sem_num" id="sem_num" class="form-select">
+              <select name="num" id="num" class="form-select">
                   <option value="1">1 </option>
                   <option value="2" selected>2 </option>
               </select>
               @endif
         </div>
         <div class="col-xl-2 mt-auto">
-              @if ($activity->sem_type == 's')
-              <select name="sem_type" id="sem_type" class="form-select">
+              @if ($activity->type == 's')
+              <select name="type" id="type" class="form-select">
                   <option value="s" selected>Semestral</option>
                   <option value="i">Intersemestral</option>
               </select>
               @else
-              <select name="sem_type" id="sem_type" class="form-select">
+              <select name="type" id="type" class="form-select">
                   <option value="s">Semestral</option>
                   <option value="i" selected>Intersemestral</option>
               </select>

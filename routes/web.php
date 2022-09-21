@@ -49,17 +49,11 @@ Route::get('administrador/actualizar/{administrator_id}', 'AdministratorControll
 Route::put('administrador/guardar/{administrator_id}', 'AdministratorController@update')->name('update.administrator');
 Route::delete('administrador/eliminar/{administrator_id}', 'AdministratorController@delete')->name('delete.administrator');
 
-//Route Career
-Route::get('carreras', "CareerController@index")->name("view.careers");
-Route::post('carreras/almacenar', "CareerController@store")->name("store.career");
-Route::put('carreras/guardar/{career_id}', "CareerController@update")->name('update.career');
-Route::delete('carreras/eliminar/{career_id}', "CareerController@delete")->name("delete.career");
-
-//Route Category
-Route::get('categorias', "CategoryController@index")->name("view.categories");
-Route::post('categoria/almacenar', "CategoryController@store")->name("store.category");
-Route::put('categoria/guardar/{category_id}', "CategoryController@update")->name('update.category');
-Route::delete('categoria/eliminar/{category_id}', "CategoryController@delete")->name("delete.category");
+//Route Work Position
+Route::get('puestos-trabajo', "WorkPositionController@index")->name("view.work-positions");
+Route::post('puesto-trabajo/almacenar', "WorkPositionController@store")->name("store.work-position");
+Route::put('puesto-trabajo/guardar/{work_position_id}', "WorkPositionController@update")->name('update.work-position');
+Route::delete('puesto-trabajo/eliminar/{work_position_id}', "WorkPositionController@delete")->name("delete.work-position");
 
 //Route Department
 Route::get('coordinaciones', "DepartmentController@index")->name("view.departments");
@@ -80,8 +74,6 @@ Route::get('divisiones', "DivisionController@index")->name("view.divisions");
 Route::post('divisiones/almacenar', "DivisionController@store")->name("store.division");
 Route::put('divisiones/guardar/{division_id}', "DivisionController@update")->name('update.division');
 Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")->name("delete.division");
-
-//Route Faculty
 
 //Route Instructor
 Route::get('instructores/{activity_id}', "InstructorController@index")->name("view.instructors");
@@ -106,13 +98,9 @@ Route::get('profesores/actualizar/{professor_id}', "ProfessorController@edit")->
 Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->name('update.professor');
 Route::delete('profesores/eliminar/{professor_id}', "ProfessorController@delete")->name("delete.professor");
 
-//Route Professor Career
-
-//Route Professor Category
+//Route Professor Position
 
 //Route Professor Division
-
-//Route Professor Faculty
 
 //Route Seminar Topic
 
