@@ -85,7 +85,7 @@ class AdministratorController extends Controller
       if($th->getCode() == 7)
         return redirect()
           ->route('home')
-          ->with('danger', 'Problema con la base de datos.');
+          ->with('danger', 'No hay conexión con la base de datos.');
       else
         return dd($th);
         return redirect()
@@ -136,7 +136,7 @@ class AdministratorController extends Controller
       if($th->getCode() == 7)
         return redirect()
           ->route('home')
-          ->with('danger', 'Problema con la base de datos.');
+          ->with('danger', 'No hay conexión con la base de datos.');
       else
         return redirect()
           ->back()
@@ -161,7 +161,7 @@ class AdministratorController extends Controller
       if($th->getCode() == 7)
         return redirect()
           ->route('home')
-          ->with('danger', 'Problema con la base de datos.');
+          ->with('danger', 'No hay conexión con la base de datos.');
       else
         return redirect()
           ->back()

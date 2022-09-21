@@ -26,7 +26,7 @@
         </div>
         <div class="row" style="margin: 1%">
           <div class="col-4">
-            <a href={!! route('view.activities.catalogue') !!} class="btn btn-outline-dark">Ver Actividades programados</a>
+            <a href={!! route('view.activities') !!} class="btn btn-outline-dark">Ver Actividades programadas</a>
           </div>
           <div class="col-4">
             <a href={!! route('view.diplomas') !!} class="btn btn-outline-dark">Ver diplomados</a>
@@ -40,7 +40,7 @@
             <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-dark">Crear nuevo Catálogo de Actividades</a>
           </div>
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Crear diplomado</a>
+            <a href={!! route('view.diplomas') !!} class="btn btn-outline-dark">Crear diplomado</a>
           </div>
           <div class="col-4">
             <a href="" class="btn btn-outline-dark">Consultar Evaluaciones</a>

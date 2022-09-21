@@ -32,6 +32,12 @@ Route::put('catalogo-actividades/guardar/{activity_catalogue_id}', 'ActivityCata
 Route::delete('catalogo-actividades/eliminar/{activity_catalogue_id}', 'ActivityCatalogueController@delete')->name('delete.activity.catalogue');
 
 //Route Activity
+Route::get('actividades','ActivityController@index')->name('view.activities');
+Route::get('actividades/crear/{activity_catalogue_id}','ActivityController@create')->name('create.activity');
+Route::post('actividades/almacenar','ActivityController@store')->name('store.activity');
+Route::get('actividades/actualizar/{activity_id}','ActivityController@edit')->name('edit.activity');
+Route::put('actividades/guardar/{activity_id}','ActivityController@update')->name('update.activity');
+Route::delete('actividades/eliminar/{activity_id}','ActivityController@delete')->name('delete.activity');
 
 //Route Activity Evaluation
 
@@ -78,10 +84,19 @@ Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")-
 //Route Faculty
 
 //Route Instructor
+Route::get('instructores/{activity_id}', "InstructorController@index")->name("view.instructors");
+Route::post('instructores/almacenar/{professor_id}', "InstructorController@store")->name("store.instructor");
+Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@delete")->name("delete.instructor");
 
 //Route Instructor Evaluation
 
 //Route Participant
+Route::get('participantes/{activity_id}',"ParticipantController@index")->name("view.participants");
+Route::get('participantes/crear/{activity_id}', "ParticipantController@create")->name("create.participant");
+Route::post('participantes/almacenar/{professor_id}', "ParticipantController@store")->name("store.participant");
+Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->name('edit.participant');
+Route::put('participantes/guardar/{participant_id}', "ParticipantController@update")->name('update.participant');
+Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@delete")->name("delete.participant");
 
 //Route Professor
 Route::get('profesores', "ProfessorController@index")->name("view.professors");

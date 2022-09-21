@@ -45,7 +45,7 @@
                     <ul class="submenu">
                         <li><a href={!! route('create.activity.catalogue') !!}>Alta Catálogo</a></li>
                         <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de Actividades</a></li>
-                        <li><a href=''>Actividades programadas</a></li>
+                        <li><a href={!! route('view.activities') !!}>Actividades programadas</a></li>
                         <li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>
                     </ul>
                 </li>
