@@ -99,8 +99,14 @@ Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->n
 Route::delete('profesores/eliminar/{professor_id}', "ProfessorController@delete")->name("delete.professor");
 
 //Route Professor Position
+Route::get('puestos/profesor/{professor_id}', "ProfessorPositionController@index")->name("view.professor-positions");
+Route::post('puestos/profesor/crear/{professor_id}', "ProfessorPositionController@store")->name("store.professor-position");
+Route::delete('puestos/eliminar/{profesor_position_id}', "ProfessorPositionController@delete")->name("delete.professor-position");
 
 //Route Professor Division
+Route::get('divisiones/profesor/{profesor_id}', "ProfessorDivisionController@index")->name("view.professor-divisions");
+Route::post('divisiones/profesor/crear/{professor_id}', "ProfessorDivisionController@store")->name("store.professor-division");
+Route::delete('divisiones/profesor/eliminar/{professor_division_id}', "ProfessorDivisionController@delete")->name("delete.professor-division");
 
 //Route Seminar Topic
 
