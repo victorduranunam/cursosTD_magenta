@@ -93,6 +93,7 @@ Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@
 //Route Professor
 Route::get('profesores', "ProfessorController@index")->name("view.professors");
 Route::get('profesores/crear', "ProfessorController@create")->name("create.professor");
+Route::get('profesor/generar/reporte-actividades/{professor_id}', "ProfessorController@generateRecord")->name("generate.professor-record");
 Route::post('profesores/almacenar', "ProfessorController@store")->name("store.professor");
 Route::get('profesores/actualizar/{professor_id}', "ProfessorController@edit")->name("edit.professor");
 Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->name('update.professor');

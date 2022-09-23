@@ -20,7 +20,7 @@
     <div class="card-body"><br>
       @if($departments->isNotEmpty())
         @foreach ($departments as $department)
-        <div class="row">
+        <div class="row row-list">
           <div class="col-xl-6">
             {!! $department->name !!}
           </div>

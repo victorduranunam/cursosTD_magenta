@@ -57,7 +57,7 @@
 
       @foreach ($professor->positions as $position)
 
-        <div class="row" style="margin: 1%">
+        <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
           <div class="col-xl-6">
