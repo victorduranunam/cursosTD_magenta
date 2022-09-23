@@ -15,13 +15,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/home', function () {
+Route::get('/hogar', function () {
   return view('pages.home');
 })->name('home');
 
+Route::get('/ingresar', function () {
+  return view('pages.login');
+})->name('login');
+
 //Route Account
+Route::post('/autenticacion', 'AccountController@auth')->name('auth');
+Route::get('/salir', 'AccountController@logout')->name('logout');
+
+Route::get('/usuarios', 'AccountController@index')->name('view.accounts');
+Route::get('/usuario/crear', 'AccountController@create')->name('create.account');
+Route::post('/usuario/almacenar', 'AccountController@store')->name('store.account');
+Route::get('/usuario/actualizar/{account_id}', 'AccountController@edit')->name('edit.account');
+Route::put('/usuario/guardar/{account_id}', 'AccountController@update')->name('update.account');
+Route::delete('/usuario/eliminar/{account_id}', 'AccountController@delete')->name('delete.account');
+
+
 
 //Route Activity Catalogue
 Route::get('catalogo-actividades', 'ActivityCatalogueController@index')->name('view.activities.catalogue');

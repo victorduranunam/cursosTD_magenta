@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
 
-  <title>MagestiCD | Centro de Docencia</title>
+  <title>Magestic | Capacitación Docente</title>
 </head>
 <body>
     <div class="wrap">
@@ -19,14 +19,16 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
-                    <a class="navbar-brand" href={!! route('home') !!}>MagestiCD</a>
+                    <a class="navbar-brand" href={!! route('home') !!}>Magestic</a>
                     
                     <!-- User Dashboard -->
                     <div class="dropdown">
-                        <a href="#" class="dropdown-toggle usr-dashboard" data-bs-toggle="dropdown">UserName &nbsp;<i class="bi bi-person-circle"></i></a>
+                        <a href="#" class="dropdown-toggle usr-dashboard" data-bs-toggle="dropdown">{!! Auth::user()->username !!} &nbsp;<i class="bi bi-person-circle"></i></a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#" class="dropdown-item">Ver Usuarios</a>
-                            <a href="#" class="dropdown-item">Cerrar Sesión</a>
+                          @if(Auth::user()->admin)
+                            <a href="{!! route('view.accounts') !!}" class="dropdown-item">Ver Usuarios</a>
+                          @endif
+                            <a href="{!! route('logout') !!}" class="dropdown-item">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>

@@ -4,15 +4,15 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Bienvenid@</h3>
+    <h3>Accesos Rápidos <i class="bi bi-pin-angle"></i> </h3>
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
       <div class="logos col-center">
-        <img class="img-escudo" src={!! asset('img/cdd.png') !!} alt="">
-        &nbsp; Manejo y Gestión de información del Centro de Docencia.
+        <img class="img-escudo" src={!! asset('img/logo-magestic.png') !!} alt="">
+        &nbsp; Manejo y Gestión de actividades para la capacitación docente.
         <hr>
-        <h5>Accesos rápidos <i class="bi bi-pin-angle"></i></h5>
+        <h5>¿Qué desea hacer?</h5>
         <div class="row" style="margin: 1%" style="margin: 1%">
           <div class="col-4">
             <a href="" class="btn btn-outline-dark">Dar de alta un curso</a>

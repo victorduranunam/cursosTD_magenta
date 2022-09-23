@@ -1,5 +1,6 @@
 .home, body {
-  background-image: url("/img/ri_1.png");
+  /* background-image: url("/img/ri_1.png"); */
+  /* TODO: Poner nueva imagen de fondo */
   background-size: auto;
   background-repeat: no-repeat;
   background-color: #fff;

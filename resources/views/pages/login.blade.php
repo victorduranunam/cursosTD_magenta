@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href={!! asset('bootstrap/css/bootstrap.min.css') !!}>
   <link rel="stylesheet" href={!! asset('css/welcome.css') !!}>
+  <link rel="stylesheet" href={!! asset('css/app.css') !!}>
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
@@ -15,18 +16,30 @@
 <body class="home">
 
   <div class="flex-center position-ref full-height">
-
-    <div class="top-right links">
-      {{-- TODO: if auth --}}
-      {{-- <a href="{{ route('home') }}">Hogar</a> --}}
-      <a href="{!! route('login') !!}">Ingresar</a>
-    </div>
-
+    
+    <form method="POST" action="{!! route('auth') !!}">
+      @csrf
+      @method('post')
     <div class="content">
       <div class="title m-b-md">
         Magestic
       </div>
     </div>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de usuario:</label>
+        <input type="text" class="form-control" name='username' id="username" placeholder="Ej. areacomputo45" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña:</label>
+        <input type="password" class="form-control" id="password" name='password' required>
+      </div>
+      <button type="submit" class="btn btn-primary">Ingresar</button>
+      @if(isset($msj))
+        <p>{!! $msj !!}</p>
+      @endif
+    </form>
+
 
   </div>
 

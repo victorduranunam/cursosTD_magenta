@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professor;
-use App\Models\Participant;
-use App\Models\Activity;
-use App\Models\ActivityCatalogue;
 use DB;
 use PDF;
 
