@@ -25,7 +25,6 @@ class Professor extends Model
         'semblance',
         'facebook',
         'is_instructor',
-        'is_unam',
         'provenance'
     ];
 

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professor;
-use Illuminate\Support\Facades\DB;
+use App\Models\Participant;
+use App\Models\Activity;
+use App\Models\ActivityCatalogue;
+use DB;
+use PDF;
 
 class ProfessorController extends Controller
 {
@@ -12,6 +16,7 @@ class ProfessorController extends Controller
     {
         try {
             $professors = Professor::orderBy('last_name')->get();
+
             return view("pages.view-professors")
                 ->with("professors",$professors);
             
@@ -43,7 +48,6 @@ class ProfessorController extends Controller
             $professor->semblance = $req->semblance;
             $professor->facebook = $req->facebook;
             $professor->is_instructor = $req->is_instructor;
-            $professor->is_unam = $req->is_unam;
             $professor->provenance = $req->provenance;
             $professor->save();
 
@@ -92,7 +96,6 @@ class ProfessorController extends Controller
             $professor->semblance = $req->semblance;
             $professor->facebook = $req->facebook;
             $professor->is_instructor = $req->is_instructor;
-            $professor->is_unam = $req->is_unam;
             $professor->provenance = $req->provenance;
             $professor->save();
 
@@ -133,5 +136,42 @@ class ProfessorController extends Controller
               ->back()
               ->with('warning', 'Error al eliminar el profesor.');
         }
+    }
+
+    public function generateRecord($professor_id){
+      try {
+        // Todas las actividades acreditadas del profesor
+        // Por cada actividad el nombre, su duracion y su periodo
+        // Del profesor su nombre, el numero total de actividades y el numero total de horas
+
+        $professor = Professor::findOrFail($professor_id);
+
+        $professor->activities = DB::table('participant as p')
+          ->join('activity as a', 'a.activity_id', '=', 'p.activity_id')
+          ->join('activity_catalogue as ac', 'ac.activity_catalogue_id', '=', 
+                 'a.activity_catalogue_id')
+          ->where('p.professor_id', $professor_id)
+          ->where('p.accredited', TRUE)
+          ->select('ac.name', 'ac.hours', 'a.year', 'a.num', 'a.type')
+          ->get();
+
+        $pdf = PDF::loadView('docs.professor-record', 
+          [
+            'professor' => $professor
+          ])
+          ->setPaper('letter');
+
+        return $pdf->download('HistorialProfesor'.$professor_id.'.pdf');
+
+      } catch(\Illuminate\Database\QueryException $th) {
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
       }
+    }
 }

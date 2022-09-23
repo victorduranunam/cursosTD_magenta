@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Faculty extends Model
+class WorkPosition extends Model
 {
     use HasFactory;
 
-    protected $table = "faculty";
+    protected $table = "work_position";
     protected $fillable = [
-        'faculty_id',
-        'name'
+        'work_position_id',
+        'name',
+        'abbreviation'
     ];
 
-    protected $primaryKey = 'faculty_id';
+    protected $primaryKey = 'work_position_id';
     public $timestamps = false;
 }

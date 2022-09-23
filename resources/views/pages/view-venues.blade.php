@@ -18,7 +18,7 @@
   <div class="card-body"><br>
     @if($venues->isNotEmpty())
       @foreach ($venues as $venue)
-        <div class="row" style="margin: 1%">
+        <div class="row row-list" style="margin: 1%">
           <div class="col-xl-6">
             {!! $venue->name !!}
           </div>

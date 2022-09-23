@@ -59,9 +59,9 @@
                 </li>
 
                 <li class="nav-bar">
-                  <div class="link"><i class="bi bi-newspaper"></i>Categorías y Niveles <i class="bi bi-chevron-down"></i></div>
+                  <div class="link"><i class="bi bi-newspaper"></i>Puestos de trabajo <i class="bi bi-chevron-down"></i></div>
                   <ul class="submenu">
-                    <li><a href={!! route('view.categories') !!}>Consulta de Categorías y Niveles</a></li>
+                    <li><a href={!! route('view.work-positions') !!}>Consulta de Puestos de trabajo</a></li>
                   </ul>
                 </li>
 
@@ -70,13 +70,6 @@
                     <ul class="submenu">
                         <li><a href={!! route('create.venue') !!}>Alta de Salón</a></li>
                         <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-header">
-                    <div class="link"><i class="bi bi-mortarboard"></i>Carreras<i class="bi bi-chevron-down"></i></div>
-                    <ul class="submenu">
-                        <li><a href={!! route('view.careers') !!}>Consulta Carreras</a></li>
                     </ul>
                 </li>
 

@@ -173,9 +173,7 @@
           <label class="col-form-label" for="comment">Comentarios:</label>
         </div>
         <div class="col-xl-10">
-          <textarea id='comment' name='comment' class="form-control" placeholder="Ej. El alumno era introvertido..." rows="5">
-            {!! $participant->comment !!}
-          </textarea>
+          <textarea id='comment' name='comment' class="form-control" placeholder="Ej. El alumno era introvertido..." rows="5">{!! $participant->comment !!}</textarea>
         </div>
 
       </div>

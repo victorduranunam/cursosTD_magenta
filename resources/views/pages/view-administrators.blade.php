@@ -18,7 +18,7 @@
   <div class="card-body"><br>
     @if($administrators->isNotEmpty())
     @foreach ($administrators as $administrator)
-    <div class="row">
+    <div class="row row-list">
       <div class="col-xl-4">
         {!! $administrator->last_name.' '.$administrator->mothers_last_name.' '.$administrator->name !!}
       </div>

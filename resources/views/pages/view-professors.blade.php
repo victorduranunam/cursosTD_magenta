@@ -55,40 +55,44 @@
                 <button class="btn btn-outline-primary dropdown-toggle mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Opciones
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <form method="POST" action="{!! route('delete.professor', $professor->professor_id) !!}">
+                <form method="POST" action="{!! route('delete.professor', $professor->professor_id) !!}">
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     @csrf
                     @method('delete')
                     
-                    <li><a class="dropdown-item" href="#">Actividades</a></li>
-                    <li><a class="dropdown-item" href="#">Historial</a></li>
+                    <li><a class="dropdown-item" href="{!! route('view.professor-divisions', $professor->professor_id) !!}">Divisiones</a></li>
+                    <li><a class="dropdown-item" href="{!! route('view.professor-positions', $professor->professor_id) !!}">Puestos de Trabajo</a></li>
+                    <li><a class="dropdown-item" href="{!! route('generate.professor-record', $professor->professor_id) !!}">Historial</a></li>
                     <li><a class="dropdown-item" href={!! route('edit.professor', $professor->professor_id) !!}>Actualizar</a></li>
                     <li><a data-bs-toggle="modal" data-bs-target="#myModal{!! $professor->professor_id !!}" class="dropdown-item">Eliminar</a></li>
                 
-                    <div class="modal fade" id="myModal{!! $professor->professor_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Eliminar profesor</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <p>¿Está seguro de eliminar a {!! $professor->getFullName() !!}? 
-                            </p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <input type="submit" value="Eliminar" class="btn btn-outline-danger">
-                          </div>
+                    
+                  </ul>
+                  
+                  <div class="modal fade" id="myModal{!! $professor->professor_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Eliminar profesor</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <div class="modal-body">
+                          <p>¿Está seguro de eliminar a {!! $professor->getFullName() !!}? Esto eliminará los registros de sus inscribciones
+                            y participaciones como instructor en actividades, así como las evaluaciones que haya o le hayan realizado.
+                          </p>
+                        </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="submit" value="Eliminar" class="btn btn-outline-danger">
                       </div>
                     </div>
-
-                  </form>
-                </ul>
+                  </div>
+                </form>
               </div>
+
             </div>
           </div>
+        </div>
         @endforeach
 
       @elseif($departments->isEmpty())

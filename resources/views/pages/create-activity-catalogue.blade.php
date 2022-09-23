@@ -66,21 +66,21 @@
       <div class="row">
         <div class="col-xl-6">
           <label for="aimed_at" class="form-label">Dirijido a:</label>
-          <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirijido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos" value="{!! old('aimed_at') !!}"></textarea>
+          <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirijido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos">{!! old('aimed_at') !!}</textarea>
         </div>
         <div class="col-xl-6">
           <label for="objective" class="form-label">Objetivo:</label>
-          <textarea rows="4" max="500" name="objective" id="objective" class="form-control" placeholder="Ej. El objetivo es ejemplificar a los docentes casos de uso comunes dentro de la materia..." value="{!! old('objective') !!}"></textarea>
+          <textarea rows="4" max="500" name="objective" id="objective" class="form-control" placeholder="Ej. El objetivo es ejemplificar a los docentes casos de uso comunes dentro de la materia...">{!! old('objective') !!}</textarea>
         </div>
       </div>
       <div class="row">
         <div class="col-xl-6">
           <label for="content" class="form-label">Contenido:</label>
-          <textarea rows="4" max="2000" name="content" id="content" class="form-control" placeholder="Ej. 1. Introducción, 2. Fundamentos del cálculo...." value="{!! old('content') !!}"></textarea>
+          <textarea rows="4" max="2000" name="content" id="content" class="form-control" placeholder="Ej. 1. Introducción, 2. Fundamentos del cálculo....">{!! old('content') !!}</textarea>
         </div>
         <div class="col-xl-6">
           <label for="background" class="form-label">Antecedentes:</label>
-          <textarea rows="4" max="500" name="background" id="background" class="form-control" placeholder="Ej. Para cursar esta actividad es necesario contar con antecedentes sobre..." value="{!! old('background') !!}"></textarea>
+          <textarea rows="4" max="500" name="background" id="background" class="form-control" placeholder="Ej. Para cursar esta actividad es necesario contar con antecedentes sobre...">{!! old('background') !!}</textarea>
         </div>
       </div>
 

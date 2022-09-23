@@ -57,27 +57,22 @@
     </div>
 
     <div class="row">
+
         <div class="col-xl-4">
-          <label class="form-label" for="degree">Grado:</label>
-          <select required class="form-select" type="text" name="degree" id="degree">
-            <option value="">Licenciatura</option>
-            <option value="">Ingeniería</option>
-            <option value="">Maestría</option>
-            <option value="">Doctorado</option>
-            <option value="">Otro</option>
-          </select>
+          <label class="form-label" for="degree">Abriaviatura de Grado:</label>
+          <input class="form-control" value="{!! old('degree') !!}" type="text" name="degree" id="degree" placeholder="Ej. M.I.">
         </div>
 
         <div class="col-xl-4">
-          <label class="form-label" for="is_unam">Profesor de la UNAM:</label>
-          <div class="form-check">
-            <input required class="form-check-input" type="radio" name="is_unam" id="is_unam" value="true">
-            <label for="is_unam" class="form-check-label">Sí</label>
-          </div>
-          <div class="form-check">
-            <input required class="form-check-input" type="radio" name="is_unam" id="is_unam" value="false">
-            <label for="is_unam" class="form-check-label">No</label>
-          </div>
+          <label class="form-label" for="is_instructor">Es instructor:</label>
+            <div class="form-check">
+              <input required class="form-check-input" type="radio" name="is_instructor" id="is_instructor" value="true">
+              <label for="is_instructor" class="form-check-label">Sí</label>
+            </div>
+            <div class="form-check">
+              <input required class="form-check-input" type="radio" name="is_instructor" id="is_instructor" value="false">
+              <label for="is_instructor" class="form-check-label">No</label>
+            </div>
         </div>
 
         <div class="col-xl-4">
@@ -93,16 +88,23 @@
         </div>
 
     </div>
+    
     <div class="row">
         <div class="col-xl-4">
           <label class="form-label" for="semblance">Semblanza corta:</label>
-          <textarea required class="form-control" type="text" rows="4" cols="50" name="semblance" id="semblance"  value="{!! old('semblance') !!}"></textarea>
+          <textarea class="form-control" type="text" rows="4" cols="50" name="semblance" id="semblance">{!! old('semblance') !!}</textarea>
+        </div>
+
+        <div class="col-xl-4">
+          <label class="form-label" for="provenance">Proveniencia:</label>
+          <textarea class="form-control" type="text" rows="4" cols="50" name="provenance" id="provenance">{!!old('provenance') !!}</textarea>
         </div>
 
         <div class="col-xl-2 mt-auto">
           <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
         </div>
     </div>
+
 
     </form>
     <div class="row">

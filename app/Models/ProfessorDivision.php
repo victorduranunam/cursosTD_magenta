@@ -18,4 +18,13 @@ class ProfessorDivision extends Model
     
     protected $primaryKey = 'professor_division_id';
     public $timestamps = false;
+
+
+    public function getName(){
+      return Division::findOrFail($this->division_id)->name;
+    }
+
+    public function getAbbreviation(){
+      return Division::findOrFail($this->division_id)->abbreviation;
+    }
 }

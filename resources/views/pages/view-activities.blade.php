@@ -43,7 +43,7 @@
           </div>
           {{-- Semestre de la actividad --}}
           <div class="col-xl-2">
-            {!! $activity->getSemester() !!}
+            {!! $activity->getPeriod() !!}
           </div>
           
           {{-- Opciones de la actividad --}}

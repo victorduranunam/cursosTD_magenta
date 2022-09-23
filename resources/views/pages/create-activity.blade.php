@@ -16,21 +16,21 @@
       <div class="row">
         <input id="activity_catalogue_id" type="hidden" class="form-control" name="activity_catalogue_id" value="{{ $activity_cat->activity_catalogue_id}}" required>
         <div class="col-xl-2">
-          <label for="sem_year" class="form-label">*Periodo:</label>
-          <input type="text" required class="form-control" name="sem_year" id="sem_year" placeholder="Ej. 2022" value="{!! old('sem_year') !!}">
+          <label for="year" class="form-label">*Periodo:</label>
+          <input type="text" required class="form-control" name="year" id="year" placeholder="Ej. 2022" value="{!! old('year') !!}">
         </div>
         <div class="col-xl-2 mt-auto">
-          <label for="sem_num" class="form-label"></label>
-          <select name="sem_num" id="sem_num" class="form-select">
-            <option {!! old('sem_num') == '1' ? "selected" : "" !!} value="1">1</option>
-            <option {!! old('sem_num') == '2' ? "selected" : "" !!} value="2">2</option>
+          <label for="num" class="form-label"></label>
+          <select name="num" id="num" class="form-select">
+            <option {!! old('num') == '1' ? "selected" : "" !!} value="1">1</option>
+            <option {!! old('num') == '2' ? "selected" : "" !!} value="2">2</option>
           </select>
         </div>
         <div class="col-xl-2 mt-auto">
-          <label for="sem_type" class="form-label"></label>
-          <select name="sem_type" id="sem_type" class="form-select">
-            <option {!! old('sem_type') == 's' ? "selected" : "" !!} value="s">Semestral</option>
-            <option {!! old('sem_type') == 'i' ? "selected" : "" !!} value="i">Intersemestral</option>
+          <label for="type" class="form-label"></label>
+          <select name="type" id="type" class="form-select">
+            <option {!! old('type') == 's' ? "selected" : "" !!} value="s">Semestral</option>
+            <option {!! old('type') == 'i' ? "selected" : "" !!} value="i">Intersemestral</option>
           </select>
         </div>
         <div class="col-xl-3">
