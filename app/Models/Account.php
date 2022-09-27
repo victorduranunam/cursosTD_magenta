@@ -22,4 +22,14 @@ class Account extends Authenticatable
     
     protected $primaryKey = 'account_id';
     public $timestamps = false;
+
+    public function getDepartments() {
+      if($this->admin)
+        $departments = Department::select('department_id','name')->get();
+      else
+        $departments = Department::select('department_id','name')
+                     ->where('department_id', $this->department_id)
+                     ->get();
+      return $departments;
+    }
 }

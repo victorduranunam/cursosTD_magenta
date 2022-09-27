@@ -40,7 +40,7 @@
 
       <div class="row">
         <div class="col-xl-8">
-          <label for="department_id" class="form-label">Departamento asociado:</label>
+          <label for="department_id" class="form-label">Coordinación asociada:</label>
           <select name="department_id" id="department_id" class="form-select">
             @foreach($departments as $department)
               <option {!! old('department_id') == $department->department_id ? "selected" : "" !!} 
