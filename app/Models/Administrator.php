@@ -29,9 +29,9 @@ class Administrator extends Model
       if($this->job === 'C')
         return 'Coordinador';
       if($this->job === 'O' and $this->gender === 'F')
-        return 'Coordinadora del Centro de Docencia';
+        return 'Coordinadora General';
       if($this->job === 'O')
-        return 'Coordinador del Centro de Docencia';
+        return 'Coordinador General';
       if($this->job === 'S' and $this->gender === 'F')
         return 'Secretaria de Apoyo a la Docencia';
       if($this->job === 'S')

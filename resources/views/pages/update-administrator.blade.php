@@ -46,7 +46,7 @@
             <label for="job">*Cargo:</label>
             <select required class="form-select" name="job" id="job">
               <option {!! $administrator->job == 'C' ? "selected" : "" !!} value="C">Coordinador</option>
-              <option {!! $administrator->job == 'O' ? "selected" : "" !!} value="O">Coordinador del Centro de Docencia</option>
+              <option {!! $administrator->job == 'O' ? "selected" : "" !!} value="O">Coordinador General</option>
               <option {!! $administrator->job == 'S' ? "selected" : "" !!} value="S">Secretario de Apoyo</option>
               <option {!! $administrator->job == 'D' ? "selected" : "" !!} value="D">Director</option>
             </select>

@@ -60,7 +60,7 @@ class AdministratorController extends Controller
             ->back()
             ->withInput()
             ->with('danger', 'No es posible crear a más de un '      .
-            'Coordinador del Centro de Docencia. ' .
+            'Coordinador General. ' .
             'Por favor elimine al administrador con el puesto que '.
             'desea crear para continuar o simplemente edítelo en lugar de ' .
             'crear uno nuevo.');
