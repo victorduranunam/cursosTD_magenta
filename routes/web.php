@@ -106,10 +106,8 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@delete")->name("delete.instructor");
   
   //Route Instructor Evaluation
-  Route::get('evaluacion-instructor/ver/{participant_id}', 'InstructorEvaluationController@index')->name('view.instructor-evaluation');
   Route::get('evaluacion-instructor/crear/{instructor_id}', 'InstructorEvaluationController@create')->name('create.instructor-evaluation');
-  Route::post('evaluacion-instructor/almacenar/{participant_id}', 'InstructorEvaluationController@store')->name('store.instructor-evaluation');
-  Route::get('evaluacion-instructor/editar/{participant_id}', 'InstructorEvaluationController@edit')->name('edit.instructor-evaluation');
+  Route::post('evaluacion-instructor/almacenar/{instructor_id}', 'InstructorEvaluationController@store')->name('store.instructor-evaluation');
   Route::put('evaluacion-instructor/guardar/{instructor_evaluation_id}', 'InstructorEvaluationController@update')->name('update.instructor-evaluation');
   Route::delete('evaluacion-instructor/eliminar/{instructor_evaluation_id}', 'InstructorEvaluationController@delete')->name('delete.instructor-evaluation');
 
