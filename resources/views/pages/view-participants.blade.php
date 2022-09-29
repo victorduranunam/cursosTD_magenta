@@ -72,7 +72,7 @@
                   @csrf
                   @method('delete')
                   <li><a class="dropdown-item" href={!! route('view.activity-evaluation', $participant->participant_id) !!}>Evaluar Actividad</a></li>
-                  <li><a class="dropdown-item" href={!! route('view.instructor-evaluation', $participant->participant_id) !!}>Evaluar Instructores</a></li>
+                  <li><a class="dropdown-item" href={!! route('create.instructor-evaluation', $participant->participant_id) !!}>Evaluar Instructores</a></li>
                   <div class="dropdown-divider"></div>
                   <li><button type=button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal{!! $participant->participant_id !!}">Eliminar</button></li>
                 </ul>
