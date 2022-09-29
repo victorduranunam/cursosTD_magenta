@@ -82,7 +82,7 @@
         </div>
         <div class="col-xl-6">
           <label for="venue_id" class="form-label">*Sede:</label>
-          <select required name="venue_id" id="venue_id" class="form-select">
+          <select name="venue_id" id="venue_id" class="form-select">
             @foreach($venues as $venue)
               <option {!! old('venue_id') == $venue->venue_id ? "selected" : "" !!} 
                 value="{!! $venue->venue_id !!}">
@@ -95,11 +95,11 @@
       <div class="row">
         <div class="col-xl-3">
           <label for="min_quota" class="form-label">Cupo mínimo:</label>
-          <input type="number" min="1" class="form-control" name="min_quota" id="min_quota" placeholder="Ej. 5" value="{!! old('min_quota') !!}">
+          <input required type="number" min="1" class="form-control" name="min_quota" id="min_quota" placeholder="Ej. 5" value="{!! old('min_quota') !!}">
         </div>
         <div class="col-xl-3">
           <label for="max_quota" class="form-label">Cupo máximo:</label>
-          <input type="number" min="1" class="form-control" name="max_quota" id="max_quota" placeholder="Ej. 30" value="{!! old('max_quota') !!}">
+          <input required type="number" min="1" class="form-control" name="max_quota" id="max_quota" placeholder="Ej. 30" value="{!! old('max_quota') !!}">
         </div>
         <div class="col-xl-3">
           <label for="ctc" class="form-label">Acreditación:</label>

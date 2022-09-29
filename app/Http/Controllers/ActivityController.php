@@ -80,6 +80,7 @@ class ActivityController extends Controller
                 ->route('home')
                 ->with('danger', 'No hay conexión con la base de datos.');
             else
+            //23502->not nulls
               return dd($th);   
           }
 

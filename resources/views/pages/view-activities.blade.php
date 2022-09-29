@@ -60,6 +60,7 @@
                   <li><a class="dropdown-item" href={!! route('create.participant', $activity->activity_id) !!}>Inscribir participantes</a></li>
                   <li><a class="dropdown-item" href={!! route('view.instructors', $activity->activity_id) !!}>Instructores</a></li>
                   <li><a class="dropdown-item" href={!! route('edit.activity', $activity->activity_id) !!}>Actualizar</a></li>
+                  {{-- TODO: reportes de evaluacion si son admins --}}
                   <div class="dropdown-divider"></div>
                   <li><button type=button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal{!! $activity->activity_id !!}">Eliminar</button></li>
                 </ul>

@@ -59,6 +59,12 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::delete('actividades/eliminar/{activity_id}','ActivityController@delete')->name('delete.activity');
   
   //Route Activity Evaluation
+  Route::get('evaluacion-actividad/ver/{participant_id}', 'ActivityEvaluationController@index')->name('view.activity-evaluation');
+  Route::get('evaluacion-actividad/crear/{participant_id}', 'ActivityEvaluationController@create')->name('create.activity-evaluation');
+  Route::post('evaluacion-actividad/almacenar/{participant_id}', 'ActivityEvaluationController@store')->name('store.activity-evaluation');
+  Route::get('evaluacion-actividad/editar/{activity_evaluation_id}', 'ActivityEvaluationController@edit')->name('edit.activity-evaluation');
+  Route::put('evaluacion-actividad/guardar/{activity_evaluation_id}', 'ActivityEvaluationController@update')->name('update.activity-evaluation');
+  Route::delete('evaluacion-actividad/eliminar/{activity_evaluation_id}', 'ActivityEvaluationController@delete')->name('delete.activity-evaluation');
   
   //Route Administrator
   Route::get('administradores', 'AdministratorController@index')->name('view.administrators');
@@ -100,7 +106,11 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@delete")->name("delete.instructor");
   
   //Route Instructor Evaluation
-  
+  Route::get('evaluacion-instructor/crear/{instructor_id}', 'InstructorEvaluationController@create')->name('create.instructor-evaluation');
+  Route::post('evaluacion-instructor/almacenar/{instructor_id}', 'InstructorEvaluationController@store')->name('store.instructor-evaluation');
+  Route::put('evaluacion-instructor/guardar/{instructor_evaluation_id}', 'InstructorEvaluationController@update')->name('update.instructor-evaluation');
+  Route::delete('evaluacion-instructor/eliminar/{instructor_evaluation_id}', 'InstructorEvaluationController@delete')->name('delete.instructor-evaluation');
+
   //Route Participant
   Route::get('participantes/{activity_id}',"ParticipantController@index")->name("view.participants");
   Route::get('participantes/crear/{activity_id}', "ParticipantController@create")->name("create.participant");

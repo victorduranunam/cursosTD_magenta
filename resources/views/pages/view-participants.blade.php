@@ -61,32 +61,46 @@
             <a type="button" class="btn btn-outline-secondary" href={!! route('edit.participant', $participant->participant_id) !!}>Modificar</a>
           </div>
 
-          {{-- Button, form for delete --}}
+          {{-- Options for participant --}}
           <div class="col-xl-2">
-            <form method="POST" action="{!! route('delete.participant', $participant->participant_id) !!}">
-              @csrf
-              @method('delete')
-              <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $participant->participant_id !!}">Eliminar</a>
-              <div class="modal fade" id="myModal{!! $participant->participant_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Eliminar participante</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>¿Está seguro de eliminar al participante {!! $participant->name.' '.$participant->last_name.' '.$participant->mothers_last_name !!}?
-                        Esto borrará las evaluaciones del participante y su folio para constancias.
-                      </p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+            <div class="dropdown">
+              <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Opciones
+              </button>
+              <form method="POST" action="{!! route('delete.participant', $participant->participant_id) !!}">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  @csrf
+                  @method('delete')
+                  <li><a class="dropdown-item" href={!! route('view.activity-evaluation', $participant->participant_id) !!}>Evaluar Actividad</a></li>
+                  <li><a class="dropdown-item" href={!! route('create.instructor-evaluation', $participant->participant_id) !!}>Evaluar Instructores</a></li>
+                  <div class="dropdown-divider"></div>
+                  <li><button type=button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal{!! $participant->participant_id !!}">Eliminar</button></li>
+                </ul>
+                <div class="modal fade" id="myModal{!! $participant->participant_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar participante</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Está seguro de eliminar al participante 
+                          {!! $participant->name.
+                          ' '.$participant->last_name.
+                          ' '.$participant->mothers_last_name !!}?
+                          Esto borrará las evaluaciones del participante y su 
+                          folio para constancias.
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
 
         </div>
