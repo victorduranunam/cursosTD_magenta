@@ -42,15 +42,26 @@ class InstructorEvaluationController extends Controller
   }
   
   public function edit($participant_id) {
-    $participant = Participant::findOrFail($participant_id);
-    $participant->name = $participant->getFullName();
-    $participant->activity_name = $participant->getActivityName();
-    $instructors = Instructor::join('instructor_evaluation','instructor_evaluation.instructor_id','instructor.instructor_id')
-                  ->where('instructor.activity_id',$participant->activity_id)
-                  ->get();
-    return view('pages.update-instructor-evaluation')
-          ->with('participant', $participant)
-          ->with('instructors', $instructors);
+    try{
+        $participant = Participant::findOrFail($participant_id);
+        $participant->name = $participant->getFullName();
+        $participant->activity_name = $participant->getActivityName();
+        $instructors = Instructor::join('instructor_evaluation','instructor_evaluation.instructor_id','instructor.instructor_id')
+                      ->where('instructor.activity_id',$participant->activity_id)
+                      ->get();
+        return view('pages.update-instructor-evaluation')
+                ->with('participant', $participant)
+                ->with('instructors', $instructors);
+          }catch (\Illuminate\Database\QueryException $th) {
+            if ($th->getCode() == 7)
+              return redirect()
+                ->route('home')
+                ->with('danger', 'No hay conexión con la base de datos.');
+            else
+              return redirect()
+              ->route('home')
+              ->with('danger', 'Problema con la base de datos.');  
+          }
   }
   
   public function store(Request $req, $instructor_id) {
@@ -102,8 +113,8 @@ class InstructorEvaluationController extends Controller
       $instructor_evaluation->question_11 = $req->question_11;
       $instructor_evaluation->save();
       return redirect()
-          ->back()
-          ->with('success', 'Evaluación guardada correctamente');
+          ->route('edit.instructor-evaluation', $instructor_evaluation->instructor_evaluation_id)
+          ->with('success', 'Evaluación modificada correctamente');
   }catch (\Illuminate\Database\QueryException $th) {
       if ($th->getCode() == 7)
         return redirect()
@@ -116,7 +127,26 @@ class InstructorEvaluationController extends Controller
     }
   }
 
-  public function delete($activity_instructor_id) {
+  public function delete($instructor_evaluation_id) {
+    try {
+      $instructor_evaluation = InstructorEvaluation::findOrFail($instructor_evaluation_id);
+      $participant = Participant::findOrFail($instructor_evaluation->participant_id);
+      $instructor_evaluation->delete();
+
+      return redirect()
+           ->route('view.participants', $participant->activity_id)
+           ->with('success', 'Evaluación eliminada correctamente.');
+
+    } catch (\Illuminate\Database\QueryException $th) {
+      if ($th->getCode() == 7)
+        return redirect()
+          ->route('home')
+          ->with('danger', 'No hay conexión con la base de datos.');
+      else
+        return redirect()
+          ->route('home')
+          ->with('danger', 'Problema con la base de datos.');
+    }
     
   }
 }

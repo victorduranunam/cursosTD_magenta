@@ -29,4 +29,10 @@ class InstructorEvaluation extends Model
 
     protected $primaryKey = 'instructor_evaluation_id';
     public $timestamps = false;
+
+    public function getName(){
+        $instructor = Instructor::findOrFail($this->instructor_id);
+        $professor = Professor::findOrFail($instructor->professor_id);
+        return $professor->name.' '.$professor->last_name.' '.$professor->mothers_last_name;
+      }
 }

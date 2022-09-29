@@ -3,7 +3,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Evaluar instructor(es) <i class="bi bi-clipboard-check"></i></h3>
+    <h3>Editar evaluaciones de instructor(es) <i class="bi bi-clipboard-check"></i></h3>
     <h5>{!! $participant->name !!}</h5>
     <h6>{!! $participant->activity_name !!}</h6>
   </div>
@@ -374,8 +374,38 @@
                             <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
                         </div>
                     </div>
-        </form>
+                </form>
+                <form method="POST" action="{!! route("delete.instructor-evaluation", $instructor->instructor_evaluation_id) !!}">
+                    @csrf
+                    @method('delete')
+                    
+                    
+                    <div class="col-xl-2">
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $instructor->instructor_evaluation_id !!}">Eliminar</button>
+                    </div>
+                   
+                    <div class="modal fade" id="myModal{!! $instructor->instructor_evaluation_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Evaluación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Está seguro de eliminar la evaluación?
+                            Esto la borrará de los reportes, siempre puede crear una nueva.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
+                            <input type="submit" value="Eliminar" class="btn btn-outline-danger">
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </form>
                 </div>
+
             </div>
         </div>
         @endforeach
