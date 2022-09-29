@@ -27,9 +27,7 @@ class Activity extends Model
     ];
     protected $primaryKey = 'activity_id';
     public $timestamps = false;
-    protected $casts = [
-        'day' => 'array'
-    ];
+
     public function getName(){
         $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
                                     ->where('activity_catalogue.activity_catalogue_id',$this->activity_catalogue_id)

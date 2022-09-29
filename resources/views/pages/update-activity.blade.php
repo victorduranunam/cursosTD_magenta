@@ -121,8 +121,8 @@
         <input type="text" required class="form-control" name="manual_date" id="manual_date" placeholder="Ej. Los días 5, 7 y 9 de Agosto" value="{!! $activity->manual_date !!}">
       </div>
       <div class="col-xl-6">
-        <label for="venue_id" class="form-label">*Sede:</label>
-        <select required name="venue_id" id="venue_id" class="form-select">
+        <label for="venue_id" class="form-label">Sede:</label>
+        <select name="venue_id" id="venue_id" class="form-select">
             @foreach($venues as $venue)
               <option 
               {!! $activity->venue_id ==  $venue->venue_id ? "selected" : ""!!} 
@@ -136,19 +136,19 @@
 
     <div class="row">
       <div class="col-xl-3">
-        <label for="min_quota" class="form-label">Cupo mínimo:</label>
-        <input type="number" min="1" class="form-control" name="min_quota" id="min_quota" placeholder="Ej. 5" value="{!! $activity->min_quota !!}">
+        <label for="min_quota" class="form-label">*Cupo mínimo:</label>
+        <input required type="number" min="1" class="form-control" name="min_quota" id="min_quota" placeholder="Ej. 5" value="{!! $activity->min_quota !!}">
       </div>
       <div class="col-xl-3">
-        <label for="max_quota" class="form-label">Cupo máximo:</label>
-        <input type="number" min="1" class="form-control" name="max_quota" id="max_quota" placeholder="Ej. 30" value="{!! $activity->max_quota !!}">
+        <label for="max_quota" class="form-label">*Cupo máximo:</label>
+        <input required type="number" min="1" class="form-control" name="max_quota" id="max_quota" placeholder="Ej. 30" value="{!! $activity->max_quota !!}">
       </div>
       <div class="col-xl-3">
         <label for="ctc" class="form-label">Acreditación:</label>
         <input type="number" min="0" max="100" class="form-control" name="ctc" id="ctc" placeholder="Ej. 80" value="{!! $activity->ctc !!}">
       </div>
       <div class="col-xl-3">
-        <label for="cost" class="form-label">Costo:</label>
+        <label for="cost" class="form-label">*Costo:</label>
         <input type="text" required class="form-control" name="cost" id="cost" placeholder="Ej. 799.99" value="{!! $activity->cost !!}">
       </div>
     </div>

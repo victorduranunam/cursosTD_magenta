@@ -27,13 +27,13 @@ class ActivityEvaluation extends Model
         'question_3_4',
         'question_4',
         'question_5',
-        'question_6',
-        'question_7',
-        'question_8',
-        'question_9',
-        'question_10',
-        'sem_schedule',
-        'int_schedule',
+        'question_6_1',
+        'question_6_2',
+        'question_6_3',
+        'question_7_1',
+        'question_7_2',
+        'question_8_1',
+        'question_8_2',
         'participant_id'
     ];
 
