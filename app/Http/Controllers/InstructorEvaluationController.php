@@ -83,7 +83,7 @@ class InstructorEvaluationController extends Controller
             $instructor_evaluation->participant_id = $req->participant_id;
             $instructor_evaluation->save();
             return redirect()
-                ->back()
+                ->route('edit.instructor-evaluation', $instructor_evaluation->instructor_evaluation_id)
                 ->with('success', 'Evaluación guardada correctamente');
         }catch (\Illuminate\Database\QueryException $th) {
             if ($th->getCode() == 7)
