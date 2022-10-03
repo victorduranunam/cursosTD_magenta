@@ -25,8 +25,22 @@ class Instructor extends Model
       return $professor->name.' '.$professor->last_name.' '.$professor->mothers_last_name;
     }
 
+    public function getRecognitionName(){
+      $professor = Professor::findOrFail($this->professor_id);
+      return $professor->degree.' '.$professor->name.' '.$professor->last_name.' '.$professor->mothers_last_name;
+    }
+
     public function getSemblance(){
       $professor = Professor::findOrFail($this->professor_id);
       return $professor->semblance;
+    }
+
+    public function getFullNameFile(){
+      return Professor::join('instructor', 'professor.professor_id', '=', 'instructor.professor_id')
+                               ->where('instructor.instructor_id', $this->instructor_id)
+                               ->selectRaw("concat(replace(professor.name, ' ', '_'), '_',professor.last_name, '_',professor.mothers_last_name) as full_name")
+                               ->first()
+                               ->full_name;
+      
     }
 }

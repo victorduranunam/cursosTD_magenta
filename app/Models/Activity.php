@@ -36,7 +36,13 @@ class Activity extends Model
       return $activity->name;
     }
 
-    public function getCertificateName(){
+    public function getType(){
+      $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
+                                  ->first();
+      return $activity->type;
+    }
+
+    public function getFileName(){
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                     ->first();
       return str_replace(' ', '_',$activity->name);

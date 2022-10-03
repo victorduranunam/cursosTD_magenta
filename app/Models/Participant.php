@@ -82,7 +82,7 @@ class Participant extends Model
       
     }
 
-    public function getFullNameCertificate(){
+    public function getFullNameFile(){
       return Professor::join('participant', 'professor.professor_id', '=', 'participant.professor_id')
                                ->where('participant.participant_id', $this->participant_id)
                                ->selectRaw("concat(replace(professor.name, ' ', '_'), '_',professor.last_name, '_',professor.mothers_last_name) as full_name")
