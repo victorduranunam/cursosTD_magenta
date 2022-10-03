@@ -13,7 +13,6 @@ class Instructor extends Model
     protected $fillable = [
         'instructor_id',
         'key',
-        'send_date',
         'professor_id',
         'activity_id'
     ];
@@ -24,5 +23,10 @@ class Instructor extends Model
     public function getName(){
       $professor = Professor::findOrFail($this->professor_id);
       return $professor->name.' '.$professor->last_name.' '.$professor->mothers_last_name;
+    }
+
+    public function getSemblance(){
+      $professor = Professor::findOrFail($this->professor_id);
+      return $professor->semblance;
     }
 }

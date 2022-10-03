@@ -24,7 +24,6 @@ class Participant extends Model
         'grade',
         'comment',
         'key',
-        'send_date',
         'professor_id',
         'activity_id'
     ];
@@ -78,6 +77,15 @@ class Participant extends Model
       return Professor::join('participant', 'professor.professor_id', '=', 'participant.professor_id')
                                ->where('participant.participant_id', $this->participant_id)
                                ->selectRaw("concat(professor.name, ' ',professor.last_name, ' ',professor.mothers_last_name) as full_name")
+                               ->first()
+                               ->full_name;
+      
+    }
+
+    public function getFullNameCertificate(){
+      return Professor::join('participant', 'professor.professor_id', '=', 'participant.professor_id')
+                               ->where('participant.participant_id', $this->participant_id)
+                               ->selectRaw("concat(replace(professor.name, ' ', '_'), '_',professor.last_name, '_',professor.mothers_last_name) as full_name")
                                ->first()
                                ->full_name;
       

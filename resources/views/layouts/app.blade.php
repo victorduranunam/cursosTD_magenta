@@ -151,6 +151,7 @@
     <script src={!! asset ('/dist/jquery.fancybox.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.bundle.js') !!}></script>
+    <script src={!! asset('js/app.js') !!}></script>
     <script>
         function openNav() {
             document.getElementsByClassName("sidebar")[0].style.display='block';

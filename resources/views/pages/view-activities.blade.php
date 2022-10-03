@@ -39,7 +39,7 @@
           </div>
           {{-- Instructores de la actividad --}}
           <div class="col-xl-4">
-            {!! $activity->getProfessors() !!}
+            {!! $activity->getInstructors() !!}
           </div>
           {{-- Semestre de la actividad --}}
           <div class="col-xl-2">
@@ -59,6 +59,11 @@
                   <li><a class="dropdown-item" href={!! route('view.participants', $activity->activity_id) !!}>Ver participantes inscritos</a></li>
                   <li><a class="dropdown-item" href={!! route('create.participant', $activity->activity_id) !!}>Inscribir participantes</a></li>
                   <li><a class="dropdown-item" href={!! route('view.instructors', $activity->activity_id) !!}>Instructores</a></li>
+
+                  <li><a class="dropdown-item" href={!! route('download.activity-promo', $activity->activity_id) !!}>Publicidad</a></li>
+                  <li><a class="dropdown-item" href={!! route('create.activity-certificates', $activity->activity_id) !!}>Constancias</a></li>
+                  <li><a class="dropdown-item" href={!! route('create.activity-recognitions', $activity->activity_id) !!}>Reconocimientos</a></li>
+
                   <li><a class="dropdown-item" href={!! route('edit.activity', $activity->activity_id) !!}>Actualizar</a></li>
                   {{-- TODO: reportes de evaluacion si son admins --}}
                   <div class="dropdown-divider"></div>

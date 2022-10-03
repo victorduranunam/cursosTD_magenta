@@ -21,7 +21,9 @@ class Activity extends Model
         'ctc', 
         'cost', 
         'max_quota', 
-        'min_quota', 
+        'min_quota',
+        'certificate_date',
+        'recognition_date',
         'venue_id', 
         'activity_catalogue_id'
     ];
@@ -29,13 +31,18 @@ class Activity extends Model
     public $timestamps = false;
 
     public function getName(){
-        $activities = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-                                    ->where('activity_catalogue.activity_catalogue_id',$this->activity_catalogue_id)
-                                    ->get(['activity_catalogue.name']);
-        return $activities[0]->name;
+      $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
+                                  ->first();
+      return $activity->name;
     }
 
-    public function getProfessors(){
+    public function getCertificateName(){
+      $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
+                                    ->first();
+      return str_replace(' ', '_',$activity->name);
+  }
+
+    public function getInstructors(){
         $professors = Professor::join('instructor','instructor.professor_id','=','professor.professor_id')
                                 ->where('instructor.activity_id',$this->activity_id)
                                 ->get();
@@ -64,5 +71,11 @@ class Activity extends Model
 
     public function getPeriod(){
         return $this->year."-".$this->num.$this->type;
+    }
+
+    public function getHours(){
+      $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
+                                  ->first();
+      return $activity->hours;
     }
 }

@@ -135,11 +135,8 @@ class ProfessorController extends Controller
         }
     }
 
-    public function generateRecord($professor_id){
+    public function downloadRecord($professor_id){
       try {
-        // Todas las actividades acreditadas del profesor
-        // Por cada actividad el nombre, su duracion y su periodo
-        // Del profesor su nombre, el numero total de actividades y el numero total de horas
 
         $professor = Professor::findOrFail($professor_id);
 

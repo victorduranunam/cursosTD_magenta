@@ -37,4 +37,23 @@ class ActivityCatalogue extends Model
     public function getDepartmentAbbreviation(){
       return Department::findOrFail($this->department_id)->abbreviation;
     }
+
+    public function getType(){
+      if($this->type == 'CU')
+        return 'Curso';
+      elseif($this->type == 'CT')
+        return 'Curso - Taller';
+      elseif($this->type == 'TA')
+        return 'Taller';
+      elseif($this->type == 'SE')
+        return 'Seminario';
+      elseif($this->type == 'FO')
+        return 'Foro';
+      elseif($this->type == 'EV')
+        return 'Evento';
+      elseif($this->type == 'DI')
+        return 'Módulo de Diplomado';
+      elseif($this->type == 'CO')
+        return 'Conferencia';
+    }
 }
