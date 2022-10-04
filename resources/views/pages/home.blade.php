@@ -9,7 +9,7 @@
   @include('partials.messages')
     <div class="card-body"><br>
       <div class="logos col-center">
-        <img class="img-escudo" src={!! asset('img/logo-magestic.png') !!} alt="">
+        <img class="img-escudo" src={!! asset('img/logo-MAGESTIC.png') !!} alt="">
         &nbsp; Manejo y Gestión de actividades para la capacitación docente.
         <hr>
         <h5>¿Qué desea hacer?</h5>

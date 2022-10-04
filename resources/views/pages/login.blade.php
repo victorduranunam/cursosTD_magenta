@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-  <title>Magestic | Capacitación Docente</title>
+  <title>MAGESTIC | Capacitación Docente</title>
 </head>
 <body class="home">
 
@@ -22,7 +22,7 @@
       @method('post')
     <div class="content">
       <div class="title m-b-md">
-        Magestic
+        MAGESTIC
       </div>
     </div>
 
