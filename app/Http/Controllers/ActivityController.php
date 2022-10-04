@@ -16,7 +16,11 @@ class ActivityController extends Controller
 {
     public function index(){
         try {
-          $activities = Activity::all();
+          $activities = Activity::join('activity_catalogue', 'activity_catalogue.activity_catalogue_id', '=', 'activity.activity_catalogue_id')
+                                ->select('activity.*', 'activity_catalogue.name as catalogue_name')
+                                ->orderByRaw('unaccent(lower(activity_catalogue.name))')
+                                ->get();
+
           return view("pages.view-activities")
             ->with("activities", $activities);
     

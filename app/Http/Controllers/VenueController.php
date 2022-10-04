@@ -11,7 +11,7 @@ class VenueController extends Controller
   public function index()
   {
     try {
-      $venues = Venue::all();
+      $venues = Venue::orderByRaw('unaccent(lower(name))')->get();
       return view("pages.view-venues")
           ->with("venues",$venues);
     } catch (\Illuminate\Database\QueryException $th) {

@@ -19,6 +19,7 @@ class ParticipantController extends Controller
         
         $participants = Participant::join('professor','professor.professor_id','=','participant.professor_id')
                                     ->where('participant.activity_id', $activity_id)
+                                    ->orderByRaw('unaccent(lower(professor.name || professor.last_name || professor.mothers_last_name))')
                                     ->get(['participant.*', 'professor.name', 'professor.last_name', 'professor.mothers_last_name']);
         
         foreach($participants as $participant)
@@ -44,12 +45,12 @@ class ParticipantController extends Controller
         try{   
             $professors = Professor::whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
                                     ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
-                                    ->orderBy('last_name')
+                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
                                     ->get(['professor_id','name','last_name','mothers_last_name','email','rfc','worker_number']);
 
             $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
                                     ->where('instructor.activity_id',$activity_id)
-                                    ->orderBy('last_name')
+                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
                                     ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
            
             $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')

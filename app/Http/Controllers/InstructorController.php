@@ -14,9 +14,12 @@ class InstructorController extends Controller
             $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
                                     ->where('is_instructor',true)
                                     ->whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
+                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
                                     ->get();
+
             $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
                                     ->where('instructor.activity_id',$activity_id)
+                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
                                     ->get();
            
             $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')

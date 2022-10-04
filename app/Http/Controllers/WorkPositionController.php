@@ -13,8 +13,7 @@ class WorkPositionController extends Controller
   {
     try {
 
-      $work_positions = WorkPosition::all()
-        ->sortBy('name');
+      $work_positions = WorkPosition::orderByRaw('unaccent(lower(name))')->get();
 
       return view("pages.view-work-positions")
         ->with("work_positions", $work_positions);

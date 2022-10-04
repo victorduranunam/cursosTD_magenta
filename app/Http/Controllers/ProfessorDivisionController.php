@@ -20,11 +20,14 @@ class ProfessorDivisionController extends Controller
 
         $professor = Professor::findOrFail($professor_id);
 
-        $professor->divisions = ProfessorDivision::where('professor_id', $professor_id)
-                                ->select('professor_division_id', 'division_id')
+        $professor->divisions = ProfessorDivision::join('division', 'division.division_id', '=', 'professor_division.division_id')
+                                ->where('professor_id', $professor_id)
+                                ->select('professor_division_id', 'division.division_id', 'division.name')
+                                ->orderByRaw('unaccent(lower(division.name))')
                                 ->get();
 
         $divisions = Division::whereNotIn('division_id',$professor->divisions->map($callback))
+                              ->orderByRaw('unaccent(name)')
                               ->get();
 
         return view("pages.view-professor-divisions")

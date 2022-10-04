@@ -14,8 +14,8 @@ class ActivityCatalogueController extends Controller
   {
     try {
 
-      $activities_cat = ActivityCatalogue::all()
-        ->sortBy('key');
+      $activities_cat = ActivityCatalogue::orderByRaw('unaccent(lower(key))')
+        ->get();
 
       return view("pages.view-activities-catalogue")
         ->with("activities_cat", $activities_cat);

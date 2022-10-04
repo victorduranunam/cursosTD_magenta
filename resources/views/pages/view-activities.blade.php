@@ -35,7 +35,7 @@
         <div class="row row-list">
           {{-- Nombre de la actividad --}}
           <div class="col-xl-4">
-            {!! $activity->getName() !!}
+            {!! $activity->catalogue_name !!}
           </div>
           {{-- Instructores de la actividad --}}
           <div class="col-xl-4">
@@ -77,7 +77,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <p>¿Está seguro de eliminar la actividad {!! $activity->getName() !!}?
+                        <p>¿Está seguro de eliminar la actividad {!! $activity->catalogue_name !!}?
                           Esto borrará los registros que existan entre instructores y participantes
                           con ella. 
                         </p>

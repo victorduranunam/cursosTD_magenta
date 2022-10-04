@@ -12,7 +12,8 @@ class ProfessorController extends Controller
     public function index()
     {
         try {
-            $professors = Professor::orderBy('last_name')->get();
+            $professors = Professor::orderByRaw('unaccent(lower(last_name || mothers_last_name || name))')
+            ->get();
 
             return view("pages.view-professors")
                 ->with("professors",$professors);

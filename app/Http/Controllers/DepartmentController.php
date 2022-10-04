@@ -12,8 +12,7 @@ class DepartmentController extends Controller
   {
       try {
 
-        $departments = Department::all()
-          ->sortByDesc('name');
+        $departments = Department::orderByRaw('unaccent(lower(name))')->get();
 
         return view("pages.view-departments")
           ->with("departments", $departments);
