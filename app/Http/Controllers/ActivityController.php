@@ -408,4 +408,23 @@ class ActivityController extends Controller
               ->with('warning', 'Error al generar el reporte.');
       }
     }
+
+    public function downloadExport(){
+      return 'Exportacion';
+    }
+
+    public function downloadKeysBook(){
+      return 'Libro de folios';
+    }
+
+    public function downloadGeneralRecord(Request $req){
+      $req->ruta = 'Reporte general';
+      return $req;
+    }
+
+    public function downloadSuggestionsRecord(Request $req){
+      $req->ruta = 'Reporte sugerencias';
+      return $req;
+    }
+
   }

@@ -62,6 +62,11 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('actividades/descargar/publicidad/{activity_id}','ActivityController@downloadPromo')->name('download.activity-promo');
   Route::post('actividades/descargar/constancias/{activity_id}','ActivityController@downloadCertificates')->name('download.activity-certificates');
   Route::post('actividades/descargar/reconocimientos/{activity_id}','ActivityController@downloadRecognitions')->name('download.activity-recognitions');
+  Route::get('actividades/descargar/exportacion','ActivityController@downloadExport')->name('download.activities-export');
+  Route::get('actividades/descargar/libro-de-folios','ActivityController@downloadKeysBook')->name('download.activities-keys-book');
+  Route::get('actividades/descargar/reporte-general','ActivityController@downloadGeneralRecord')->name('download.activities-general-record');
+  Route::get('actividades/descargar/reporte-sugerencias','ActivityController@downloadSuggestionsRecord')->name('download.activities-suggestions-record');
+
   
   //Route Activity Evaluation
   Route::get('evaluacion-actividad/ver/{participant_id}', 'ActivityEvaluationController@index')->name('view.activity-evaluation');

@@ -1,3 +1,15 @@
+function selectGeneralRecordRouteActivityDocs(){
+  let docsForm = document.getElementById('docsForm')
+  let generalRecordRoute = document.getElementById('generalRecordRoute')
+  docsForm.action = generalRecordRoute.name
+}
+
+function selectSuggestionsRecordRouteActivityDocs(){
+  let docsForm = document.getElementById('docsForm')
+  let suggetionsRecordRoute = document.getElementById('suggetionsRecordRoute')
+  docsForm.action = suggetionsRecordRoute.name
+}
+
 function updateCertificateCustomText() {
   let divCustomText = document.getElementById('div_custom_text');
   let select_text_opt = document.getElementById('text').value
