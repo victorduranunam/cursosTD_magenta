@@ -152,29 +152,5 @@
     <script src={!! asset('bootstrap/js/bootstrap.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.bundle.js') !!}></script>
     <script src={!! asset('js/app.js') !!}></script>
-    <script>
-        function openNav() {
-            document.getElementsByClassName("sidebar")[0].style.display='block';
-            document.getElementsByClassName("sidebar")[0].style.width = "100%";
-            document.getElementById("side-menu").style.display='block';
-            document.getElementById("side-menu").style.width = "100%";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
-
-            function closeNav() {
-            // document.getElementsByClassName("sidebar")[0].style.display='none';
-            document.getElementsByClassName("sidebar")[0].style.width = '25%';
-            // document.getElementById("side-menu").style.display='none';
-            document.getElementById("side-menu").style.width = '100%';
-            document.getElementById("main").style.marginLeft= "0";
-            if (window.innerWidth >= 360 &&  window.innerWidth <= 414){
-                document.getElementsByClassName("sidebar")[0].style.display='none';
-                document.getElementsByClassName("sidebar")[0].style.width = '0';
-                document.getElementById("side-menu").style.display='none';
-                document.getElementById("side-menu").style.width = '0';
-                document.getElementById("main").style.marginLeft= "0";
-            }
-        }
-    </script>
 </body>
 </html>

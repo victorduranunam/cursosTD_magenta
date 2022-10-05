@@ -120,30 +120,4 @@
   </div>
 </div>
 
-<script>
-  viewRowDiploma();
-
-  function viewRowDiploma(){
-    const type = document.getElementById('type')
-    const btn = document.getElementById('btn_save')
-    console.log(type.value);
-    if(type.value === 'DI'){
-      if(document.getElementById('row_diploma_advice')){
-        diploma = document.getElementById('row_diploma_advice')
-        btn.style.visibility = 'hidden'
-      }
-      else if (document.getElementById('row_diploma_select')){
-        console.log('dentro');
-        diploma = document.getElementById('row_diploma_select')
-        btn.style.visibility = 'visible'
-      }
-      diploma.style.visibility = 'visible'
-    }
-    else{
-      btn.style.visibility = 'visible'
-      diploma.style.visibility = 'hidden'
-    }
-  }
-</script>
-
 @endsection

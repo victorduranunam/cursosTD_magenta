@@ -174,3 +174,50 @@ function updateCertificateSignatures() {
 
   }
 }
+
+function blockCreateDiv() {
+  document.getElementById('create-div').style.display = "block";
+}
+
+function openNav() {
+  document.getElementsByClassName("sidebar")[0].style.display='block';
+  document.getElementsByClassName("sidebar")[0].style.width = "100%";
+  document.getElementById("side-menu").style.display='block';
+  document.getElementById("side-menu").style.width = "100%";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+  function closeNav() {
+  // document.getElementsByClassName("sidebar")[0].style.display='none';
+  document.getElementsByClassName("sidebar")[0].style.width = '25%';
+  // document.getElementById("side-menu").style.display='none';
+  document.getElementById("side-menu").style.width = '100%';
+  document.getElementById("main").style.marginLeft= "0";
+  if (window.innerWidth >= 360 &&  window.innerWidth <= 414){
+      document.getElementsByClassName("sidebar")[0].style.display='none';
+      document.getElementsByClassName("sidebar")[0].style.width = '0';
+      document.getElementById("side-menu").style.display='none';
+      document.getElementById("side-menu").style.width = '0';
+      document.getElementById("main").style.marginLeft= "0";
+  }
+}
+
+function viewRowDiploma(){
+  const type = document.getElementById('type')
+  const btn = document.getElementById('btn_save')
+  if(type.value === 'DI'){
+    if(document.getElementById('row_diploma_advice')){
+      diploma = document.getElementById('row_diploma_advice')
+      btn.style.visibility = 'hidden'
+    }
+    else if (document.getElementById('row_diploma_select')){
+      diploma = document.getElementById('row_diploma_select')
+      btn.style.visibility = 'visible'
+    }
+    diploma.style.visibility = 'visible'
+  }
+  else{
+    btn.style.visibility = 'visible'
+    diploma.style.visibility = 'hidden'
+  }
+}

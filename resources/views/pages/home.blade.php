@@ -15,10 +15,10 @@
         <h5>¿Qué desea hacer?</h5>
         <div class="row" style="margin: 1%" style="margin: 1%">
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Dar de alta un curso</a>
+            <a href="{!! route('view.activities.catalogue') !!}" class="btn btn-outline-dark">Dar de alta una actividad</a>
           </div>
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Dar de alta módulo de diplomado</a>
+            <a href="{!! route('view.departments') !!}" class="btn btn-outline-dark">Ver coordinaciones</a>
           </div>
           <div class="col-4">
             <a href={!! route('create.professor') !!} class="btn btn-outline-dark">Dar de alta profesor</a>
@@ -43,7 +43,7 @@
             <a href={!! route('view.diplomas') !!} class="btn btn-outline-dark">Crear diplomado</a>
           </div>
           <div class="col-4">
-            <a href="" class="btn btn-outline-dark">Consultar Evaluaciones</a>
+            <a href="{!! route('view.administrators') !!}" class="btn btn-outline-dark">Consultar Administradores</a>
           </div>
         </div>
       </div>

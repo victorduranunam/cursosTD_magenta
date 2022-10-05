@@ -144,10 +144,4 @@
   </div>
 </div>
 
-<script>
-  function blockCreateDiv() {
-    document.getElementById('create-div').style.display = "block";
-  }
-</script>
-
 @endsection
