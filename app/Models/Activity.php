@@ -36,6 +36,12 @@ class Activity extends Model
       return $activity->name;
     }
 
+    public function getKey(){
+      $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
+                                  ->first();
+      return $activity->key;
+    }
+
     public function getType(){
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                   ->first();
@@ -83,5 +89,12 @@ class Activity extends Model
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                   ->first();
       return $activity->hours;
+    }
+
+    public function getVenueName(){
+      $venue = Venue::where('venue_id', $this->venue_id)
+                    ->first();
+      
+      return $venue->name;
     }
 }

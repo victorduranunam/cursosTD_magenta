@@ -418,8 +418,52 @@ class ActivityController extends Controller
     }
 
     public function downloadGeneralRecord(Request $req){
-      $req->ruta = 'Reporte general';
-      return $req;
+
+      try{
+        $activities = Activity::where('activity.type', $req->type_search)
+                               ->where('activity.num', $req->num_search)
+                               ->where('activity.year', $req->year_search)
+                               ->get();
+        
+        if($activities->isEmpty())
+          return redirect()
+              ->back()
+              ->with('danger', 'No se encontraron actividades en el periodo seleccionado.');
+
+        foreach($activities as $activity){
+          
+          $activity->instructors = $activity->getInstructors();
+          $activity->name        = $activity->getName();
+          $activity->key         = $activity->getKey();
+          $activity->venue       = $activity->getVenueName();
+          $activity->hours       = $activity->getHours();
+        }
+        
+        $pdf = PDF::loadView('docs.activities-general-record',
+          [
+            'activities' => $activities,
+            'year' => $req->year_search,
+            'num' => $req->num_search,
+            'type' => $req->type_search
+          ]
+          )->setPaper('letter');
+
+        return $pdf->download('Reporte_General_Actividades_'.$req->year_search.
+                                                             $req->num_search.
+                                                             $req->type_search.
+                                                             '.pdf');
+      } catch(\Illuminate\Database\QueryException $th){
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+            return dd($th);
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
+      }
+
     }
 
     public function downloadSuggestionsRecord(Request $req){
