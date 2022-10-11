@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\ActivityCatalogue;
+use App\Models\Department;
 use App\Models\Instructor;
 use App\Models\Participant;
 use App\Models\SeminarTopic;
 use App\Models\Venue;
+use App\Exports\DBExport;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use PDF;
 use ZipArchive;
+use App\Exports\KeysExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ActivityController extends Controller
 {
@@ -410,11 +415,11 @@ class ActivityController extends Controller
     }
 
     public function downloadExport(){
-      return 'Exportacion';
+      return Excel::download(new DBExport, 'exportacion_magestic.xlsx');
     }
 
     public function downloadKeysBook(){
-      return 'Libro de folios';
+      return Excel::download(new KeysExport, 'libro_folios.xlsx');
     }
 
     public function downloadGeneralRecord(Request $req){
@@ -432,7 +437,7 @@ class ActivityController extends Controller
 
         foreach($activities as $activity){
           
-          $activity->instructors = $activity->getInstructors();
+          $activity->instructors = $activity->getInstructorsName();
           $activity->name        = $activity->getName();
           $activity->key         = $activity->getKey();
           $activity->venue       = $activity->getVenueName();
@@ -467,8 +472,66 @@ class ActivityController extends Controller
     }
 
     public function downloadSuggestionsRecord(Request $req){
-      $req->ruta = 'Reporte sugerencias';
-      return $req;
+      try{
+
+        $departments = Department::all();
+
+        foreach($departments as $key_dept => $department){
+          $department->activities = Activity::join('activity_catalogue as ac', 'ac.activity_catalogue_id', '=', 'activity.activity_catalogue_id')
+                                            ->where('ac.department_id', $department->department_id)
+                                            ->where('activity.type', $req->type_search)
+                                            ->where('activity.num', $req->num_search)
+                                            ->where('activity.year', $req->year_search)
+                                            ->get();
+
+          foreach($department->activities as $key_act => $activity ){
+            $activity->suggestions = $activity->getParticipantsSuggestions();
+            if($activity->suggestions->isEmpty()){
+              $department->activities->pull($key_act);
+              continue;
+            }
+            $activity->name        = $activity->getName();
+          }
+
+          if($department->activities->isEmpty()){
+            $departments->pull($key_dept);
+            continue;
+          }
+          
+        }
+
+        if($departments->isEmpty())
+          return redirect()
+               ->back()
+               ->with('danger', 'No se encontraron actividades con sugerencias en el periodo seleccionado.');
+
+        
+        $pdf = PDF::loadView('docs.activities-suggestions-record',
+          [
+            'departments' => $departments,
+            'year' => $req->year_search,
+            'num' => $req->num_search,
+            'type' => $req->type_search
+          ]
+          )->setPaper('letter');
+
+        return $pdf->download('Reporte_Sugerencias_Actividades_'.
+                               $req->year_search.
+                               $req->num_search.
+                               $req->type_search.
+                               '.pdf');
+
+      } catch(\Illuminate\Database\QueryException $th){
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+            return dd($th);
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
+      }
     }
 
   }

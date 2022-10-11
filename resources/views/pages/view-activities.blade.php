@@ -98,7 +98,7 @@
           </div>
           {{-- Instructores de la actividad --}}
           <div class="col-xl-4">
-            {!! $activity->getInstructors() !!}
+            {!! $activity->getInstructorsName() !!}
           </div>
           {{-- Semestre de la actividad --}}
           <div class="col-xl-2">

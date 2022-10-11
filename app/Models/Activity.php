@@ -54,7 +54,7 @@ class Activity extends Model
       return str_replace(' ', '_',$activity->name);
   }
 
-    public function getInstructors(){
+    public function getInstructorsName(){
         $professors = Professor::join('instructor','instructor.professor_id','=','professor.professor_id')
                                 ->where('instructor.activity_id',$this->activity_id)
                                 ->get();
@@ -96,5 +96,41 @@ class Activity extends Model
                     ->first();
       
       return $venue->name;
+    }
+
+    public function getParticipantsSuggestions(){
+      $participants = Participant::join('activity_evaluation as ae', 
+                                        'ae.participant_id',
+                                        '=',
+                                        'participant.participant_id')
+                                 ->join('professor as p',
+                                        'p.professor_id',
+                                        '=',
+                                        'participant.professor_id')
+                                 ->where('activity_id', $this->activity_id)
+                                 ->whereNotNull('ae.question_6_2')
+                                 ->select('p.name', 'p.last_name', 
+                                          'p.mothers_last_name', 
+                                          'ae.question_6_2')
+                                 ->get();
+      return $participants;
+    }
+
+    public function getInstructors(){
+       return Professor::join('instructor','instructor.professor_id','=','professor.professor_id')
+                             ->where('instructor.activity_id',$this->activity_id)
+                             ->get()
+                             ->sortBy(function($value){
+                                return $value->last_name.$value->mothers_last_name.$value->name;
+                              }, SORT_NATURAL);
+    }
+
+    public function getParticipants(){
+      return Professor::join('participant','participant.professor_id','=','professor.professor_id')
+                      ->where('participant.activity_id',$this->activity_id)
+                      ->get()
+                      ->sortBy(function($value){
+                          return $value->last_name.$value->mothers_last_name.$value->name;
+                        }, SORT_NATURAL);
     }
 }
