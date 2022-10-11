@@ -62,7 +62,7 @@
                     
                     <li><a class="dropdown-item" href="{!! route('view.professor-divisions', $professor->professor_id) !!}">Divisiones</a></li>
                     <li><a class="dropdown-item" href="{!! route('view.professor-positions', $professor->professor_id) !!}">Puestos de Trabajo</a></li>
-                    <li><a class="dropdown-item" href="{!! route('generate.professor-record', $professor->professor_id) !!}">Historial</a></li>
+                    <li><a class="dropdown-item" href="{!! route('download.professor-record', $professor->professor_id) !!}">Historial</a></li>
                     <li><a class="dropdown-item" href={!! route('edit.professor', $professor->professor_id) !!}>Actualizar</a></li>
                     <li><a data-bs-toggle="modal" data-bs-target="#myModal{!! $professor->professor_id !!}" class="dropdown-item">Eliminar</a></li>
                 

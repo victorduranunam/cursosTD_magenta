@@ -57,6 +57,16 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('actividades/actualizar/{activity_id}','ActivityController@edit')->name('edit.activity');
   Route::put('actividades/guardar/{activity_id}','ActivityController@update')->name('update.activity');
   Route::delete('actividades/eliminar/{activity_id}','ActivityController@delete')->name('delete.activity');
+  Route::get('actividades/crear/constancias/{activity_id}','ActivityController@createCertificates')->name('create.activity-certificates');
+  Route::get('actividades/crear/reconocimientos/{activity_id}','ActivityController@createRecognitions')->name('create.activity-recognitions');
+  Route::get('actividades/descargar/publicidad/{activity_id}','ActivityController@downloadPromo')->name('download.activity-promo');
+  Route::post('actividades/descargar/constancias/{activity_id}','ActivityController@downloadCertificates')->name('download.activity-certificates');
+  Route::post('actividades/descargar/reconocimientos/{activity_id}','ActivityController@downloadRecognitions')->name('download.activity-recognitions');
+  Route::get('actividades/descargar/exportacion','ActivityController@downloadExport')->name('download.activities-export');
+  Route::get('actividades/descargar/libro-de-folios','ActivityController@downloadKeysBook')->name('download.activities-keys-book');
+  Route::get('actividades/descargar/reporte-general','ActivityController@downloadGeneralRecord')->name('download.activities-general-record');
+  Route::get('actividades/descargar/reporte-sugerencias','ActivityController@downloadSuggestionsRecord')->name('download.activities-suggestions-record');
+
   
   //Route Activity Evaluation
   Route::get('evaluacion-actividad/ver/{participant_id}', 'ActivityEvaluationController@index')->name('view.activity-evaluation');
@@ -122,7 +132,7 @@ Route::group( ['middleware' => 'guest'], function() {
   //Route Professor
   Route::get('profesores', "ProfessorController@index")->name("view.professors");
   Route::get('profesores/crear', "ProfessorController@create")->name("create.professor");
-  Route::get('profesor/generar/reporte-actividades/{professor_id}', "ProfessorController@generateRecord")->name("generate.professor-record");
+  Route::get('profesor/descargar/reporte-actividades/{professor_id}', "ProfessorController@downloadRecord")->name("download.professor-record");
   Route::post('profesores/almacenar', "ProfessorController@store")->name("store.professor");
   Route::get('profesores/actualizar/{professor_id}', "ProfessorController@edit")->name("edit.professor");
   Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->name('update.professor');

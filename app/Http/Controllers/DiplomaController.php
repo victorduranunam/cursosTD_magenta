@@ -10,7 +10,7 @@ class DiplomaController extends Controller
   public function index()
   {
     try {
-      $diplomas = Diploma::all();
+      $diplomas = Diploma::orderByRaw('unaccent(lower(name))')->get();
       return view("pages.view-diplomas")
         ->with("diplomas", $diplomas);
     } catch (\Illuminate\Database\QueryException $th) {

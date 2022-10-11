@@ -11,7 +11,7 @@ class AdministratorController extends Controller
   {
       try {
 
-        $administrators = Administrator::orderByRaw('last_name || mothers_last_name || name')
+        $administrators = Administrator::orderByRaw('unaccent(lower(last_name || mothers_last_name || name))')
           ->get();
 
         return view("pages.view-administrators")

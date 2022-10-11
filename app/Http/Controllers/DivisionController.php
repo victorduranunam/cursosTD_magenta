@@ -11,7 +11,7 @@ class DivisionController extends Controller
     public function index()
     {
         try {
-            $divisions = Division::all();
+            $divisions = Division::orderByRaw('unaccent(lower(name))')->get();
             return view("pages.view-divisions")
                 ->with("divisions",$divisions);
         } catch (\Illuminate\Database\QueryException $th) {

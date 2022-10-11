@@ -23,12 +23,15 @@ class ProfessorPositionController extends Controller
 
         $professor = Professor::findOrFail($professor_id);
 
-        $professor->positions = ProfessorPosition::where('professor_id', $professor_id)
-                                ->select('professor_position_id', 'work_position_id')
+        $professor->positions = ProfessorPosition::join('work_position', 'work_position.work_position_id', '=', 'professor_position.work_position_id')
+                                ->where('professor_id', $professor_id)
+                                ->select('professor_position_id', 'work_position.work_position_id', 'work_position.name')
+                                ->orderByRaw('unaccent(lower(work_position.name))')
                                 ->get();
 
         $positions = WorkPosition::whereNotIn('work_position_id',$professor->positions->map($callback))
-                              ->get();
+                                 ->orderByRaw('unaccent(lower(work_position.name))')
+                                 ->get();
 
         return view("pages.view-professor-positions")
             ->with("positions",$positions)

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
 
-  <title>Magestic | Capacitación Docente</title>
+  <title>MAGESTIC | Capacitación Docente</title>
 </head>
 <body>
     <div class="wrap">
@@ -19,7 +19,7 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
-                    <a class="navbar-brand" href={!! route('home') !!}>Magestic</a>
+                    <a class="navbar-brand" href={!! route('home') !!}>MAGESTIC</a>
                     
                     <!-- User Dashboard -->
                     <div class="dropdown">
@@ -151,29 +151,6 @@
     <script src={!! asset ('/dist/jquery.fancybox.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.min.js') !!}></script>
     <script src={!! asset('bootstrap/js/bootstrap.bundle.js') !!}></script>
-    <script>
-        function openNav() {
-            document.getElementsByClassName("sidebar")[0].style.display='block';
-            document.getElementsByClassName("sidebar")[0].style.width = "100%";
-            document.getElementById("side-menu").style.display='block';
-            document.getElementById("side-menu").style.width = "100%";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
-
-            function closeNav() {
-            // document.getElementsByClassName("sidebar")[0].style.display='none';
-            document.getElementsByClassName("sidebar")[0].style.width = '25%';
-            // document.getElementById("side-menu").style.display='none';
-            document.getElementById("side-menu").style.width = '100%';
-            document.getElementById("main").style.marginLeft= "0";
-            if (window.innerWidth >= 360 &&  window.innerWidth <= 414){
-                document.getElementsByClassName("sidebar")[0].style.display='none';
-                document.getElementsByClassName("sidebar")[0].style.width = '0';
-                document.getElementById("side-menu").style.display='none';
-                document.getElementById("side-menu").style.width = '0';
-                document.getElementById("main").style.marginLeft= "0";
-            }
-        }
-    </script>
+    <script src={!! asset('js/app.js') !!}></script>
 </body>
 </html>

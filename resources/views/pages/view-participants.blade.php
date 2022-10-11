@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-xl-6">
         <h5>Instructor(es):</h5>
-        <h6>{!! $activity->getProfessors() !!}</h6>
+        <h6>{!! $activity->getInstructorsName() !!}</h6>
       </div>
     </div>
     <div class="row justify-content-end">
