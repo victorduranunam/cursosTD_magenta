@@ -1,3 +1,8 @@
+function main(){
+  document.getElementById("type").onload = viewRowDiploma();
+}
+
+
 function selectGeneralRecordRouteActivityDocs(){
   let docsForm = document.getElementById('docsForm')
   let generalRecordRoute = document.getElementById('generalRecordRoute')

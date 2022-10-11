@@ -74,8 +74,8 @@ class ActivityController extends Controller
             $activity->year = $req->year;
             $activity->num = $req->num;
             $activity->type = $req->type;
-            $activity->start_date = $req->start_date;
-            $activity->end_date = $req->end_date;
+            $activity->start_time = $req->start_time;
+            $activity->end_time = $req->end_time;
             $activity->manual_date = $req->manual_date;
             $activity->days_week = implode('', $req->days_week);
             $activity->ctc = $req->ctc;
@@ -123,8 +123,8 @@ class ActivityController extends Controller
         $activity->year = $req->year;
         $activity->num = $req->num;
         $activity->type = $req->type;
-        $activity->start_date = $req->start_date;
-        $activity->end_date = $req->end_date;
+        $activity->start_time = $req->start_time;
+        $activity->end_time = $req->end_time;
         $activity->manual_date = $req->manual_date;
         $activity->days_week = implode('', $req->days_week);
         $activity->ctc = $req->ctc;

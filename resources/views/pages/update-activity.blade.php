@@ -44,12 +44,12 @@
               @endif
         </div>
         <div class="col-xl-3">
-          <label for="start_date" class="form-label">*Fecha de inicio:</label>
-          <input type="date" required class="form-control" name="start_date" id="start_date" value="{!! $activity->start_date !!}">
+          <label for="start_time" class="form-label">*Hora de inicio:</label>
+          <input type="time" required class="form-control" name="start_time" id="start_time" value="{!! $activity->start_time !!}">
         </div>
         <div class="col-xl-3">
-          <label for="end_date" class="form-label">*Fecha de fin:</label>
-          <input type="date" required class="form-control" name="end_date" id="end_date" value="{!! $activity->end_date !!}">
+          <label for="end_time" class="form-label">*Hora de fin:</label>
+          <input type="time" required class="form-control" name="end_time" id="end_time" value="{!! $activity->end_time !!}">
         </div>
       </div>
 

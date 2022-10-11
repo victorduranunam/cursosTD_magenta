@@ -12,7 +12,7 @@
 
   <title>MAGESTIC | Capacitación Docente</title>
 </head>
-<body>
+<body onload="main()">
     <div class="wrap">
         <!-- Header -->
         <div class="header">

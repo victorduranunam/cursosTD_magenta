@@ -16,7 +16,6 @@ class ActivityCatalogue extends Model
         'name', 
         'hours',
         'type', 
-        'institution', 
         'aimed_at', 
         'objective',
         'content', 

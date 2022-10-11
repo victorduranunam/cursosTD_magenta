@@ -34,12 +34,12 @@
           </select>
         </div>
         <div class="col-xl-3">
-          <label for="start_date" class="form-label">*Fecha de inicio:</label>
-          <input type="date" required class="form-control" name="start_date" id="start_date" value="{!! old('start_date') !!}">
+          <label for="start_time" class="form-label">*Hora de inicio:</label>
+          <input type="time" required class="form-control" name="start_time" id="start_time" value="{!! old('start_time') !!}">
         </div>
         <div class="col-xl-3">
-          <label for="end_date" class="form-label">*Fecha de fin:</label>
-          <input type="date" required class="form-control" name="end_date" id="end_date" value="{!! old('end_date') !!}">
+          <label for="end_time" class="form-label">*Hora de fin:</label>
+          <input type="time" required class="form-control" name="end_time" id="end_time" value="{!! old('end_time') !!}">
         </div>
       </div>
       <div class="row">
