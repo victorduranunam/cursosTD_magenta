@@ -5,65 +5,98 @@
     <title>Publicidad {!! $activity->catalogue->name !!} </title>
   </head>
 
+<style>
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url({!! public_path('img/logo-MAGESTIC.png') !!});
+  background-size:45%;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  border-bottom-right-radius: 15%;
+  opacity: 0.4;
+}
+
+#header{
+  width: 100%;
+  text-align:center;
+  line-height:10px;
+}
+th, td{
+  text-align: left;
+  vertical-align:top;
+}
+.instructor{
+  font-style: italic;
+}
+.rubros{
+  width: 150px;
+}
+.contenidos{
+  text-align: justify;
+}
+
+</style>
 
   <body>
-
     <div>
       <div id='header'>
-        <h1>MAGESTIC</h1>
-        <table>
-          <tr>
-            <th>{!! $activity->catalogue->getType() !!}: </th>
-            <th>{!! $activity->catalogue->name !!}</th>
-          </tr>
-        </table>
+        <h2>MAGESTIC</h2>
+        <h3>Facultad de Ingeniería</h3>
       </div>
-
       <div id="body">
+        <hr>
+          <table>
+            <tr>
+              <th>{!! $activity->catalogue->getType() !!}: </th>
+              <td>{!! $activity->catalogue->name !!}</td>
+            </tr>
+          </table>
+        <hr>
         <table>
           <tr>
-            <td class=rubros>Dirigido a:</td>
-            <td class=contenidos>{!! $activity->catalogue->aimed_at !!}</td>
+            <th class="rubros">Dirigido a:</th>
+            <td class="contenidos">{!! $activity->catalogue->aimed_at !!}</td>
           </tr>
           <tr>
-            <td class=rubros>Instructor(es):</td>
-            <td></td>
+            <th class="rubros">Instructor(es):</th>
+            <td> 
+              @foreach ($activity->instructors as $instructor)
+                <p class="instructor"> {!! $instructor->getName() !!}</p>
+                <p> {!! $instructor->getSemblance() !!}</p>
+              @endforeach
+            </td>
           </tr>
         </table>
         
-        @foreach ($activity->instructors as $instructor)
-          <p> {!! $instructor->getName() !!}</p>
-          <p> {!! $instructor->getSemblance() !!}</p>
-        @endforeach
         
         <table style="margin-top:10px">
           <tr>
-            <td class=rubros>Objetivo:</td>
-          <td class=contenidos>{!! $activity->catalogue->objective !!}</td>
+            <th class="rubros">Objetivo:</th>
+          <td class="contenidos">{!! $activity->catalogue->objective !!}</td>
           </tr>
           <tr>
-            <td id=rubro-temario>Contenido:</td>
+            <th id=rubro-temario>Contenido:</th>
             <td class=temario>{!! $activity->catalogue->content !!}</td>
           </tr>
           <tr>
-            <td class=rubros>Antecedentes:</td>
-            <td class=contenidos>{!! $activity->catalogue->background !!}</td>
+            <th class="rubros">Antecedentes:</th>
+            <td class="contenidos">{!! $activity->catalogue->background !!}</td>
           </tr>
           <tr>
-            <td class=rubros>Fecha: </td>
-            <td class=contenidos>{!! $activity->manual_date !!}</td>
+            <th class="rubros">Fecha: </th>
+            <td class="contenidos">{!! $activity->manual_date !!}</td>
           </tr>
           <tr>
-            <td class=rubros>Sede: </td>
-            <td class=contenidos>{!! $activity->venue->name !!}</td>
+            <th class="rubros">Sede: </th>
+            <td class="contenidos">{!! $activity->venue->name !!}</td>
           </tr>
           <tr>
-            <td class=rubros>Duración: </td>
-            <td class=contenidos>{!! $activity->catalogue->hours !!} h</td>
+            <th class="rubros">Duración: </th>
+            <td class="contenidos">{!! $activity->catalogue->hours !!} h</td>
           </tr>
           <tr>
-            <td class=rubros>Costo:</td>
-            <td class=contenidos>${!! $activity->cost !!}MXN</td> <!--Originalmente con "id=tipolower"-->
+            <th class="rubros">Costo:</th>
+            <td class="contenidos">${!! $activity->cost !!} MXN</td> <!--Originalmente con "id=tipolower"-->
           </tr>
         </table>
       </div>

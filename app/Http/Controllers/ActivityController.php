@@ -399,7 +399,6 @@ class ActivityController extends Controller
             'activity' => $activity
           ])
           ->setPaper('letter');
-
         return $pdf->download('Publicidad_'.$activity->catalogue->name.'.pdf');
 
       } catch(\Illuminate\Database\QueryException $th) {
