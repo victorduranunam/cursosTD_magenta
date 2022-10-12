@@ -6,6 +6,10 @@
   </head>
 
 <style>
+html{
+	width:100%;
+  height: 100%;
+}
 body{
   font-family: Arial, Helvetica, sans-serif;
   background-image: url({!! public_path('img/logo-MAGESTIC.png') !!});

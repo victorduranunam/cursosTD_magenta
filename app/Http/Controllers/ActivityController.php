@@ -450,7 +450,7 @@ class ActivityController extends Controller
             'num' => $req->num_search,
             'type' => $req->type_search
           ]
-          )->setPaper('letter');
+          )->setPaper('letter','landscape');
 
         return $pdf->download('Reporte_General_Actividades_'.$req->year_search.
                                                              $req->num_search.
