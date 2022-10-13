@@ -36,6 +36,14 @@ class Activity extends Model
       return $activity->name;
     }
 
+    public function getDepartmentName(){
+      $activity = ActivityCatalogue::join('department as d', 'd.department_id', '=', 'activity_catalogue.department_id')
+                                  ->where('activity_catalogue_id',$this->activity_catalogue_id)
+                                  ->select('d.name as department_name')
+                                  ->first();
+      return $activity->department_name;
+    }
+
     public function getKey(){
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                   ->first();
