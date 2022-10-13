@@ -41,13 +41,6 @@
           </select>
         </div>
         <div class="col-xl-2">
-          <label for="institution" class='form-label'>Institución:</label>
-          <select name="institution" id="institution0" class="form-select">
-            <option {!! old('institution') == 'DGAPA' ? "selected" : "" !!} value="DGAPA">DGAPA</option>
-            <option {!! old('institution') == 'CDD' ? "selected" : "" !!} value="CDD">CDD</option>
-          </select>
-        </div>
-        <div class="col-xl-2">
           <label for="creation_date" class="form-label">*Fecha de creación:</label>
           <input type="date" class="form-control" required name="creation_date" 
             id="creation_date" placeholder="22/07/22" 
