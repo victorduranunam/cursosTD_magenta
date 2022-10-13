@@ -221,7 +221,7 @@
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_1_5" value="100"  {!! $activity_evaluation->p1_5 == '100' ? 'checked' : ''  !!}  class="form-check-input" id="question_1_5">
+                  <input type="radio" name="question_1_5" value="100"  {!! $activity_evaluation->question_1_5 == '100' ? 'checked' : ''  !!}  class="form-check-input" id="question_1_5">
                 </div>
               </td>
             </tr>
