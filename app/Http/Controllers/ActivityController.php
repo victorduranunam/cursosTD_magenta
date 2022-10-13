@@ -489,7 +489,7 @@ class ActivityController extends Controller
               $department->activities->pull($key_act);
               continue;
             }
-            $activity->name        = $activity->getName();
+            $activity->name = $activity->getName();
           }
 
           if($department->activities->isEmpty()){
@@ -526,11 +526,127 @@ class ActivityController extends Controller
               ->route('home')
               ->with('danger', 'No hay conexión con la base de datos.');
           else
-            return dd($th);
             return redirect()
               ->back()
               ->with('warning', 'Error al generar el reporte.');
       }
     }
+
+    public function downloadIdentifiers($activity_id){
+      
+      try {
+
+        $activity = Activity::findOrFail($activity_id);
+        $activity->participants = $activity->getParticipantsNames();
+        $activity->name = $activity->getName();
+
+        if($activity->participants->isEmpty())
+          return redirect()
+               ->back()
+               ->with('danger', 'No hay participantes inscritos en la actividad. Primero inscriba algunos');
+
+        $pdf = PDF::loadView('docs.activity-identifiers',
+          [
+            'participants' => $activity->participants,
+            'manual_date' => $activity->manual_date,
+            'activity_name' => $activity->name
+          ]
+          )->setPaper('letter');
+
+        return $pdf->download('Identificadores_'.$activity->getFileName().'.pdf');
+
+
+      } catch(\Illuminate\Database\QueryException $th){
+
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
+      }
+    }
+    public function downloadVerifyDataSheet($activity_id){
+
+      try {
+
+        $activity = Activity::findOrFail($activity_id);
+        $activity->participants = $activity->getParticipants();
+        $activity->name = $activity->getName();
+
+        if($activity->participants->isEmpty())
+          return redirect()
+               ->back()
+               ->with('danger', 'No hay participantes inscritos en la actividad. Primero inscriba algunos');
+
+        $pdf = PDF::loadView('docs.activity-verify-data',
+          [
+            'participants' => $activity->participants,
+            'manual_date' => $activity->manual_date,
+            'activity_name' => $activity->name
+          ]
+          )->setPaper('letter');
+
+        return $pdf->download('Verificacion_Datos_'.$activity->getFileName().'.pdf');
+
+
+      } catch(\Illuminate\Database\QueryException $th){
+
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
+      }
+    }
+
+    public function downloadAttendanceSheet($activity_id){
+      try {
+
+        $activity = Activity::findOrFail($activity_id);
+        $activity->participants = $activity->getParticipantsNames();
+        $activity->name = $activity->getName();
+        $activity->department_name = $activity->getDepartmentName();
+        $activity->venue_name = $activity->getVenueName();
+        $activity->instructors_name = $activity->getInstructorsName();
+
+
+        if($activity->participants->isEmpty())
+          return redirect()
+               ->back()
+               ->with('danger', 'No hay participantes inscritos en la actividad. Primero inscriba algunos');
+
+        $pdf = PDF::loadView('docs.activity-attendance',
+          [
+            'participants' => $activity->participants,
+            'activity_name' => $activity->name,
+            'department_name' => $activity->department_name,
+            'venue_name' => $activity->venue_name,
+            'instructors_name' => $activity->instructors_name,
+            'manual_date' => $activity->manual_date
+          ]
+          )->setPaper('landscape');
+
+        return $pdf->download('Hoja_Asistencia_'.$activity->getFileName().'.pdf');
+
+
+      } catch(\Illuminate\Database\QueryException $th){
+
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+          return dd($th);
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
+      }
+  }
 
   }

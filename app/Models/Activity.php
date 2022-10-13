@@ -36,6 +36,14 @@ class Activity extends Model
       return $activity->name;
     }
 
+    public function getDepartmentName(){
+      $activity = ActivityCatalogue::join('department as d', 'd.department_id', '=', 'activity_catalogue.department_id')
+                                  ->where('activity_catalogue_id',$this->activity_catalogue_id)
+                                  ->select('d.name as department_name')
+                                  ->first();
+      return $activity->department_name;
+    }
+
     public function getKey(){
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                   ->first();
@@ -132,5 +140,13 @@ class Activity extends Model
                       ->sortBy(function($value){
                           return $value->last_name.$value->mothers_last_name.$value->name;
                         }, SORT_NATURAL);
+    }
+
+    public function getParticipantsNames(){
+      return Professor::join('participant','participant.professor_id','=','professor.professor_id')
+                      ->where('participant.activity_id',$this->activity_id)
+                      ->select('professor.name')
+                      ->get()
+                      ->sortBy('name', SORT_NATURAL);
     }
 }
