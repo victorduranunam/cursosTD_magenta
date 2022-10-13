@@ -61,8 +61,6 @@ class ActivityCatalogueController extends Controller
       $activity_cat->creation_date = $req->creation_date;
       $activity_cat->department_id = $req->department_id;
       
-      if($req->institution)
-        $activity_cat->institution = $req->institution;
       if($req->aimed_at)
         $activity_cat->aimed_at = $req->aimed_at;
       if($req->objective)
@@ -118,8 +116,16 @@ class ActivityCatalogueController extends Controller
       
       $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
 
+      $diplomas = Diploma::all()
+                         ->sortBy('name');
+
+      $departments = Department::all()
+                               ->sortBy('name');
+
       return view("pages.update-activity-catalogue")
-        ->with("activity_cat", $activity_cat);
+        ->with("activity_cat", $activity_cat)
+        ->with('diplomas', $diplomas)
+        ->with('departments', $departments);
 
     } catch (\Illuminate\Database\QueryException $th) {
       
@@ -138,35 +144,44 @@ class ActivityCatalogueController extends Controller
   {
     
     try {
-     
+
       $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
-      
+
       $activity_cat->key = $req->key;
       $activity_cat->name = $req->name;
       $activity_cat->hours = $req->hours;
       $activity_cat->type = $req->type;
       $activity_cat->creation_date = $req->creation_date;
       $activity_cat->department_id = $req->department_id;
-      $activity_cat->institution = $req->institution;
-      $activity_cat->aimed_at = $req->aimed_at;
-      $activity_cat->objective = $req->objective;
-      $activity_cat->content = $req->content;
-      $activity_cat->background = $req->background;
       
+      if($req->aimed_at)
+        $activity_cat->aimed_at = $req->aimed_at;
+      if($req->objective)
+        $activity_cat->objective = $req->objective;
+      if($req->content)
+        $activity_cat->content = $req->content;
+      if($req->background)
+        $activity_cat->background = $req->background;
+
       if($req->type === 'DI'){
         if(!$req->module OR !$req->diploma_id)
           return redirect()
             ->back()
             ->with('warning', 'Error al almacenar, verifique haber ingresado el número de módulo y el diplomado asociado.')
             ->withInput();
-        $activity_cat->module = $req->module;
+        if(ActivityCatalogue::where('module', $req->module)
+                            ->where('diploma_id', $req->diploma_id)
+                            ->where('activity_catalogue_id', '<>', $activity_cat->activity_catalogue_id)
+                            ->get()
+                            ->isNotEmpty())
+          return redirect()
+            ->back()
+            ->with('warning', 'Error al almacenar, el número de módulo no debe repetirse para el mismo diplomado.')
+            ->withInput();
         $activity_cat->diploma_id = $req->diploma_id;
+        $activity_cat->module = $req->module;
       }
-      else {
-        $activity_cat->module = NULL;
-        $activity_cat->diploma_id = NULL;
-      }
-
+      
       $activity_cat->save();
 
       return redirect()

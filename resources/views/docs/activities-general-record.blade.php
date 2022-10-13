@@ -32,7 +32,7 @@
               <td>{!! $activity->key !!}</td>
               <td>{!! $activity->name !!}</td>
               <td>{!! $activity->instructors !!}</td>
-              <td>{!! $activity->start_date !!}</td>
+              <td>{!! $activity->start_time !!}</td>
               <td>{!! $activity->manual_date !!}</td>
               <td>{!! $activity->hours !!}</td>
               <td>{!! $activity->venue !!}</td>
@@ -44,7 +44,7 @@
               <td></td>
               <td></td>
               <td></td>
-              <td>{!! $activity->end_date !!}</td>
+              <td>{!! $activity->end_time !!}</td>
               <td></td>
               <td></td>
               <td></td>
