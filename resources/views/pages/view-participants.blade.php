@@ -18,9 +18,29 @@
       </div>
     </div>
     <div class="row justify-content-end">
+
+      {{-- Inscribe Button --}}
       <div class="col-xl-2">
         <a class="btn btn-outline-success" href={!! route('create.participant', $activity->activity_id) !!}>Inscribir</a>
       </div>
+
+      {{-- Generate docs --}}
+      <div class="col-xl-2" style='width: auto'>
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            Formatos
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+            <li><a class="dropdown-item" href={!! route('download.activities-verify-data-sheet', $activity->activity_id) !!}>Verificación de Datos</a></li>
+            <li><a class="dropdown-item" href={!! route('download.activities-identifiers', $activity->activity_id) !!}>Identificadores</a></li>
+            <li><a class="dropdown-item" href={!! route('download.activities-attendance-sheet', $activity->activity_id) !!}>Hoja de asistencia</a></li>
+            <li><a class="dropdown-item" href={!! route('create.activity-certificates', $activity->activity_id) !!}>Constancias</a></li>
+            <li><a class="dropdown-item" href={!! route('create.activity-recognitions', $activity->activity_id) !!}>Reconocimientos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {{-- Return Button --}}
       <div class="col-xl-2">
         <a href={!! route('view.activities') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
@@ -65,7 +85,7 @@
           <div class="col-xl-2">
             <div class="dropdown">
               <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Opciones
+                Evaluaciones
               </button>
               <form method="POST" action="{!! route('delete.participant', $participant->participant_id) !!}">
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

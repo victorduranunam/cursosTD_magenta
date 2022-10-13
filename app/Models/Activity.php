@@ -133,4 +133,12 @@ class Activity extends Model
                           return $value->last_name.$value->mothers_last_name.$value->name;
                         }, SORT_NATURAL);
     }
+
+    public function getParticipantsNames(){
+      return Professor::join('participant','participant.professor_id','=','professor.professor_id')
+                      ->where('participant.activity_id',$this->activity_id)
+                      ->select('professor.name')
+                      ->get()
+                      ->sortBy('name', SORT_NATURAL);
+    }
 }

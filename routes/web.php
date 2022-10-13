@@ -62,6 +62,9 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('actividades/descargar/publicidad/{activity_id}','ActivityController@downloadPromo')->name('download.activity-promo');
   Route::post('actividades/descargar/constancias/{activity_id}','ActivityController@downloadCertificates')->name('download.activity-certificates');
   Route::post('actividades/descargar/reconocimientos/{activity_id}','ActivityController@downloadRecognitions')->name('download.activity-recognitions');
+  Route::get('actividades/descargar/verificacion-datos/{activity_id}', "ActivityController@downloadVerifyDataSheet")->name('download.activities-verify-data-sheet');
+  Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->name('download.activities-identifiers');
+  Route::get('actividades/descargar/hoja-asistencia/{activity_id}', "ActivityController@downloadAttendanceSheet")->name('download.activities-attendance-sheet');
   Route::get('actividades/descargar/exportacion','ActivityController@downloadExport')->name('download.activities-export');
   Route::get('actividades/descargar/libro-de-folios','ActivityController@downloadKeysBook')->name('download.activities-keys-book');
   Route::get('actividades/descargar/reporte-general','ActivityController@downloadGeneralRecord')->name('download.activities-general-record');
@@ -128,6 +131,7 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->name('edit.participant');
   Route::put('participantes/guardar/{participant_id}', "ParticipantController@update")->name('update.participant');
   Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@delete")->name("delete.participant");
+  
   
   //Route Professor
   Route::get('profesores', "ProfessorController@index")->name("view.professors");

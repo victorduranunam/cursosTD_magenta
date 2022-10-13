@@ -526,11 +526,57 @@ class ActivityController extends Controller
               ->route('home')
               ->with('danger', 'No hay conexión con la base de datos.');
           else
-            return dd($th);
             return redirect()
               ->back()
               ->with('warning', 'Error al generar el reporte.');
       }
     }
+
+    public function downloadIdentifiers($activity_id){
+      
+      try {
+
+        $activity = Activity::findOrFail($activity_id);
+        $activity->participants = $activity->getParticipantsNames();
+        $activity->name = $activity->getName();
+
+        if($activity->participants->isEmpty())
+          return redirect()
+               ->back()
+               ->with('danger', 'No hay participantes inscritos en la actividad. Primero inscriba algunos');
+
+        $pdf = PDF::loadView('docs.activity-identifiers',
+          [
+            'participants' => $activity->participants,
+            'manual_date' => $activity->manual_date,
+            'activity_name' => $activity->name
+          ]
+          )->setPaper('letter');
+
+        return $pdf->download('Identificadores_'.$activity->getFileName().'.pdf');
+
+
+      } catch(\Illuminate\Database\QueryException $th){
+
+        if($th->getCode() == 7)
+            return redirect()
+              ->route('home')
+              ->with('danger', 'No hay conexión con la base de datos.');
+          else
+            return dd($th);
+            return redirect()
+              ->back()
+              ->with('warning', 'Error al generar el reporte.');
+      }
+      
+      return 'Identificadores';
+    }
+    public function downloadVerifyDataSheet($activity_id){
+        return 'Verificacion de datos';
+    }
+
+    public function downloadAttendanceSheet($activity_id){
+      return 'Hoja de asistencia';
+  }
 
   }
