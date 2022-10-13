@@ -7,48 +7,99 @@
     <title>Reporte General De Actividades {!! $year.$num.$type !!} </title>
   </head>
 
-
+<style>
+html{
+	width:100%;
+  height: 100%;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+#header{
+  width: 100%;
+  text-align:center;
+  line-height:10px;
+  display:inline-block;
+}
+.img-escudo{
+  width: 32%;
+}
+.mg{
+  width: 28%;
+  border-bottom-right-radius: 20%;
+  border-bottom-left-radius: 20%;
+}
+.left-header,.right-header{
+  width: 30%;
+  position:relative;
+}
+.right-header{
+  float:right;
+}
+.center-header{
+  width:100%;
+  align:center;
+  line-height:5px;
+}
+th, td{
+  vertical-align:top;
+  border-bottom: 5pt solid white;
+  border-left: 3pt solid white;
+  font-size: 13px;
+}
+.rubro{
+  text-align: left;
+  width:auto;
+}
+.contenido{
+  text-align:center;
+  width:auto;
+}
+</style>
   <body>
 
     <div>
       <div id='header'>
-        <h1>MAGESTIC</h1>
-        <h2>Reporte General De Actividades</h2>
-        <h3>{!! $year.$num.$type !!}</h3>
+
+        <div class="left-header">
+          <img class="img-escudo mg" src={!! public_path('img/logo-MAGESTIC.png') !!} align=left>
+        </div>
+
+        <div class="right-header">
+          <img class="img-escudo" src={!! public_path('img/escudo_fi_color.png') !!} align=right>
+        </div>
+
+        <div class="center-header">
+          <h2>MAGESTIC</h2>
+          <h3>Facultad de Ingeniería</h3>
+          <h3>Reporte General de Actividades</h3> 
+          <h3>{!! $year.'-'.$num.$type !!}</h3>
+        </div>
+        <hr>
       </div>
-      
+
       <div id="body">
         <table>
           <tr>
-            <th>Clave</th>
-            <th>Nombre de la actividad</th>
-            <th>Instructor(es)</th>
-            <th colspan="2">Fechas</th>
-            <th>Horas</th>
-            <th>Cupo</th>
+            <th class="rubro">Clave</th>
+            <th class="rubro">Nombre de la actividad</th>
+            <th class="rubro">Instructor(es)</th>
+            <th class="contenido">Horas</th>
+            <th class="rubro">Horario</th>
+            <th class="rubro">Fechas</th>
+            <th class="rubro">Sede</th>
+            <th class="contenido">Cupo</th>
           </tr>
           @foreach($activities as $activity)
             <tr>
               <td>{!! $activity->key !!}</td>
               <td>{!! $activity->name !!}</td>
               <td>{!! $activity->instructors !!}</td>
-              <td>{!! $activity->start_time !!}</td>
+              <td class="contenido">{!! $activity->hours !!}</td>
+              <td>{!! $activity->start_time !!}-{!! $activity->end_time !!}</td>
               <td>{!! $activity->manual_date !!}</td>
-              <td>{!! $activity->hours !!}</td>
               <td>{!! $activity->venue !!}</td>
-              <td>{!! $activity->max_quota !!}</td>
-
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{!! $activity->end_time !!}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>{!! $activity->min_quota !!}</td>
+              <td class="contenido">{!! $activity->min_quota !!}-{!! $activity->max_quota !!}</td>
             </tr>
           @endforeach
         </table>

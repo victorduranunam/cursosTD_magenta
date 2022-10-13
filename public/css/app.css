@@ -310,6 +310,8 @@
 
 .img-escudo{
   width: 5%;
+  border-bottom-right-radius: 20%;
+  border-bottom-left-radius: 20%;
 }
 .logos{
   font-size: 20px;
