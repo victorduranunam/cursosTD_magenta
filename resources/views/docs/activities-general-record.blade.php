@@ -85,7 +85,7 @@ th, td{
             <th class="rubro">Nombre de la actividad</th>
             <th class="rubro">Instructor(es)</th>
             <th class="contenido">Horas</th>
-            <th class="rubro">Horario</th>
+            <th class="contenido">Horario</th>
             <th class="rubro">Fechas</th>
             <th class="rubro">Sede</th>
             <th class="contenido">Cupo</th>
@@ -96,7 +96,7 @@ th, td{
               <td>{!! $activity->name !!}</td>
               <td>{!! $activity->instructors !!}</td>
               <td class="contenido">{!! $activity->hours !!}</td>
-              <td>{!! $activity->start_time !!} - {!! $activity->end_time !!}</td>
+              <td class="contenido">{!! date('H:i',strtotime($activity->start_time)) !!}-{!! date('H:i',strtotime($activity->end_time)) !!}</td>
               <td>{!! $activity->manual_date !!}</td>
               <td>{!! $activity->venue !!}</td>
               <td class="contenido">{!! $activity->min_quota !!}-{!! $activity->max_quota !!}</td>
