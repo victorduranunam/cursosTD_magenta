@@ -96,10 +96,10 @@ th, td{
               <td>{!! $activity->name !!}</td>
               <td>{!! $activity->instructors !!}</td>
               <td class="contenido">{!! $activity->hours !!}</td>
-              <td>{!! $activity->start_time !!}-{!! $activity->end_time !!}</td>
+              <td>{!! $activity->start_time !!} - {!! $activity->end_time !!}</td>
               <td>{!! $activity->manual_date !!}</td>
               <td>{!! $activity->venue !!}</td>
-              <td class="contenido">{!! $activity->min_quota !!}-{!! $activity->max_quota !!}</td>
+              <td class="contenido">{!! $activity->min_quota !!} - {!! $activity->max_quota !!}</td>
             </tr>
           @endforeach
         </table>
