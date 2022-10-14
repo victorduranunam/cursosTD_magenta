@@ -2,17 +2,43 @@ function main(){
   document.getElementById("type").onload = viewRowDiploma();
 }
 
-
-function selectGeneralRecordRouteActivityDocs(){
+function selectAccepatanceCriteriaReportRouteDepartmentDocs(department_id){
   let docsForm = document.getElementById('docsForm')
-  let generalRecordRoute = document.getElementById('generalRecordRoute')
-  docsForm.action = generalRecordRoute.name
+  let generalReportRoute = document.getElementById('departmentAccepatanceCriteriaReportRoute'+department_id)
+  let typeNumSearch = document.getElementById('type_num_search')
+
+  typeNumSearch.style.display = "none";
+  docsForm.action = generalReportRoute.name
 }
 
-function selectSuggestionsRecordRouteActivityDocs(){
+function selectParticipantsReportRouteDepartmentDocs(department_id){
   let docsForm = document.getElementById('docsForm')
-  let suggetionsRecordRoute = document.getElementById('suggetionsRecordRoute')
-  docsForm.action = suggetionsRecordRoute.name
+  let generalReportRoute = document.getElementById('departmentParticipantsReportRoute'+department_id)
+  let typeNumSearch = document.getElementById('type_num_search')
+
+  typeNumSearch.style.display = "flex";
+  docsForm.action = generalReportRoute.name
+}
+
+function selectEvaluationReportRouteDepartmentDocs(department_id){
+  let docsForm = document.getElementById('docsForm')
+  let generalReportRoute = document.getElementById('departmentEvaluationReportRoute'+department_id)
+  let typeNumSearch = document.getElementById('type_num_search')
+
+  typeNumSearch.style.display = "flex";
+  docsForm.action = generalReportRoute.name
+}
+
+function selectGeneralReportRouteActivityDocs(){
+  let docsForm = document.getElementById('docsForm')
+  let generalReportRoute = document.getElementById('generalReportRoute')
+  docsForm.action = generalReportRoute.name
+}
+
+function selectSuggestionsReportRouteActivityDocs(){
+  let docsForm = document.getElementById('docsForm')
+  let suggetionsReportRoute = document.getElementById('suggetionsReportRoute')
+  docsForm.action = suggetionsReportRoute.name
 }
 
 function updateCertificateCustomText() {
@@ -204,7 +230,7 @@ function openNav() {
   document.getElementById("main").style.marginLeft = "250px";
 }
 
-  function closeNav() {
+function closeNav() {
   // document.getElementsByClassName("sidebar")[0].style.display='none';
   document.getElementsByClassName("sidebar")[0].style.width = '25%';
   // document.getElementById("side-menu").style.display='none';

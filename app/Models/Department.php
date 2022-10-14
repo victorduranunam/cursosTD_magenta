@@ -18,4 +18,9 @@ class Department extends Model
     ];
     protected $primaryKey = 'department_id';
     public $timestamps = false;
+
+    public function getFileName(){
+      $department = Department::findOrFail($this->department_id);
+      return str_replace(' ', '_',$department->name);
+    }
 }

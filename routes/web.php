@@ -67,8 +67,8 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('actividades/descargar/hoja-asistencia/{activity_id}', "ActivityController@downloadAttendanceSheet")->name('download.activities-attendance-sheet');
   Route::get('actividades/descargar/exportacion','ActivityController@downloadExport')->name('download.activities-export');
   Route::get('actividades/descargar/libro-de-folios','ActivityController@downloadKeysBook')->name('download.activities-keys-book');
-  Route::get('actividades/descargar/reporte-general','ActivityController@downloadGeneralRecord')->name('download.activities-general-record');
-  Route::get('actividades/descargar/reporte-sugerencias','ActivityController@downloadSuggestionsRecord')->name('download.activities-suggestions-record');
+  Route::get('actividades/descargar/reporte-general','ActivityController@downloadGeneralReport')->name('download.activities-general-record');
+  Route::get('actividades/descargar/reporte-sugerencias','ActivityController@downloadSuggestionsReport')->name('download.activities-suggestions-record');
 
   
   //Route Activity Evaluation
@@ -100,6 +100,9 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('coordinaciones/actualizar/{department_id}', "DepartmentController@edit")->name("edit.department");
   Route::put('coordinaciones/guardar/{department_id}', "DepartmentController@update")->name('update.department');
   Route::delete('coordinaciones/eliminar/{department_id}', "DepartmentController@delete")->name("delete.department");
+  Route::get('coordinaciones/descargar/reporte-criterio-aceptacion/{department_id}','DepartmentController@downloadAcceptanceCriteriaReport')->name('download.department-acceptance-criteria-report');
+  Route::get('coordinaciones/descargar/reporte-participantes/{department_id}','DepartmentController@downloadParticipantsReport')->name('download.department-participants-report');
+  Route::get('coordinaciones/descargar/reporte-evaluacion/{department_id}','DepartmentController@downloadEvaluationReport')->name('download.department-evaluation-report');
   
   //Route Diploma
   Route::get('diplomas', "DiplomaController@index")->name("view.diplomas");
