@@ -1,10 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
+use App\Models\Participant;
 use App\Models\Administrator;
 use Illuminate\Http\Request;
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
+use PDF;
+
 
 class DepartmentController extends Controller
 {
@@ -133,5 +137,74 @@ class DepartmentController extends Controller
           ->back()
           ->with('warning', 'Error al eliminar la coordinación.');
     }
+  }
+
+  public function downloadAcceptanceCriteriaReport(Request $req, $department_id){
+    return 'Criteria';
+  }
+
+  public function downloadParticipantsReport(Request $req, $department_id){
+    $period = $req->year_search.'-'.$req->num_search.$req->type_search;
+    $department = Department::findOrFail($department_id);
+    $activities = Activity::join('activity_catalogue as ac', 
+                                 'ac.activity_catalogue_id', 
+                                 '=', 
+                                 'activity.activity_catalogue_id')
+                          ->where('activity.year', $req->year_search)
+                          ->where('activity.num', $req->num_search)
+                          ->where('activity.type', $req->type_search)
+                          ->where('ac.department_id', $department_id)
+                          ->select('activity.activity_id', 
+                                   'activity.max_quota', 
+                                   'activity.activity_catalogue_id')
+                          ->get();
+    if($activities->isEmpty())
+      return redirect()
+           ->back()
+           ->with('warning', 'La coordinación elegida no cuenta con cursos en el periodo ingresado.');
+           
+    foreach($activities as $activity){
+
+      $activity->name = $activity->getName();
+
+      $participants = Participant::where('activity_id', $activity->activity_id)
+                                  ->select('participant_id', 'additional', 'mistimed')
+                                  ->get();
+
+      $activity->total_participants = $participants->count();
+
+      $mistimed = $participants->countBy(function ($activity){
+          return $activity->mistimed ? 'true' : 'false';
+      });
+      $activity->mistimed_participants = empty($mistimed['true']) 
+                                       ? 0 
+                                       : $mistimed['true'];
+
+      $additional = $participants->countBy(function ($activity){
+        return $activity->additional ? 'true' : 'false';
+      });
+
+      $activity->additional_participants = empty($additional['true'])
+                                         ? 0
+                                         : $additional['true'];
+
+      $activity->average = $activity->total_participants
+                         ? $activity->total_participants / $activity->max_quota * 100
+                         : 'No calculable';
+    }
+
+    $pdf = PDF::loadView('docs.department-participants-report',
+          [
+            'activities' => $activities,
+            'period' => $period,
+            'department' => $department->name
+          ]
+          )->setPaper('letter');
+
+    return $pdf->download('Reporte_Criterio_Aceptacion_'.$department->getFileName().'.pdf');
+  }
+
+  public function downloadEvaluationReport(Request $req, $department_id){
+    return 'Evaluacion';
   }
 }

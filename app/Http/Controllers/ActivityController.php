@@ -421,7 +421,7 @@ class ActivityController extends Controller
       return Excel::download(new KeysExport, 'libro_folios.xlsx');
     }
 
-    public function downloadGeneralRecord(Request $req){
+    public function downloadGeneralReport(Request $req){
 
       try{
         $activities = Activity::where('activity.type', $req->type_search)
@@ -470,7 +470,7 @@ class ActivityController extends Controller
 
     }
 
-    public function downloadSuggestionsRecord(Request $req){
+    public function downloadSuggestionsReport(Request $req){
       try{
 
         $departments = Department::all();
