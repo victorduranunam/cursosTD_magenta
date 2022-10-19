@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\ActivityEvaluation;
 use App\Models\Participant;
 use App\Models\Administrator;
 use Illuminate\Http\Request;
@@ -138,9 +139,29 @@ class DepartmentController extends Controller
           ->with('warning', 'Error al eliminar la coordinación.');
     }
   }
-
+//TODO::evaluaciones 1s,1i,2s,2i.
   public function downloadAcceptanceCriteriaReport(Request $req, $department_id){
-    return 'Criteria';
+    $department = Department::findOrFail($department_id);
+    $department->evaluations = ActivityEvaluation::join('participant as p',
+                                             'p.participant_id',
+                                             '=',
+                                             'activity_evaluation.participant_id')
+                                      ->join('activity as a',
+                                             'a.activity_id',
+                                             '=',
+                                             'p.participant_id')
+                                      ->join('activity_catalogue as ac', 
+                                            'ac.activity_catalogue_id', 
+                                            '=', 
+                                            'a.activity_catalogue_id')
+                                      ->where('a.year', $req->year_search)
+                                      ->where('ac.department_id', $department_id)
+                                      ->select('a.activity_id', 
+                                              'a.activity_catalogue_id',
+                                              'activity_evaluation.*')
+                                      ->get();
+    
+    return $department;
   }
 
   public function downloadParticipantsReport(Request $req, $department_id){
