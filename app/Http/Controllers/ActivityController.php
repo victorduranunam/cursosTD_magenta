@@ -609,13 +609,13 @@ class ActivityController extends Controller
       try {
 
         $activity = Activity::findOrFail($activity_id);
-        $activity->participants = $activity->getParticipantsNames();
+        $activity->participants = $activity->getParticipants();
         $activity->name = $activity->getName();
         $activity->department_name = $activity->getDepartmentName();
         $activity->venue_name = $activity->getVenueName();
         $activity->instructors_name = $activity->getInstructorsName();
 
-
+       
         if($activity->participants->isEmpty())
           return redirect()
                ->back()
@@ -630,7 +630,7 @@ class ActivityController extends Controller
             'instructors_name' => $activity->instructors_name,
             'manual_date' => $activity->manual_date
           ]
-          )->setPaper('landscape');
+          )->setPaper('a4','landscape');
 
         return $pdf->download('Hoja_Asistencia_'.$activity->getFileName().'.pdf');
 
