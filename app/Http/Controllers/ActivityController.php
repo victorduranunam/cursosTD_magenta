@@ -68,7 +68,22 @@ class ActivityController extends Controller
 
     public function store(Request $req){
         try{
-          // 
+          
+          // Verify if doesn't exist another modules 
+          // for the same year and catalogue
+          if(ActivityCatalogue::findOrFail($req->activity_catalogue_id)->type === 'DI'){
+
+            if(Activity::where('year', $req->year)
+                       ->where('activity_catalogue_id', $req->activity_catalogue_id)
+                       ->get()
+                       ->isNotEmpty())
+              return redirect()
+                   ->back()
+                   ->with('warning', 'No es posible programar un módulo de '
+                                    .'diplomado ya programado para el mismo año');
+          }
+
+          // Store the activity
             $activity = new Activity(); 
             $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
             $activity->year = $req->year;
@@ -85,6 +100,7 @@ class ActivityController extends Controller
             $activity->activity_catalogue_id = $req->activity_catalogue_id;
             $activity->venue_id = $req->venue_id;
             $activity->save();
+            
             return redirect()
                 ->route('view.activities')
                 ->with('success', 'Actividad creada correctamente');
@@ -118,8 +134,8 @@ class ActivityController extends Controller
 
     public function update(Request $req, $activity_id){
       try{
-        $activity = Activity::findOrFail($activity_id);
 
+        $activity = Activity::findOrFail($activity_id);
         $activity->year = $req->year;
         $activity->num = $req->num;
         $activity->type = $req->type;
@@ -133,6 +149,7 @@ class ActivityController extends Controller
         $activity->min_quota = $req->min_quota;
         $activity->venue_id = $req->venue_id;
         $activity->save();
+
         return redirect()
         ->route('edit.activity', $activity->activity_id)
         ->with('success', 'Cambios realizados.');
@@ -443,7 +460,7 @@ class ActivityController extends Controller
           $activity->hours       = $activity->getHours();
         }
         
-        $pdf = PDF::loadView('docs.activities-general-record',
+        $pdf = PDF::loadView('docs.activities-general-report',
           [
             'activities' => $activities,
             'year' => $req->year_search,

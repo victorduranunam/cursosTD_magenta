@@ -105,10 +105,11 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('coordinaciones/descargar/reporte-evaluacion/{department_id}','DepartmentController@downloadEvaluationReport')->name('download.department-evaluation-report');
   
   //Route Diploma
-  Route::get('diplomas', "DiplomaController@index")->name("view.diplomas");
-  Route::post('diplomas/almacenar', "DiplomaController@store")->name("store.diploma");
-  Route::put('diplomas/guardar/{diploma_id}', "DiplomaController@update")->name('update.diploma');
-  Route::delete('diplomas/eliminar/{diploma_id}', "DiplomaController@delete")->name("delete.diploma");
+  Route::get('diplomados', "DiplomaController@index")->name("view.diplomas");
+  Route::post('diplomados/almacenar', "DiplomaController@store")->name("store.diploma");
+  Route::put('diplomados/guardar/{diploma_id}', "DiplomaController@update")->name('update.diploma');
+  Route::delete('diplomados/eliminar/{diploma_id}', "DiplomaController@delete")->name("delete.diploma");
+  Route::get('diplomados/descargar-diplomas/{diploma_id}', "DiplomaController@downloadDiplomas")->name('download.diplomas');
   
   //Route Division
   Route::get('divisiones', "DivisionController@index")->name("view.divisions");

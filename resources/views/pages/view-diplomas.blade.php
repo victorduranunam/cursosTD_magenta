@@ -65,11 +65,58 @@
                     </div>
                     <div class="modal-body">
                       <label class="form-label" for="name">Nombre:</label>
-                      <input required class="form-control" type="text" name="name" id="name" value="{!! $diploma->name !!}">     
+                      <input required class="form-control" type="text" name="name" id="name" value="{!! $diploma->name !!}">
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
                       <input type="submit" value="Guardar" class="btn btn-outline-success">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          {{-- Docs Button --}}
+          <div class="col-xl-2">
+            <form method="GET" action="{!! route('download.diplomas', $diploma->diploma_id) !!}">
+              @csrf
+              @method('get')
+              <a type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#myModal{!! $diploma->diploma_id !!}">Diplomas</a>
+              <div class="modal fade" id="myModal{!! $diploma->diploma_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="docsModalLabel">Escoger Periodo</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-10">
+                          <label for="year_search" class="form-label">Año:</label>
+                          <input required placeholder="Ej. 2022" type="number" min="1900" max="2199" step="1" id="year_search" name="year_search" class="form-control">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-10">
+                          <label for="key" class="form-label">Folio:</label>
+                          <input required placeholder="Ej. F0023554" type="text" id="key" name="key" class="form-control">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-5">
+                          <label for="page" class="form-label">Foja:</label>
+                          <input required placeholder="Ej. 10" type="number" min="1" step="1" id="page" name="page" class="form-control">
+                        </div>
+                        <div class="col-5">
+                          <label for="book" class="form-label">Libro:</label>
+                          <input required placeholder="Ej. 23" type="number" min="1" step="1" id="book" name="book" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <input type="submit" value="Generar" class="btn btn-outline-primary">
+                      <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                   </div>
                 </div>
