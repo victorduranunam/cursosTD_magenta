@@ -22,10 +22,10 @@ body{
   display:inline-block;
 }
 .img-escudo{
-  width: 32%;
+  width: 30%;
 }
 .mg{
-  width: 28%;
+  width: 26%;
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
 }
