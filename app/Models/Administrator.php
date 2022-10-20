@@ -46,4 +46,8 @@ class Administrator extends Model
     public function getFullName(){
       return $this->name.' '.$this->last_name.' '.$this->mothers_last_name;
     }
+
+    public function getSigningName(){
+      return $this->degree.' '.$this->name.' '.$this->last_name.' '.$this->mothers_last_name;
+    }
 }

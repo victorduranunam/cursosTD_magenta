@@ -26,11 +26,11 @@
         @csrf
         @method('post')
         <div class="row">
-          <div class="col-xl-6">
+          <div class="col-5">
             <label class="form-label" for="name">Nombre:</label>
             <input required class="form-control" type="text" name="name" id="name" value="{!! old('name') !!}">
           </div>
-          <div class="col-xl-2 mt-auto">
+          <div class="col-2 mt-auto">
             <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
           </div>
         </div>
@@ -87,7 +87,7 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="docsModalLabel">Escoger Periodo</h5>
+                      <h5 class="modal-title" id="docsModalLabel">Datos de los diplomas</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

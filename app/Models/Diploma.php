@@ -17,4 +17,9 @@ class Diploma extends Model
 
     protected $primaryKey = 'diploma_id';
     public $timestamps = false;
+
+    public function getFileName(){
+      $diploma = Diploma::findOrFail($this->diploma_id);
+      return str_replace(' ', '_',$diploma->name);
+  }
 }
