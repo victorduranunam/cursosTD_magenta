@@ -73,7 +73,7 @@ th, td{
 
       <div class="center-header">
         <h2>MAGESTIC</h2>
-        <h3>Facultad de IngenierÃ­a</h3>
+        <h3>Facultad de Ingenierí­a</h3>
         <h3>Reporte de Sugerencias</h3> 
         <h3>{!! $year.'-'.$num.$type !!}</h3>
       </div>
