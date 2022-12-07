@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Crear Coordinación <i class="bi bi-bank"></i></h3>
+    <h3>Crear Departamento <i class="bi bi-bank"></i></h3>
   </div>
   @include('partials.messages')
   <div class="card-body"><br>

@@ -51,7 +51,7 @@ class DepartmentController extends Controller
 
       return redirect()
         ->route('view.departments')
-        ->with('success', 'Coordinación creada correctamente');
+        ->with('success', 'Departamento creado correctamente');
 
     } catch (\Illuminate\Database\QueryException $th) {
       if($th->getCode() == 7)
@@ -136,7 +136,7 @@ class DepartmentController extends Controller
       else
         return redirect()
           ->back()
-          ->with('warning', 'Error al eliminar la coordinación.');
+          ->with('warning', 'Error al eliminar el departamento.');
     }
   }
 
@@ -244,7 +244,7 @@ class DepartmentController extends Controller
     if($activities->isEmpty())
       return redirect()
            ->back()
-           ->with('warning', 'La coordinación elegida no cuenta con cursos en el periodo ingresado.');
+           ->with('warning', 'El departamento elegido no cuenta con cursos en el periodo ingresado.');
            
     foreach($activities as $activity){
 

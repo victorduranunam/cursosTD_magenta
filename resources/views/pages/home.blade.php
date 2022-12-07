@@ -18,7 +18,7 @@
             <a href="{!! route('view.activities.catalogue') !!}" class="btn btn-outline-dark">Dar de alta una actividad</a>
           </div>
           <div class="col-4">
-            <a href="{!! route('view.departments') !!}" class="btn btn-outline-dark">Ver coordinaciones</a>
+            <a href="{!! route('view.departments') !!}" class="btn btn-outline-dark">Ver departamentos</a>
           </div>
           <div class="col-4">
             <a href={!! route('create.professor') !!} class="btn btn-outline-dark">Dar de alta profesor</a>

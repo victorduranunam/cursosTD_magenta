@@ -29,7 +29,7 @@ class AccountExport implements FromCollection, WithTitle, WithHeadings, ShouldAu
         'Nombre de Usuario',
         'Contraseña (cifrada)',
         'Es administrador',
-        'Coordinación ID'
+        'Departamento ID'
     ];
     }
 }
