@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Actualizar Coordinación <i class="bi bi-bank"></i></h3>
+    <h3>Actualizar Departamento <i class="bi bi-bank"></i></h3>
     <h4> {!! $department->name !!} </h4>
   </div>
   @include('partials.messages')
@@ -58,11 +58,11 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar coordinación</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar departamento</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <p>¿Está seguro de eliminar la coordinación {!! $department->name !!}? 
+                <p>¿Está seguro de eliminar el departamento {!! $department->name !!}? 
                   Esto borrará todos los registros
                   que dependan de ella, como catálogos de Actividades, Actividades y evaluaciones. 
                   Si no quiere perder estos registros primero modifíquelos.

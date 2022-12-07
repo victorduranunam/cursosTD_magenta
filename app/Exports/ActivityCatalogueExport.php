@@ -36,7 +36,7 @@ class ActivityCatalogueExport implements FromCollection, WithTitle, WithHeadings
         'Antecedentes',
         'Fecha de creación',
         'Módulo',
-        'Coordinación ID',
+        'Departamento ID',
         'Diplomado ID'
     ];
     }

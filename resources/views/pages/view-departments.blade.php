@@ -4,10 +4,10 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Ver Coordinaciones <i class="bi bi-bank"></i></h3>
+    <h3>Ver Departamentos <i class="bi bi-bank"></i></h3>
     <div class="row justify-content-end">
       <div class="col-xl-3">
-        <a href={!! route('create.department') !!} class="btn btn-outline-success">Alta de coordinación</a>
+        <a href={!! route('create.department') !!} class="btn btn-outline-success">Alta de departamento</a>
       </div>
       <div class="col-xl-2">
         <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
@@ -93,11 +93,11 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Eliminar coordinación</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar departamento</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <p>¿Está seguro de eliminar la coordinación {!! $department->name !!}? 
+                        <p>¿Está seguro de eliminar el departamento {!! $department->name !!}? 
                           Esto borrará todos los registros
                           que dependan de ella, como catálogos de Actividades, Actividades y evaluaciones. 
                           Si no quiere perder estos registros primero modifíquelos.
@@ -120,7 +120,7 @@
 
         <div class="row">
           <div class="col-xl-6">
-            No hay coordinaciones en la base de datos.
+            No hay departamentos en la base de datos.
           </div>
         </div>
 

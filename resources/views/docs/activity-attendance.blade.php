@@ -99,7 +99,7 @@ th, td{
     <div id="body">
       <table class="t1">
         <tr>
-          <th class="rubro">Coordinación: </th>
+          <th class="rubro">Departamento: </th>
           <td class="contenido">{!! $department_name !!}</td>
           <th class="rubro">Sede: </th>
           <td class="contenido">{!! $venue_name !!}</td>

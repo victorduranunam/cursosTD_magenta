@@ -18,7 +18,7 @@ class DepartmentExport implements FromCollection, WithTitle, WithHeadings, Shoul
 
     public function title(): string
     {
-        return 'Coordinaciones';
+        return 'Departamentos';
     }
 
     public function headings(): array

@@ -42,7 +42,7 @@ class ActivityCatalogueController extends Controller
     if($departments->isEmpty())
       return redirect()
         ->route('home')
-        ->with('danger', 'Es necesario crear una coordinación antes de crear un Catálogo de Actividades.');
+        ->with('danger', 'Es necesario crear un departamento antes de crear un Catálogo de Actividades.');
     return view("pages.create-activity-catalogue")
       ->with('diplomas', $diplomas)
       ->with('departments', $departments);
