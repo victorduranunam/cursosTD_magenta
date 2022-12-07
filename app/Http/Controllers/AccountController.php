@@ -11,15 +11,20 @@ use App\Models\Department;
 class AccountController extends Controller
 {
   public function auth(Request $req) {
-    $user = array(
-      'username' => $req->username,
-      'password' => $req->password
-    );
-  
-    if (Auth::attempt($user))
-      return redirect()->route('home')->with('success', 'Bienvenid@');
+    try{
+      $user = array(
+        'username' => $req->username,
+        'password' => $req->password
+      );
     
-    return redirect()->route('login')->with('msj', 'Credenciales incorrectas, intente de nuevo.');
+      if (Auth::attempt($user))
+        return redirect()->route('home')->with('success', 'Bienvenid@');
+      
+      return redirect()->route('login')->with('danger', 'Credenciales incorrectas. Intente de nuevo.');
+
+    } catch(\Illuminate\Database\QueryException $th){
+      return redirect()->route('login')->with('warning', 'Problema con la base de datos.');
+    }
   
   }
 

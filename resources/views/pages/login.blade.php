@@ -25,6 +25,7 @@
         MAGESTIC
       </div>
     </div>
+    @include('partials.messages')
 
       <div class="mb-3">
         <label for="username" class="form-label">Nombre de usuario:</label>
