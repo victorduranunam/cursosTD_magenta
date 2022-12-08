@@ -7,7 +7,7 @@
 <div class="card">
   <div class="card-header"><br>
     <h3>Actualizar Administrador <i class="bi bi-person"></i></h3>
-    <h4> {!! $administrator->getJob() !!} </h4>
+    <h4> {!! $administrator->getFullName() !!} </h4>
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
@@ -36,19 +36,40 @@
           <div class="col-xl-3">
             <label class="form-label" for="gender">Género</label>
             <select class="form-select" name="gender" id="gender">
+              <option {!! $administrator->gender == NULL ? "selected" : "" !!} value="">No especificado</option>
               <option {!! $administrator->gender == 'M' ? "selected" : "" !!} value="M">Masculino</option>
               <option {!! $administrator->gender == 'F' ? "selected" : "" !!} value="F">Femenino</option>
             </select>
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-6">
-            <label for="job">*Cargo:</label>
-            <select required class="form-select" name="job" id="job">
-              <option {!! $administrator->job == 'C' ? "selected" : "" !!} value="C">Coordinador</option>
-              <option {!! $administrator->job == 'O' ? "selected" : "" !!} value="O">Coordinador General</option>
-              <option {!! $administrator->job == 'S' ? "selected" : "" !!} value="S">Secretario de Apoyo</option>
-              <option {!! $administrator->job == 'D' ? "selected" : "" !!} value="D">Director</option>
+          <div class="col-xl-4">
+            <label for="job">*Nombre de usuario:</label>
+            <input required max=40 min=5 class="form-control" type="text" name="username" id="username" placeholder="Ej. jefe_dsa" value="{!! $administrator->username !!}">
+          </div>
+          <div class="col-xl-4">
+            <label for="job">*Contraseña:</label>
+            <input required max=60 min=8 class="form-control" type="password" name="password" id="password" placeholder="Máximo 60 caracteres.">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <label class="form-label" for="admin">*¿Cuenta con todos los privilegios?</label>
+            <select class="form-select" name="admin" id="admin">
+              <option {!! $administrator->admin == TRUE ? "selected" : "" !!} value="TRUE">Sí</option>
+              <option {!! $administrator->admin == FALSE ? "selected" : "" !!} value="FALSE">No</option>
+            </select>
+          </div>
+          <div class="col-xl-5">
+            <label class="form-label" for="admin">Departamento</label>
+            <select class="form-select" name="department_id" id="department_id">
+                <option {!! $administrator->department_id == NULL ? "selected" : "" !!} value=''> Ninguno </option>
+                @foreach ($departments as $department)
+                  <option {!! $administrator->department_id == $department->department_id ? "selected" : "" !!} 
+                    value={!! $department->department_id !!}> 
+                    {!! $department->name !!} 
+                  </option>
+                @endforeach
             </select>
           </div>
           <div class="col-xl-2 mt-auto">
