@@ -31,11 +31,7 @@ class DepartmentController extends Controller
   }
 
   public function create() {
-    $administrators = Administrator::where('job', 'C')
-      ->orderByRaw('last_name || mothers_last_name || name')
-      ->get();
-    return view ("pages.create-department")
-      ->with('administrators', $administrators);
+    return view ("pages.create-department");
   }
 
   public function store(Request $req){
@@ -46,7 +42,7 @@ class DepartmentController extends Controller
       $department->department_id = DB::select("select nextval('department_seq')")[0]->nextval;
       $department->name = $req->name;
       $department->abbreviation = $req->abbreviation;
-      $department->administrator_id = $req->administrator_id;
+
       $department->save();
 
       return redirect()
@@ -71,13 +67,9 @@ class DepartmentController extends Controller
     try {
 
         $department = Department::findOrFail($department_id);
-        $administrators = Administrator::where('job', 'C')
-          ->orderByRaw('last_name || mothers_last_name || name')
-          ->get();
         
         return view("pages.update-department")
-          ->with("department", $department)
-          ->with('administrators', $administrators);
+          ->with("department", $department);
   
       } catch (\Illuminate\Database\QueryException $th) {
         
@@ -95,7 +87,7 @@ class DepartmentController extends Controller
       $department = Department::findOrFail($department_id);
       $department->name = $req->name;
       $department->abbreviation = $req->abbreviation;
-      $department->administrator_id = $req->administrator_id;
+
       $department->save();
 
       return redirect()

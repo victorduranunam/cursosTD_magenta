@@ -23,21 +23,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-6">
-            <label class="form-label" for="administrator_id">*Coordinador:</label>
-            <select required class="form-select" name="administrator_id" id="administrator_id">
-              @foreach($administrators as $administrator)
-                <option 
-                {!! $department->administrator_id == $administrator->administrator_id ? "selected" : "" !!}
-                  value="{!! $administrator->administrator_id !!}"
-                >
-                  {!! $administrator->getFullName() !!}
-                </option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-        <div class="row">
           <div class="d-grid gap-2 col-xl-2">
               <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
           </div>
