@@ -31,16 +31,8 @@ Route::group( ['middleware' => 'guest'], function() {
   })->name('login')->withoutMiddleware(['guest']);
   
   // Route Login
-  Route::post('/autenticacion', 'AccountController@auth')->name('auth')->withoutMiddleware(['guest']);
-  Route::get('/salir', 'AccountController@logout')->name('logout');
-  
-  //Route Account
-  Route::get('/usuarios', 'AccountController@index')->name('view.accounts');
-  Route::get('/usuario/crear', 'AccountController@create')->name('create.account');
-  Route::post('/usuario/almacenar', 'AccountController@store')->name('store.account');
-  Route::get('/usuario/actualizar/{account_id}', 'AccountController@edit')->name('edit.account');
-  Route::put('/usuario/guardar/{account_id}', 'AccountController@update')->name('update.account');
-  Route::delete('/usuario/eliminar/{account_id}', 'AccountController@delete')->name('delete.account');
+  Route::post('/autenticacion', 'AdministratorController@auth')->name('auth')->withoutMiddleware(['guest']);
+  Route::get('/salir', 'AdministratorController@logout')->name('logout');
   
   //Route Activity Catalogue
   Route::get('catalogo-actividades', 'ActivityCatalogueController@index')->name('view.activities.catalogue');

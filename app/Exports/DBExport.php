@@ -14,7 +14,6 @@ class DBExport implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-        $sheets[] = new AccountExport();
         $sheets[] = new ActivityCatalogueExport();
         $sheets[] = new ActivityEvaluationExport();
         $sheets[] = new ActivityExport();

@@ -25,10 +25,7 @@
                     <div class="dropdown">
                         <a href="#" class="dropdown-toggle usr-dashboard" data-bs-toggle="dropdown">{!! Auth::user()->username !!} &nbsp;<i class="bi bi-person-circle"></i></a>
                         <div class="dropdown-menu dropdown-menu-end">
-                          @if(Auth::user()->admin)
-                            <a href="{!! route('view.accounts') !!}" class="dropdown-item">Ver Usuarios</a>
-                          @endif
-                            <a href="{!! route('logout') !!}" class="dropdown-item">Cerrar Sesión</a>
+                          <a href="{!! route('logout') !!}" class="dropdown-item">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>
