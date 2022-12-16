@@ -14,7 +14,8 @@
     <form method="POST" action="{!! route('store.activity-evaluation', $participant->participant_id) !!}">
       @csrf
       @method('post')
-      <p>Le solicitamos contestar con veracidad y 
+      <p>
+        Le solicitamos contestar con veracidad y 
         proporcionar cualquier comentario adicional que resulte relavante, 
         gracias.
       </p>
@@ -38,8 +39,8 @@
             {{-- Question_1_1 --}}
             <tr>
               <td>
-                Las actividades de aprendizaje estuvieron 
-                vinculadas a los objetivos y contenidos de manera:
+                Las actividades realizadas a lo largo {!! $participant->activity_string_1 !!}
+                estuvieron vinculadas a los objetivos y contenidos de manera:
               </td>
               <td align="center">
                 <div class="form-check">
@@ -105,7 +106,7 @@
             <tr>
               <td>
                 La utilidad del material proporcionado 
-                durante la actividad fue:
+                durante {!! $participant->activity_string_2 !!} fue:
               </td>
               <td align="center">
                 <div class="form-check">
@@ -169,8 +170,7 @@
             {{-- Question_1_5 --}}
             <tr>
               <td>
-                La aplicación de los temas tratados en mi desarrollo 
-                académico es:
+                La aplicación de los temas tratados en mi desarrollo es:
               </td>
               <td align="center">
                 <div class="form-check">
@@ -276,7 +276,7 @@
 
             {{-- Question_2_3 --}}
             <tr>
-              <td>Mi actitud durante la actividad fue:</td>
+              <td>Mi actitud durante {!! $participant->activity_string_2 !!} fue:</td>
               <td align="center">
                 <div class="form-check">
                   <input type="radio" name="question_2_3" value="50"  {!! old('question_2_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_3">
@@ -307,8 +307,8 @@
             {{-- Question_2_4 --}}
             <tr>
               <td>
-                La forma en la que aprovecharé esta
-                actividad será:
+                La forma en la que aprovecharé 
+                {!! $participant->activity_string_2 !!} será:
               </td>
               <td align="center">
                 <div class="form-check">
@@ -355,7 +355,7 @@
             {{-- Question_3_1 --}}
             <tr>
               <td>
-                El departamento de la actividad desde su 
+                El departamento {!! $participant->activity_string_1 !!} desde su 
                 difusión, inscripción, hasta el cierre fue:
               </td>
               <td align="center">
@@ -489,7 +489,11 @@
             
             {{-- HEADER --}}
             <tr>
-              <th colspan="2">4. ¿RECOMENDARÍA LA ACTIVIDAD A OTROS PROFESORES?</th>
+              <th colspan="2">
+                4. ¿RECOMENDARÍA 
+                {!! $participant->activity_string_2 !!} 
+                A OTRAS PERSONAS?
+              </th>
             </tr>
 
             {{-- Question_4 --}}
@@ -513,7 +517,7 @@
             
             {{-- HEADER --}}
             <tr>
-              <th colspan="4">5. ¿CÓMO SE ENTERÓ DE LA ACTIVIDAD?</th>
+              <th colspan="4">5. ¿CÓMO SE ENTERÓ {!! $participant->activity_string_1 !!}?</th>
             </tr>
 
             {{-- Question_5 --}}
@@ -552,7 +556,7 @@
 
             {{-- Question_6_1 --}}
             <tr>
-              <td>Lo mejor de la actividad fue: </td>
+              <td>Lo mejor {!! $participant->activity_string_1 !!} fue: </td>
               <td>
                 <textarea maxlength="500" name="question_6_1" class="form-control" id="question_6_1" rows="2">{!! old('question_6_1') !!}</textarea>
               </td>
@@ -568,7 +572,11 @@
 
             {{-- Question_6_3 --}}
             <tr>
-              <td width="40%">¿Qué otras actividades le gustaría que se impartiesen o tomasen en cuenta?</td>
+              <td width="40%">
+                ¿Qué otros cursos, talleres, curso-talleres, 
+                seminarios, eventos, conferencias, foros o diplomados 
+                le gustaría que se impartiesen o tomasen en cuenta?
+              </td>
               <td>
                 <textarea maxlength="300" name="question_6_3" class="form-control" id="question_6_3" rows="2">{!! old('question_6_3') !!}</textarea>
               </td>
@@ -603,7 +611,7 @@
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_1" value="C" {!! old('question_7_1') == 'C' ? 'checked':'' !!}>Cómputación
+                  <input name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_1" value="C" {!! old('question_7_1') == 'C' ? 'checked':'' !!}>Computación
                 </div>
               </td>
               <td>
@@ -635,7 +643,11 @@
             {{-- QUESTION_8_1 & QUESTION_8_2  --}}
             <tr>
               <td colspan="2">
-                <label class="form-label">¿En qué horarios le gustaría que se impartiesen los cursos, talleres, seminarios o diplomados?</label>
+                <label class="form-label">
+                  ¿En qué horarios le gustaría que se impartiesen los cursos, 
+                  talleres, curso-talleres, seminarios, conferencias, eventos,
+                  diplomados o foros?
+                </label>
               </td>
             </tr>
             <tr>

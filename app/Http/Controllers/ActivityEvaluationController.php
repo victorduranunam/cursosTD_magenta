@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use App\Models\ActivityEvaluation;
 use App\Models\Participant;
@@ -34,10 +35,60 @@ class ActivityEvaluationController extends Controller
 
   public function create($participant_id) {    
     try {
+
+      $participant = DB::table('participant as pt')
+        ->join('professor as p', 'p.professor_id', 'pt.professor_id')
+        ->join('activity as a', 'a.activity_id', 'pt.activity_id')
+        ->join('activity_catalogue as ac', 'ac.activity_catalogue_id',
+               'a.activity_catalogue_id')
+        ->select('pt.participant_id', 'pt.activity_id','p.name', 'p.last_name',
+                 'p.mothers_last_name','ac.name as activity_name', 
+                 'ac.type as activity_type')
+        ->where('pt.participant_id', $participant_id)
+        ->get()
+        ->first();
+
+      if(!$participant)
+        return redirect()->back()->with('warning', 'Participante no encontrado');
       
-      $participant = Participant::findOrFail($participant_id);
-      $participant->name = $participant->getFullName();
-      $participant->activity_name = $participant->getActivityName();
+      $participant->name = $participant->name     .' '.
+                           $participant->last_name.' '.
+                           $participant->mothers_last_name;
+
+      if($participant->activity_type == 'CO'){
+        $participant->activity_string_1 = 'de la conferencia';
+        $participant->activity_string_2 = 'la conferencia';
+      } else if($participant->activity_type == 'SE') {
+        $participant->activity_string_1 = 'del seminario';
+        $participant->activity_string_2 = 'el seminario';
+      } else if($participant->activity_type == 'CU') {
+        $participant->activity_string_1 = 'del curso';
+        $participant->activity_string_2 = 'el curso';
+      } else if($participant->activity_type == 'CT') {
+        $participant->activity_string_1 = 'del curso-taller';
+        $participant->activity_string_2 = 'el curso-taller';
+      } else if($participant->activity_type == 'TA') {
+        $participant->activity_string_1 = 'del taller';
+        $participant->activity_string_2 = 'el taller';
+      } else if($participant->activity_type == 'EV') {
+        $participant->activity_string_1 = 'del evento';
+        $participant->activity_string_2 = 'el evento';
+      } else if($participant->activity_type == 'FO') {
+        $participant->activity_string_1 = 'del foro';
+        $participant->activity_string_2 = 'el foro';
+      } else if($participant->activity_type == 'DI') {
+        $participant->activity_string_1 = 'del módulo de diplomado';
+        $participant->activity_string_2 = 'el módulo de diplomado';
+      } else {
+        return redirect()->back()->with('danger', 'Error con el tipo de actividad.');
+      }
+
+      unset(
+        $participant->last_name, 
+        $participant->mothers_last_name, 
+        $participant->activity_type
+      );
+      
       return view('pages.create-activity-evaluation')
            ->with('participant', $participant);
 

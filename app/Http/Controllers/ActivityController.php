@@ -522,7 +522,7 @@ class ActivityController extends Controller
                ->with('danger', 'No se encontraron actividades con sugerencias en el periodo seleccionado.');
 
         
-        $pdf = PDF::loadView('docs.activities-suggestions-record',
+        $pdf = PDF::loadView('docs.activities-suggestions-report',
           [
             'departments' => $departments,
             'year' => $req->year_search,
