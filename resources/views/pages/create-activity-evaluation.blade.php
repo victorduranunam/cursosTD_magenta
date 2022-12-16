@@ -344,7 +344,7 @@
             
             {{-- HEADER --}}
             <tr>
-              <th width='45%'>3. COORDINACIÓN DE LA ACTIVIDAD</th>
+              <th width='45%'>3. DEPARTAMENTO DE LA ACTIVIDAD</th>
               <th>Mala</th>
               <th>Regular</th>
               <th>Buena</th>
@@ -355,7 +355,7 @@
             {{-- Question_3_1 --}}
             <tr>
               <td>
-                La coordinación de la actividad desde su 
+                El departamento de la actividad desde su 
                 difusión, inscripción, hasta el cierre fue:
               </td>
               <td align="center">

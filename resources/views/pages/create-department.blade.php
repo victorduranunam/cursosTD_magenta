@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Crear Coordinación <i class="bi bi-bank"></i></h3>
+    <h3>Crear Departamento <i class="bi bi-bank"></i></h3>
   </div>
   @include('partials.messages')
   <div class="card-body"><br>
@@ -22,18 +22,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-6">
-          <label class="form-label" for="administrator_id">*Coordinador:</label>
-          <select required class="form-select" name="administrator_id" id="administrator_id">
-            @foreach($administrators as $administrator)
-              <option 
-                {!! old('administrator_id') == $administrator->administrator_id ? "selected" : "" !!} 
-                value="{!! $administrator->administrator_id !!}"
-              >
-                {!! $administrator->getFullName() !!}
-              </option>
-            @endforeach
-          </select>
+        <div class="col-2">
+          <a href="{!! route("view.departments") !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
         <div class="col-xl-2 mt-auto">
           <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
@@ -41,9 +31,6 @@
       </div>
     </form>
     <div class="row">
-      <div class="col-2">
-        <a href="{!! route("view.departments") !!}" class="btn btn-outline-warning">Cancelar</a>
-      </div>
     </div>
   </div>
 </div>

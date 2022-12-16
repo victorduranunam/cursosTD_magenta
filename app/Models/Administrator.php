@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Administrator extends Model
+
+class Administrator extends Authenticatable
 {
     use HasFactory;
 
@@ -17,31 +18,14 @@ class Administrator extends Model
         'mothers_last_name',
         'degree',
         'gender',
-        'job'
+        'username',
+        'password',
+        'admin',
+        'department_id'
     ];
 
     protected $primaryKey = 'administrator_id';
     public $timestamps = false;
-
-    public function getJob(){
-      if($this->job === 'C' and $this->gender === 'F')
-        return 'Coordinadora';
-      if($this->job === 'C')
-        return 'Coordinador';
-      if($this->job === 'O' and $this->gender === 'F')
-        return 'Coordinadora General';
-      if($this->job === 'O')
-        return 'Coordinador General';
-      if($this->job === 'S' and $this->gender === 'F')
-        return 'Secretaria de Apoyo a la Docencia';
-      if($this->job === 'S')
-        return 'Secretario de Apoyo a la Docencia';
-      if($this->job === 'D' and $this->gender === 'F')
-        return 'Directora';
-      if($this->job === 'D')
-        return 'Director';
-      return '';
-    }
 
     public function getFullName(){
       return $this->name.' '.$this->last_name.' '.$this->mothers_last_name;
@@ -49,5 +33,12 @@ class Administrator extends Model
 
     public function getSigningName(){
       return $this->degree.' '.$this->name.' '.$this->last_name.' '.$this->mothers_last_name;
+    }
+
+    public function getDepartment() {
+      if($this->department_id)
+        return Department::findOrFail('department_id',$this->department_id);
+      else
+        return NULL;
     }
 }

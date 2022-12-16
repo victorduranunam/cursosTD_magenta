@@ -25,10 +25,7 @@
                     <div class="dropdown">
                         <a href="#" class="dropdown-toggle usr-dashboard" data-bs-toggle="dropdown">{!! Auth::user()->username !!} &nbsp;<i class="bi bi-person-circle"></i></a>
                         <div class="dropdown-menu dropdown-menu-end">
-                          @if(Auth::user()->admin)
-                            <a href="{!! route('view.accounts') !!}" class="dropdown-item">Ver Usuarios</a>
-                          @endif
-                            <a href="{!! route('logout') !!}" class="dropdown-item">Cerrar Sesión</a>
+                          <a href="{!! route('logout') !!}" class="dropdown-item">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>
@@ -76,10 +73,10 @@
                 </li>
 
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-bank"></i>Coordinaciones<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-bank"></i>Departamentos<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.department') !!}>Alta de Coordinación</a></li>
-                        <li><a href={!! route('view.departments') !!}>Consulta de coordinaciones</a></li>
+                        <li><a href={!! route('create.department') !!}>Alta de Departamento</a></li>
+                        <li><a href={!! route('view.departments') !!}>Consulta de departamentos</a></li>
                         <li><a href={!! route('create.administrator') !!}>Alta de administrador</a></li>
                         <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
                     </ul>

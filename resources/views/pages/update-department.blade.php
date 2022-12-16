@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Actualizar Coordinación <i class="bi bi-bank"></i></h3>
+    <h3>Actualizar Departamento <i class="bi bi-bank"></i></h3>
     <h4> {!! $department->name !!} </h4>
   </div>
   @include('partials.messages')
@@ -20,21 +20,6 @@
           <div class="col-xl-3">
             <label class="form-label" for="abbreviation">*Abreviación:</label>
             <input required class="form-control" type="text" name="abbreviation" id="abbreviation" value="{!! $department->abbreviation !!}">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xl-6">
-            <label class="form-label" for="administrator_id">*Coordinador:</label>
-            <select required class="form-select" name="administrator_id" id="administrator_id">
-              @foreach($administrators as $administrator)
-                <option 
-                {!! $department->administrator_id == $administrator->administrator_id ? "selected" : "" !!}
-                  value="{!! $administrator->administrator_id !!}"
-                >
-                  {!! $administrator->getFullName() !!}
-                </option>
-              @endforeach
-            </select>
           </div>
         </div>
         <div class="row">
@@ -58,11 +43,11 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar coordinación</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar departamento</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <p>¿Está seguro de eliminar la coordinación {!! $department->name !!}? 
+                <p>¿Está seguro de eliminar el departamento {!! $department->name !!}? 
                   Esto borrará todos los registros
                   que dependan de ella, como catálogos de Actividades, Actividades y evaluaciones. 
                   Si no quiere perder estos registros primero modifíquelos.

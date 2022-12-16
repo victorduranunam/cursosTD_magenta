@@ -25,7 +25,7 @@
             <h6>Nombre</h6>
           </div>
           <div class="col-xl">
-            <h6>Coordinación</h6>
+            <h6>Departamento</h6>
           </div>
         </div>
         @foreach ($activities_cat as $activity_cat)

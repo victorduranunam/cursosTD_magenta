@@ -31,16 +31,8 @@ Route::group( ['middleware' => 'guest'], function() {
   })->name('login')->withoutMiddleware(['guest']);
   
   // Route Login
-  Route::post('/autenticacion', 'AccountController@auth')->name('auth')->withoutMiddleware(['guest']);
-  Route::get('/salir', 'AccountController@logout')->name('logout');
-  
-  //Route Account
-  Route::get('/usuarios', 'AccountController@index')->name('view.accounts');
-  Route::get('/usuario/crear', 'AccountController@create')->name('create.account');
-  Route::post('/usuario/almacenar', 'AccountController@store')->name('store.account');
-  Route::get('/usuario/actualizar/{account_id}', 'AccountController@edit')->name('edit.account');
-  Route::put('/usuario/guardar/{account_id}', 'AccountController@update')->name('update.account');
-  Route::delete('/usuario/eliminar/{account_id}', 'AccountController@delete')->name('delete.account');
+  Route::post('/autenticacion', 'AdministratorController@auth')->name('auth')->withoutMiddleware(['guest']);
+  Route::get('/salir', 'AdministratorController@logout')->name('logout');
   
   //Route Activity Catalogue
   Route::get('catalogo-actividades', 'ActivityCatalogueController@index')->name('view.activities.catalogue');
@@ -94,15 +86,15 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::delete('puesto-trabajo/eliminar/{work_position_id}', "WorkPositionController@delete")->name("delete.work-position");
   
   //Route Department
-  Route::get('coordinaciones', "DepartmentController@index")->name("view.departments");
-  Route::get('coordinaciones/crear', "DepartmentController@create")->name("create.department");
-  Route::post('coordinaciones/almacenar', "DepartmentController@store")->name("store.department");
-  Route::get('coordinaciones/actualizar/{department_id}', "DepartmentController@edit")->name("edit.department");
-  Route::put('coordinaciones/guardar/{department_id}', "DepartmentController@update")->name('update.department');
-  Route::delete('coordinaciones/eliminar/{department_id}', "DepartmentController@delete")->name("delete.department");
-  Route::get('coordinaciones/descargar/reporte-criterio-aceptacion/{department_id}','DepartmentController@downloadAcceptanceCriteriaReport')->name('download.department-acceptance-criteria-report');
-  Route::get('coordinaciones/descargar/reporte-participantes/{department_id}','DepartmentController@downloadParticipantsReport')->name('download.department-participants-report');
-  Route::get('coordinaciones/descargar/reporte-evaluacion/{department_id}','DepartmentController@downloadEvaluationReport')->name('download.department-evaluation-report');
+  Route::get('departamentos', "DepartmentController@index")->name("view.departments");
+  Route::get('departamentos/crear', "DepartmentController@create")->name("create.department");
+  Route::post('departamentos/almacenar', "DepartmentController@store")->name("store.department");
+  Route::get('departamentos/actualizar/{department_id}', "DepartmentController@edit")->name("edit.department");
+  Route::put('departamentos/guardar/{department_id}', "DepartmentController@update")->name('update.department');
+  Route::delete('departamentos/eliminar/{department_id}', "DepartmentController@delete")->name("delete.department");
+  Route::get('departamentos/descargar/reporte-criterio-aceptacion/{department_id}','DepartmentController@downloadAcceptanceCriteriaReport')->name('download.department-acceptance-criteria-report');
+  Route::get('departamentos/descargar/reporte-participantes/{department_id}','DepartmentController@downloadParticipantsReport')->name('download.department-participants-report');
+  Route::get('departamentos/descargar/reporte-evaluacion/{department_id}','DepartmentController@downloadEvaluationReport')->name('download.department-evaluation-report');
   
   //Route Diploma
   Route::get('diplomados', "DiplomaController@index")->name("view.diplomas");

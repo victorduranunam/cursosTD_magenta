@@ -13,8 +13,7 @@ class Department extends Model
     protected $fillable = [
         'department_id',
         'abbreviation',
-        'name',
-        'administrator_id'
+        'name'
     ];
     protected $primaryKey = 'department_id';
     public $timestamps = false;
