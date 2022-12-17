@@ -276,7 +276,7 @@ class DepartmentController extends Controller
           ]
           )->setPaper('letter');
 
-    return $pdf->download('Reporte_Criterio_Aceptacion_'.$department->getFileName().'.pdf');
+    return $pdf->download('Reporte_Participantes_'.$department->getFileName().'.pdf');
   }
 
   public function downloadEvaluationReport(Request $req, $department_id){

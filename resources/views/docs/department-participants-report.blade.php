@@ -22,7 +22,7 @@ body{
   font-size: 15px;
 }
 .img-escudo{
-  width: 32%;
+  width: 52%;
 }
 .mg{
   width: 28%;
@@ -67,7 +67,7 @@ th, td{
     <div class="center-header">
       <h2>MAGESTIC</h2>
       <h3>Facultad de Ingenierí­a</h3>
-      <h3>Reporte de Criterio de Aceptación</h3>
+      <h3>Reporte de Participantes</h3>
       <h3>{!! $department !!}</h3>
       <h3>{!! $period !!}</h3>
       <hr>

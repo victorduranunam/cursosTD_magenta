@@ -68,7 +68,7 @@ th, td{
       </div>
 
       <div class="right-header">
-        <img class="img-escudo" src={!! public_path('img/escudo_fi_color.png') !!} align=right>
+        <img class="img-escudo" src={!! public_path('img/unica.png') !!} align=right>
       </div>
 
       <div class="center-header">
