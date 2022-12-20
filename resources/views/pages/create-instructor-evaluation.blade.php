@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-participant')
 @section('content')
 
 <div class="card">
@@ -46,7 +46,7 @@
                       
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_1" value="50" {!! old('question_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1">
+                            <input required type="radio" name="question_1" value="50" {!! old('question_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1">
                           </div>
                         </td>
                         <td align="center">
@@ -77,7 +77,7 @@
                         
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_2" value="50" {!! old('question_2') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2">
+                            <input required type="radio" name="question_2" value="50" {!! old('question_2') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2">
                           </div>
                         </td>
                         <td align="center">
@@ -108,7 +108,7 @@
                       
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_3" value="50" {!! old('question_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3">
+                            <input required type="radio" name="question_3" value="50" {!! old('question_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3">
                           </div>
                         </td>
                         <td align="center">
@@ -139,7 +139,7 @@
                       
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_4" value="50" {!! old('question_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_4">
+                            <input required type="radio" name="question_4" value="50" {!! old('question_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_4">
                           </div>
                         </td>
                         <td align="center">
@@ -170,7 +170,7 @@
                       
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_5" value="50" {!! old('question_5') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_5">
+                            <input required type="radio" name="question_5" value="50" {!! old('question_5') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_5">
                           </div>
                         </td>
                         <td align="center">
@@ -201,7 +201,7 @@
                         
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_6" value="50" {!! old('question_6') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_6">
+                            <input required type="radio" name="question_6" value="50" {!! old('question_6') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_6">
                           </div>
                         </td>
                         <td align="center">
@@ -232,7 +232,7 @@
                     
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_7" value="50" {!! old('question_7') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_7">
+                            <input required type="radio" name="question_7" value="50" {!! old('question_7') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_7">
                           </div>
                         </td>
                         <td align="center">
@@ -263,7 +263,7 @@
                     
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_8" value="50" {!! old('question_8') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_8">
+                            <input required type="radio" name="question_8" value="50" {!! old('question_8') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_8">
                           </div>
                         </td>
                         <td align="center">
@@ -294,7 +294,7 @@
                         
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_9" value="50" {!! old('question_9') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_9">
+                            <input required type="radio" name="question_9" value="50" {!! old('question_9') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_9">
                           </div>
                         </td>
                         <td align="center">
@@ -325,7 +325,7 @@
                       
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_10" value="50" {!! old('question_10') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_10">
+                            <input required type="radio" name="question_10" value="50" {!! old('question_10') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_10">
                           </div>
                         </td>
                         <td align="center">
@@ -356,7 +356,7 @@
                         
                         <td align="center">
                           <div class="form-check">
-                            <input type="radio" name="question_11" value="50" {!! old('question_11') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_11">
+                            <input required type="radio" name="question_11" value="50" {!! old('question_11') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_11">
                           </div>
                         </td>
                         <td align="center">
@@ -401,10 +401,6 @@
               </h2>
               <div id="collapse{!! $instructor->instructor_id !!}" class="accordion-collapse collapse" aria-labelledby="heading{!! $instructor->instructor_id !!}" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <form method="POST" action="{!! route('update.instructor-evaluation', $instructor->evaluation->instructor_evaluation_id) !!}">
-                    @csrf
-                    @method('put')
-
                       <table class="table table-hover">
                         <tr>
                           <th width="42%" align="justify"></th>
@@ -422,27 +418,27 @@
                     
                           <td align="center">
                             <div class="form-check">
-                              <input type="radio" name="question_1" value="50" {!! $instructor->evaluation->question_1 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_1">
+                              <input type="radio" name="{!! 'question_1'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_1 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_1'.$instructor->instructor_id !!}">
                             </div>
                           </td>
                           <td align="center">
                             <div class="form-check">
-                              <input type="radio" name="question_1" value="60" {!! $instructor->evaluation->question_1 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_1">
+                              <input type="radio" name="{!! 'question_1'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_1 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_1'.$instructor->instructor_id !!}">
                             </div>
                           </td>
                           <td align="center">
                             <div class="form-check">
-                              <input type="radio" name="question_1" value="80" {!! $instructor->evaluation->question_1 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_1">
+                              <input type="radio" name="{!! 'question_1'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_1 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_1'.$instructor->instructor_id !!}">
                             </div>
                           </td>
                           <td align="center">
                             <div class="form-check">
-                              <input type="radio" name="question_1" value="95" {!! $instructor->evaluation->question_1 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_1">
+                              <input type="radio" name="{!! 'question_1'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_1 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_1'.$instructor->instructor_id !!}">
                             </div>
                           </td>
                           <td align="center">
                             <div class="form-check">
-                              <input type="radio" name="question_1" value="100" {!! $instructor->evaluation->question_1 == 100 ? 'checked' : '' !!} class="form-check-input" id="question_1">
+                              <input type="radio" name="{!! 'question_1'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_1 == 100 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_1'.$instructor->instructor_id !!}">
                             </div>
                           </td>
                         </tr>
@@ -453,27 +449,27 @@
                             
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_2" value="50" {!! $instructor->evaluation->question_2 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_2">
+                                <input type="radio" name="{!! 'question_2'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_2 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_2'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_2" value="60" {!! $instructor->evaluation->question_2 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_2">
+                                <input type="radio" name="{!! 'question_2'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_2 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_2'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_2" value="80" {!! $instructor->evaluation->question_2 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_2">
+                                <input type="radio" name="{!! 'question_2'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_2 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_2'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_2" value="95" {!! $instructor->evaluation->question_2 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_2">
+                                <input type="radio" name="{!! 'question_2'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_2 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_2'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_2" value="100" {!! $instructor->evaluation->question_2 == 100 ? 'checked' : '' !!} class="form-check-input" id="question_2">
+                                <input type="radio" name="{!! 'question_2'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_2 == 100 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_2'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -484,27 +480,27 @@
                             
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_3" value="50" {!! $instructor->evaluation->question_3 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_3">
+                                <input type="radio" name="{!! 'question_3'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_3 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_3'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_3" value="60" {!! $instructor->evaluation->question_3 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_3">
+                                <input type="radio" name="{!! 'question_3'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_3 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_3'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_3" value="80" {!! $instructor->evaluation->question_3 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_3">
+                                <input type="radio" name="{!! 'question_3'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_3 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_3'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_3" value="95" {!! $instructor->evaluation->question_3 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_3">
+                                <input type="radio" name="{!! 'question_3'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_3 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_3'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_3" value="100" {!! $instructor->evaluation->question_3 == 100 ? 'checked' : '' !!} class="form-check-input" id="question_3">
+                                <input type="radio" name="{!! 'question_3'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_3 == 100 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_3'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -515,27 +511,27 @@
 
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_4" value="50" {!! $instructor->evaluation->question_4 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_4">
+                                <input type="radio" name="{!! 'question_4'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_4 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_4'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_4" value="60" {!! $instructor->evaluation->question_4 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_4">
+                                <input type="radio" name="{!! 'question_4'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_4 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_4'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_4" value="80" {!! $instructor->evaluation->question_4 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_4">
+                                <input type="radio" name="{!! 'question_4'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_4 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_4'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_4" value="95" {!! $instructor->evaluation->question_4 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_4">
+                                <input type="radio" name="{!! 'question_4'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_4 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_4'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_4" value="100" {!! $instructor->evaluation->question_4 == 100 ? 'checked' : '' !!} class="form-check-input" id="question_4">
+                                <input type="radio" name="{!! 'question_4'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_4 == 100 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_4'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -546,27 +542,27 @@
                           
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_5" value="50" {!! $instructor->evaluation->question_5 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_5">
+                                <input type="radio" name="{!! 'question_5'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_5 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_5'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_5" value="60" {!! $instructor->evaluation->question_5 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_5">
+                                <input type="radio" name="{!! 'question_5'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_5 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_5'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_5" value="80" {!! $instructor->evaluation->question_5 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_5">
+                                <input type="radio" name="{!! 'question_5'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_5 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_5'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_5" value="95" {!! $instructor->evaluation->question_5 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_5">
+                                <input type="radio" name="{!! 'question_5'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_5 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_5'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_5" value="100" {!! $instructor->evaluation->question_5 == 100 ? 'checked' : '' !!}   class="form-check-input" id="question_5">
+                                <input type="radio" name="{!! 'question_5'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_5 == 100 ? 'checked' : '' !!}   class="form-check-input" id="{!! 'question_5'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -577,27 +573,27 @@
                         
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_6" value="50" {!! $instructor->evaluation->question_6 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_6">
+                                <input type="radio" name="{!! 'question_6'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_6 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_6'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_6" value="60" {!! $instructor->evaluation->question_6 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_6">
+                                <input type="radio" name="{!! 'question_6'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_6 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_6'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_6" value="80" {!! $instructor->evaluation->question_6 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_6">
+                                <input type="radio" name="{!! 'question_6'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_6 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_6'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_6" value="95" {!! $instructor->evaluation->question_6 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_6">
+                                <input type="radio" name="{!! 'question_6'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_6 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_6'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_6" value="100" {!! $instructor->evaluation->question_6 == 100 ? 'checked' : '' !!}   class="form-check-input" id="question_6">
+                                <input type="radio" name="{!! 'question_6'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_6 == 100 ? 'checked' : '' !!}   class="form-check-input" id="{!! 'question_6'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -608,27 +604,27 @@
                             
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_7" value="50" {!! $instructor->evaluation->question_7 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_7">
+                                <input type="radio" name="{!! 'question_7'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_7 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_7'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_7" value="60" {!! $instructor->evaluation->question_7 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_7">
+                                <input type="radio" name="{!! 'question_7'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_7 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_7'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_7" value="80" {!! $instructor->evaluation->question_7 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_7">
+                                <input type="radio" name="{!! 'question_7'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_7 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_7'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_7" value="95" {!! $instructor->evaluation->question_7 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_7">
+                                <input type="radio" name="{!! 'question_7'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_7 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_7'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_7" value="100" {!! $instructor->evaluation->question_7 == 100 ? 'checked' : '' !!}   class="form-check-input" id="question_7">
+                                <input type="radio" name="{!! 'question_7'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_7 == 100 ? 'checked' : '' !!}   class="form-check-input" id="{!! 'question_7'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -639,27 +635,27 @@
                       
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_8" value="50" {!! $instructor->evaluation->question_8 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_8">
+                                <input type="radio" name="{!! 'question_8'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_8 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_8'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_8" value="60" {!! $instructor->evaluation->question_8 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_8">
+                                <input type="radio" name="{!! 'question_8'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_8 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_8'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_8" value="80" {!! $instructor->evaluation->question_8 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_8">
+                                <input type="radio" name="{!! 'question_8'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_8 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_8'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_8" value="95" {!! $instructor->evaluation->question_8 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_8">
+                                <input type="radio" name="{!! 'question_8'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_8 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_8'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_8" value="100" {!! $instructor->evaluation->question_8 == 100 ? 'checked' : '' !!}   class="form-check-input" id="question_8">
+                                <input type="radio" name="{!! 'question_8'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_8 == 100 ? 'checked' : '' !!}   class="form-check-input" id="{!! 'question_8'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -670,27 +666,27 @@
                         
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_9" value="50" {!! $instructor->evaluation->question_9 == 50 ? 'checked' : '' !!} class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_9'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_9 == 50 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_9'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_9" value="60" {!! $instructor->evaluation->question_9 == 60 ? 'checked' : '' !!} class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_9'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_9 == 60 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_9'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_9" value="80" {!! $instructor->evaluation->question_9 == 80 ? 'checked' : '' !!} class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_9'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_9 == 80 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_9'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_9" value="95" {!! $instructor->evaluation->question_9 == 95 ? 'checked' : '' !!} class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_9'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_9 == 95 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_9'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_9" value="100" {!! $instructor->evaluation->question_9 == 100 ? 'checked' : '' !!}   class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_9'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_9 == 100 ? 'checked' : '' !!}   class="form-check-input" id="{!! 'question_9'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -701,27 +697,27 @@
                         
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_10" value="50" {!! $instructor->evaluation->question_10 == 50 ? 'checked' : '' !!}  class="form-check-input" id="question_10">
+                                <input type="radio" name="{!! 'question_10'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_10 == 50 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_10'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_10" value="60" {!! $instructor->evaluation->question_10 == 60 ? 'checked' : '' !!}  class="form-check-input" id="question_10">
+                                <input type="radio" name="{!! 'question_10'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_10 == 60 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_10'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_10" value="80" {!! $instructor->evaluation->question_10 == 80 ? 'checked' : '' !!}  class="form-check-input" id="question_10">
+                                <input type="radio" name="{!! 'question_10'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_10 == 80 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_10'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_10" value="95" {!! $instructor->evaluation->question_10 == 95 ? 'checked' : '' !!}  class="form-check-input" id="question_10">
+                                <input type="radio" name="{!! 'question_10'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_10 == 95 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_10'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_10" value="100" {!! $instructor->evaluation->question_10 == 100 ? 'checked' : '' !!} }  class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_10'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_10 == 100 ? 'checked' : '' !!} }  class="form-check-input" id="{!! 'question_10'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
@@ -732,72 +728,32 @@
                         
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_11" value="50" {!! $instructor->evaluation->question_11 == 50 ? 'checked' : '' !!}  class="form-check-input" id="question_11">
+                                <input type="radio" name="{!! 'question_11'.$instructor->instructor_id !!}" value="50" disabled {!! $instructor->evaluation->question_11 == 50 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_11'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_11" value="60" {!! $instructor->evaluation->question_11 == 60 ? 'checked' : '' !!}  class="form-check-input" id="question_11">
+                                <input type="radio" name="{!! 'question_11'.$instructor->instructor_id !!}" value="60" disabled {!! $instructor->evaluation->question_11 == 60 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_11'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_11" value="80" {!! $instructor->evaluation->question_11 == 80 ? 'checked' : '' !!}  class="form-check-input" id="question_11">
+                                <input type="radio" name="{!! 'question_11'.$instructor->instructor_id !!}" value="80" disabled {!! $instructor->evaluation->question_11 == 80 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_11'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_11" value="95" {!! $instructor->evaluation->question_11 == 95 ? 'checked' : '' !!}  class="form-check-input" id="question_11">
+                                <input type="radio" name="{!! 'question_11'.$instructor->instructor_id !!}" value="95" disabled {!! $instructor->evaluation->question_11 == 95 ? 'checked' : '' !!}  class="form-check-input" id="{!! 'question_11'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                             <td align="center">
                               <div class="form-check">
-                                <input type="radio" name="question_11" value="100" {!! $instructor->evaluation->question_11 == 100 ? 'checked' : '' !!} }  class="form-check-input" id="question_9">
+                                <input type="radio" name="{!! 'question_11'.$instructor->instructor_id !!}" value="100" disabled {!! $instructor->evaluation->question_11 == 100 ? 'checked' : '' !!} class="form-check-input" id="{!! 'question_11'.$instructor->instructor_id !!}">
                               </div>
                             </td>
                           </tr>
                         </table>
-
-                        <div class="row">
-                          <div class="d-grid gap-2">
-                            <button type="submit" id='save-btn' class="btn btn-outline-success">Guardar</button>
-                          </div>
-                        </div>
-
                       </div>
-                    </form>
-                    
-                    {{-- DELETE --}}
-                    <form method="POST" action="{!! route("delete.instructor-evaluation", $instructor->evaluation->instructor_evaluation_id) !!}">
-                      @csrf
-                      @method('delete')
-                      
-                      <div class="row">
-                        <div class="d-grid gap-2">
-                          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $instructor->evaluation->instructor_evaluation_id !!}">Eliminar</button>
-                        </div>
-                        
-                        <div class="modal fade" id="myModal{!! $instructor->evaluation->instructor_evaluation_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Eliminar Evaluación</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <p>¿Está seguro de eliminar la evaluación?
-                                  Esto la borrará de los reportes, siempre puede crear una nueva.
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Cancelar</button>
-                                <input type="submit" value="Eliminar" class="btn btn-outline-danger">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
                   </div>
                 </div>
 

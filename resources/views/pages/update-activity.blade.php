@@ -152,6 +152,12 @@
         <input type="text" required class="form-control" name="cost" id="cost" placeholder="Ej. 799.99" value="{!! $activity->cost !!}">
       </div>
     </div>
+    <div class="row">
+      <div class="col-xl-3">
+        <label for="group_key">Clave de grupo:</label>
+        <input type="text" name="group_key" id="group_key" class="form-control" disabled value="{!! $activity->group_key !!}">
+      </div>
+    </div>
 
     <div class="row">
         <div class="d-grid gap-2 col-xl-2">

@@ -119,6 +119,7 @@ class ActivityController extends Controller
     public function edit($activity_id){
       try{
         $activity = Activity::findOrFail($activity_id);
+        $activity->group_key = $activity->getKey().'-'.$activity->activity_id;
         $venues = Venue::all();
 
         return view("pages.update-activity")
@@ -522,7 +523,7 @@ class ActivityController extends Controller
                ->with('danger', 'No se encontraron actividades con sugerencias en el periodo seleccionado.');
 
         
-        $pdf = PDF::loadView('docs.activities-suggestions-record',
+        $pdf = PDF::loadView('docs.activities-suggestions-report',
           [
             'departments' => $departments,
             'year' => $req->year_search,
