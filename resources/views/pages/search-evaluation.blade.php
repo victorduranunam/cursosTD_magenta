@@ -17,25 +17,28 @@
 
   <div class="flex-center position-ref full-height">
     
-    <form method="POST" action="{!! route('auth') !!}">
+    <form method="GET" action="{!! route('create.activity-evaluation') !!}">
       @csrf
-      @method('post')
+      @method('get')
     <div class="content">
       <div class="title m-b-md">
-        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">MAGESTIC</a>
+        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">MAGESTIC</a> 
+      </div>
+      <div class="subtitle m-b-md">
+        Contestar Encuesta
       </div>
     </div>
     @include('partials.messages')
 
       <div class="mb-3">
-        <label for="username" class="form-label">Nombre de usuario:</label>
-        <input type="text" class="form-control" name='username' id="username" placeholder="Ej. areacomputo45" required>
+        <label for="email" class="form-label">Correo electrónico:</label>
+        <input type="text" class="form-control" name='email' id="email" placeholder="Ej. armando@ejemplo.com" required>
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Contraseña:</label>
-        <input type="password" class="form-control" id="password" name='password' required>
+        <label for="group_key" class="form-label">Clave de Grupo:</label>
+        <input type="text" class="form-control" id="group_key" name='group_key' placeholder="Ej. DICU001-12" required>
       </div>
-      <button type="submit" class="btn btn-primary">Ingresar</button>
+      <button type="submit" class="btn btn-primary">Continuar</button>
     </form>
 
 

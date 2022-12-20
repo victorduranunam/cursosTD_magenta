@@ -1,17 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.app-participant')
 @section('content')
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Nueva Evaluación <i class="bi bi-journals"></i></h3>
-    <h4>{!! $participant->name !!}</h4>
-    <h5>{!! $participant->activity_name!!}</h5>
+    <h3>Evaluación <i class="bi bi-journals"></i></h3>
+    <h4>{!! $data['participant_name'] !!}</h4>
+    <h5>{!! $data['activity_name']!!}</h5>
   </div>
   
   @include('partials.messages')
 
   <div class="card-body"><br>
-    <form method="POST" action="{!! route('store.activity-evaluation', $participant->participant_id) !!}">
+    <form method="POST" action="{!! route('store.activity-evaluation', $data['participant_id']) !!}">
       @csrf
       @method('post')
       <p>
@@ -39,12 +39,12 @@
             {{-- Question_1_1 --}}
             <tr>
               <td>
-                Las actividades realizadas a lo largo {!! $participant->activity_string_1 !!}
+                Las actividades realizadas a lo largo {!! $data['activity_string_1'] !!}
                 estuvieron vinculadas a los objetivos y contenidos de manera:
               </td>
               <td align="center">
                 <div class="form-check">
-                    <input type="radio" name="question_1_1" value="50"  {!! old('question_1_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_1">
+                    <input required type="radio" name="question_1_1" value="50"  {!! old('question_1_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_1">
                 </div>
               </td>
               <td align="center">
@@ -77,7 +77,7 @@
               </td>
               <td align="center">
                   <div class="form-check">
-                      <input type="radio" name="question_1_2" value="50"  {!! old('question_1_2') == '50' ? 'checked'  : '' !!} class="form-check-input" id="question_1_2">
+                      <input required type="radio" name="question_1_2" value="50"  {!! old('question_1_2') == '50' ? 'checked'  : '' !!} class="form-check-input" id="question_1_2">
                   </div>
               </td>
               <td align="center">
@@ -106,11 +106,11 @@
             <tr>
               <td>
                 La utilidad del material proporcionado 
-                durante {!! $participant->activity_string_2 !!} fue:
+                durante {!! $data['activity_string_2'] !!} fue:
               </td>
               <td align="center">
                 <div class="form-check">
-                    <input type="radio" name="question_1_3" value="50"  {!! old('question_1_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_3">
+                    <input required type="radio" name="question_1_3" value="50"  {!! old('question_1_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_3">
                 </div>
               </td>
               <td align="center">
@@ -142,7 +142,7 @@
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_1_4" value="50"  {!! old('question_1_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_4">
+                  <input required type="radio" name="question_1_4" value="50"  {!! old('question_1_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_4">
                 </div>
               </td>
               <td align="center">
@@ -174,7 +174,7 @@
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_1_5" value="50"  {!! old('question_1_5') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_5">
+                  <input required type="radio" name="question_1_5" value="50"  {!! old('question_1_5') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_1_5">
                 </div>
               </td>
               <td align="center">
@@ -219,7 +219,7 @@
               <td>Mi puntualidad fue:</td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_2_1" value="50"  {!! old('question_2_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_1">
+                  <input required type="radio" name="question_2_1" value="50"  {!! old('question_2_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_1">
                 </div>
               </td>
               <td align="center">
@@ -249,7 +249,7 @@
               <td>Mi participación fue:</td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_2_2" value="50"  {!! old('question_2_2') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_2">
+                  <input required type="radio" name="question_2_2" value="50"  {!! old('question_2_2') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_2">
                 </div>
               </td>
               <td align="center">
@@ -276,10 +276,10 @@
 
             {{-- Question_2_3 --}}
             <tr>
-              <td>Mi actitud durante {!! $participant->activity_string_2 !!} fue:</td>
+              <td>Mi actitud durante {!! $data['activity_string_2'] !!} fue:</td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_2_3" value="50"  {!! old('question_2_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_3">
+                  <input required type="radio" name="question_2_3" value="50"  {!! old('question_2_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_3">
                 </div>
               </td>
               <td align="center">
@@ -308,11 +308,11 @@
             <tr>
               <td>
                 La forma en la que aprovecharé 
-                {!! $participant->activity_string_2 !!} será:
+                {!! $data['activity_string_2'] !!} será:
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_2_4" value="50"  {!! old('question_2_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_4">
+                  <input required type="radio" name="question_2_4" value="50"  {!! old('question_2_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_2_4">
                 </div>
               </td>
               <td align="center">
@@ -355,12 +355,12 @@
             {{-- Question_3_1 --}}
             <tr>
               <td>
-                El departamento {!! $participant->activity_string_1 !!} desde su 
+                El departamento {!! $data['activity_string_1'] !!} desde su 
                 difusión, inscripción, hasta el cierre fue:
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_3_1" value="50"  {!! old('question_3_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_1">
+                  <input required type="radio" name="question_3_1" value="50"  {!! old('question_3_1') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_1">
                 </div>
               </td>
               <td align="center">
@@ -393,7 +393,7 @@
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_3_2" value="50"  {!! old('question_3_2') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_2">
+                  <input required type="radio" name="question_3_2" value="50"  {!! old('question_3_2') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_2">
                 </div>
               </td>
               <td align="center">
@@ -426,7 +426,7 @@
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_3_3" value="50"  {!! old('question_3_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_3">
+                  <input required type="radio" name="question_3_3" value="50"  {!! old('question_3_3') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_3">
                 </div>
               </td>
               <td align="center">
@@ -458,7 +458,7 @@
               </td>
               <td align="center">
                 <div class="form-check">
-                  <input type="radio" name="question_3_4" value="50"  {!! old('question_3_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_4">
+                  <input required type="radio" name="question_3_4" value="50"  {!! old('question_3_4') == '50' ? 'checked' : '' !!} class="form-check-input" id="question_3_4">
                 </div>
               </td>
               <td align="center">
@@ -491,7 +491,7 @@
             <tr>
               <th colspan="2">
                 4. ¿RECOMENDARÍA 
-                {!! $participant->activity_string_2 !!} 
+                {!! strtoupper($data['activity_string_2']) !!} 
                 A OTRAS PERSONAS?
               </th>
             </tr>
@@ -500,7 +500,7 @@
             <tr>
               <td>
                 <div class="form-check">
-                  <input type="radio" name="question_4" value="1" {!! old('question_4') == '1' ? 'checked' : '' !!} class="form-check-input" id="question_4"> Sí
+                  <input required type="radio" name="question_4" value="1" {!! old('question_4') == '1' ? 'checked' : '' !!} class="form-check-input" id="question_4"> Sí
                 </div>
               </td>
               <td >
@@ -518,7 +518,7 @@
             {{-- HEADER --}}
             <tr>
               <th colspan="4">
-                5. ¿CÓMO SE ENTERÓ {!! $participant->activity_string_1 !!}?
+                5. ¿CÓMO SE ENTERÓ {!! strtoupper($data['activity_string_1']) !!}?
               </th>
             </tr>
 
@@ -526,22 +526,22 @@
             <tr>
               <td>
                 <div class="form-check">
-                  <input name="question_5[]" type="checkbox" class="form-check-input" id="question_5" value="I" {!! old('question_5') == 'I' ? checked : '' !!}> Internet
+                  <input required onchange=evaluationFormRequiredQuestion5() name="question_5[]" type="checkbox" class="form-check-input" id="question_5_I" value="I" {!! old('question_5') == 'I' ? checked : '' !!}> Internet
                 </div>
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_5[]" type="checkbox" class="form-check-input" id="question_5" value="P" {!! old('question_5') == 'P' ? checked : '' !!}> Publicidad
+                  <input required onchange=evaluationFormRequiredQuestion5() name="question_5[]" type="checkbox" class="form-check-input" id="question_5_P" value="P" {!! old('question_5') == 'P' ? checked : '' !!}> Publicidad
                 </div>
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_5[]" type="checkbox" class="form-check-input" id="question_5" value="J" {!! old('question_5') == 'J' ? checked : '' !!}> Jefes de División
+                  <input required onchange=evaluationFormRequiredQuestion5() name="question_5[]" type="checkbox" class="form-check-input" id="question_5_J" value="J" {!! old('question_5') == 'J' ? checked : '' !!}> Jefes de División
                 </div>
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_5[]" type="checkbox" class="form-check-input" id="question_5" value="O" {!! old('question_5') == 'O' ? checked : '' !!}> Otro
+                  <input required onchange=evaluationFormRequiredQuestion5() name="question_5[]" type="checkbox" class="form-check-input" id="question_5_O" value="O" {!! old('question_5') == 'O' ? checked : '' !!}> Otro
                 </div>
               </td>
             </tr>
@@ -558,7 +558,7 @@
 
             {{-- Question_6_1 --}}
             <tr>
-              <td>Lo mejor {!! $participant->activity_string_1 !!} fue:</td>
+              <td>Lo mejor {!! $data['activity_string_1'] !!} fue:</td>
               <td>
                 <textarea maxlength="500" name="question_6_1" class="form-control" id="question_6_1" rows="2">{!! old('question_6_1') !!}</textarea>
               </td>
@@ -603,22 +603,22 @@
             <tr>
               <td>
                 <div class="form-check">
-                  <input name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_1" value="P" {!! old('question_7_1') == 'P' ? 'checked':'' !!}>Pedagogía
+                  <input required onchange=evaluationFormRequiredQuestion7() name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_P" value="P" {!! old('question_7_1') == 'P' ? 'checked':'' !!}>Pedagogía
                 </div>
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_1" value="H" {!! old('question_7_1') == 'H' ? 'checked':'' !!}>Desarrollo Humano
+                  <input required onchange=evaluationFormRequiredQuestion7() name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_H" value="H" {!! old('question_7_1') == 'H' ? 'checked':'' !!}>Desarrollo Humano
                 </div>
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_1" value="C" {!! old('question_7_1') == 'C' ? 'checked':'' !!}>Computación
+                  <input required onchange=evaluationFormRequiredQuestion7() name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_C" value="C" {!! old('question_7_1') == 'C' ? 'checked':'' !!}>Computación
                 </div>
               </td>
               <td>
                 <div class="form-check">
-                  <input name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_1" value="O" {!! old('question_7_1') == 'O' ? 'checked':'' !!}>Otro
+                  <input required onchange=evaluationFormRequiredQuestion7() name="question_7_1[]" type="checkbox" class="form-check-input" id="question_7_O" value="O" {!! old('question_7_1') == 'O' ? 'checked':'' !!}>Otro
                 </div>
               </td>
             </tr>
@@ -675,7 +675,7 @@
           <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
         </div>
         <div class="col-xl-2">
-          <a href="{!! route("view.participants",$participant->activity_id) !!}" class="btn btn-outline-warning">Cancelar</a>
+          <a href="{!! route("view.participants", $data['activity_id']) !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
       </div>
 

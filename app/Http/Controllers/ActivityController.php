@@ -119,6 +119,7 @@ class ActivityController extends Controller
     public function edit($activity_id){
       try{
         $activity = Activity::findOrFail($activity_id);
+        $activity->group_key = $activity->getKey().'-'.$activity->activity_id;
         $venues = Venue::all();
 
         return view("pages.update-activity")
