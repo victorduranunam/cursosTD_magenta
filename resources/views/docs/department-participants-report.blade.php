@@ -22,15 +22,16 @@ body{
   font-size: 15px;
 }
 .img-escudo{
-  width: 52%;
+  width: 115%;
 }
 .mg{
-  width: 28%;
+  width: 50%;
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
 }
 .left-header,.right-header{
-  width: 30%;
+  width: 20%;
+  height: auto;
   position:relative;
 }
 .right-header{
@@ -38,8 +39,9 @@ body{
 }
 .center-header{
   width:100%;
+  padding-left:5%;
   align:center;
-  line-height:5px;
+  line-height:1px;
 }  
 
 th, td{
@@ -61,7 +63,7 @@ th, td{
     </div>
 
     <div class="right-header">
-      <img class="img-escudo" src={!! public_path('img/unica.png') !!} align=right>
+      <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
     </div>
 
     <div class="center-header">
@@ -70,9 +72,9 @@ th, td{
       <h3>Reporte de Participantes</h3>
       <h3>{!! $department !!}</h3>
       <h3>{!! $period !!}</h3>
-      <hr>
     </div>
   </div>
+  <hr>
   <div id="body">
     @foreach ($activities as $activity)
       <table>

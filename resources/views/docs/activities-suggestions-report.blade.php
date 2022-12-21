@@ -21,10 +21,10 @@ body{
   display:inline-block;
 }
 .img-escudo{
-  width: 32%;
+  width: 80%;
 }
 .mg{
-  width: 28%;
+  width: 34%;
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
 }
@@ -37,6 +37,7 @@ body{
 }
 .center-header{
   width:100%;
+  padding-left:7%;
   align:center;
   line-height:5px;
 }
@@ -68,7 +69,7 @@ th, td{
       </div>
 
       <div class="right-header">
-        <img class="img-escudo" src={!! public_path('img/unica.png') !!} align=right>
+        <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
       </div>
 
       <div class="center-header">

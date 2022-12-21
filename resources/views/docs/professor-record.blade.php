@@ -21,7 +21,7 @@ body{
   display:inline-block;
 }
 .img-escudo{
-  width: 55%;
+  width: 60%;
 }
 .mg{
   width: 30%;
@@ -37,6 +37,7 @@ body{
 }
 .center-header{
   width:100%;
+  padding-left:5%;
   align:center;
   line-height:5px;
 }
@@ -62,7 +63,7 @@ th, td{
         <img class="img-escudo mg" src={!! public_path('img/logo-MAGESTIC.png') !!} align=left>
       </div>
       <div class="right-header">
-        <img class="img-escudo" src={!! public_path('img/unica.png') !!} align=right>
+        <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
       </div>
 
       <div class="center-header">
