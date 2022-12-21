@@ -264,3 +264,47 @@ function viewRowDiploma(){
     diploma.style.visibility = 'hidden'
   }
 }
+
+function evaluationFormRequiredQuestion5(){
+  const question_5_I = document.getElementById('question_5_I')
+  const question_5_P = document.getElementById('question_5_P')
+  const question_5_J = document.getElementById('question_5_J')
+  const question_5_O = document.getElementById('question_5_O')
+
+  if(question_5_I.checked || question_5_P.checked || question_5_J.checked || question_5_O.checked ){
+    question_5_I.required = false
+    question_5_P.required = false
+    question_5_J.required = false
+    question_5_O.required = false
+  } else {
+    question_5_I.required = true
+    question_5_P.required = true
+    question_5_J.required = true
+    question_5_O.required = true
+  }
+
+}
+
+function evaluationFormRequiredQuestion7(){
+  const question_7_P = document.getElementById('question_7_P')
+  const question_7_H = document.getElementById('question_7_H')
+  const question_7_C = document.getElementById('question_7_C')
+  const question_7_O = document.getElementById('question_7_O')
+
+  if(question_7_P.checked || 
+     question_7_H.checked || 
+     question_7_C.checked || 
+     question_7_O.checked ) {
+
+      question_7_P.required = false
+      question_7_H.required = false
+      question_7_C.required = false
+      question_7_O.required = false
+  } else {
+      question_7_P.required = true
+      question_7_H.required = true
+      question_7_C.required = true
+      question_7_O.required = true
+  }
+
+}

@@ -16,11 +16,16 @@
 
   <div class="flex-center position-ref full-height">
 
+    @if(Auth::user())
     <div class="top-right links">
-      {{-- TODO: if auth --}}
-      {{-- <a href="{{ route('home') }}">Hogar</a> --}}
+      <a href="{{ route('home') }}">Hogar</a>
+    </div>
+    @else
+    <div class="top-right links">
+      <a href="{!! route('search.evaluation') !!}">Contestar Encuesta</a>
       <a href="{!! route('login') !!}">Ingresar</a>
     </div>
+    @endif
 
     <div class="content">
       <div class="title m-b-md">

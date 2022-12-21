@@ -209,4 +209,8 @@ class ParticipantController extends Controller
                 ->with('warning', 'Error al eliminar el participante');
             }
       }
+
+    public function searchEvaluation(){
+      return view("pages.search-evaluation");
+    }
 }
