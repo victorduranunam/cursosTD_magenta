@@ -56,10 +56,11 @@ th{
   font-size: 15px;
   padding: 5px;
   background-color: lightgray;
+  width: 30%;
 }
 
 td{
-  text-align:center;
+  text-align:left;
   font-size: 15px;
   padding: 5px;
   width: 30%;
@@ -94,7 +95,11 @@ td{
     <table>
       <tr>
         <th class="activity" colspan="2">2022-1s</th>
-        <th class="activity">Criterio: {!! $department->period_1s->avg !!}</th>
+        @if($department->period_1s->avg == 0)
+          <th class="activity">Sin evaluaciones</th>
+        @else
+          <th class="activity">Criterio: {!! $department->period_1s->avg !!}</th>
+        @endif
       </tr>
       @foreach($department->period_1s->activities as $activity)
       <tr>
@@ -107,7 +112,11 @@ td{
     <table>
       <tr>
         <th class="activity" colspan="2">2022-1i</th>
-        <th class="activity">Criterio: {!! $department->period_1i->avg !!}</th>
+        @if($department->period_1i->avg == 0)
+          <th class="activity">Sin evaluaciones</th>
+        @else
+          <th class="activity">Criterio: {!! $department->period_1i->avg !!}</th>
+        @endif
       </tr>
       @foreach($department->period_1i->activities as $activity)
       <tr>
@@ -120,7 +129,11 @@ td{
     <table>
       <tr>
         <th class="activity" colspan="2">2022-2s</th>
-        <th class="activity">Criterio: {!! $department->period_2s->avg !!}</th>
+        @if($department->period_2s->avg == 0)
+          <th class="activity">Sin evaluaciones</th>
+        @else
+          <th class="activity">Criterio: {!! $department->period_2s->avg !!}</th>
+        @endif
       </tr>
       @foreach($department->period_2s->activities as $activity)
       <tr>
@@ -133,7 +146,11 @@ td{
     <table>
       <tr>
         <th class="activity" colspan="2">2022-2i</th>
-        <th class="activity" >Criterio: {!! $department->period_2i->avg !!}</th>
+        @if($department->period_2i->avg == 0)
+          <th class="activity">Sin evaluaciones</th>
+        @else
+          <th class="activity">Criterio: {!! $department->period_2i->avg !!}</th>
+        @endif
       </tr>
       @foreach($department->period_2i->activities as $activity)
       <tr>
@@ -145,6 +162,7 @@ td{
     </table>
     <div>
       <p>Criterio anual del departamento: {!! $department->avg !!}</p>
+      <p>*No se toman en cuenta aquellas actividades sin evaluaciones.</p>
     </div>
   </div>
 </body>
