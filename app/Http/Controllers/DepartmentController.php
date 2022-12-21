@@ -2,14 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use App\Models\ActivityEvaluation;
 use App\Models\Participant;
-use App\Models\Administrator;
 use Illuminate\Http\Request;
 use App\Models\Department;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use PDF;
-use stdClass;
 
 class DepartmentController extends Controller
 {
@@ -133,10 +131,12 @@ class DepartmentController extends Controller
   }
 
   public function downloadAcceptanceCriteriaReport(Request $req, $department_id){
-    $department = Department::findOrFail($department_id);
-    $activities = DB::table('activity AS a')
-                    ->select('a.activity_id', 'ae.activity_evaluation_id', 
-                              'a.num','a.type','ae.question_4')
+    try{
+      $department = Department::findOrFail($department_id);
+      $activities = DB::table('activity AS a')
+                    ->select('a.activity_id', 'ac.key', 
+                             'ae.activity_evaluation_id', 'a.num','a.type',
+                             'ae.question_4')
                     ->join('activity_catalogue AS ac',
                            'ac.activity_catalogue_id',
                            '=',
@@ -154,10 +154,14 @@ class DepartmentController extends Controller
                     ->get();
 
     
-    $department->period_1s = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
-    $department->period_1i = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
-    $department->period_2s = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
-    $department->period_2i = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_1s = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_1i = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_2s = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_2i = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
 
     foreach($activities as $activity){
       if($activity->type === 's' && $activity->num === 1)
@@ -169,15 +173,19 @@ class DepartmentController extends Controller
       elseif($activity->type === 'i' && $activity->num === 2)
         $p = 'period_2i';
       
-      if($department->$p->activities->doesntContain('activity_id',$activity->activity_id))
-        $department->$p->activities->push((object) [
-          'activity_id'  => $activity->activity_id,
-          'sum'     => $activity->question_4 ? 100 : 0,
-          'avg'     => $activity->question_4 ? 100 : 0,
-          'evals' => collect()->push((object) [
-            'activity_evaluation_id' => $activity->activity_evaluation_id, 
-            'question_4'             => $activity->question_4
-          ])
+      if($department->$p->activities
+          ->doesntContain('activity_id',$activity->activity_id))
+        $department->$p->activities->push(
+          (object) [
+            'activity_id'  => $activity->activity_id,
+            'key'          => $activity->key,
+            'sum'          => $activity->question_4 ? 100 : 0,
+            'avg'          => $activity->question_4 ? 100 : 0,
+            'evals'        => collect()->push(
+              (object) [
+                'activity_evaluation_id' => $activity->activity_evaluation_id, 
+                'question_4'             => $activity->question_4
+              ])
         ]);
       else{
         $searched_act = $department->$p->activities->firstWhere('activity_id', $activity->activity_id);
@@ -186,36 +194,66 @@ class DepartmentController extends Controller
             'question_4' => $activity->question_4
         ]);
         $searched_act->sum += $activity->question_4 ? 100 : 0;
-        $searched_act->avg = $searched_act->sum/$searched_act->evals->count();
+        $searched_act->avg = round(
+          $searched_act->sum/$searched_act->evals->count(),2
+        );
       }
     }
     
     $department->period_1s->sum = $department->period_1s->activities->sum('avg');
-    $department->period_1s->avg = $department->period_1s->activities->count()
-                                ? $department->period_1s->sum
-                                / $department->period_1s->activities->count()
-                                : 0;
+    $department->period_1s->avg = round(
+        $department->period_1s->activities->count()
+      ? $department->period_1s->sum
+      / $department->period_1s->activities->count()
+      : 0,2);
 
 
     $department->period_1i->sum = $department->period_1i->activities->sum('avg');
-    $department->period_1i->avg = $department->period_1i->activities->count()
-                                ? $department->period_1i->sum
-                                / $department->period_1i->activities->count()
-                                : 0;
+    $department->period_1i->avg = round(
+        $department->period_1i->activities->count()
+      ? $department->period_1i->sum
+      / $department->period_1i->activities->count()
+      : 0,2);
 
     $department->period_2s->sum = $department->period_2s->activities->sum('avg');
-    $department->period_2s->avg = $department->period_2s->activities->count() 
-                                ? $department->period_2s->sum
-                                / $department->period_2s->activities->count() 
-                                : 0;
+    $department->period_2s->avg = round(
+        $department->period_2s->activities->count() 
+      ? $department->period_2s->sum
+      / $department->period_2s->activities->count() 
+      : 0,2);
 
     $department->period_2i->sum = $department->period_2i->activities->sum('avg');
-    $department->period_2i->avg = $department->period_2i->activities->count()
-                                ? $department->period_2i->sum
-                                / $department->period_2i->activities->count()
-                                : 0;
-                                
-    return $department;
+    $department->period_2i->avg = round(
+        $department->period_2i->activities->count()
+      ? $department->period_2i->sum
+      / $department->period_2i->activities->count()
+      : 0,2);
+    
+    $department->sum = $department->period_1s->avg + 
+                       $department->period_2s->avg + 
+                       $department->period_1i->avg + 
+                       $department->period_2i->avg;
+
+    $department->avg = round($department->sum / 4,2);
+
+
+    $pdf = PDF::loadView('docs.department-acceptance-criteria-report',
+      [
+        'department' => $department,
+        'year'       => $req->year_search
+      ]
+    )->setPaper('letter');
+
+    return $pdf->download(
+      'Reporte_Criterio_Aceptacion_'.$department->getFileName().'.pdf'
+    );
+
+    } catch (Exception $th){
+      return redirect()
+        ->back()
+        ->with('danger', 'Problema al generar el formato');
+    }
+    
   }
 
   public function downloadParticipantsReport(Request $req, $department_id){
