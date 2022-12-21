@@ -2,14 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use App\Models\ActivityEvaluation;
 use App\Models\Participant;
-use App\Models\Administrator;
 use Illuminate\Http\Request;
 use App\Models\Department;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use PDF;
-use stdClass;
 
 class DepartmentController extends Controller
 {
@@ -133,10 +131,16 @@ class DepartmentController extends Controller
   }
 
   public function downloadAcceptanceCriteriaReport(Request $req, $department_id){
-    $department = Department::findOrFail($department_id);
-    $activities = DB::table('activity AS a')
-                    ->select('a.activity_id', 'ae.activity_evaluation_id', 
-                              'a.num','a.type','ae.question_4')
+    try{
+
+      // Find Department
+      $department = Department::findOrFail($department_id);
+
+      // Find Evaluations linked to the department and the requested year
+      $evals = DB::table('activity AS a')
+                    ->select('a.activity_id', 'ac.key', 
+                             'ae.activity_evaluation_id', 'a.num','a.type',
+                             'ae.question_4')
                     ->join('activity_catalogue AS ac',
                            'ac.activity_catalogue_id',
                            '=',
@@ -153,69 +157,183 @@ class DepartmentController extends Controller
                     ->where('ac.department_id', $department_id)
                     ->get();
 
-    
-    $department->period_1s = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
-    $department->period_1i = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
-    $department->period_2s = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
-    $department->period_2i = (object) ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      // Return if it isn't evaluations.
+      if($evals->isEmpty())
+        return redirect()
+             ->back()
+             ->with('warning', 'No hay actividades asociadas a ese '.
+                               'departamento en ese año.');
+                                
+      // Prepare data
+      $department->period_1s = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_1i = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_2s = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
+      $department->period_2i = (object) 
+                            ['avg' => 0, 'sum' => 0, 'activities' => collect()];
 
-    foreach($activities as $activity){
-      if($activity->type === 's' && $activity->num === 1)
+    // Associate each evaluation to his period.
+    foreach($evals as $eval){
+      if($eval->type === 's' && $eval->num === 1)
         $p = 'period_1s';
-      elseif($activity->type === 'i' && $activity->num === 1)
+      elseif($eval->type === 'i' && $eval->num === 1)
         $p = 'period_1i';
-      elseif($activity->type === 's' && $activity->num === 2)
+      elseif($eval->type === 's' && $eval->num === 2)
         $p = 'period_2s';
-      elseif($activity->type === 'i' && $activity->num === 2)
+      elseif($eval->type === 'i' && $eval->num === 2)
         $p = 'period_2i';
       
-      if($department->$p->activities->doesntContain('activity_id',$activity->activity_id))
-        $department->$p->activities->push((object) [
-          'activity_id'  => $activity->activity_id,
-          'sum'     => $activity->question_4 ? 100 : 0,
-          'avg'     => $activity->question_4 ? 100 : 0,
-          'evals' => collect()->push((object) [
-            'activity_evaluation_id' => $activity->activity_evaluation_id, 
-            'question_4'             => $activity->question_4
-          ])
+      // Check if the activity of the evaluation is already in the data
+      // if the activity doesn't have any evaluations is not in the final data.
+      if($department->$p->activities
+          ->doesntContain('activity_id',$eval->activity_id))
+        $department->$p->activities->push(
+          (object) [
+            'activity_id'  => $eval->activity_id,
+            'key'          => $eval->key,
+            'sum'          => $eval->question_4 ? 100 : 0,
+            'avg'          => $eval->question_4 ? 100 : 0,
+            'evals'        => collect()->push(
+              (object) [
+                'activity_evaluation_id' => $eval->activity_evaluation_id, 
+                'question_4'             => $eval->question_4
+              ])
         ]);
       else{
-        $searched_act = $department->$p->activities->firstWhere('activity_id', $activity->activity_id);
-        $searched_act->evals->push((object) [
-            'activity_evaluation_id' => $activity->activity_evaluation_id, 
-            'question_4' => $activity->question_4
+        $searched_act = $department
+                     -> $p
+                     -> activities
+                     ->firstWhere('activity_id', $eval->activity_id);
+
+        $searched_act -> evals
+                      -> push((object) [
+            'activity_evaluation_id' => $eval->activity_evaluation_id, 
+            'question_4' => $eval->question_4
         ]);
-        $searched_act->sum += $activity->question_4 ? 100 : 0;
-        $searched_act->avg = $searched_act->sum/$searched_act->evals->count();
+        $searched_act->sum += $eval->question_4 ? 100 : 0;
+        $searched_act->avg = round(
+          $searched_act->sum/$searched_act->evals->count(),2
+        );
       }
     }
     
-    $department->period_1s->sum = $department->period_1s->activities->sum('avg');
-    $department->period_1s->avg = $department->period_1s->activities->count()
-                                ? $department->period_1s->sum
-                                / $department->period_1s->activities->count()
-                                : 0;
+    $department->period_count = 4;
+    // Calculate average per period
+    $department->period_1s
+               ->activities_count = $department->period_1s
+                                               ->activities
+                                               ->count();
 
+    if( $department->period_1s->activities_count == 0){
+      $department->period_1s->sum = 0;
+      $department->period_1s->avg = 0;
+      $department->period_count--;
+    } else {
+      $department->period_1s->sum = $department->period_1s 
+                                               -> activities
+                                               -> sum('avg');
+                                      
+      $department->period_1s->avg = round(
+        $department->period_1s->activities_count ?
+        $department->period_1s->sum                 /
+        $department->period_1s->activities_count :
+        0,2
+      );
+    }
 
-    $department->period_1i->sum = $department->period_1i->activities->sum('avg');
-    $department->period_1i->avg = $department->period_1i->activities->count()
-                                ? $department->period_1i->sum
-                                / $department->period_1i->activities->count()
-                                : 0;
+    $department -> period_2s
+                -> activities_count = $department -> period_2s
+                                                  -> activities
+                                                  -> count();
 
-    $department->period_2s->sum = $department->period_2s->activities->sum('avg');
-    $department->period_2s->avg = $department->period_2s->activities->count() 
-                                ? $department->period_2s->sum
-                                / $department->period_2s->activities->count() 
-                                : 0;
+    if( $department -> period_2s -> activities_count == 0){
+      $department -> period_2s -> sum = 0;
+      $department -> period_2s -> avg = 0;
+      $department->period_count--;
+    } else {
+      $department -> period_2s -> sum = $department -> period_2s 
+                                                    -> activities
+                                                    -> sum('avg');
+                                      
+      $department -> period_2s ->avg = round(
+          $department -> period_2s -> activities_count
+        ? $department -> period_2s -> sum
+        / $department -> period_2s -> activities_count
+        : 0,2
+      );
+    }
 
-    $department->period_2i->sum = $department->period_2i->activities->sum('avg');
-    $department->period_2i->avg = $department->period_2i->activities->count()
-                                ? $department->period_2i->sum
-                                / $department->period_2i->activities->count()
-                                : 0;
-                                
-    return $department;
+    $department -> period_1i
+                -> activities_count = $department -> period_1i
+                                                  -> activities
+                                                  -> count();
+
+    if( $department -> period_1i -> activities_count == 0){
+      $department -> period_1i -> sum = 0;
+      $department -> period_1i -> avg = 0;
+      $department->period_count--;
+    } else {
+      $department -> period_1i -> sum = $department -> period_1i 
+                                                    -> activities
+                                                    -> sum('avg');
+                                      
+      $department -> period_1i ->avg = round(
+          $department -> period_1i -> activities_count
+        ? $department -> period_1i -> sum
+        / $department -> period_1i -> activities_count
+        : 0,2
+      );
+    }
+
+    $department -> period_2i
+                -> activities_count = $department -> period_2i
+                                                  -> activities
+                                                  -> count();
+
+    if( $department -> period_2i -> activities_count == 0){
+      $department -> period_2i -> sum = 0;
+      $department -> period_2i -> avg = 0;
+      $department->period_count--;
+    } else {
+      $department -> period_2i -> sum = $department -> period_2i 
+                                                    -> activities
+                                                    -> sum('avg');
+                                      
+      $department -> period_2i ->avg = round(
+          $department -> period_2i -> activities_count
+        ? $department -> period_2i -> sum
+        / $department -> period_2i -> activities_count
+        : 0,2
+      );
+    }
+    
+    $department->sum = $department->period_1s->avg + 
+                       $department->period_2s->avg + 
+                       $department->period_1i->avg + 
+                       $department->period_2i->avg;
+
+    $department->avg = round($department->sum / $department->period_count,2);
+
+    $pdf = PDF::loadView('docs.department-acceptance-criteria-report',
+      [
+        'department' => $department,
+        'year'       => $req->year_search
+      ]
+    )->setPaper('letter');
+
+    return $pdf->download(
+      'Reporte_Criterio_Aceptacion_'.$department->getFileName().'.pdf'
+    );
+
+    } catch (Exception $th){
+      return dd($th);
+      return redirect()
+        ->back()
+        ->with('danger', 'Problema al generar el formato');
+    }
+    
   }
 
   public function downloadParticipantsReport(Request $req, $department_id){
