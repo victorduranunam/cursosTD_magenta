@@ -1,8 +1,8 @@
 @extends('layouts.app-participant')
 @section('content')
 
-<div class="card">
-  <div class="card-header"><br>
+<div class="card evaluation">
+  <div class="card-header evaluation"><br>
     <h3>Evaluación <i class="bi bi-journals"></i></h3>
     <h4>{!! $data['participant_name'] !!}</h4>
     <h5>{!! $data['activity_name']!!}</h5>
@@ -10,7 +10,7 @@
   
   @include('partials.messages')
 
-  <div class="card-body"><br>
+  <div class="card-body evaluation"><br>
     <form method="POST" action="{!! route('store.activity-evaluation', $data['participant_id']) !!}">
       @csrf
       @method('post')

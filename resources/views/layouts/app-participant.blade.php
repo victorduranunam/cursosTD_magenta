@@ -18,15 +18,14 @@
       <div class="header">
           <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-              <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
-              <p class="navbar-brand">MAGESTIC</p>
+              <a href="{!! route('home') !!}" class="navbar-brand">MAGESTIC</a>
               <a href="{!! route('home') !!}" class="navbar-brand">Salir</a>
             </div>
           </nav>
       </div>
 
       <!-- Main Info -->
-      <div class="main" id="main">
+      <div class="main evaluation" id="evaluation">
         @yield('content')
       </div>
       <div class="ft">
