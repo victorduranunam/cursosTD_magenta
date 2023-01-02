@@ -5,6 +5,12 @@
 
 Management and control system in updating activities for the training and professional development of teachers.
 
+## Dependencies
+For this project you will need:
+
+1. [PHP 7](https://windows.php.net/download/) 
+2. [Composer](https://getcomposer.org)
+3. [Magestic-DB](https://github.com/MauRamos334455/magestic-db)
 ## Deploy
 ### Connect 
 Connect this Laravel project to any database created via [Magestic-DB](https://github.com/MauRamos334455/magestic-db) with the .env file.
@@ -20,12 +26,16 @@ DB_PASSWORD = <your password>
 ```
 
 ### Execute
+Install dependencies
+```shell
+php composer install
+```
+
 Initialize the server with the next commands
 
 ```shell
 php artisan serve --port=<port_number> --host=<ip_address>
 ```
-
 ## Build with
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
