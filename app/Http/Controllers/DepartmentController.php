@@ -398,6 +398,127 @@ class DepartmentController extends Controller
   }
 
   public function downloadEvaluationReport(Request $req, $department_id){
-    return 'Evaluacion';
+    try {
+
+      // ---------------------------- QUERIES ----------------------------------
+
+      $department = Department::findOrFail($department_id);
+
+      // Get all the activities
+      $activities = DB::table('activity AS a')
+        ->join('activity_catalogue AS ac', 
+                'ac.activity_catalogue_id', 
+                'a.activity_catalogue_id')
+        ->where('ac.department_id', $department_id)
+        ->where('a.year', $req->year_search)
+        ->where('a.num', $req->num_search)
+        ->where('a.type', $req->type_search)
+        ->select('a.activity_id', 'ac.key', 'ac.name', 
+                 'ac.type', 'a.max_quota', 'ac.hours')
+        ->get();
+
+      // Get all the instructor_evaluations
+      $instructor_evaluations = DB::table('instructor_evaluation AS ie')
+        ->join('instructor AS i', 'i.instructor_id', 'ie.instructor_id')
+        ->join('professor AS pr', 'pr.professor_id', 'i.professor_id')
+        ->join('activity AS a', 'a.activity_id', 'i.activity_id')
+        ->whereIn('a.activity_id', $activities->pluck('activity_id'))
+        ->select('ie.*', 'pr.name', 'pr.last_name', 'pr.mothers_last_name',
+                 'a.activity_id')
+        ->get();
+
+      // return $instructor_evaluations;
+
+      // Get all the activity_evaluations
+      $activity_evaluations = DB::table('participant AS p')
+        ->leftJoin('activity_evaluation AS ae', 'p.participant_id', 'ae.participant_id')
+        ->join('activity AS a', 'a.activity_id', 'p.activity_id')
+        ->whereIn('a.activity_id', $activities->pluck('activity_id'))
+        ->select('ae.*', 'p.attendance', 'p.accredited', 'a.activity_id')
+        ->get();
+
+      // return $activity_evaluations->dd();
+
+      // -----------------------------------------------------------------------
+
+      // --------------- SECOND SECTION: PARTICIPANT COUNTS --------------------
+
+      // Maximum quota
+      $activities->max_quota = $activities->sum('max_quota');
+      
+      // Hours total
+      $activities->hours = $activities->sum('hours');
+
+      // Participants count
+      $activity_evaluations->enrolled = $activity_evaluations->count();
+
+      // Attendance count
+      $activity_evaluations->attendance = $activity_evaluations->sum('attendance');
+
+      // Accredited count
+      $activity_evaluations->accredited = $activity_evaluations->sum('accredited');
+
+      // Evaluations count
+      $activity_evaluations->count = $activity_evaluations->sum(function ($p){
+        return collect($p)->has('activity_evaluation_id');
+      });
+
+      // -----------------------------------------------------------------------
+
+      // --------------- THIRD SECTION: OCCUPANCE FACTOR -----------------------
+      $occupance_factor = $activity_evaluations->attendance * 100 / $activities->max_quota;
+
+      // -----------------------------------------------------------------------
+
+      // ------------ FOURTH SECTION: RECOMMENDATION FACTOR --------------------
+
+
+      // -----------------------------------------------------------------------
+
+      // ------------ FIFTH SECTION: ACCREDITANCE FACTOR -----------------------
+      $accredited_factor = $activity_evaluations->accredited * 100 / $activity_evaluations->attendance;
+
+      // -----------------------------------------------------------------------
+
+      // ------------ SIXTH SECTION: ACTIVITIES QUALITY FACTOR -----------------
+
+      // -----------------------------------------------------------------------
+
+      // ------------ SEVENTH SECTION: DEPARTMENT QUALITY FACTOR ---------------
+
+      // -----------------------------------------------------------------------
+
+      // ------------------- EIGHTH SECTION: INSTRUCTORS -----------------------
+
+      // -----------------------------------------------------------------------
+
+      // ------------------- NINTH SECTION: REQUESTED AREAS --------------------
+
+      // -----------------------------------------------------------------------
+
+      // ------------------- TENTH SECTION: SUGGESTIONS ------------------------
+
+      // -----------------------------------------------------------------------
+
+      // ------------------- ELEVENTH SECTION: SCHEDULES -----------------------
+
+      // -----------------------------------------------------------------------
+
+
+      return view('docs.department-evaluation-report')
+        ->with('period', $req->year_search.'-'.$req->num_search.$req->type_search)
+        ->with('department_name', $department->name)
+        ->with('count_attendance', $activity_evaluations->attendance)
+        ->with('count_accredited', $activity_evaluations->accredited)
+        ->with('count_participants', $activity_evaluations->enrolled)
+        ->with('count_evaluations', $activity_evaluations->count)
+        ->with('activities', $activities);
+
+    } catch (\Throwable $th) {
+      return dd($th);
+    }
+    
+    
+    
   }
 }
