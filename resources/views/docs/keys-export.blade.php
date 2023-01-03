@@ -8,10 +8,28 @@
 </head>
 <body>
   <table>
+    <tr>
+      <th>Clave</th>
+      <th>Periodo</th>
+      <th>Instructor</th>
+      <th>Folio del Instructor</th>
+      <th>Participante</th>
+      <th>Folio del Participante</th>
+    </tr>
     @foreach($activities as $activity)
-      <tr>
-        <td>{!! $activity !!}</td>
-      </tr>
+      @foreach($activity->instructors as $instructor)
+        <tr>
+          <td>{!! $activity->catalogue->key !!}</td>
+          <td>{!! $activity->year ."-". $activity->num . $activity->type !!}</td>
+          <td>{!! $instructor !!}</td>
+        </tr>
+      @endforeach
+    
+        <!-- @foreach($activity->participants as $participant)
+          <td>{!! $participant->name . " " . $participant->last_name . " " . $participant->mothers_last_name!!}</td>
+          <td>{!! $participant->key !!}</td>
+        @endforeach -->
+
     @endforeach
   </table>
 </body>
