@@ -22,10 +22,10 @@ body{
   font-size: 15px;
 }
 .img-escudo{
-  width: 52%;
+  width: 90%;
 }
 .mg{
-  width: 28%;
+  width: 40%;
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
 }
@@ -38,6 +38,7 @@ body{
 }
 .center-header{
   width:100%;
+  padding-left:5%;
   align:center;
   line-height:5px;
 }  
@@ -79,7 +80,7 @@ td{
     </div>
 
     <div class="right-header">
-      <img class="img-escudo" src={!! public_path('img/unica.png') !!} align=right>
+      <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
     </div>
 
     <div class="center-header">
@@ -88,9 +89,9 @@ td{
       <h3>Criterio de Aceptación del Departamento</h3>
       <h3>{!! $department->name !!}</h3>
       <h3>{!! $year !!}</h3>
-      <hr>
     </div>
   </div>
+  <hr>
   <div id="body">
     <table>
       <tr>

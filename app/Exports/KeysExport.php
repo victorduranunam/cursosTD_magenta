@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Illuminate\Contracts\View\View;
 
 use App\Models\Activity;
+use App\Models\Professor;
 use App\Models\ActivityCatalogue;
 
 class KeysExport implements FromView, ShouldAutoSize
@@ -18,8 +19,18 @@ class KeysExport implements FromView, ShouldAutoSize
         $activities = Activity::all();
         foreach ($activities as $activity) {
           $activity->catalogue = ActivityCatalogue::findOrFail($activity->activity_catalogue_id);
-          $activity->instructors = $activity->getInstructors();
-          $activity->participants = $activity->getParticipants();
+          $activity->instructors = Professor::join('instructor','instructor.professor_id','=','professor.professor_id')
+                                    ->where('instructor.activity_id',$activity->activity_id)
+                                    ->get(['name','last_name','mothers_last_name','key'])
+                                    ->sortBy(function($value){
+                                      return $value->last_name.$value->mothers_last_name.$value->name;
+                                    }, SORT_NATURAL);
+          $activity->participants = Professor::join('participant','participant.professor_id','=','professor.professor_id')
+                                      ->where('participant.activity_id',$activity->activity_id)
+                                      ->get(['name','last_name','mothers_last_name','key'])
+                                      ->sortBy(function($value){
+                                          return $value->last_name.$value->mothers_last_name.$value->name;
+                                        }, SORT_NATURAL);
         }
     
         $activities = $activities->sortBy(function ($value, $key) {
@@ -35,3 +46,6 @@ class KeysExport implements FromView, ShouldAutoSize
         return view('docs.keys-export', ['activities' => $activities]);
     }
 }
+
+
+
