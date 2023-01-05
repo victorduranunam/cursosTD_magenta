@@ -11,25 +11,17 @@
     <tr>
       <th>Clave</th>
       <th>Periodo</th>
-      <th>Instructor</th>
-      <th>Folio del Instructor</th>
-      <th>Participante</th>
-      <th>Folio del Participante</th>
+      <th>Instructor/Participante</th>
+      <th>Folio</th>
     </tr>
-    @foreach($activities as $activity)
-      @foreach($activity->instructors as $instructor)
-        <tr>
-          <td>{!! $activity->catalogue->key !!}</td>
-          <td>{!! $activity->year ."-". $activity->num . $activity->type !!}</td>
-          <td>{!! $instructor !!}</td>
-        </tr>
-      @endforeach
-    
-        <!-- @foreach($activity->participants as $participant)
-          <td>{!! $participant->name . " " . $participant->last_name . " " . $participant->mothers_last_name!!}</td>
-          <td>{!! $participant->key !!}</td>
-        @endforeach -->
+    @foreach($rows as $row)
+    <tr>
+      <td>{!! $row->key_catalogue !!}</td>
+      <td>{!! $row->year.'-'.$row->num.$row->type !!}</td>
+      <td>{!! $row->name.' '.$row->last_name.' '.$row->mothers_last_name !!}</td>
+      <td>{!! $row->key !!}</td>
 
+    </tr>
     @endforeach
   </table>
 </body>
