@@ -107,6 +107,10 @@
         <td>{!! $recommendation_factor !!}</td>
         <td>Factor de acreditación:</td>
         <td>{!! $accredited_factor !!}</td>
+        <td>Factor de calidad de actividades:</td>
+        <td>{!! $activity_quality_factor !!}</td>
+        <td>Factor de calidad del departmento:</td>
+        <td>{!! $department_quality_factor !!}</td>
       </tr>
     </table>
     <table>
@@ -137,22 +141,72 @@
             @endphp
           @endif
         @endforeach
-        @php
-          $average = round($average/($evaluations_count),2);
-        @endphp
         <tr>
           <td>
             {!! $i['name'].' '.$i['last_name'].' '.$i['mothers_last_name'] !!}
           </td>
-          <td>
-            {!! $average !!}
-          </td>
-          <td>
-            {!! $evaluations_count !!}
-          </td>
+          @if($evaluations_count)
+            <td>
+              {!! round($average/($evaluations_count),2) !!}
+            </td>
+            <td>
+              {!! $evaluations_count !!}
+            </td>
+          @else
+            <td colspan="2">
+              Sin evaluaciones
+            </td>
+          @endif
         </tr>
       @endforeach
-
+    </table>
+    <table>
+      <tr>
+        <th colspan="3">SUGERENCIAS Y RECOMENDACIONES</th>
+      </tr>
+      <tr>
+        <th>Lo mejor de la actividad</th>
+        <th>Sugerencias y Recomendaciones</th>
+        <th>Otros intereses</th>
+      </tr>
+      @foreach($suggestions as $s)
+        <tr>
+          <td>{!! $s['best'] !!}</td>
+          <td>{!! $s['suggestions'] !!}</td>
+          <td>{!! $s['others'] !!}</td>
+        </tr>
+      @endforeach
+    </table>
+    <table>
+      <tr>
+        <th colspan="4"> AREAS SOLICITADAS</th>
+      </tr>
+      <tr>
+        <td>Pedagógica {!! $areas_count['P'] !!}</td>
+        <td>Desarrollo Humano {!! $areas_count['H'] !!}</td>
+        <td>Computación {!! $areas_count['C'] !!}</td>
+        <td>Otras {!! $areas_count['O'] !!}</td>
+      </tr>
+      @foreach ($subjects as $s)
+        <tr>
+          <td colspan="4">{!! $s !!}</td>
+        </tr>
+      @endforeach
+    </table>
+    <table>
+      <tr>
+        <th colspan="2">HORARIOS PROPUESTOS</th>
+      </tr>
+      <tr>
+        <th>Horarios semestrales</th>
+        <th>Horarios intersemestrales</th>
+      </tr>
+      @foreach($schedules as $s)
+        <tr>
+          <td>{!! $s['sem'] !!}</td>
+          <td>{!! $s['int'] !!}</td>
+        </tr>
+      @endforeach
     </table>
   </div>
 </body>

@@ -463,11 +463,30 @@ class DepartmentController extends Controller
       // Accredited count
       $activity_evaluations->accredited = $activity_evaluations->sum('accredited');
 
+      // Areas
+      $areas_count = ['P' => 0, 'H' => 0, 'C' => 0, 'O' => 0];
+
+      // Schedules
+      $schedules = collect([]);
+
+      // Suggestions
+      $suggestions = collect([]);
+
+      // Subjects
+      $subjects = collect([]);
+
       // Evaluations count
       $activity_evaluations->count = $activity_evaluations->sum(function ($p){
-        return collect($p)->has('activity_evaluation_id');
+        return $p->activity_evaluation_id ? 1 : 0;
       });
 
+      if(!$activity_evaluations->count)
+        return redirect()
+             ->back()
+             ->with('warning', 'No existen encuestas de evaluación registradas'.
+                               ' en todo el periodo para ninguna actividad.'.
+                               ' Para generar el reporte es necesario que'.
+                               ' exista al menos una.');
       // -----------------------------------------------------------------------
 
       // --------------- THIRD SECTION: OCCUPANCE FACTOR -----------------------
@@ -480,14 +499,17 @@ class DepartmentController extends Controller
       // ------------ FOURTH SECTION: RECOMMENDATION FACTOR --------------------
       $recommendation_factor = round(
         $activity_evaluations->sum('question_4') / 
-        $activity_evaluations->count('activity_evaluation_id') * 100, 2);
+        $activity_evaluations->count * 100, 2);
 
       // -----------------------------------------------------------------------
 
       // ------------ FIFTH SECTION: ACCREDITANCE FACTOR -----------------------
-      $accredited_factor = round(
-        $activity_evaluations->accredited /
-        $activity_evaluations->attendance * 100, 2);
+      if($activity_evaluations->attendance)
+        $accredited_factor = round($activity_evaluations->accredited / 
+                                   $activity_evaluations->attendance * 100, 2
+                                  );
+      else
+        $accredited_factor = "Sin asistentes";
 
       // -----------------------------------------------------------------------
 
@@ -553,10 +575,55 @@ class DepartmentController extends Controller
           if($ae->question_3_4 == 80 || $ae->question_3_4 == 95 || $ae->question_3_4 == 100)
             $department_positive_answers++;
         }
+
+        $ae_best = '';
+        $ae_suggestions = '';
+        $ae_others = '';
+
+        if($ae->question_6_1)
+          $ae_best = $ae->question_6_1;
+        if($ae->question_6_2)
+          $ae_suggestions = $ae->question_6_2;
+        if($ae->question_6_3)
+          $ae_others = $ae->question_6_3;
+        
+        $suggestions->push([
+          'best' => $ae_best, 
+          'suggestions' => $ae_suggestions, 
+          'others' => $ae_others
+        ]);
+
+        if($ae->question_7_1){
+          $areas = collect(str_split($ae->question_7_1));
+          if($areas->contains('P'))
+            $areas_count['P']++;
+          if($areas->contains('H'))
+            $areas_count['H']++;
+          if($areas->contains('C'))
+            $areas_count['C']++;
+          if($areas->contains('O'))
+            $areas_count['O']++;
+        }
+
+        if($ae->question_7_2)
+          $subjects->push($ae->question_7_2);
+
+
+        $ae_sem = '';
+        $ae_int = '';
+        if($ae->question_8_1)
+          $ae_sem = $ae->question_8_1;
+        if($ae->question_8_2)
+          $ae_int = $ae->question_8_2;
+
+        $schedules->push(['sem' => $ae_sem, 'int' => $ae_int]);
       }
 
-      $activity_quality_factor = $activity_positive_answers / $activity_answers * 100;
-      $department_quality_factor = $department_positive_answers / $department_answers * 100;
+      $activity_quality_factor = $activity_positive_answers / 
+                                 $activity_answers * 100;
+
+      $department_quality_factor = $department_positive_answers / 
+                                   $department_answers * 100;
       // -----------------------------------------------------------------------
 
       // ------------------- EIGHTH SECTION: INSTRUCTORS -----------------------
@@ -567,18 +634,19 @@ class DepartmentController extends Controller
               ->firstWhere('instructor_id', $ie->instructor_id)['evaluations']
               ->push([
                 'instructor_evaluation_id' => $ie->instructor_evaluation_id,
-                'average' => $ie->instructor_evaluation_id ? ($ie->question_1 +
-                                                             $ie->question_2 +
-                                                             $ie->question_3 +
-                                                             $ie->question_4 +
-                                                             $ie->question_5 +
-                                                             $ie->question_6 +
-                                                             $ie->question_7 +
-                                                             $ie->question_8 +
-                                                             $ie->question_9 +
-                                                             $ie->question_10 +
-                                                             $ie->question_11) / 11
-                                                            : 0
+                'average'                  => $ie->instructor_evaluation_id ? (
+                  $ie->question_1 +
+                  $ie->question_2 +
+                  $ie->question_3 +
+                  $ie->question_4 +
+                  $ie->question_5 +
+                  $ie->question_6 +
+                  $ie->question_7 +
+                  $ie->question_8 +
+                  $ie->question_9 +
+                  $ie->question_10 +
+                  $ie->question_11
+                ) / 11 : 0
               ]);
         } else{
           $instructors->push([
@@ -589,27 +657,22 @@ class DepartmentController extends Controller
             'activity_key' => $ie->key.'-'.$ie->activity_id,
             'evaluations' => collect([[
               'instructor_evaluation_id' => $ie->instructor_evaluation_id,
-              'average' => $ie->instructor_evaluation_id ? ($ie->question_1 +
-                                                           $ie->question_2 +
-                                                           $ie->question_3 +
-                                                           $ie->question_4 +
-                                                           $ie->question_5 +
-                                                           $ie->question_6 +
-                                                           $ie->question_7 +
-                                                           $ie->question_8 +
-                                                           $ie->question_9 +
-                                                           $ie->question_10 +
-                                                           $ie->question_11) / 11
-                                                         : 0
+              'average'                  => $ie->instructor_evaluation_id ? (
+                $ie->question_1 +
+                $ie->question_2 +
+                $ie->question_3 +
+                $ie->question_4 +
+                $ie->question_5 +
+                $ie->question_6 +
+                $ie->question_7 +
+                $ie->question_8 +
+                $ie->question_9 +
+                $ie->question_10 +
+                $ie->question_11) / 11 : 0
               ]])
           ]);
         }
       }
-      // TODO:INSTRUCTUROES SIN EVALUACIONES Y MAS PRUEBAS
-      // -----------------------------------------------------------------------
-
-      // ------------------- NINTH SECTION: REQUESTED AREAS --------------------
-
       // -----------------------------------------------------------------------
 
       // ------------------- TENTH SECTION: SUGGESTIONS ------------------------
@@ -620,7 +683,32 @@ class DepartmentController extends Controller
 
       // -----------------------------------------------------------------------
 
+      // $pdf = PDF::loadView('docs.department-evaluation-report',
+      //   [
+      //     'period' => $req->year_search.'-'.$req->num_search.$req->type_search,
+      //     'department_name' => $department->name,
+      //     'count_attendance' => $activity_evaluations->attendance,
+      //     'count_accredited' => $activity_evaluations->accredited,
+      //     'count_participants' => $activity_evaluations->enrolled,
+      //     'count_evaluations' => $activity_evaluations->count,
+      //     'activity_quality_factor' => $activity_quality_factor,
+      //     'department_quality_factor' => $department_quality_factor,
+      //     'occupance_factor' => $occupance_factor,
+      //     'recommendation_factor' => $recommendation_factor,
+      //     'accredited_factor' => $accredited_factor,
+      //     'suggestions' => $suggestions,
+      //     'subjects' => $subjects,
+      //     'schedules' => $schedules,
+      //     'areas_count' => $areas_count,
+      //     'instructors' => $instructors,
+      //     'activities' => $activities
+      //   ]
+      // )->setPaper('letter');
 
+      // return $pdf->download(
+      //   'Reporte_Evaluacion_'.$department->getFileName().'.pdf'
+      // );
+      
       return view('docs.department-evaluation-report')
         ->with('period', $req->year_search.'-'.$req->num_search.$req->type_search)
         ->with('department_name', $department->name)
@@ -628,14 +716,25 @@ class DepartmentController extends Controller
         ->with('count_accredited', $activity_evaluations->accredited)
         ->with('count_participants', $activity_evaluations->enrolled)
         ->with('count_evaluations', $activity_evaluations->count)
+        ->with('activity_quality_factor', $activity_quality_factor)
+        ->with('department_quality_factor', $department_quality_factor)
         ->with('occupance_factor', $occupance_factor)
         ->with('recommendation_factor', $recommendation_factor)
         ->with('accredited_factor', $accredited_factor)
+        ->with('suggestions', $suggestions)
+        ->with('subjects', $subjects)
+        ->with('schedules', $schedules)
+        ->with('areas_count', $areas_count)
         ->with('instructors', $instructors)
         ->with('activities', $activities);
 
-    } catch (\Throwable $th) {
-      return dd($th);
+    } catch (Exception $th) {
+      if ($th->getMessage() === 'Division by zero')
+        return redirect()
+             ->back()
+             ->with('danger', 'Ocurrió una división por cero en alguna fórmula.');
+      else
+        return dd($th);
     }
     
     
