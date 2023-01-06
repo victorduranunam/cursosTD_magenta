@@ -683,31 +683,31 @@ class DepartmentController extends Controller
 
       // -----------------------------------------------------------------------
 
-      // $pdf = PDF::loadView('docs.department-evaluation-report',
-      //   [
-      //     'period' => $req->year_search.'-'.$req->num_search.$req->type_search,
-      //     'department_name' => $department->name,
-      //     'count_attendance' => $activity_evaluations->attendance,
-      //     'count_accredited' => $activity_evaluations->accredited,
-      //     'count_participants' => $activity_evaluations->enrolled,
-      //     'count_evaluations' => $activity_evaluations->count,
-      //     'activity_quality_factor' => $activity_quality_factor,
-      //     'department_quality_factor' => $department_quality_factor,
-      //     'occupance_factor' => $occupance_factor,
-      //     'recommendation_factor' => $recommendation_factor,
-      //     'accredited_factor' => $accredited_factor,
-      //     'suggestions' => $suggestions,
-      //     'subjects' => $subjects,
-      //     'schedules' => $schedules,
-      //     'areas_count' => $areas_count,
-      //     'instructors' => $instructors,
-      //     'activities' => $activities
-      //   ]
-      // )->setPaper('letter');
+      $pdf = PDF::loadView('docs.department-evaluation-report',
+        [
+          'period' => $req->year_search.'-'.$req->num_search.$req->type_search,
+          'department_name' => $department->name,
+          'count_attendance' => $activity_evaluations->attendance,
+          'count_accredited' => $activity_evaluations->accredited,
+          'count_participants' => $activity_evaluations->enrolled,
+          'count_evaluations' => $activity_evaluations->count,
+          'activity_quality_factor' => $activity_quality_factor,
+          'department_quality_factor' => $department_quality_factor,
+          'occupance_factor' => $occupance_factor,
+          'recommendation_factor' => $recommendation_factor,
+          'accredited_factor' => $accredited_factor,
+          'suggestions' => $suggestions,
+          'subjects' => $subjects,
+          'schedules' => $schedules,
+          'areas_count' => $areas_count,
+          'instructors' => $instructors,
+          'activities' => $activities
+        ]
+      )->setPaper('letter');
 
-      // return $pdf->download(
-      //   'Reporte_Evaluacion_'.$department->getFileName().'.pdf'
-      // );
+      return $pdf->download(
+        'Reporte_Evaluacion_'.$department->getFileName().'.pdf'
+      );
       
       return view('docs.department-evaluation-report')
         ->with('period', $req->year_search.'-'.$req->num_search.$req->type_search)

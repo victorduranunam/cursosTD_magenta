@@ -37,11 +37,11 @@
   <div id='header'>
 
     <div class="left-header">
-      <img class="img-escudo mg" src={!! asset('img/logo-magestic.png') !!} align=left>
+      <img class="img-escudo mg" src={!! public_path('img/logo-magestic.png') !!} align=left>
     </div>
 
     <div class="right-header">
-      <img class="img-escudo" src={!! asset('img/unica2.png') !!} align=right>
+      <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
     </div>
 
     <div class="center-header">
