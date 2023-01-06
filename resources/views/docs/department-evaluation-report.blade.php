@@ -95,9 +95,64 @@
         <td>{!! $count_attendance !!}</td>
         <td>Número de participantes que acreditaron:</td>
         <td>{!! $count_accredited !!}</td>
-        <td>Número de participantes que contestaron evaluación:</td>
+        <td>Número de participantes que contestaron evaluación sobre actividad:</td>
         <td>{!! $count_evaluations !!}</td>
       </tr>
+    </table>
+    <table>
+      <tr>
+        <td>Factor de ocupación:</td>
+        <td>{!! $occupance_factor !!}</td>
+        <td>Factor de recomendación:</td>
+        <td>{!! $recommendation_factor !!}</td>
+        <td>Factor de acreditación:</td>
+        <td>{!! $accredited_factor !!}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>INSTRUCTORES</th>
+      </tr>
+      <tr>
+        <th>
+          NOMBRE
+        </th>
+        <th>
+          PROMEDIO
+        </th>
+        <th>
+          NÚMERO DE EVALUACIONES
+        </th>
+      </tr>
+      @foreach($instructors as $i)
+        @php
+          $average = 0;
+          $evaluations_count = 0;
+        @endphp
+        @foreach($i['evaluations'] as $e)
+          @if($e['instructor_evaluation_id'])
+            @php
+              $evaluations_count++;
+              $average += $e['average'] ;
+            @endphp
+          @endif
+        @endforeach
+        @php
+          $average = round($average/($evaluations_count),2);
+        @endphp
+        <tr>
+          <td>
+            {!! $i['name'].' '.$i['last_name'].' '.$i['mothers_last_name'] !!}
+          </td>
+          <td>
+            {!! $average !!}
+          </td>
+          <td>
+            {!! $evaluations_count !!}
+          </td>
+        </tr>
+      @endforeach
+
     </table>
   </div>
 </body>

@@ -418,16 +418,21 @@ class DepartmentController extends Controller
         ->get();
 
       // Get all the instructor_evaluations
-      $instructor_evaluations = DB::table('instructor_evaluation AS ie')
-        ->join('instructor AS i', 'i.instructor_id', 'ie.instructor_id')
+      $instructor_evaluations = DB::table('instructor AS i')
         ->join('professor AS pr', 'pr.professor_id', 'i.professor_id')
         ->join('activity AS a', 'a.activity_id', 'i.activity_id')
+        ->join('activity_catalogue AS ac', 
+               'ac.activity_catalogue_id',
+               'a.activity_catalogue_id'
+              )
+        ->leftJoin('instructor_evaluation AS ie', 
+                   'ie.instructor_id', 
+                   'i.instructor_id'
+                  )
         ->whereIn('a.activity_id', $activities->pluck('activity_id'))
-        ->select('ie.*', 'pr.name', 'pr.last_name', 'pr.mothers_last_name',
-                 'a.activity_id')
+        ->select('a.activity_id', 'ac.key', 'pr.name',
+                 'pr.last_name', 'pr.mothers_last_name', 'ie.*')
         ->get();
-
-      // return $instructor_evaluations;
 
       // Get all the activity_evaluations
       $activity_evaluations = DB::table('participant AS p')
@@ -466,30 +471,141 @@ class DepartmentController extends Controller
       // -----------------------------------------------------------------------
 
       // --------------- THIRD SECTION: OCCUPANCE FACTOR -----------------------
-      $occupance_factor = $activity_evaluations->attendance * 100 / $activities->max_quota;
+      $occupance_factor = round(
+        $activity_evaluations->attendance / 
+        $activities->max_quota * 100, 2);
 
       // -----------------------------------------------------------------------
 
       // ------------ FOURTH SECTION: RECOMMENDATION FACTOR --------------------
-
+      $recommendation_factor = round(
+        $activity_evaluations->sum('question_4') / 
+        $activity_evaluations->count('activity_evaluation_id') * 100, 2);
 
       // -----------------------------------------------------------------------
 
       // ------------ FIFTH SECTION: ACCREDITANCE FACTOR -----------------------
-      $accredited_factor = $activity_evaluations->accredited * 100 / $activity_evaluations->attendance;
+      $accredited_factor = round(
+        $activity_evaluations->accredited /
+        $activity_evaluations->attendance * 100, 2);
 
       // -----------------------------------------------------------------------
 
-      // ------------ SIXTH SECTION: ACTIVITIES QUALITY FACTOR -----------------
+      // --------- SIXTH SECTION: ACTIVITIES & DEPARTMENT QUALITY FACTOR -------
+      foreach($activity_evaluations as $ae){
+        
+        $activity_answers = 0;
+        $department_answers = 0;
 
-      // -----------------------------------------------------------------------
+        $activity_positive_answers = 0;
+        $department_positive_answers = 0;
 
-      // ------------ SEVENTH SECTION: DEPARTMENT QUALITY FACTOR ---------------
+        if($ae->question_1_1){
+          $activity_answers++;
+          if($ae->question_1_1 == 80 || $ae->question_1_1 == 95 || $ae->question_1_1 == 100)
+            $activity_positive_answers++;
+        }
 
+        if($ae->question_1_2){
+          $activity_answers++;
+          if($ae->question_1_2 == 80 || $ae->question_1_2 == 95 || $ae->question_1_2 == 100)
+            $activity_positive_answers++;
+        }
+
+        if($ae->question_1_3){
+          $activity_answers++;
+          if($ae->question_1_3 == 80 || $ae->question_1_3 == 95 || $ae->question_1_3 == 100)
+            $activity_positive_answers++;
+        }
+
+        if($ae->question_1_4){
+          $activity_answers++;
+          if($ae->question_1_4 == 80 || $ae->question_1_4 == 95 || $ae->question_1_4 == 100)
+            $activity_positive_answers++;
+        }
+
+        if($ae->question_1_5){
+          $activity_answers++;
+          if($ae->question_1_5 == 80 || $ae->question_1_5 == 95 || $ae->question_1_5 == 100)
+            $activity_positive_answers++;
+        }
+
+        if($ae->question_3_1){
+          $department_answers++;
+          if($ae->question_3_1 == 80 || $ae->question_3_1 == 95 || $ae->question_3_1 == 100)
+            $department_positive_answers++;
+        }
+
+        if($ae->question_3_2){
+          $department_answers++;
+          if($ae->question_3_2 == 80 || $ae->question_3_2 == 95 || $ae->question_3_2 == 100)
+            $department_positive_answers++;
+        }
+
+        if($ae->question_3_3){
+          $department_answers++;
+          if($ae->question_3_3 == 80 || $ae->question_3_3 == 95 || $ae->question_3_3 == 100)
+            $department_positive_answers++;
+        }
+
+        if($ae->question_3_4){
+          $department_answers++;
+          if($ae->question_3_4 == 80 || $ae->question_3_4 == 95 || $ae->question_3_4 == 100)
+            $department_positive_answers++;
+        }
+      }
+
+      $activity_quality_factor = $activity_positive_answers / $activity_answers * 100;
+      $department_quality_factor = $department_positive_answers / $department_answers * 100;
       // -----------------------------------------------------------------------
 
       // ------------------- EIGHTH SECTION: INSTRUCTORS -----------------------
-
+      $instructors = collect([]);
+      foreach($instructor_evaluations as $ie){
+        if($instructors->contains('instructor_id', $ie->instructor_id)){
+            $instructors
+              ->firstWhere('instructor_id', $ie->instructor_id)['evaluations']
+              ->push([
+                'instructor_evaluation_id' => $ie->instructor_evaluation_id,
+                'average' => $ie->instructor_evaluation_id ? ($ie->question_1 +
+                                                             $ie->question_2 +
+                                                             $ie->question_3 +
+                                                             $ie->question_4 +
+                                                             $ie->question_5 +
+                                                             $ie->question_6 +
+                                                             $ie->question_7 +
+                                                             $ie->question_8 +
+                                                             $ie->question_9 +
+                                                             $ie->question_10 +
+                                                             $ie->question_11) / 11
+                                                            : 0
+              ]);
+        } else{
+          $instructors->push([
+            'instructor_id' => $ie->instructor_id,
+            'name' => $ie->name,
+            'last_name' => $ie->last_name,
+            'mothers_last_name' => $ie->mothers_last_name,
+            'activity_key' => $ie->key.'-'.$ie->activity_id,
+            'evaluations' => collect([[
+              'instructor_evaluation_id' => $ie->instructor_evaluation_id,
+              'average' => $ie->instructor_evaluation_id ? ($ie->question_1 +
+                                                           $ie->question_2 +
+                                                           $ie->question_3 +
+                                                           $ie->question_4 +
+                                                           $ie->question_5 +
+                                                           $ie->question_6 +
+                                                           $ie->question_7 +
+                                                           $ie->question_8 +
+                                                           $ie->question_9 +
+                                                           $ie->question_10 +
+                                                           $ie->question_11) / 11
+                                                         : 0
+              ]])
+          ]);
+        }
+      }
+      // TODO:INSTRUCTUROES SIN EVALUACIONES Y MAS PRUEBAS
       // -----------------------------------------------------------------------
 
       // ------------------- NINTH SECTION: REQUESTED AREAS --------------------
@@ -512,6 +628,10 @@ class DepartmentController extends Controller
         ->with('count_accredited', $activity_evaluations->accredited)
         ->with('count_participants', $activity_evaluations->enrolled)
         ->with('count_evaluations', $activity_evaluations->count)
+        ->with('occupance_factor', $occupance_factor)
+        ->with('recommendation_factor', $recommendation_factor)
+        ->with('accredited_factor', $accredited_factor)
+        ->with('instructors', $instructors)
         ->with('activities', $activities);
 
     } catch (\Throwable $th) {
