@@ -6,6 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Constancia | MAGESTIC</title>
 </head>
+<style>
+  html{
+    width: 100%;
+    height: 100%;
+    background-image: url('../public/img/contancia_INTER.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+  /* background-position: 4cm 1.9cm; */
+  }
+</style>
 <body>
   <p>
     {!! $activity_name !!}
