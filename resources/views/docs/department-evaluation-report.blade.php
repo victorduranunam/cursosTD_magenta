@@ -37,11 +37,11 @@
   <div id='header'>
 
     <div class="left-header">
-      <img class="img-escudo mg" src={!! asset('img/logo-magestic.png') !!} align=left>
+      <img class="img-escudo mg" src={!! public_path('img/logo-magestic.png') !!} align=left>
     </div>
 
     <div class="right-header">
-      <img class="img-escudo" src={!! asset('img/unica2.png') !!} align=right>
+      <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
     </div>
 
     <div class="center-header">
@@ -95,9 +95,118 @@
         <td>{!! $count_attendance !!}</td>
         <td>Número de participantes que acreditaron:</td>
         <td>{!! $count_accredited !!}</td>
-        <td>Número de participantes que contestaron evaluación:</td>
+        <td>Número de participantes que contestaron evaluación sobre actividad:</td>
         <td>{!! $count_evaluations !!}</td>
       </tr>
+    </table>
+    <table>
+      <tr>
+        <td>Factor de ocupación:</td>
+        <td>{!! $occupance_factor !!}</td>
+        <td>Factor de recomendación:</td>
+        <td>{!! $recommendation_factor !!}</td>
+        <td>Factor de acreditación:</td>
+        <td>{!! $accredited_factor !!}</td>
+        <td>Factor de calidad de actividades:</td>
+        <td>{!! $activity_quality_factor !!}</td>
+        <td>Factor de calidad del departmento:</td>
+        <td>{!! $department_quality_factor !!}</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>INSTRUCTORES</th>
+      </tr>
+      <tr>
+        <th>
+          NOMBRE
+        </th>
+        <th>
+          PROMEDIO
+        </th>
+        <th>
+          NÚMERO DE EVALUACIONES
+        </th>
+      </tr>
+      @foreach($instructors as $i)
+        @php
+          $average = 0;
+          $evaluations_count = 0;
+        @endphp
+        @foreach($i['evaluations'] as $e)
+          @if($e['instructor_evaluation_id'])
+            @php
+              $evaluations_count++;
+              $average += $e['average'] ;
+            @endphp
+          @endif
+        @endforeach
+        <tr>
+          <td>
+            {!! $i['name'].' '.$i['last_name'].' '.$i['mothers_last_name'] !!}
+          </td>
+          @if($evaluations_count)
+            <td>
+              {!! round($average/($evaluations_count),2) !!}
+            </td>
+            <td>
+              {!! $evaluations_count !!}
+            </td>
+          @else
+            <td colspan="2">
+              Sin evaluaciones
+            </td>
+          @endif
+        </tr>
+      @endforeach
+    </table>
+    <table>
+      <tr>
+        <th colspan="3">SUGERENCIAS Y RECOMENDACIONES</th>
+      </tr>
+      <tr>
+        <th>Lo mejor de la actividad</th>
+        <th>Sugerencias y Recomendaciones</th>
+        <th>Otros intereses</th>
+      </tr>
+      @foreach($suggestions as $s)
+        <tr>
+          <td>{!! $s['best'] !!}</td>
+          <td>{!! $s['suggestions'] !!}</td>
+          <td>{!! $s['others'] !!}</td>
+        </tr>
+      @endforeach
+    </table>
+    <table>
+      <tr>
+        <th colspan="4"> AREAS SOLICITADAS</th>
+      </tr>
+      <tr>
+        <td>Pedagógica {!! $areas_count['P'] !!}</td>
+        <td>Desarrollo Humano {!! $areas_count['H'] !!}</td>
+        <td>Computación {!! $areas_count['C'] !!}</td>
+        <td>Otras {!! $areas_count['O'] !!}</td>
+      </tr>
+      @foreach ($subjects as $s)
+        <tr>
+          <td colspan="4">{!! $s !!}</td>
+        </tr>
+      @endforeach
+    </table>
+    <table>
+      <tr>
+        <th colspan="2">HORARIOS PROPUESTOS</th>
+      </tr>
+      <tr>
+        <th>Horarios semestrales</th>
+        <th>Horarios intersemestrales</th>
+      </tr>
+      @foreach($schedules as $s)
+        <tr>
+          <td>{!! $s['sem'] !!}</td>
+          <td>{!! $s['int'] !!}</td>
+        </tr>
+      @endforeach
     </table>
   </div>
 </body>
