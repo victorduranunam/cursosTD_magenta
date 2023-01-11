@@ -102,15 +102,15 @@
     <table>
       <tr>
         <td>Factor de ocupación:</td>
-        <td>{!! $occupance_factor !!}</td>
+        <td>{!! $occupance_factor !!}%</td>
         <td>Factor de recomendación:</td>
-        <td>{!! $recommendation_factor !!}</td>
+        <td>{!! $recommendation_factor !!}%</td>
         <td>Factor de acreditación:</td>
-        <td>{!! $accredited_factor !!}</td>
+        <td>{!! $accredited_factor !!}%</td>
         <td>Factor de calidad de actividades:</td>
-        <td>{!! $activity_quality_factor !!}</td>
+        <td>{!! $activity_quality_factor !!}%</td>
         <td>Factor de calidad del departmento:</td>
-        <td>{!! $department_quality_factor !!}</td>
+        <td>{!! $department_quality_factor !!}%</td>
       </tr>
     </table>
     <table>
@@ -118,6 +118,9 @@
         <th>INSTRUCTORES</th>
       </tr>
       <tr>
+        <th>
+          ACTIVIDAD
+        </th>
         <th>
           NOMBRE
         </th>
@@ -143,11 +146,14 @@
         @endforeach
         <tr>
           <td>
+            {!! $i['activity_key'] !!}
+          </td>
+          <td>
             {!! $i['name'].' '.$i['last_name'].' '.$i['mothers_last_name'] !!}
           </td>
           @if($evaluations_count)
             <td>
-              {!! round($average/($evaluations_count),2) !!}
+              {!! round($average/($evaluations_count),2) . '%' !!}
             </td>
             <td>
               {!! $evaluations_count !!}

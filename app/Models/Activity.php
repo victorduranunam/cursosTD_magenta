@@ -60,7 +60,7 @@ class Activity extends Model
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                     ->first();
       return str_replace(' ', '_',$activity->name);
-  }
+    }
 
     public function getInstructorsName(){
         $professors = Professor::join('instructor','instructor.professor_id','=','professor.professor_id')

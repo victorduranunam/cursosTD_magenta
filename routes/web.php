@@ -61,6 +61,7 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::get('actividades/descargar/libro-de-folios','ActivityController@downloadKeysBook')->name('download.activities-keys-book');
   Route::get('actividades/descargar/reporte-general','ActivityController@downloadGeneralReport')->name('download.activities-general-record');
   Route::get('actividades/descargar/reporte-sugerencias','ActivityController@downloadSuggestionsReport')->name('download.activities-suggestions-record');
+  Route::get('actividades/descargar/reporte-evaluacion/{activity_id}','ActivityController@downloadEvaluationReport')->name('download.activity-evaluation-report');
 
   
   //Route Activity Evaluation

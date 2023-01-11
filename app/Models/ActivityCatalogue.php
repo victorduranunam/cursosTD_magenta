@@ -55,4 +55,11 @@ class ActivityCatalogue extends Model
       elseif($this->type == 'CO')
         return 'Conferencia';
     }
+
+    public function getFileName(){
+      if($this->name)
+        return str_replace(' ', '_',$this->name);
+      else
+        return '-';
+    }
 }
