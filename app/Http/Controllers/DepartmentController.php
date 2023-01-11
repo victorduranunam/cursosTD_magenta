@@ -576,21 +576,10 @@ class DepartmentController extends Controller
             $department_positive_answers++;
         }
 
-        $ae_best = '';
-        $ae_suggestions = '';
-        $ae_others = '';
-
-        if($ae->question_6_1)
-          $ae_best = $ae->question_6_1;
-        if($ae->question_6_2)
-          $ae_suggestions = $ae->question_6_2;
-        if($ae->question_6_3)
-          $ae_others = $ae->question_6_3;
-        
         $suggestions->push([
-          'best' => $ae_best, 
-          'suggestions' => $ae_suggestions, 
-          'others' => $ae_others
+          'best'        => $ae->question_6_1 ? $ae->question_6_1 : '',
+          'suggestions' => $ae->question_6_2 ? $ae->question_6_2 : '',
+          'others'      => $ae->question_6_3 ? $ae->question_6_3 : ''
         ]);
 
         if($ae->question_7_1){
@@ -609,14 +598,10 @@ class DepartmentController extends Controller
           $subjects->push($ae->question_7_2);
 
 
-        $ae_sem = '';
-        $ae_int = '';
-        if($ae->question_8_1)
-          $ae_sem = $ae->question_8_1;
-        if($ae->question_8_2)
-          $ae_int = $ae->question_8_2;
-
-        $schedules->push(['sem' => $ae_sem, 'int' => $ae_int]);
+        $schedules->push([
+          'sem' => $ae->question_8_1 ? $ae->question_8_1 : '',
+          'int' => $ae->question_8_2 ? $ae->question_8_2 : '',
+        ]);
       }
 
       $activity_quality_factor = $activity_positive_answers / 
@@ -628,8 +613,10 @@ class DepartmentController extends Controller
 
       // ------------------- EIGHTH SECTION: INSTRUCTORS -----------------------
       $instructors = collect([]);
-      foreach($instructor_evaluations as $ie){
-        if($instructors->contains('instructor_id', $ie->instructor_id)){
+
+      foreach ($instructor_evaluations as $ie) {
+
+        if ($instructors->contains('instructor_id', $ie->instructor_id)) {
             $instructors
               ->firstWhere('instructor_id', $ie->instructor_id)['evaluations']
               ->push([
@@ -675,58 +662,36 @@ class DepartmentController extends Controller
       }
       // -----------------------------------------------------------------------
 
-      // ------------------- TENTH SECTION: SUGGESTIONS ------------------------
+      // ------------------------- PDF DOWNLOAD --------------------------------
 
-      // -----------------------------------------------------------------------
-
-      // ------------------- ELEVENTH SECTION: SCHEDULES -----------------------
-
-      // -----------------------------------------------------------------------
-
-      $pdf = PDF::loadView('docs.department-evaluation-report',
+      $pdf = PDF::loadView(
+        'docs.department-evaluation-report',
         [
-          'period' => $req->year_search.'-'.$req->num_search.$req->type_search,
-          'department_name' => $department->name,
-          'count_attendance' => $activity_evaluations->attendance,
-          'count_accredited' => $activity_evaluations->accredited,
-          'count_participants' => $activity_evaluations->enrolled,
-          'count_evaluations' => $activity_evaluations->count,
-          'activity_quality_factor' => $activity_quality_factor,
+          'period'                    => $req->year_search.'-'.
+                                         $req->num_search.
+                                         $req->type_search,
+          'department_name'           => $department->name,
+          'count_attendance'          => $activity_evaluations->attendance,
+          'count_accredited'          => $activity_evaluations->accredited,
+          'count_participants'        => $activity_evaluations->enrolled,
+          'count_evaluations'         => $activity_evaluations->count,
+          'activity_quality_factor'   => $activity_quality_factor,
           'department_quality_factor' => $department_quality_factor,
-          'occupance_factor' => $occupance_factor,
-          'recommendation_factor' => $recommendation_factor,
-          'accredited_factor' => $accredited_factor,
-          'suggestions' => $suggestions,
-          'subjects' => $subjects,
-          'schedules' => $schedules,
-          'areas_count' => $areas_count,
-          'instructors' => $instructors,
-          'activities' => $activities
+          'occupance_factor'          => $occupance_factor,
+          'recommendation_factor'     => $recommendation_factor,
+          'accredited_factor'         => $accredited_factor,
+          'suggestions'               => $suggestions,
+          'subjects'                  => $subjects,
+          'schedules'                 => $schedules,
+          'areas_count'               => $areas_count,
+          'instructors'               => $instructors,
+          'activities'                => $activities
         ]
       )->setPaper('letter');
 
       return $pdf->download(
         'Reporte_Evaluacion_'.$department->getFileName().'.pdf'
       );
-      
-      return view('docs.department-evaluation-report')
-        ->with('period', $req->year_search.'-'.$req->num_search.$req->type_search)
-        ->with('department_name', $department->name)
-        ->with('count_attendance', $activity_evaluations->attendance)
-        ->with('count_accredited', $activity_evaluations->accredited)
-        ->with('count_participants', $activity_evaluations->enrolled)
-        ->with('count_evaluations', $activity_evaluations->count)
-        ->with('activity_quality_factor', $activity_quality_factor)
-        ->with('department_quality_factor', $department_quality_factor)
-        ->with('occupance_factor', $occupance_factor)
-        ->with('recommendation_factor', $recommendation_factor)
-        ->with('accredited_factor', $accredited_factor)
-        ->with('suggestions', $suggestions)
-        ->with('subjects', $subjects)
-        ->with('schedules', $schedules)
-        ->with('areas_count', $areas_count)
-        ->with('instructors', $instructors)
-        ->with('activities', $activities);
 
     } catch (Exception $th) {
       if ($th->getMessage() === 'Division by zero')
@@ -736,8 +701,5 @@ class DepartmentController extends Controller
       else
         return dd($th);
     }
-    
-    
-    
   }
 }
