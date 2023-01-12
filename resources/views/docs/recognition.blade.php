@@ -30,6 +30,7 @@
   }
   .text{
     font-size: 18pt;
+    line-height: 80%;
   }
   .instructor{
     width: 100%;
@@ -55,6 +56,12 @@
     font-size: 22pt;
     font-weight: bold;
     line-height: 100%;
+  }
+  .topic{
+    font-family:'Tangerine', serif;
+    font-size: 15pt;
+    font-style:italic;
+    line-height: 50%;
   }
   .firmas{
     width:100%;
@@ -125,6 +132,8 @@
       @endif
     </div>
 
+    
+    
     @if($instructor_topics->count() == 1)
     <p class="text">Por impartir el tema</p>
     <p class="text topic">{!! $instructor_topics->first() !!}</p>
@@ -134,9 +143,9 @@
     <p class="text">Por su participacion en varios temas de seminario</p>
     @endif
 
-    <p>{!! $activity_manual_date !!}</p>
-    <p>Duración: {!! $activity_hours !!} h</p>
-    <p>Ciudad Universitaria, Cd. Mx., {!! $activity_recognition_date !!}</p>
+    <p style="line-height: 20%;">{!! $activity_manual_date !!}</p>
+    <p style="line-height: 20%;">Duración: {!! $activity_hours !!} h</p>
+    <p style="line-height: 20%;">Ciudad Universitaria, Cd. Mx., {!! $activity_recognition_date !!}</p>
   </div>
 
   <div class="firmas">

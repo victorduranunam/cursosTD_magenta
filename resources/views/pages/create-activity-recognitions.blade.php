@@ -33,7 +33,7 @@
         <div class="col-xl-12">
           <label class="form-label" for="text">*Texto Intermedio:</label>
           <select class="form-select" name="text" id="text" onchange="updateCertificateCustomText()" onload="updateCertificateCustomText()">
-            {!! $article = $activity->type === 'Conferencia' ? 'el' : 'la'!!}
+            {!! $article = $activity->type == 'Conferencia' ? 'la' : 'el'!!}
             <option value="{!! 'por haber impartido '.$article !!}">Por haber impartido (el/la) </option>
             <option value="{!! 'por haber participado en '.$article !!}">Por haber participado en (el/la) </option>
             <option value="{!! 'por haber colaborado en '.$article !!}">Por haber colaborado en (el/la) </option>
