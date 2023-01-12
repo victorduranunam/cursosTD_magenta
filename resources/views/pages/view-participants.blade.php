@@ -35,6 +35,7 @@
             <li><a class="dropdown-item" href={!! route('download.activities-identifiers', $activity->activity_id) !!}>Identificadores</a></li>
             <li><a class="dropdown-item" href={!! route('download.activities-attendance-sheet', $activity->activity_id) !!}>Hoja de asistencia</a></li>
             <li><a class="dropdown-item" href={!! route('download.activity-evaluation-report', $activity->activity_id) !!}>Reporte de Evaluación</a></li>
+            <li><a class="dropdown-item" href={!! route('download.instructors-evaluation-report', $activity->activity_id) !!}>Reporte de Instructores</a></li>
             <li><a class="dropdown-item" href={!! route('create.activity-certificates', $activity->activity_id) !!}>Constancias</a></li>
             <li><a class="dropdown-item" href={!! route('create.activity-recognitions', $activity->activity_id) !!}>Reconocimientos</a></li>
           </ul>
