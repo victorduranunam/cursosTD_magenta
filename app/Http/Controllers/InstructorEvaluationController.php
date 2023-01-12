@@ -87,9 +87,6 @@ class InstructorEvaluationController extends Controller
       $instructor_evaluation->question_6 = $req->question_6;
       $instructor_evaluation->question_7 = $req->question_7;
       $instructor_evaluation->question_8 = $req->question_8;
-      $instructor_evaluation->question_9 = $req->question_9;
-      $instructor_evaluation->question_10 = $req->question_10;
-      $instructor_evaluation->question_11 = $req->question_11;
       $instructor_evaluation->instructor_id = $instructor_id;
       $instructor_evaluation->participant_id = $req->participant_id;
 
