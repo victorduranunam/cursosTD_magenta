@@ -909,11 +909,8 @@ class ActivityController extends Controller
               $ie->question_5 +
               $ie->question_6 +
               $ie->question_7 +
-              $ie->question_8 +
-              $ie->question_9 +
-              $ie->question_10 +
-              $ie->question_11
-            ) / 11 : 0
+              $ie->question_8
+            ) / 8 : 0
           ]);
 
       } else{
@@ -933,11 +930,8 @@ class ActivityController extends Controller
               $ie->question_5 +
               $ie->question_6 +
               $ie->question_7 +
-              $ie->question_8 +
-              $ie->question_9 +
-              $ie->question_10 +
-              $ie->question_11
-            ) / 11 : 0
+              $ie->question_8
+            ) / 8 : 0
             ]])
         ]);
       }
@@ -977,5 +971,127 @@ class ActivityController extends Controller
              ->with('danger', 'Ocurrió una división por cero en alguna fórmula.');
       return dd($th);
     }
+  }
+
+  public function downloadInstructorsEvaluationReport($activity_id){
+    try {
+
+      $activity = Activity::findOrFail($activity_id);
+
+      $activity_catalogue = ActivityCatalogue::findOrFail($activity->activity_catalogue_id);
+      
+      $instructors = collect([]);
+
+      $data = DB::table('instructor AS i')
+                ->leftJoin(
+                    'instructor_evaluation AS ie', 
+                    'ie.instructor_id', 
+                    'i.instructor_id'
+                  )
+                ->join('professor AS p', 'p.professor_id', 'i.professor_id')
+                ->select(
+                    'i.instructor_id',
+                    'p.name',
+                    'p.last_name',
+                    'p.mothers_last_name',
+                    'ie.instructor_evaluation_id',
+                    'ie.question_1',
+                    'ie.question_2',
+                    'ie.question_3',
+                    'ie.question_4',
+                    'ie.question_5',
+                    'ie.question_6',
+                    'ie.question_7',
+                    'ie.question_8'
+                  )
+                ->where('i.activity_id', $activity_id)
+                ->get();
+
+      if ( $data->isEmpty() ) {
+        return redirect()
+          ->back()
+          ->with('warning', 'No existen instructores asignados a la actividad '.
+                            'para generar el reporte.');
+      }
+
+      foreach ($data as $ie) {
+
+        if ( $instructors->contains('instructor_id', $ie->instructor_id) ) {
+
+          $i = $instructors->pull($ie->instructor_id);
+
+          if($ie->instructor_evaluation_id)
+            $i['counters']['evaluations'] = $i['counters']['evaluations'] + 1;
+          
+          if($ie->question_1)
+            $i['counters']['experience'] = $i['counters']['experience'] + $ie->question_1;
+
+          if($ie->question_2)
+            $i['counters']['planification'] = $i['counters']['planification'] + $ie->question_2;
+
+          if($ie->question_3)
+            $i['counters']['puntuality'] = $i['counters']['puntuality'] + $ie->question_3;
+
+          if($ie->question_4)
+            $i['counters']['materials'] = $i['counters']['materials'] + $ie->question_4;
+
+          if($ie->question_5)
+            $i['counters']['resolution'] = $i['counters']['resolution'] + $ie->question_5;
+
+          if($ie->question_6)
+            $i['counters']['control'] = $i['counters']['control'] + $ie->question_6;
+
+          if($ie->question_7)
+            $i['counters']['interest'] = $i['counters']['interest'] + $ie->question_7;
+
+          if($ie->question_8)
+            $i['counters']['attitude'] = $i['counters']['attitude'] + $ie->question_8;
+
+          $instructors->put($ie->instructor_id, $i);
+  
+        } else {
+  
+          $instructors->put($ie->instructor_id, [
+            
+            'instructor_id'     => $ie->instructor_id,
+            'name'              => $ie->name,
+            'last_name'         => $ie->last_name,
+            'mothers_last_name' => $ie->mothers_last_name,
+            'counters'          => collect([
+              'evaluations'   => $ie->instructor_evaluation_id ? 1 : 0,
+              'experience'    => $ie->question_1 ? $ie->question_1 : 0,
+              'planification' => $ie->question_2 ? $ie->question_2 : 0,
+              'puntuality'    => $ie->question_3 ? $ie->question_3 : 0,
+              'materials'     => $ie->question_4 ? $ie->question_4 : 0,
+              'resolution'    => $ie->question_5 ? $ie->question_5 : 0,
+              'control'       => $ie->question_6 ? $ie->question_6 : 0,
+              'interest'      => $ie->question_7 ? $ie->question_7 : 0,
+              'attitude'      => $ie->question_8 ? $ie->question_8 : 0
+            ])
+          ]);
+
+        }
+
+      }
+
+      $pdf = PDF::loadView(
+        'docs.instructors-evaluation-report',
+        [
+          'activity'               => $activity,
+          'activity_catalogue'     => $activity_catalogue,
+          'instructors'            => $instructors
+        ]
+      )->setPaper('letter');
+
+      return $pdf->download(
+        'Reporte_Instructores_'.$activity_catalogue->getFileName().'.pdf'
+      );
+
+    } catch (Excepcion $th) {
+
+      return dd($th);
+
+    }
+
   }
 }

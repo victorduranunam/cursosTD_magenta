@@ -629,11 +629,8 @@ class DepartmentController extends Controller
                   $ie->question_5 +
                   $ie->question_6 +
                   $ie->question_7 +
-                  $ie->question_8 +
-                  $ie->question_9 +
-                  $ie->question_10 +
-                  $ie->question_11
-                ) / 11 : 0
+                  $ie->question_8
+                ) / 8 : 0
               ]);
         } else{
           $instructors->push([
@@ -652,10 +649,8 @@ class DepartmentController extends Controller
                 $ie->question_5 +
                 $ie->question_6 +
                 $ie->question_7 +
-                $ie->question_8 +
-                $ie->question_9 +
-                $ie->question_10 +
-                $ie->question_11) / 11 : 0
+                $ie->question_8
+                ) / 8 : 0
               ]])
           ]);
         }

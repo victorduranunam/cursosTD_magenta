@@ -20,9 +20,6 @@ class InstructorEvaluation extends Model
         'question_6',
         'question_7',
         'question_8',
-        'question_9',
-        'question_10',
-        'question_11',
         'instructor_id',
         'participant_id'
     ];
