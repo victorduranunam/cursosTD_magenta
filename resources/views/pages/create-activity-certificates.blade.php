@@ -57,7 +57,7 @@
       <div class="row" id='div_name_first_signature'>
         <div class="col-xl-12">
           <label class="form-label" for="first_name_signature">*Nombre del Primer Firmante:</label>
-          <input required class="form-control" type="text" name="first_name_signature" id="first_name_signature" placeholder="Ej. Jose Luis Rodriguez" value="{!! old('first_name_signature') !!}">
+          <input maxlength="50" required class="form-control" type="text" name="first_name_signature" id="first_name_signature" placeholder="Ej. Jose Luis Rodriguez" value="{!! old('first_name_signature') !!}">
         </div>
       </div>
       <div class="row" id='div_degree_first_signature'>
@@ -69,7 +69,7 @@
       <div class="row" style='display: none;' id='div_name_second_signature'>
         <div class="col-xl-12">
           <label class="form-label" for="second_name_signature">*Nombre del Segundo Firmante:</label>
-          <input class="form-control" type="text" name="second_name_signature" id="second_name_signature" value="{!! old('second_name_signature') !!}">
+          <input maxlength="50" class="form-control" type="text" name="second_name_signature" id="second_name_signature" value="{!! old('second_name_signature') !!}">
         </div>
       </div>
       <div class="row" style='display: none;' id='div_degree_second_signature'>
@@ -81,7 +81,7 @@
       <div class="row">
         <div class="col-xl-12" style='display: none;' id='div_name_third_signature'>
           <label class="form-label" for="third_name_signature">*Nombre del Tercer Firmante:</label>
-          <input class="form-control" type="text" name="third_name_signature" id="third_name_signature" value="{!! old('third_name_signature') !!}">
+          <input maxlength="50" class="form-control" type="text" name="third_name_signature" id="third_name_signature" value="{!! old('third_name_signature') !!}">
         </div>
       </div>
       <div class="row">
@@ -93,7 +93,7 @@
       <div class="row">
         <div class="col-xl-12" style='display: none;' id='div_name_fourth_signature'>
           <label class="form-label" for="fourth_name_signature">*Nombre del Cuarto Firmante:</label>
-          <input class="form-control" type="text" name="fourth_name_signature" id="fourth_name_signature" value="{!! old('fourth_name_signature') !!}">
+          <input maxlength="50" class="form-control" type="text" name="fourth_name_signature" id="fourth_name_signature" value="{!! old('fourth_name_signature') !!}">
         </div>
       </div>
       <div class="row">
@@ -105,7 +105,7 @@
       <div class="row">
         <div class="col-xl-12" style='display: none;' id='div_name_fifth_signature'>
           <label class="form-label" for="fifth_name_signature_name">*Nombre del Quinto Firmante:</label>
-          <input class="form-control" type="text" name="fifth_name_signature" id="fifth_name_signature" value="{!! old('fifth_name_signature_name') !!}">
+          <input maxlength="50" class="form-control" type="text" name="fifth_name_signature" id="fifth_name_signature" value="{!! old('fifth_name_signature_name') !!}">
         </div>
       </div>
       <div class="row">
