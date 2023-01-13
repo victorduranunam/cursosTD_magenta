@@ -9,11 +9,26 @@
 </head>
 
 <style>
+  html{
+	width:100%;
+  height: 100%;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13pt;
+}
+#header{
+  width: 100%;
+  text-align:center;
+  line-height:10px;
+  display:inline-block;
+  font-size: 15px;
+}
 .img-escudo{
-  width: 63%;
+  width: 88%;
 }
 .mg{
-  width: 27%;
+  width: 38%;
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
 }
@@ -30,6 +45,21 @@
   align:center;
   line-height:5px;
 }
+table, th, td{
+  border: 1pt solid lightgray;
+}
+table{
+  width:100%;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  background: lightgray;
+}
+.center{
+  text-align:center;
+
+}
 </style>
 
 <body>
@@ -45,9 +75,9 @@
     </div>
 
     <div class="center-header">
-      <h2>MAGESTIC</h2>
+      <h3>MAGESTIC</h3>
       <h3>Facultad de Ingeniería</h3>
-      <h2>{!! $department_name !!}</h2>
+      <h3>{!! $department_name !!}</h3>
       <h3>Reporte de Evaluación</h3> 
       <h3>{!! $period !!}</h3>
     </div>
@@ -57,7 +87,7 @@
   </div>
 
   <div>
-    <h1> 1. ACTIVIDADES IMPARTIDAS DURANTE EL PERIODO</h1>
+    <h4> 1. ACTIVIDADES IMPARTIDAS DURANTE EL PERIODO</h4>
     <table>
       <th>
         Nombre
@@ -79,43 +109,50 @@
     <table>
       <tr>
         <td>Capacidad Máxima:</td>
-        <td>{!! $activities->max_quota !!}</td>
+        <td class="center">{!! $activities->max_quota !!}</td>
         <td>Total de horas:</td>
-        <td>{!! $activities->hours !!}</td>
+        <td class="center">{!! $activities->hours !!}</td>
       </tr>
     </table>
   </div>
+  <br>
   <div>
-    <h1>2. REGISTRO DE PARTICIPANTES</h1>
+    <h4>2. REGISTRO DE PARTICIPANTES</h4>
     <table>
       <tr>
-        <td>Número de participantes inscritos:</td>
-        <td>{!! $count_participants !!}</td>
-        <td>Número de participantes que asistieron:</td>
-        <td>{!! $count_attendance !!}</td>
-        <td>Número de participantes que acreditaron:</td>
-        <td>{!! $count_accredited !!}</td>
-        <td>Número de participantes que contestaron evaluación sobre actividad:</td>
-        <td>{!! $count_evaluations !!}</td>
+        <th class="center">Número de participantes inscritos:</th>
+        <th class="center">Número de participantes que asistieron:</th>
+        <th class="center">Número de participantes que acreditaron:</th>
+        <th class="center">Número de participantes que contestaron evaluación sobre actividad:</th>
+      </tr>
+      <tr>
+        <td class="center">{!! $count_participants !!}</td>
+        <td class="center">{!! $count_attendance !!}</td>
+        <td class="center">{!! $count_accredited !!}</td>
+        <td class="center">{!! $count_evaluations !!}</td>
       </tr>
     </table>
+    <br><br>
     <table>
       <tr>
-        <td>Factor de ocupación:</td>
-        <td>{!! $occupance_factor !!}%</td>
-        <td>Factor de recomendación:</td>
-        <td>{!! $recommendation_factor !!}%</td>
-        <td>Factor de acreditación:</td>
-        <td>{!! $accredited_factor !!}%</td>
-        <td>Factor de calidad de actividades:</td>
-        <td>{!! $activity_quality_factor !!}%</td>
-        <td>Factor de calidad del departmento:</td>
-        <td>{!! $department_quality_factor !!}%</td>
+        <th class="center">Factor de ocupación:</th>
+        <th class="center">Factor de recomendación:</th>
+        <th class="center">Factor de acreditación:</th>
+        <th class="center">Factor de calidad de actividades:</th>
+        <th class="center">Factor de calidad del departmento:</th>
+      </tr>
+      <tr>
+        <td class="center">{!! $occupance_factor !!}%</td>
+        <td class="center">{!! $recommendation_factor !!}%</td>
+        <td class="center">{!! $accredited_factor !!}%</td>
+        <td class="center">{!! $activity_quality_factor !!}%</td>
+        <td class="center">{!! $department_quality_factor !!}%</td>
       </tr>
     </table>
+    <br><br>
     <table>
       <tr>
-        <th>INSTRUCTORES</th>
+        <th colspan="4">INSTRUCTORES</th>
       </tr>
       <tr>
         <th>
@@ -166,6 +203,7 @@
         </tr>
       @endforeach
     </table>
+    <br>
     <table>
       <tr>
         <th colspan="3">SUGERENCIAS Y RECOMENDACIONES</th>
@@ -183,15 +221,16 @@
         </tr>
       @endforeach
     </table>
+    <br><br>
     <table>
       <tr>
         <th colspan="4"> AREAS SOLICITADAS</th>
       </tr>
       <tr>
-        <td>Pedagógica {!! $areas_count['P'] !!}</td>
-        <td>Desarrollo Humano {!! $areas_count['H'] !!}</td>
-        <td>Computación {!! $areas_count['C'] !!}</td>
-        <td>Otras {!! $areas_count['O'] !!}</td>
+        <td><b>Pedagógica:</b> {!! $areas_count['P'] !!}</td>
+        <td><b>Desarrollo Humano:</b> {!! $areas_count['H'] !!}</td>
+        <td><b>Computación:</b> {!! $areas_count['C'] !!}</td>
+        <td><b>Otras:</b> {!! $areas_count['O'] !!}</td>
       </tr>
       @foreach ($subjects as $s)
         <tr>
@@ -199,6 +238,7 @@
         </tr>
       @endforeach
     </table>
+    <br><br>
     <table>
       <tr>
         <th colspan="2">HORARIOS PROPUESTOS</th>

@@ -9,6 +9,21 @@
 </head>
 
 <style>
+   html{
+	width:100%;
+  height: 100%;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13pt;
+}
+#header{
+  width: 100%;
+  text-align:center;
+  line-height:10px;
+  display:inline-block;
+  font-size: 15px;
+}
 .img-escudo{
   width: 63%;
 }
@@ -30,12 +45,23 @@
   align:center;
   line-height:5px;
 }
+hr{
+  line-height:10px;
+}
+.activity-name{
+  line-height:25px;
+}
+table{
+  width: 100%;
+}
+th, td{
+  text-align: left;
+}
 </style>
 
 <body>
 
   <div id='header'>
-
     <div class="left-header">
       <img class="img-escudo mg" src={!! public_path('img/logo-magestic.png') !!} align=left>
     </div>
@@ -46,21 +72,19 @@
 
     <div class="center-header">
       <h2>MAGESTIC</h2>
-      <h3>Facultad de Ingeniería</h3>
-      <h3>Reporte de Instructores</h3> 
-      <h4> {!! $activity_catalogue->name !!} </h4>
+      <h2>Facultad de Ingeniería</h2>
+      <h2>Reporte de Instructores</h2> 
     </div>
-
-    <hr>
-
   </div>
-
+  
   <div>
-
-    <h1> DESEMPEÑO DE LOS INSTRUCTORES </h1>
+    <hr>
+    <h3 class="activity-name"> {!! $activity_catalogue->name !!} </h3>
+    <hr>
+    <h3> DESEMPEÑO DE LOS INSTRUCTORES </h3>
 
     @foreach($instructors as $instructor)
-      <h2> {!! $instructor['name'].' '.$instructor['last_name'].' '.$instructor['mothers_last_name'] !!} </h2>
+      <h3 style="font-style: italic;"> {!! $instructor['name'].' '.$instructor['last_name'].' '.$instructor['mothers_last_name'] !!} </h3>
         <table>
 
           @if($instructor['counters']['evaluations'] == 0)
