@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Diploma| MAGESTIC</title>
 </head>
+
+<style>
+  .firmas{
+    width:100%;
+    position: absolute;
+    bottom: 9px;
+    text-align:center;
+  }
+
+</style>
+
 <body>
   <table>
     <tr>
@@ -17,10 +29,20 @@
       <td>{!! $participant['name'].' '.$participant['last_name'].' '.$participant['mothers_last_name'] !!}</td>
     </tr>
 
-    @foreach ($participant['grades'] as $module => $grade)
+    <tr>
+      <td> Numero de módulo </td>
+      <td> Nombre de módulo </td>
+      <td> Calificación </td>
+    </tr>
+
+    @foreach ($participant['grades'] as $module)
       <tr>
-        <td>{!! $module !!}</td>
-        <td>{!! $grade !!}</td>
+      {{-- Numero de modulo --}}
+        <td>{!! $module['number'] !!}</td>
+      {{-- Nombre de modulo --}}
+        <td>{!! $module['name'] !!}</td>
+      {{-- Calificacion --}}
+        <td>{!! $module['grade'] !!}</td>
       </tr>
     @endforeach
 
@@ -30,23 +52,94 @@
       <td>{!! 'Foja: '.$page !!}</td>
       <td>{!! 'Libro: '.$book !!}</td>
     </tr>
-
-    <tr>
-      <th>{!! $director_name !!}</th>
-      @if($director_gender === 'M')
-        <th>Director</th>
-      @elseif($director_gender === 'F')
-        <th>Directora</th>
-      @endif
-    </tr>
-    <tr>
-      <th>{!! $coord_name !!}</th>
-      @if($coord_gender === 'M')
-        <th>Coordinador</th>
-      @elseif($coord_gender === 'F')
-        <th>Coordinadora</th>
-      @endif
-    </tr>
   </table>
+  <p>Ciudad Universitaria, Cd. Mx., {!! $certificate_date !!}</p>
+  <div class="firmas">
+    <table>
+      @if($signatures == '1')
+        <tr>
+          <td class="signature">___________________</td>
+        </tr>
+        <tr>
+          <td class="signatory-degree">{!! $first_degree_signature !!}</td>
+        </tr>
+        <tr>
+          <td class="name-signatory">{!! $first_name_signature !!}</td>
+        </tr>
+      @elseif($signatures == '2')
+        <tr>
+          <td class="signature">___________________</td>
+          <td class="signature">___________________</td>
+        </tr>
+        <tr>
+          <td class="signatory-degree">{!! $first_degree_signature !!}</td>
+          <td class="signatory-degree">{!! $second_degree_signature !!}</td>
+        </tr>
+        <tr>
+          <td class="name-signatory">{!! $first_name_signature !!}</td>
+          <td class="name-signatory">{!! $second_name_signature !!}</td>
+        </tr>
+
+      @elseif($signatures == '3')
+        <tr>
+          <td class="signature">___________________</td>
+          <td class="signature">___________________</td>
+          <td class="signature">___________________</td>
+        </tr>
+        <tr>
+          <td class="signatory-degree">{!! $first_degree_signature !!}</td>
+          <td class="signatory-degree">{!! $second_degree_signature !!}</td>
+          <td class="signatory-degree">{!! $third_degree_signature !!}</td>
+        </tr>
+        <tr>
+          <td class="name-signatory">{!! $first_name_signature !!}</td>
+          <td class="name-signatory">{!! $second_name_signature !!}</td>
+          <td class="name-signatory">{!! $third_name_signature !!}</td>
+        </tr>
+      @elseif($signatures == '4')
+        <tr>
+          <td class="signature">___________________</td>
+          <td class="signature">___________________</td>
+          <td class="signature">___________________</td>
+          <td class="signature">___________________</td>
+        </tr>
+        <tr>
+          <td class="signatory-degree">{!! $first_degree_signature !!}</td>
+          <td class="signatory-degree">{!! $second_degree_signature !!}</td>
+          <td class="signatory-degree">{!! $third_degree_signature !!}</td>
+          <td class="signatory-degree">{!! $fourth_degree_signature !!}</td>
+        </tr>
+        <tr>
+          <td class="name-signatory">{!! $first_name_signature !!}</td>
+          <td class="name-signatory">{!! $second_name_signature !!}</td>
+          <td class="name-signatory">{!! $third_name_signature !!}</td>
+          <td class="name-signatory">{!! $fourth_name_signature !!}</td>
+        </tr>
+      @elseif($signatures == '5')
+        <tr>
+            <td class="signature">___________________</td>
+            <td class="signature">___________________</td>
+            <td class="signature">___________________</td>
+            <td class="signature">___________________</td>
+            <td class="signature">___________________</td>
+          </tr>
+          <tr>
+            <td class="signatory-degree">{!! $first_degree_signature !!}</td>
+            <td class="signatory-degree">{!! $second_degree_signature !!}</td>
+            <td class="signatory-degree">{!! $third_degree_signature !!}</td>
+            <td class="signatory-degree">{!! $fourth_degree_signature !!}</td>
+            <td class="signatory-degree">{!! $fifth_degree_signature !!}</td>
+          </tr>
+          <tr>
+            <td class="name-signatory">{!! $first_name_signature !!}</td>
+            <td class="name-signatory">{!! $second_name_signature !!}</td>
+            <td class="name-signatory">{!! $third_name_signature !!}</td>
+            <td class="name-signatory">{!! $fourth_name_signature !!}</td>
+            <td class="name-signatory">{!! $fifth_name_signature !!}</td>
+          </tr>
+          
+      @endif
+    </table>
+  </div> 
 </body>
 </html>

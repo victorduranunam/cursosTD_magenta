@@ -98,10 +98,29 @@ class DiplomaController extends Controller
     }
   }
 
-  public function downloadDiplomas(Request $req, $diploma_id){
+
+  public function createDiplomaCertificates(Request $req, $diploma_id) {
+
+    try {
+      $diploma = Diploma::findOrFail($diploma_id);
+
+      return view('pages.create-diploma-certificates')
+        ->with('diploma', $diploma);
+
+
+    } catch (\Throwable $th) {
+      
+      return dd($th);
+    
+    }
+
+  }
+
+  public function downloadDiplomaCertificates(Request $req, $diploma_id) {
     try {
 
       $diploma = Diploma::findOrFail($diploma_id);
+
       $modules = Activity::join('activity_catalogue as ac',
                                             'ac.activity_catalogue_id',
                                             '=',
@@ -109,8 +128,8 @@ class DiplomaController extends Controller
                                      ->where('ac.diploma_id', $diploma_id)
                                      ->where('ac.type', 'DI')
                                      ->where('activity.year', $req->year_search)
-                                     ->select('activity.activity_id', 'ac.name', 
-                                              'ac.hours')
+                                     ->select('activity.activity_id', 'ac.name',
+                                              'ac.hours', 'ac.module')
                                      ->get();
 
       if($modules->isEmpty())
@@ -120,25 +139,42 @@ class DiplomaController extends Controller
                               .' Primero asigne algunos.');
 
       $diploma->duration = $modules->sum('hours');
+
       $diploma->participants = collect([]);
-      foreach($modules as $module){
-        foreach($module->getParticipants() as $participant){
+
+      foreach($modules as $module) {
+
+        foreach($module->getParticipants() as $participant) {
+
           if( $diploma->participants->doesntContain('professor_id',$participant->professor_id) && $participant->accredited)
+
             $diploma->participants->push(collect([
               'professor_id'      => $participant->professor_id,
               'name'              => $participant->name,
               'last_name'         => $participant->last_name,
               'mothers_last_name' => $participant->mothers_last_name,
-              'grades'            => array ($module->name => $participant->grade)
+              'grades'            => collect([[
+                'name' => $module->name,
+                'number' => $module->module,
+                'grade' => $participant->grade
+              ]])
             ]));
-          elseif ($diploma->participants->has($participant->professor_id) && $participant->accredited){
+
+          elseif ($diploma->participants->has($participant->professor_id) && $participant->accredited) {
+
             $tmp = $diploma->participants->where('professor_id', $participant->professor_id)->first()['grades'];
-            $tmp[$module->name] = $participant->grade;
+            $tmp[] = [
+              'name' => $module->name,
+              'number' => $module->module,
+              'grade' => $participant->grade
+            ];
             $diploma->participants->where('professor_id', $participant->professor_id)->first()['grades'] = $tmp;
-          }
-          else
+
+          } else
+
             continue;
         }
+
       }
 
       if($diploma->participants->isEmpty())
@@ -150,17 +186,13 @@ class DiplomaController extends Controller
                              ' y haberlos acreditado.');
 
       foreach($diploma->participants as $key => $participant){
-        
         if(count($participant['grades']) != $modules->count())
           $diploma->participants->pull($key);
 
         else
-          $participant['average'] = array_sum($participant['grades']) 
+          $participant['average'] = $participant['grades']->sum('grade')
                                   / $modules->count();
       }
-
-      $director = Administrator::where('job', 'D')->first();
-      $coord = Administrator::where('job', 'O')->first();
 
       $zip = new ZipArchive();
 
@@ -168,35 +200,47 @@ class DiplomaController extends Controller
                 .$diploma->getFileName()
                 .'.zip';
 
-      if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
-        {
-          foreach($diploma->participants as $ix => $participant){
-            $participant['key'] = $req->key.sprintf("%03s", $ix+1);
-            $pdfname = strval($ix+1)
-                     .'_Diploma_'
-                     .$participant['name']
-                     .$participant['last_name']
-                     .$participant['mothers_last_name']
-                     .'.pdf';
 
-            $pdf = PDF::loadView('docs.diploma', 
-            [
-              'diploma_name'     => $diploma->name,
-              'diploma_duration' => $diploma->duration,
-              'director_name'    => $director->getSigningName(),
-              'director_gender'  => $director->gender,
-              'coord_name'       => $coord->getSigningName(),
-              'coord_gender'     => $coord->gender,
-              'participant'      => $participant,
-              'page'             => $req->page,
-              'book'             => $req->book
-            ])
-            ->setPaper('letter','landscape');
-            $zip->addFromString($pdfname, $pdf->download($pdfname));
-          }
-    
-          $zip->close();
+      if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+        foreach($diploma->participants as $ix => $participant) {
+          $participant['key'] = $req->key.sprintf("%03s", $ix+1);
+          $pdfname = strval($ix+1)
+                    .'_Diploma_'
+                    .$participant['name']
+                    .$participant['last_name']
+                    .$participant['mothers_last_name']
+                    .'.pdf';
+
+          $pdf = PDF::loadView('docs.diploma', [
+            'diploma_name'     => $diploma->name,
+            'diploma_duration' => $diploma->duration,
+            'participant'      => $participant,
+            'signatures'       => $req->signatures,
+            'page'             => isset($req->page) ? $req->page : '',
+            'certificate_date' => isset($req->certificate_date) ? $req->certificate_date : '',
+            'book'             => isset($req->book) ? $req->book : '',
+
+            'first_name_signature'    => isset($req->first_name_signature)    ? $req->first_name_signature    : NULL,
+            'second_name_signature'   => isset($req->second_name_signature)   ? $req->second_name_signature   : NULL,
+            'third_name_signature'    => isset($req->third_name_signature)    ? $req->third_name_signature    : NULL,
+            'fourth_name_signature'   => isset($req->fourth_name_signature)   ? $req->fourth_name_signature   : NULL,
+            'fifth_name_signature'    => isset($req->fifth_name_signature)    ? $req->fifth_name_signature    : NULL,
+            
+            'first_degree_signature'  => isset($req->first_degree_signature)  ? $req->first_degree_signature  : NULL,
+            'second_degree_signature' => isset($req->second_degree_signature) ? $req->second_degree_signature : NULL,
+            'third_degree_signature'  => isset($req->third_degree_signature)  ? $req->third_degree_signature  : NULL,
+            'fourth_degree_signature' => isset($req->fourth_degree_signature) ? $req->fourth_degree_signature : NULL,
+            'fifth_degree_signature'  => isset($req->fifth_degree_signature)  ? $req->fifth_degree_signature  : NULL
+          ])->setPaper('letter','landscape');
+
+          $zip->addFromString($pdfname, $pdf->download($pdfname));
+
         }
+    
+        $zip->close();
+      } else 
+        return 'Error con zip';
+      
       return response()
            ->download(public_path($fileName))
            ->deleteFileAfterSend(public_path($fileName));
