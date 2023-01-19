@@ -100,7 +100,8 @@ Route::group( ['middleware' => 'guest'], function() {
   Route::post('diplomados/almacenar', "DiplomaController@store")->name("store.diploma");
   Route::put('diplomados/guardar/{diploma_id}', "DiplomaController@update")->name('update.diploma');
   Route::delete('diplomados/eliminar/{diploma_id}', "DiplomaController@delete")->name("delete.diploma");
-  Route::get('diplomados/descargar-diplomas/{diploma_id}', "DiplomaController@downloadDiplomas")->name('download.diplomas');
+  Route::get('diplomados/{diploma_id}/generar-diplomas', "DiplomaController@createDiplomaCertificates")->name('create.diploma-certificates');
+  Route::post('diplomados/{diploma_id}/descargar-diplomas', "DiplomaController@downloadDiplomaCertificates")->name('download.diploma-certificates');
   
   //Route Division
   Route::get('divisiones', "DivisionController@index")->name("view.divisions");

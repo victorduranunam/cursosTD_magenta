@@ -120,10 +120,10 @@ th {
     <h4>2. REGISTRO DE PARTICIPANTES</h4>
     <table>
       <tr>
-        <th class="center">Número de participantes inscritos:</th>
-        <th class="center">Número de participantes que asistieron:</th>
-        <th class="center">Número de participantes que acreditaron:</th>
-        <th class="center">Número de participantes que contestaron evaluación sobre actividad:</th>
+        <th class="center">Inscritos:</th>
+        <th class="center">Asistentes:</th>
+        <th class="center">Acreditados:</th>
+        <th class="center">Total Evaluaciones:</th>
       </tr>
       <tr>
         <td class="center">{!! $count_participants !!}</td>
@@ -133,26 +133,27 @@ th {
       </tr>
     </table>
     <br><br>
+    <h4> 3. FACTORES DE EVALUACIÓN</h4>
     <table>
       <tr>
-        <th class="center">Factor de ocupación:</th>
-        <th class="center">Factor de recomendación:</th>
-        <th class="center">Factor de acreditación:</th>
-        <th class="center">Factor de calidad de actividades:</th>
-        <th class="center">Factor de calidad del departmento:</th>
+        <th class="center" width="20%">Ocupación:</th>
+        <th class="center" width="20%">Recomendación:</th>
+        <th class="center" width="20%">Acreditación:</th>
+        <th class="center" width="20%">Calidad de actividades:</th>
+        <th class="center" width="20%">Calidad del departmento:</th>
       </tr>
       <tr>
-        <td class="center">{!! $occupance_factor !!}%</td>
-        <td class="center">{!! $recommendation_factor !!}%</td>
-        <td class="center">{!! $accredited_factor !!}%</td>
-        <td class="center">{!! $activity_quality_factor !!}%</td>
-        <td class="center">{!! $department_quality_factor !!}%</td>
+        <td class="center" width="20%">{!! $occupance_factor !!}%</td>
+        <td class="center" width="20%">{!! $recommendation_factor !!}%</td>
+        <td class="center" width="20%">{!! $accredited_factor !!}%</td>
+        <td class="center" width="20%">{!! $activity_quality_factor !!}%</td>
+        <td class="center" width="20%">{!! $department_quality_factor !!}%</td>
       </tr>
     </table>
     <br><br>
     <table>
       <tr>
-        <th colspan="4">INSTRUCTORES</th>
+        <th colspan="4">4. INSTRUCTORES</th>
       </tr>
       <tr>
         <th>

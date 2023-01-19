@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col-xl-5">
           <label class="form-label" for="key">*Folio:</label>
-          <input required class="form-control" type="text" name="key" id="key" placeholder="Ej. F042022CO001C001" value="{!! old('key') !!}">
+          <input required maxlength="13" class="form-control" type="text" name="key" id="key" placeholder="Ej. F042022RO001C" value="{!! old('key') !!}">
         </div>
         <div class="col-xl-4">
           <label class="form-label" for="recognition_date">*Fecha de generación:</label>
