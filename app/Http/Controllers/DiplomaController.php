@@ -147,7 +147,6 @@ class DiplomaController extends Controller
         foreach($module->getParticipants() as $participant) {
 
           if( $diploma->participants->doesntContain('professor_id',$participant->professor_id) && $participant->accredited)
-
             $diploma->participants->push(collect([
               'professor_id'      => $participant->professor_id,
               'name'              => $participant->name,
@@ -160,8 +159,7 @@ class DiplomaController extends Controller
               ]])
             ]));
 
-          elseif ($diploma->participants->has($participant->professor_id) && $participant->accredited) {
-
+          elseif (! $diploma->participants->doesntContain('professor_id',$participant->professor_id) && $participant->accredited) {
             $tmp = $diploma->participants->where('professor_id', $participant->professor_id)->first()['grades'];
             $tmp[] = [
               'name' => $module->name,
@@ -170,9 +168,7 @@ class DiplomaController extends Controller
             ];
             $diploma->participants->where('professor_id', $participant->professor_id)->first()['grades'] = $tmp;
 
-          } else
-
-            continue;
+          }
         }
 
       }
