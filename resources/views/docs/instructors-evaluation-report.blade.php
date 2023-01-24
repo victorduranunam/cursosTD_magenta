@@ -85,6 +85,7 @@ th, td{
 
     @foreach($instructors as $instructor)
       <h3 style="font-style: italic;"> {!! $instructor['name'].' '.$instructor['last_name'].' '.$instructor['mothers_last_name'] !!} </h3>
+      <h4>Número de evaluaciones: {!! $instructor['counters']['evaluations'] !!}</h4>
         <table>
 
           @if($instructor['counters']['evaluations'] == 0)
@@ -115,7 +116,6 @@ th, td{
             </tr>
 
           @else
-
             <tr>
               <th>Criterio de Experiencia: </th>
               <td>{!! round($instructor['counters']['experience']/$instructor['counters']['evaluations'],2).'%' !!}</td>
