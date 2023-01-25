@@ -17,7 +17,7 @@
     width: 100%;
     height: 100%;
     background-image: url({!! public_path('img/constancia.jpg') !!});
-    background-size: 27.5cm;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     font-family:Arial, Helvetica, Sans-serif,cursive;
@@ -26,7 +26,7 @@
     width: 100%;
     text-align:center;
     position: relative;
-    top:25%;
+    top:27%;
     align:center;
   }
   .text{
@@ -84,6 +84,9 @@
     position: absolute;
     text-align:right;
     bottom:0;
+  }
+  .folio p{
+    padding-right:2%;
   }
 </style>
 <body>
