@@ -27,8 +27,11 @@
             <label class="form-label" for="administrator_id">Ubicación:</label>
             <input required class="form-control" type="text" name="location" id="location" value="{!! $venue->location !!}">
           </div>
-          <div class="col-xl-2 mt-auto">
+          <div class="col-xl-1 mt-auto">
             <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+          </div>
+          <div class="col-xl-2 mt-auto" style="margin-left:5px;">
+            <a href="{!! route("view.venues") !!}" class="btn btn-outline-warning">Cancelar</a>
           </div>
         </div>
       </form>
@@ -36,9 +39,7 @@
         @csrf
         @method('delete')
         <div class="row">
-          <div class="col-2">
-            <a href="{!! route("view.venues") !!}" class="btn btn-outline-warning">Cancelar</a>
-          </div>
+          
           <div class="col-2">
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $venue->venue_id !!}">Eliminar</button>
           </div>
