@@ -37,6 +37,7 @@ Route::group( ['middleware' => 'guest'], function() {
   //Route Activity Catalogue
   Route::get('catalogo-actividades', 'ActivityCatalogueController@index')->name('view.activities.catalogue');
   Route::get('catalogo-actividades/crear', 'ActivityCatalogueController@create')->name('create.activity.catalogue');
+  Route::get('catalogo-actividades/buscar', 'ActivityCatalogueController@search')->name('search.activity.catalogue');
   Route::post('catalogo-actividades/almacenar', 'ActivityCatalogueController@store')->name('store.activity.catalogue');
   Route::get('catalogo-actividades/actualizar/{activity_catalogue_id}', 'ActivityCatalogueController@edit')->name('edit.activity.catalogue');
   Route::put('catalogo-actividades/guardar/{activity_catalogue_id}', 'ActivityCatalogueController@update')->name('update.activity.catalogue');
@@ -131,6 +132,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Professor
   Route::get('profesores', "ProfessorController@index")->name("view.professors");
+  Route::get('profesores/buscar', "ProfessorController@search")->name("search.professors");
   Route::get('profesores/crear', "ProfessorController@create")->name("create.professor");
   Route::get('profesor/descargar/reporte-actividades/{professor_id}', "ProfessorController@downloadRecord")->name("download.professor-record");
   Route::post('profesores/almacenar', "ProfessorController@store")->name("store.professor");

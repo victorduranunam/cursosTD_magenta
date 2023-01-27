@@ -222,6 +222,10 @@ function blockCreateDiv() {
   document.getElementById('create-div').style.display = "block";
 }
 
+function blockSearchDiv() {
+  document.getElementById('search-div').style.display = "block";
+}
+
 function openNav() {
   document.getElementsByClassName("sidebar")[0].style.display='block';
   document.getElementsByClassName("sidebar")[0].style.width = "100%";

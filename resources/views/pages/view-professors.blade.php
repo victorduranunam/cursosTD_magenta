@@ -9,6 +9,9 @@
       <div class="col-xl-3">
         <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de profesor</a>
       </div>
+      <div class="col-xl-3">
+        <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
+      </div>
       <div class="col-xl-2">
         <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
@@ -16,6 +19,34 @@
   </div>
   @include('partials.messages')
     <div class="card-body"><br>
+
+      {{-- Form for search --}}
+      <div id="search-div" style="display:none;">
+        <form method="GET" action="{!! route('search.professors') !!}">
+          @csrf
+          @method('get')
+          <div class="row">
+            <div class="col-xl-6">
+              <label class="form-label" for="words">Buscar profesor:</label>
+              <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}" data-toggle="tooltip" data-placement="top" title="Para buscar por nombre, comience por apellidos">
+            </div>
+            <div class="col-xl-3">
+              <label class="form-label" for="search-type">Buscar por:</label>
+              <select class="form-select" name="search_type" id="search_type">
+                <option selected value='name'>Nombre</option>
+                <option value='email'>Email</option>
+                <option value='rfc'>RFC</option>
+                <option value='work_number'>Número de trabajador</option>
+              </select>
+            </div>
+            <div class="col-xl-2 mt-auto">
+              <input type="submit" id='search-btn' class="btn btn-outline-success" value='Buscar'>
+            </div>
+          </div>
+          <hr>
+        </form>
+      </div>
+
       <div class="row">
         <div class="col-xl-3">
           <h6>Nombre</h6>

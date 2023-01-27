@@ -15,7 +15,7 @@ class ActivityCatalogueController extends Controller
     try {
 
       $activities_cat = ActivityCatalogue::orderByRaw('unaccent(lower(key))')
-        ->get();
+          ->get();
 
       return view("pages.view-activities-catalogue")
         ->with("activities_cat", $activities_cat);
@@ -33,7 +33,43 @@ class ActivityCatalogueController extends Controller
     }
   }
 
-  public function create()
+  public function search(Request $req) 
+  {
+    try {
+      
+      if ( $req->search_type === 'name' ) {
+        $activities_cat = ActivityCatalogue::whereRaw(
+            'unaccent(lower(name)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))'
+          )
+          ->orderByRaw('unaccent(lower(key))')
+          ->get();
+      } elseif ( $req->search_type === 'key' ) {
+        $activities_cat = ActivityCatalogue::whereRaw(
+          'unaccent(lower(key)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))'
+        )
+        ->orderByRaw('unaccent(lower(key))')
+        ->get();
+      } else {
+        $activities_cat = NULL;
+      }
+  
+      return view("pages.view-activities-catalogue")
+          ->with("activities_cat", $activities_cat);
+    
+    } catch (\Illuminate\Database\QueryException $th) {
+      
+      if ($th->getCode() == 7)
+          return redirect()
+            ->route('home')
+            ->with('danger', 'No hay conexión con la base de datos.');
+        else
+          return redirect()
+            ->route('home')
+            ->with('danger', 'Problema con la base de datos.');
+    }
+  }
+
+  public function create() 
   {
     $diplomas = Diploma::all()
       ->sortBy('name');
