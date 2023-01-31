@@ -25,8 +25,8 @@
         <div class="col-2">
           <a href="{!! route("view.departments") !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
-        <div class="col-xl-2 mt-auto">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        <div class="d-grid gap-2 col-xl-2 mt-auto">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
       </div>
     </form>

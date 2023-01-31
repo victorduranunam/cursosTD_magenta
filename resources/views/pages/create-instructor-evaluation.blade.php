@@ -290,8 +290,8 @@
                     </table>
 
                     <div class="row justify-content-end">
-                      <div class="col-xl-1">
-                          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+                      <div class="d-grid gap-2 col-xl-2">
+                        <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
                       </div>
                     </div>
 

@@ -40,14 +40,14 @@
             <option {!! $activity_cat->type == 'CO' ? "selected" : "" !!} value="CO">Conferencia</option>
           </select>
         </div>
-        <div class="col-xl-2">
+        <div class="col-xl-3">
           <label for="creation_date" class="form-label">*Fecha de creación:</label>
           <input type="date" class="form-control" required name="creation_date" 
             id="creation_date" placeholder="22/07/22" 
             value="{!! $activity_cat->creation_date !!}"
           >
         </div>
-        <div class="col-xl-5">
+        <div class="col-xl-6">
           <label for="department_id" class="form-label">*Departamento:</label>
           <select name="department_id" id="department_id" class="form-select">
             @foreach($departments as $department)
@@ -58,7 +58,7 @@
       </div>
       <div class="row">
         <div class="col-xl-6">
-          <label for="aimed_at" class="form-label">Dirijido a:</label>
+          <label for="aimed_at" class="form-label">Dirigido a:</label>
           <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirijido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos">{!! $activity_cat->aimed_at !!}</textarea>
         </div>
         <div class="col-xl-6">
@@ -101,8 +101,8 @@
       @endif
 
       <div class="row">
-        <div class="col-xl-2 mt-auto" id='btn_save' style="visibility: visible">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        <div class="d-grid gap-2 col-xl-2 mt-auto" id='btn_save' style="visibility: visible">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
         <div class="col-xl-2">
           <a href="{!! route("view.activities.catalogue") !!}" class="btn btn-outline-warning">Cancelar</a>

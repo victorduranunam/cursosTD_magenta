@@ -100,8 +100,8 @@
           <textarea style="resize: none; overflow-y:auto;" class="form-control" type="text" rows="4" cols="50" name="provenance" id="provenance">{!!old('provenance') !!}</textarea>
         </div>
 
-        <div class="col-xl-2 mt-auto">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        <div class="d-grid gap-2 col-xl-2 mt-auto">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
         <div class="col-xl-2 mt-auto">
           <a href="{!! route("view.professors") !!}" class="btn btn-outline-warning">Cancelar</a>
