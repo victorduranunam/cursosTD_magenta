@@ -43,23 +43,24 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto">
             <label for="job">*Nombre de usuario:</label>
             <input required max=40 min=5 class="form-control" type="text" name="username" id="username" placeholder="Ej. jefe_dsa" value="{!! $administrator->username !!}">
           </div>
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto">
             <label for="job">*Contraseña:</label>
             <input required max=60 min=8 class="form-control" type="password" name="password" id="password" placeholder="Máximo 60 caracteres.">
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto">
             <label class="form-label" for="admin">*¿Cuenta con todos los privilegios?</label>
             <select class="form-select" name="admin" id="admin">
               <option {!! $administrator->admin == TRUE ? "selected" : "" !!} value="TRUE">Sí</option>
               <option {!! $administrator->admin == FALSE ? "selected" : "" !!} value="FALSE">No</option>
             </select>
           </div>
+        </div>
+        <div class="row">
+          
           <div class="col-xl-5">
             <label class="form-label" for="admin">Departamento</label>
             <select class="form-select" name="department_id" id="department_id">
@@ -72,8 +73,11 @@
                 @endforeach
             </select>
           </div>
+          <div class="d-grid gap-2 col-xl-2 mt-auto">
+            <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
+          </div>
           <div class="col-xl-2 mt-auto">
-            <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+            <a href="{!! route("view.administrators") !!}" class="btn btn-outline-warning">Cancelar</a>
           </div>
         </div>
       </form> 
@@ -81,9 +85,7 @@
         @csrf
         @method('delete')
         <div class="row">
-          <div class="col-2">
-            <a href="{!! route("view.administrators") !!}" class="btn btn-outline-warning">Cancelar</a>
-          </div>
+          
           <div class="col-2">
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $administrator->administrator_id !!}">Eliminar</button>
             <div class="modal fade" id="myModal{!! $administrator->administrator_id !!}" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">

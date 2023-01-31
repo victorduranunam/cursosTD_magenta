@@ -40,23 +40,24 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-4 mt-auto">
           <label for="job">*Nombre de usuario:</label>
           <input required max=40 min=5 class="form-control" type="text" name="username" id="username" placeholder="Ej. jefe_dsa" value="{!! old('username') !!}">
         </div>
-        <div class="col-xl-4">
+        <div class="col-xl-4 mt-auto">
           <label for="job">*Contraseña:</label>
           <input required max=60 min=8 class="form-control" type="password" name="password" id="password" placeholder="Máximo 60 caracteres.">
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-4 mt-auto">
           <label class="form-label" for="admin">*¿Cuenta con todos los privilegios?</label>
           <select class="form-select" name="admin" id="admin">
             <option value="TRUE"> Sí </option>
             <option value="FALSE" selected> No </option>
           </select>
         </div>
+      </div>
+      <div class="row">
+        
         <div class="col-xl-5">
           <label class="form-label" for="admin">Departamento</label>
           <select class="form-select" name="department_id" id="department_id">
@@ -68,15 +69,16 @@
             @endforeach
           </select>
         </div>
-        <div class="col-xl-2 mt-auto">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        <div class="d-grid gap-2 col-xl-2 mt-auto">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
+        <div class="col-xl-2 mt-auto">
+          <a href="{!! route("view.administrators") !!}" class="btn btn-outline-warning">Cancelar</a>
+        </div>
+        
       </div>
     </form>
     <div class="row">
-      <div class="col-2">
-        <a href="{!! route("view.administrators") !!}" class="btn btn-outline-warning">Cancelar</a>
-      </div>
     </div>
   </div>
 </div>

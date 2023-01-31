@@ -92,26 +92,24 @@
     <div class="row">
         <div class="col-xl-4">
           <label class="form-label" for="semblance">Semblanza corta:</label>
-          <textarea class="form-control" type="text" rows="4" cols="50" name="semblance" id="semblance">{!! old('semblance') !!}</textarea>
+          <textarea style="resize: none; overflow-y:auto;" class="form-control" type="text" rows="4" cols="50" name="semblance" id="semblance">{!! old('semblance') !!}</textarea>
         </div>
 
         <div class="col-xl-4">
           <label class="form-label" for="provenance">Proveniencia:</label>
-          <textarea class="form-control" type="text" rows="4" cols="50" name="provenance" id="provenance">{!!old('provenance') !!}</textarea>
+          <textarea style="resize: none; overflow-y:auto;" class="form-control" type="text" rows="4" cols="50" name="provenance" id="provenance">{!!old('provenance') !!}</textarea>
         </div>
 
+        <div class="d-grid gap-2 col-xl-2 mt-auto">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
+        </div>
         <div class="col-xl-2 mt-auto">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+          <a href="{!! route("view.professors") !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
     </div>
 
 
     </form>
-    <div class="row">
-      <div class="col-2">
-        <a href="{!! route("view.professors") !!}" class="btn btn-outline-warning">Cancelar</a>
-      </div>
-    </div>
   </div>
 </div>
 @endsection

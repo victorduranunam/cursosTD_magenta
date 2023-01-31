@@ -26,16 +26,14 @@
           <label class="form-label" for="location">Ubicación:</label>
           <input required class="form-control" type="text" name="location" id="location" placeholder="Ej. Facultad de Ingeniería" value="{!! old('location') !!}">
         </div>
-        <div class="col-xl-2 mt-auto">
+        <div class="col-xl-1 mt-auto">
           <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        </div>
+        <div class="col-xl-2 mt-auto" style="margin-left:5px;">
+          <a href="{!! route("view.venues") !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
       </div>
     </form>
-    <div class="row">
-      <div class="col-2">
-        <a href="{!! route("view.venues") !!}" class="btn btn-outline-warning">Cancelar</a>
-      </div>
-    </div>
   </div>
 </div>
 @endsection

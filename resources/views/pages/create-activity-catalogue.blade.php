@@ -40,14 +40,14 @@
             <option {!! old('type') == 'CO' ? "selected" : "" !!} value="CO">Conferencia</option>
           </select>
         </div>
-        <div class="col-xl-2">
+        <div class="col-xl-3">
           <label for="creation_date" class="form-label">*Fecha de creación:</label>
           <input type="date" class="form-control" required name="creation_date" 
             id="creation_date" placeholder="22/07/22" 
             value="{!! old('creation_date') !!}"
           >
         </div>
-        <div class="col-xl-5">
+        <div class="col-xl-6">
           <label for="department_id" class="form-label">*Departamento:</label>
           <select name="department_id" id="department_id" class="form-select">
             @foreach($departments as $department)
