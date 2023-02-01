@@ -69,22 +69,22 @@
         <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $participant->name.' '.$participant->last_name.' '.$participant->mothers_last_name !!}
           </div>
 
           {{-- Summary of the element --}}
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $participant->summary !!}
           </div>
 
           {{-- Button for update --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <a type="button" class="btn btn-outline-secondary" href={!! route('edit.participant', $participant->participant_id) !!}>Modificar</a>
           </div>
 
           {{-- Options for participant --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <div class="dropdown">
               <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Evaluaciones

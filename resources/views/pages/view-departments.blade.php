@@ -21,17 +21,17 @@
           <div class="row row-list">
 
             {{-- Name of the department --}}
-            <div class="col-xl-6">
+            <div class="col-xl-6 mt-auto mb-auto">
               {!! $department->name !!}
             </div>
 
             {{-- Update button --}}
-            <div class="col-xl-2">
+            <div class="col-xl-2 mt-auto mb-auto">
               <a href={!! route('edit.department', $department->department_id) !!} class="btn btn-outline-primary">Actualizar</a>
             </div>
 
             {{-- Generate docs --}}
-            <div class="col-xl-2" style="width: auto;">
+            <div class="col-xl-2 mt-auto mb-auto" style="width: auto;">
               <div class="dropdown">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   Formatos
@@ -84,7 +84,7 @@
             </div>
 
             {{-- Delete button --}}
-            <div class="col-xl-2">
+            <div class="col-xl-2 mt-auto mb-auto">
               <form method="POST" action="{!! route('delete.department', $department->department_id) !!}">
                 @csrf
                 @method('delete')

@@ -19,20 +19,20 @@
     @if($administrators->isNotEmpty())
       @foreach ($administrators as $administrator)
         <div class="row row-list">
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $administrator->name.' '.$administrator->last_name.' '.$administrator->mothers_last_name !!}
           </div>
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             @if($administrator->department_abbreviation)
               {!! $administrator->department_abbreviation !!}
             @else
               Mantenimiento del sistema
             @endif
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <a href={!! route('edit.administrator', $administrator->administrator_id) !!} class="btn btn-outline-primary">Actualizar</a>
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.administrator', $administrator->administrator_id) !!}">
               @csrf
               @method('delete')
