@@ -59,17 +59,17 @@
         <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
-          <div class="col-xl-6">
+          <div class="col-xl-6 mt-auto mb-auto">
             {!! $division->name !!}
           </div>
 
           {{-- Abbreviation of the element --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $division->abbreviation !!}
           </div>
 
           {{-- Form for update --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('update.division', $division->division_id) !!}">
               @csrf
               @method('put')
@@ -98,7 +98,7 @@
           </div>
 
           {{-- Form for delete --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.division', $division->division_id) !!}">
               @csrf
               @method('delete')

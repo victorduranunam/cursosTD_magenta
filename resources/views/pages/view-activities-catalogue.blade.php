@@ -24,28 +24,28 @@
           <div class="col-xl-3">
             <h6>Nombre</h6>
           </div>
-          <div class="col-xl">
+          <div class="col-xl-2">
             <h6>Departamento</h6>
           </div>
         </div>
         @foreach ($activities_cat as $activity_cat)
         <div class="row row-list">
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $activity_cat->key !!}
           </div>
-          <div class="col-xl-3">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $activity_cat->name !!}
           </div>
-          <div class="col-xl-1">
+          <div class="col-xl-1 mt-auto mb-auto" style="text-align:center;">
             {!! $activity_cat->getDepartmentAbbreviation() !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <a href={!! route('create.activity', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-primary">Programar</a>
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <a href={!! route('edit.activity.catalogue', $activity_cat->activity_catalogue_id) !!} class="btn btn-outline-secondary">Actualizar</a>
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.activity.catalogue', $activity_cat->activity_catalogue_id) !!}">
               @csrf
               @method('delete')

@@ -50,7 +50,7 @@
         <div class="col-xl-6">
           <h6>Nombre</h6>
         </div>
-        <div class="col-xl-6">
+        <div class="col-xl-6 ">
           <h6>Abreviación</h6>
         </div>
       </div>

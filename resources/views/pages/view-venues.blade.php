@@ -19,13 +19,13 @@
     @if($venues->isNotEmpty())
       @foreach ($venues as $venue)
         <div class="row row-list" style="margin: 1%">
-          <div class="col-xl-6">
+          <div class="col-xl-6 mt-auto mb-auto">
             {!! $venue->name !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <a href={!! route('edit.venue', $venue->venue_id) !!} class="btn btn-outline-info">Actualizar</a>
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.venue', $venue->venue_id) !!}">
               @csrf
               @method('delete')

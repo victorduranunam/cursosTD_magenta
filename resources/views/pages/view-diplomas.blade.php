@@ -46,12 +46,12 @@
         <div class="row row-list" style="margin: 1%">
           
           {{-- Name of the element --}}
-          <div class="col-xl-6">
+          <div class="col-xl-6 mt-auto mb-auto">
             {!! $diploma->name !!}
           </div>
 
           {{-- Form for update --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('update.diploma', $diploma->diploma_id) !!}">
               @csrf
               @method('put')
@@ -78,12 +78,12 @@
           </div>
 
           {{-- Docs Button --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <a type="button" class="btn btn-outline-secondary" href="{!! route('create.diploma-certificates', $diploma->diploma_id) !!}">Diplomas</a>
           </div>
 
           {{-- Form for delete --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.diploma', $diploma->diploma_id) !!}">
               @csrf
               @method('delete')

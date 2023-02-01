@@ -35,20 +35,20 @@
 
       @foreach ($instructors as $instructor)
         <div class="row row-list">
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $instructor->name." ".$instructor->last_name." ".$instructor->mothers_last_name !!}
           </div>
-          <div class="col-xl-3">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $instructor->email !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $instructor->rfc !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $instructor->worker_number !!}
           </div>
           
-          <div class="col-xl-1">
+          <div class="col-xl-1 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.instructor', $instructor->instructor_id) !!}">
               @csrf
               @method('delete')
@@ -111,19 +111,19 @@
       <div class="row row-list">
         @csrf
         @method('post')
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $professor->name." ".$professor->last_name." ".$professor->mothers_last_name !!}
           </div>
-          <div class="col-xl-3">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $professor->email !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $professor->rfc !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $professor->worker_number !!}
           </div>
-          <div class="col-xl-1">
+          <div class="col-xl-1 mt-auto mb-auto">
             <button type="submit" id='save-btn' class="btn btn-outline-success"><i class="bi bi-person-plus"></i></button>
           </div>
         </div>
