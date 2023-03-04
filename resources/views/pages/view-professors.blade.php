@@ -47,7 +47,7 @@
               {!! $professor->rfc !!}
             </div>
             <div class="col-xl-2 mt-auto mb-auto">
-              {!! $professor->worker_number !!}
+              {!! $professor->worker_number !!} xd
             </div>
             
             <div class="col-xl-2 mt-auto mb-auto">
