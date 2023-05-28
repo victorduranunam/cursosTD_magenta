@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Actualizar Salón <i class="bi bi-building"></i></h3>
+    <h3>Actualizar Sede <i class="bi bi-building"></i></h3>
     <h4> {!! $venue->name !!} </h4>
   </div>
   @include('partials.messages')
@@ -47,11 +47,11 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar salón</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Sede</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <p>¿Está seguro de eliminar el salón {!! $venue->name !!}? 
+                <p>¿Está seguro de eliminar la sede {!! $venue->name !!}? 
                   Esto borrará todos los registros
                   que dependan de él, como Actividades. 
                   Si no quiere perder estos registros primero modifíquelos.

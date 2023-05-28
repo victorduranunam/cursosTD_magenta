@@ -65,10 +65,10 @@
                 </li>
 
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-building"></i>Salones<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-building"></i>Sedes<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.venue') !!}>Alta de Salón</a></li>
-                        <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
+                        <li><a href={!! route('create.venue') !!}>Alta de Sede</a></li>
+                        <li><a href={!! route('view.venues') !!}>Consulta de Sedes</a></li>
                     </ul>
                 </li>
 

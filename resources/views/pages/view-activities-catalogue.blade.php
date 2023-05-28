@@ -9,7 +9,7 @@
       <div class="col-xl-3" style='width: auto'>
           <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-success">Alta de Actividad</a>
       </div>
-      <div class="col-xl-2">
+      <div class="col-xl-1">
         <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
       </div>
       <div class="col-xl-2">
@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col-xl-6">
               <label class="form-label" for="words">Buscar actividad en catálogo:</label>
-              <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
+              <input placeholder="Ingrese texto" required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
             </div>
             <div class="col-xl-3">
               <label class="form-label" for="search-type">Buscar por:</label>

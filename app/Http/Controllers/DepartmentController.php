@@ -28,6 +28,42 @@ class DepartmentController extends Controller
       }
   }
 
+  public function search (Request $req)
+  {
+    try {
+
+      $query = NULL;
+
+      if ( $req->search_type === 'name' OR 
+           $req->search_type === 'abbreviation' )
+
+        $query = 'unaccent('.$req->search_type.') ILIKE unaccent(\'%'
+               . $req->words . '%\')';
+
+      if ( $query ) {
+
+        $departments = Department::whereRaw($query)
+          ->orderByRaw('unaccent(lower(name))')
+          ->get();
+
+      } else {
+
+        $departments = collect();
+
+      }
+
+      return view("pages.view-departments")
+          ->with("departments",$departments);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+
+      return redirect()
+          ->route('home')
+          ->with('danger', 'Problema con la base de datos.');
+
+    }
+  }
+
   public function create() {
     return view ("pages.create-department");
   }

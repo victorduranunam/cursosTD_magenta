@@ -8,10 +8,13 @@
   <div class="card-header"><br>
     <h3>Ver Divisiones <i class="bi bi-briefcase"></i></h3>
     <div class="row justify-content-end">
-      <div class="col-xl-2">
+      <div class="col-1">
         <a class="btn btn-outline-success" onclick="blockCreateDiv()">Crear</a>
       </div>
-      <div class="col-xl-2">
+      <div class="col-1">
+        <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
+      </div>
+      <div class="col-2">
         <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
     </div>
@@ -19,6 +22,31 @@
 
   @include('partials.messages')
   <div class="card-body"><br>
+
+    {{-- Form for search --}}
+    <div id="search-div" style="display:none;">
+      <form method="GET" action="{!! route('search.divisions') !!}">
+        @csrf
+        @method('get')
+        <div class="row">
+          <div class="col-xl-6">
+            <label class="form-label" for="words">Buscar división:</label>
+            <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
+          </div>
+          <div class="col-xl-3">
+            <label class="form-label" for="search-type">Buscar por:</label>
+            <select class="form-select" name="search_type" id="search_type">
+              <option selected value='name'>Nombre</option>
+              <option value='abbreviation'>Abreviación</option>
+            </select>
+          </div>
+          <div class="col-xl-2 mt-auto">
+            <input type="submit" id='search-btn' class="btn btn-outline-success" value='Buscar'>
+          </div>
+        </div>
+        <hr>
+      </form>
+    </div>
 
     {{-- Form for create --}}
     <div id="create-div" style="display:none;">
@@ -47,10 +75,10 @@
     @if($divisions->isNotEmpty())
 
       <div class="row">
-        <div class="col-xl-6">
+        <div class="col-xl-5">
           <h6>Nombre</h6>
         </div>
-        <div class="col-xl-6">
+        <div class="col-xl-7">
           <h6>Abreviación</h6>
         </div>
       </div>
@@ -60,12 +88,12 @@
         <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
-          <div class="col-xl-6">
+          <div class="col-xl-5">
             {!! $division->name !!}
           </div>
 
           {{-- Abbreviation of the element --}}
-          <div class="col-xl-2">
+          <div class="col-xl-3">
             {!! $division->abbreviation !!}
           </div>
 

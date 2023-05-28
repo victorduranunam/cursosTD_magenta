@@ -45,6 +45,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Activity
   Route::get('actividades','ActivityController@index')->name('view.activities');
+  Route::get('actividades/buscar','ActivityController@search')->name('search.activities');
   Route::get('actividades/crear/{activity_catalogue_id}','ActivityController@create')->name('create.activity');
   Route::post('actividades/almacenar','ActivityController@store')->name('store.activity');
   Route::get('actividades/actualizar/{activity_id}','ActivityController@edit')->name('edit.activity');
@@ -73,6 +74,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Administrator
   Route::get('administradores', 'AdministratorController@index')->name('view.administrators');
+  Route::get('administradores/buscar', 'AdministratorController@search')->name('search.administrators');
   Route::get('administrador/crear', 'AdministratorController@create')->name('create.administrator');
   Route::post('administrador/almacenar', 'AdministratorController@store')->name('store.administrator');
   Route::get('administrador/actualizar/{administrator_id}', 'AdministratorController@edit')->name('edit.administrator');
@@ -81,12 +83,14 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Work Position
   Route::get('puestos-trabajo', "WorkPositionController@index")->name("view.work-positions");
+  Route::get('puestos-trabajo/buscar', "WorkPositionController@search")->name("search.work-positions");
   Route::post('puesto-trabajo/almacenar', "WorkPositionController@store")->name("store.work-position");
   Route::put('puesto-trabajo/guardar/{work_position_id}', "WorkPositionController@update")->name('update.work-position');
   Route::delete('puesto-trabajo/eliminar/{work_position_id}', "WorkPositionController@delete")->name("delete.work-position");
   
   //Route Department
   Route::get('departamentos', "DepartmentController@index")->name("view.departments");
+  Route::get('departamentos/buscar', "DepartmentController@search")->name("search.departments");
   Route::get('departamentos/crear', "DepartmentController@create")->name("create.department");
   Route::post('departamentos/almacenar', "DepartmentController@store")->name("store.department");
   Route::get('departamentos/actualizar/{department_id}', "DepartmentController@edit")->name("edit.department");
@@ -106,6 +110,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Division
   Route::get('divisiones', "DivisionController@index")->name("view.divisions");
+  Route::get('divisiones/buscar', "DivisionController@search")->name("search.divisions");
   Route::post('divisiones/almacenar', "DivisionController@store")->name("store.division");
   Route::put('divisiones/guardar/{division_id}', "DivisionController@update")->name('update.division');
   Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")->name("delete.division");
@@ -153,11 +158,12 @@ Route::group( ['middleware' => 'guest'], function() {
   //Route Seminar Topic
   
   //Route Venue
-  Route::get('salones', "VenueController@index")->name("view.venues");
-  Route::get('salones/crear', "VenueController@create")->name("create.venue");
-  Route::post('salones/almacenar', "VenueController@store")->name("store.venue");
-  Route::get('salones/actualizar/{venue_id}', "VenueController@edit")->name("edit.venue");
-  Route::put('salones/guardar/{venue_id}', "VenueController@update")->name('update.venue');
-  Route::delete('salones/eliminar/{venue_id}', "VenueController@delete")->name("delete.venue");
+  Route::get('sedes', "VenueController@index")->name("view.venues");
+  Route::get('sedes/buscar', "VenueController@search")->name("search.venues");
+  Route::get('sedes/crear', "VenueController@create")->name("create.venue");
+  Route::post('sedes/almacenar', "VenueController@store")->name("store.venue");
+  Route::get('sedes/actualizar/{venue_id}', "VenueController@edit")->name("edit.venue");
+  Route::put('sedes/guardar/{venue_id}', "VenueController@update")->name('update.venue');
+  Route::delete('sedes/eliminar/{venue_id}', "VenueController@delete")->name("delete.venue");
 
 });

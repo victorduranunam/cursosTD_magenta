@@ -21,7 +21,7 @@ class ActivityEvaluationController extends Controller
       $professor = Professor::where("email", $req->email)->get()->first();
       if(!$professor){
         return redirect()->back()->with(
-          'danger', "Correo electrónico no registrado."
+          'danger', " Email no registrado."
         );
       }
       try{

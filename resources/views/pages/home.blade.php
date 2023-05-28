@@ -40,7 +40,7 @@
             <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-dark">Crear nuevo Catálogo de Actividades</a>
           </div>
           <div class="col-4">
-            <a href={!! route('view.venues') !!} class="btn btn-outline-dark">Ver salones</a>
+            <a href={!! route('view.venues') !!} class="btn btn-outline-dark">Ver sedes</a>
           </div>
           <div class="col-4">
             <a href="{!! route('view.administrators') !!}" class="btn btn-outline-dark">Consultar Administradores</a>

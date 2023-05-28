@@ -29,36 +29,55 @@ class ProfessorController extends Controller
   {
     try {
 
+      $query = NULL;
+      
       if ( $req->search_type === 'name' ) {
-        $professors = Professor::whereRaw(
-          'unaccent(lower(name)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))'
-          )
-          ->orderByRaw('unaccent(lower(key))')
+
+        $words = str_replace(' ','',$req->words);
+
+        $query = 'unaccent(concat(name,last_name,mothers_last_name)) ILIKE '.
+                 'unaccent(\'%'.$words.'%\') OR '.
+                 'unaccent(concat(last_name,mothers_last_name,name)) ILIKE '.
+                 'unaccent(\'%'.$words.'%\')';
+
+      } elseif ( $req->search_type === 'email' ) {
+
+        $query = 'email LIKE \'%'.$req->words.'%\'';
+        
+      } elseif ( $req->search_type === 'rfc' ) {
+
+        $query = 'rfc LIKE \'%'.$req->words.'%\'';
+
+      } elseif ( $req->search_type === 'worker_number' ) {
+
+        $query = 'worker_number LIKE \'%'.$req->words.'%\'';
+
+      }
+
+      if ( $query ) {
+        
+        $professors = Professor::whereRaw($query)
+          ->orderByRaw( 'unaccent(lower(concat(' .
+                          'name, last_name, mothers_last_name' .
+                        ')))'
+                      )
           ->get();
-      // } elseif ( $req->search_type === 'email' ) {
-      //   $professor = Professor::whereRaw(
-      //     'unaccent(lower(email)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))'
-      //   )
-      //   ->orderByRaw('unaccent(lower(key))')
-      //   ->get();
-      // } elseif ( $req->search_type === 'rfc' ) {
-      //   $professors = Professor::whereRaw(
-
-      // } elseif ( $req->search_type === 'work_number' ) {
-      //   $professors = Professor::whereRaw(
-
 
       } else {
-        $professors = NULL;
+        
+        $professors = collect();
+
       }
   
       return view("pages.view-professors")
           ->with("professors", $professors);
 
     } catch (\Illuminate\Database\QueryException $th) {
+
       return redirect()
               ->route('home')
               ->with('danger', 'Problema con la base de datos.');
+
     }
   }
 

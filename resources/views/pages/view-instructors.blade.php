@@ -21,7 +21,7 @@
           <h6>Nombre</h6>
         </div>
         <div class="col-xl-3">
-          <h6>Correo</h6>
+          <h6>Email</h6>
         </div>
         <div class="col-xl-2">
           <h6>RFC</h6>
@@ -92,7 +92,7 @@
           <h6>Nombre</h6>
         </div>
         <div class="col-xl-3">
-          <h6>Correo</h6>
+          <h6>Email</h6>
         </div>
         <div class="col-xl-2">
           <h6>RFC</h6>
