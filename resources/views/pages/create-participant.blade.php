@@ -24,6 +24,33 @@
             <a href={!! route('view.activities') !!} class="btn btn-outline-warning">Regresar</a>
           </div>
         </div>
+
+      {{-- Form for search --}}
+      <div id="search-div" style="display:block;">
+        <form method="GET" action="{!! route('search.participants', $activity->activity_id) !!}">
+          @csrf
+          @method('get')
+          <div class="row">
+            <div class="col-xl-6">
+              <label class="form-label" for="words">Buscar profesor:</label>
+              <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
+            </div>
+            <div class="col-xl-3">
+              <label class="form-label" for="search-type">Buscar por:</label>
+              <select class="form-select" name="search_type" id="search_type">
+                <option selected value='name'>Nombre</option>
+                <option value='email'>Email</option>
+                <option value='rfc'>RFC</option>
+                <option value='worker_number'>Número de trabajador</option>
+              </select>
+            </div>
+            <div class="col-xl-2 mt-auto">
+              <input type="submit" id='search-btn' class="btn btn-outline-success" value='Buscar'>
+            </div>
+          </div>
+          <hr>
+        </form>
+      </div>  
     </div>
   @include('partials.messages')
 

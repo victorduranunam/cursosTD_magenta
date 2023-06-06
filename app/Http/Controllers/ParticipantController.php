@@ -41,7 +41,11 @@ class ParticipantController extends Controller
       }
     }
 
-    public function create($activity_id){
+    public function search(Request $req, $activity_id) {
+
+      return $req;
+    }
+    public function create($activity_id) {
         try{   
             $professors = Professor::whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
                                     ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())

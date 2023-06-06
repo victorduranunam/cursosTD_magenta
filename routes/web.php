@@ -127,6 +127,7 @@ Route::group( ['middleware' => 'guest'], function() {
 
   //Route Participant
   Route::get('participantes/{activity_id}',"ParticipantController@index")->name("view.participants");
+  Route::get('participantes/buscar/{activity_id}',"ParticipantController@search")->name("search.participants");
   Route::get('participantes/crear/{activity_id}', "ParticipantController@create")->name("create.participant");
   Route::post('participantes/almacenar/{professor_id}', "ParticipantController@store")->name("store.participant");
   Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->name('edit.participant');

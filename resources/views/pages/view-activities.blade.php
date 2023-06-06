@@ -8,17 +8,17 @@
     <div class="row justify-content-end">
       
       {{-- Program Activities --}}
-      <div class="col-xl-3" style='width: auto'>
+      <div class="col-3" style='width: auto'>
           <a href={!! route('view.activities.catalogue') !!} class="btn btn-outline-success">Programar Actividades</a>
       </div>
 
       {{-- Search Activity --}}
-      <div class="col-xl-1">
+      <div class="col-1">
         <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
       </div>
 
       {{-- Generate docs --}}
-      <div class="col-xl-2" style='width: auto'>
+      <div class="col-2" style='width: auto'>
         <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
             Formatos
