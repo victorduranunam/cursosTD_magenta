@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-header"><br>
         <h3>Inscribir Participantes <i class="bi bi-person-check"></i></h3>
-        <h4>Actividad: {!! $activity->name !!}</h4><br>
+        <h4>Actividad: {!! $activity->activity_catalogue->name !!}</h4><br>
         <h5>Instructor(es):</h5>
         @if($instructors->isNotEmpty())
         @foreach ($instructors as $instructor)
@@ -15,7 +15,7 @@
             <h6>No hay instructores asignados.</h6>
         @endif
         <br>
-        <h5>Inscritos: {!! $count !!}/{!! $max_count->max_quota !!}</h5>
+        <h5>Inscritos: {!! $count !!}/{!! $activity->max_quota !!}</h5>
         <div class="row justify-content-end">
           <div class="col-xl-2">
             <a href={!! route('view.participants', $activity->activity_id) !!} class="btn btn-outline-primary">Ver Inscritos</a>

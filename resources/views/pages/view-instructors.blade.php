@@ -5,7 +5,7 @@
 <div class="card">
   <div class="card-header"><br>
     <h3>Asignar Instructores <i class="bi bi-person-video3"></i></h3>
-    <h4>{!! $activity->name !!}</h4>
+    <h4>{!! $activity->activity_catalogue->name !!}</h4>
     <div class="row justify-content-end">
      
       <div class="col-xl-2">
