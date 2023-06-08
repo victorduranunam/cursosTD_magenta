@@ -34,4 +34,8 @@ class Professor extends Model
     public function getFullName(){
         return $this->name.' '.$this->last_name.' '.$this->mothers_last_name;
       }
+
+    public function participants () {
+      return $this->hasMany(Participant::class, 'professor_id');
+    }
 }
