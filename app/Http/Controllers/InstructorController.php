@@ -10,17 +10,20 @@ use Illuminate\Http\Request;
 class InstructorController extends Controller
 {
     public function index($activity_id){
+
+      // Probar
       try{   
             $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
-                                    ->where('is_instructor',true)
-                                    ->whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
-                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                    ->get();
+                                   ->where('is_instructor',true)
+                                   ->whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
+                                   ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
+                                   ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
+                                   ->get();
 
             $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-                                    ->where('instructor.activity_id',$activity_id)
-                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                    ->get();
+                                     ->where('instructor.activity_id',$activity_id)
+                                     ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
+                                     ->get();
            
             $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
                                 ->where('activity.activity_id',$activity_id)
@@ -35,6 +38,45 @@ class InstructorController extends Controller
               ->route('home')
               ->with('danger', 'Problema con la base de datos.');
           }
+    }
+
+    public function search($activity_id) {
+      try {
+
+        // Falta codigo de query
+        $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
+                               ->where('is_instructor',true)
+                               ->whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
+                               ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
+                               ->whereRaw($query)
+                               ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
+                               ->get();
+
+        $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
+                                 ->where('instructor.activity_id',$activity_id)
+                                 ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
+                                 ->get();
+     
+        // Qué sería mejor? pasar el objeto actividad y preguntar por su relacion en la vista
+        // o pasar directamente el texto y preguntar por aqui por su nombre?
+
+        // Al final del dia lo que se debe evitar simplemente es ejecutar una consulta por registro
+        // No la forma en la que pasamos los datos a la vista, porque de todas formas haremos la consulta
+        $activity = Activity::findOrFail($activity_id);
+
+        return view("pages.view-instructors")
+              ->with("professors",$professors)
+              ->with("instructors",$instructors)
+              ->with('activity',$activity);
+
+      } catch (\Illuminate\Database\QueryException $th) {
+        
+        return dd($th);
+        return redirect()
+          ->route('home')
+          ->with('danger', 'Problema con la base de datos.');
+      }
+      
     }
 
     public function store(Request $re, $professor_id){

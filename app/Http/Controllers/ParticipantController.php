@@ -132,23 +132,19 @@ class ParticipantController extends Controller
 
     public function create($activity_id) {
         try{   
-            $professors = Professor::whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
-              ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
-              ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-              ->get(['professor_id','name','last_name','mothers_last_name','email','rfc','worker_number']);
+            // ¿Conservar?
+            // $professors = Professor::whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
+            //                         ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
+            //                         ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
+            //                         ->get(['professor_id','name','last_name','mothers_last_name','email','rfc','worker_number']);
 
             $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
               ->where('instructor.activity_id',$activity_id)
               ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
               ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
            
-            $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-              ->where('activity.activity_id',$activity_id)
-              ->first(['activity.activity_id','activity_catalogue.name']);
+            $activity = Activity::findOrFail($activity_id);
 
-            $max_count = Activity::select('max_quota')
-                ->where('activity_id',$activity_id)
-                ->get()->first();
             $count = Participant::select('participant_id')
                 ->where('activity_id', $activity_id)
                 ->count() - Participant::select('participant_id')
@@ -157,10 +153,9 @@ class ParticipantController extends Controller
                 ->count();
 
             return view("pages.create-participant")
-              ->with("professors",$professors)
+              ->with("professors",collect())
               ->with("instructors",$instructors)
               ->with('activity',$activity)
-              ->with('max_count',$max_count)
               ->with('count',$count);
 
         }catch (\Illuminate\Database\QueryException $th) {
