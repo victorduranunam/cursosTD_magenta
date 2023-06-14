@@ -26,9 +26,7 @@ class InstructorController extends Controller
                                      ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
                                      ->get();
            
-            $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-                                ->where('activity.activity_id',$activity_id)
-                                ->get(['activity.activity_id','activity_catalogue.name']);
+            $activity = Activity::findOrFail($activity_id);
 
             return view("pages.view-instructors")
             ->with("professors",$professors)
