@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Instructor;
 use App\Models\Activity;
 use App\Models\Professor;
+use App\Models\Participant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 

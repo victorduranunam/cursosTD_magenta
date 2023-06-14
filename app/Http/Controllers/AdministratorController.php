@@ -31,7 +31,6 @@ class AdministratorController extends Controller
 
     } catch(\Illuminate\Database\QueryException $th){
       
-      return dd($th);
       return redirect()
            ->route('login')
            ->with('warning', 'Problema con la base de datos.');
