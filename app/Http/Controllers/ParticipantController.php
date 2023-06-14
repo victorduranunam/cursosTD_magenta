@@ -48,25 +48,17 @@ class ParticipantController extends Controller
 
       try {
 
-        $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-          ->where('instructor.activity_id',$activity_id)
-          ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-          ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
+        // $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
+        //   ->where('instructor.activity_id',$activity_id)
+        //   ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
+        //   ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
                                   
         // TODO: Arreglar este join, usar relaciones
-        $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-          ->where('activity.activity_id',$activity_id)
-          ->first(['activity.activity_id','activity_catalogue.name']);
-
-        $max_count = Activity::select('max_quota')
-          ->where('activity_id',$activity_id)
-          ->get()->first();
+        $activity = Activity::findOrFail($activity_id);
 
         $count = Participant::select('participant_id')
           ->where('activity_id', $activity_id)
-          ->count() - Participant::select('participant_id')
-          ->where('activity_id', $activity_id)
-          ->where('canceled',true)
+          ->where('canceled',false)
           ->count();
 
         $query = NULL;
@@ -116,9 +108,9 @@ class ParticipantController extends Controller
 
         return view("pages.create-participant")
         ->with("professors",$professors)
-        ->with("instructors",$instructors)
+        // ->with("instructors",$instructors)
         ->with('activity',$activity)
-        ->with('max_count',$max_count)
+        // ->with('max_count',$max_count)
         ->with('count',$count);
 
       } catch(\Illuminate\Database\QueryException $th) {

@@ -7,12 +7,12 @@
         <h3>Inscribir Participantes <i class="bi bi-person-check"></i></h3>
         <h4>Actividad: {!! $activity->activity_catalogue->name !!}</h4><br>
         <h5>Instructor(es):</h5>
-        @if($instructors->isNotEmpty())
-        @foreach ($instructors as $instructor)
-            <h6>{!! $instructor->name." ".$instructor->last_name." ".$instructor->mothers_last_name !!}</h6>
-        @endforeach
-        @elseif($instructors->isEmpty())
-            <h6>No hay instructores asignados.</h6>
+        @if($instructors->isEmpty())
+          <h6>No hay instructores asignados.</h6>
+        @else
+          @foreach ($activity->instructors as $instructor)
+              <h6>{!! $instructor->professor->getFullName() !!}</h6>
+          @endforeach
         @endif
         <br>
         <h5>Inscritos: {!! $count !!}/{!! $activity->max_quota !!}</h5>
@@ -55,7 +55,7 @@
     </div>
   @include('partials.messages')
 
-  @if($count >= $max_count->max_quota)
+  @if($count >= $activity->max_quota)
   <div class="alert alert-warning message" role='alert'>
     <strong>La actividad alcanzó el cupo máximo, las siguientes inscripciones entrarán como adicionales.</strong>
   </div>
