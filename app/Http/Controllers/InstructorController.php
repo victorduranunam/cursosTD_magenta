@@ -27,7 +27,7 @@ class InstructorController extends Controller
                                      ->get();
            
             $activity = Activity::findOrFail($activity_id);
-            return $activity;
+            return $activity->activity_catalogue;
             return view("pages.view-instructors")
             ->with("professors",$professors)
             ->with("instructors",$instructors)
