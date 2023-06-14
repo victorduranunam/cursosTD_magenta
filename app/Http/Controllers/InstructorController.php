@@ -27,11 +27,11 @@ class InstructorController extends Controller
                                      ->get();
            
             $activity = Activity::findOrFail($activity_id);
-            return $activity->activity_catalogue->name;
+            
             return view("pages.view-instructors")
             ->with("professors",$professors)
             ->with("instructors",$instructors)
-            ->with('activity',$activity[0]);
+            ->with('activity',$activity);
         }catch (\Illuminate\Database\QueryException $th) { 
             return redirect()
               ->route('home')
