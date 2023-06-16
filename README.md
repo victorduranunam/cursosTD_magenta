@@ -1,4 +1,3 @@
-prueba
 <p align="center"> <a href="https://www.ingenieria.unam.mx/unica/"><img src="./public/img/mg-font.png" width="400"></a></p>
 
 # Magestic
