@@ -50,7 +50,8 @@
           </div>
           <hr>
         </form>
-      </div> 
+      </div>
+      {{-- End form for search --}}
        
     </div>
   @include('partials.messages')

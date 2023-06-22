@@ -117,6 +117,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Instructor
   Route::get('instructores/{activity_id}', "InstructorController@index")->name("view.instructors");
+  Route::get('instructores/buscar/{activity_id}',"InstructorController@search")->name("search.instructors");
   Route::post('instructores/almacenar/{professor_id}', "InstructorController@store")->name("store.instructor");
   Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@delete")->name("delete.instructor");
   

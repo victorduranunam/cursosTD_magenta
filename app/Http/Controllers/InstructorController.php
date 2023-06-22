@@ -13,25 +13,37 @@ class InstructorController extends Controller
     public function index($activity_id){
 
       // Probar
-      try{   
-            $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
-                                   ->where('is_instructor',true)
-                                   ->whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
-                                   ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
-                                   ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                   ->get();
+      try {
 
-            $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-                                     ->where('instructor.activity_id',$activity_id)
-                                     ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                     ->get();
+        $professorsNotAvailable = DB::select(
+          'select pr.professor_id
+          from participant pa
+          join professor pr on pr.professor_id = pa.professor_id 
+          where pa.activity_id = :activity_id
+          union
+          select pr.professor_id
+          from instructor i
+          join professor pr on pr.professor_id = i.professor_id 
+          where i.activity_id = :activity_id', ['activity_id' => $activity_id]
+        );
+
+         // Get professors - professorsNotAvailable
+         $professors = Professor::whereNotIn('professor_id', 
+          array_map( function ($professor) {
+            return (int)$professor->professor_id;
+          } ,$professorsNotAvailable))
+          ->get();
+
+          $instructors = Instructor::where('instructor.activity_id',$activity_id)
+            ->get();
            
-            $activity = Activity::findOrFail($activity_id);
+          $activity = Activity::findOrFail($activity_id);
             
-            return view("pages.view-instructors")
-            ->with("professors",$professors)
-            ->with("instructors",$instructors)
-            ->with('activity',$activity);
+          return view("pages.view-instructors")
+            ->with("professors", $professors)
+            ->with("instructors", $instructors)
+            ->with('activity', $activity);
+
         }catch (\Illuminate\Database\QueryException $th) { 
             return redirect()
               ->route('home')
@@ -39,38 +51,63 @@ class InstructorController extends Controller
           }
     }
 
-    public function search($activity_id) {
+    public function search(Request $req, $activity_id) {
       try {
 
-        // Falta codigo de query
-        $professors = Professor::select('professor_id','name','last_name','mothers_last_name','email','rfc','worker_number')
-                               ->where('is_instructor',true)
-                               ->whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
-                               ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
-                               ->whereRaw($query)
-                               ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                               ->get();
+        $query = NULL;
+        $words = str_replace(' ','',$req->words);
 
-        $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-                                 ->where('instructor.activity_id',$activity_id)
-                                 ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                 ->get();
-     
-        // Qué sería mejor? pasar el objeto actividad y preguntar por su relacion en la vista
-        // o pasar directamente el texto y preguntar por aqui por su nombre?
+        if ( $req->search_type === 'name' )
+          $query = 'unaccent(concat(name,last_name,mothers_last_name)) ILIKE '.
+                   'unaccent(\'%'.$words.'%\') OR '.
+                   'unaccent(concat(last_name,mothers_last_name,name)) ILIKE '.
+                   'unaccent(\'%'.$words.'%\')';
+  
+        elseif ( $req->search_type === 'email' )
+          $query = 'email LIKE \'%'.$words.'%\'';
+          
+        elseif ( $req->search_type === 'rfc' )
+          $query = 'rfc LIKE \'%'.$words.'%\'';
+  
+        elseif ( $req->search_type === 'worker_number' )
+          $query = 'worker_number LIKE \'%'.$words.'%\'';
+  
+        if ( $query ) {
 
-        // Al final del dia lo que se debe evitar simplemente es ejecutar una consulta por registro
-        // No la forma en la que pasamos los datos a la vista, porque de todas formas haremos la consulta
-        $activity = Activity::findOrFail($activity_id);
+          $professorsNotAvailable = DB::select(
+            'select pr.professor_id
+            from participant pa
+            join professor pr on pr.professor_id = pa.professor_id 
+            where pa.activity_id = :activity_id
+            union
+            select pr.professor_id
+            from instructor i
+            join professor pr on pr.professor_id = i.professor_id 
+            where i.activity_id = :activity_id', ['activity_id' => $activity_id]
+          );
 
-        return view("pages.view-instructors")
-              ->with("professors",$professors)
-              ->with("instructors",$instructors)
-              ->with('activity',$activity);
+          // Get professors - professorsNotAvailable
+          $professors = Professor::whereNotIn('professor_id', 
+            array_map( function ($professor) {
+              return (int)$professor->professor_id;
+            } ,$professorsNotAvailable))
+            ->whereRaw($query)
+            ->get();
+        } else
+          $professors = collect();
+
+          $instructors = Instructor::where('instructor.activity_id',$activity_id)
+            ->get();
+           
+          $activity = Activity::findOrFail($activity_id);
+            
+          return view("pages.view-instructors")
+            ->with("professors", $professors)
+            ->with("instructors", $instructors)
+            ->with('activity', $activity);
 
       } catch (\Illuminate\Database\QueryException $th) {
-        
-        return dd($th);
+
         return redirect()
           ->route('home')
           ->with('danger', 'Problema con la base de datos.');
