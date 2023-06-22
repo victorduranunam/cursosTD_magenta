@@ -68,20 +68,20 @@
       
           <div class="row row-list" style="margin: 1%">
 
-            <div class="col-xl-3">
+            <div class="col-xl-3 mt-auto mb-auto">
               {!! $professor->getFullName() !!}
             </div>
-            <div class="col-xl-3">
+            <div class="col-xl-3 mt-auto mb-auto">
               {!! $professor->email !!}
             </div>
-            <div class="col-xl-2">
+            <div class="col-xl-2 mt-auto mb-auto">
               {!! $professor->rfc !!}
             </div>
-            <div class="col-xl-2">
-              {!! $professor->worker_number !!}
+            <div class="col-xl-2 mt-auto mb-auto">
+              {!! $professor->worker_number !!} xd
             </div>
             
-            <div class="col-xl-2">
+            <div class="col-xl-2 mt-auto mb-auto">
               <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle mt-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Opciones

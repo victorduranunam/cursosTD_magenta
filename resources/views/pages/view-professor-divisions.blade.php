@@ -60,17 +60,17 @@
         <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
-          <div class="col-xl-6">
+          <div class="col-xl-6 mt-auto mb-auto">
             {!! $division->getName() !!}
           </div>
 
           {{-- Abbreviation of the element --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $division->getAbbreviation() !!}
           </div>
 
           {{-- Form for delete --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.professor-division', $division->professor_division_id) !!}">
               @csrf
               @method('delete')

@@ -149,16 +149,16 @@
             {!! $activity->activity_catalogue->name !!}
           </div>
           {{-- Instructores de la actividad --}}
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $activity->getInstructorsName() !!}
           </div>
           {{-- Semestre de la actividad --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $activity->getPeriod() !!}
           </div>
           
           {{-- Opciones de la actividad --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <div class="dropdown">
               <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Opciones

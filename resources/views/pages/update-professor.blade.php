@@ -133,17 +133,15 @@
           <textarea class="form-control" type="text" rows="4" name="provenance" id="provenance">{!! $professor->provenance !!}</textarea>
         </div>
 
+        <div class="d-grid gap-2 col-xl-2 mt-auto">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
+        </div>
         <div class="col-xl-2 mt-auto">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+          <a href="{!! route("view.professors") !!}" class="btn btn-outline-warning">Cancelar</a>
         </div>
     </div>
 
     </form>
-    <div class="row">
-      <div class="col-2">
-        <a href="{!! route("view.professors") !!}" class="btn btn-outline-warning">Cancelar</a>
-      </div>
-    </div>
   </div>
 </div>
 @endsection

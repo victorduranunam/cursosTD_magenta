@@ -671,8 +671,8 @@
       </div>
 
       <div class="row">
-        <div class="col-xl-2" id='btn_save'>
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        <div class="d-grid gap-2 col-xl-2" id='btn_save'>
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
         <div class="col-xl-2">
           <a href="{!! route("view.participants", $data['activity_id']) !!}" class="btn btn-outline-warning">Cancelar</a>

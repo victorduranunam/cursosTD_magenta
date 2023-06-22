@@ -88,17 +88,17 @@
         <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
-          <div class="col-xl-6">
+          <div class="col-xl-6 mt-auto mb-auto">
             {!! $work_position->name !!}
           </div>
 
           {{-- Abbreviation of the element --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $work_position->abbreviation !!}
           </div>
 
           {{-- Form for update --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('update.work-position', $work_position->work_position_id) !!}">
               @csrf
               @method('put')

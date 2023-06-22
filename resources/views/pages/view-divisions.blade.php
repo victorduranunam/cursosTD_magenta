@@ -98,7 +98,7 @@
           </div>
 
           {{-- Form for update --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('update.division', $division->division_id) !!}">
               @csrf
               @method('put')
@@ -127,7 +127,7 @@
           </div>
 
           {{-- Form for delete --}}
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             <form method="POST" action="{!! route('delete.division', $division->division_id) !!}">
               @csrf
               @method('delete')

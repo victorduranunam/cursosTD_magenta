@@ -156,16 +156,16 @@
           <div class="col-xl-4">
             {!! $professor->getFullName() !!}
           </div>
-          <div class="col-xl-3">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $professor->email !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $professor->rfc !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $professor->worker_number !!}
           </div>
-          <div class="col-xl-1">
+          <div class="col-xl-1 mt-auto mb-auto">
             <button type="submit" id='save-btn' class="btn btn-outline-success"><i class="bi bi-person-plus"></i></button>
           </div>
         </div>

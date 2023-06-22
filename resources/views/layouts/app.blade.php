@@ -9,7 +9,7 @@
   <link rel="stylesheet" href={!! asset('css/app.css') !!}>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <title>MAGESTIC | Capacitación Docente</title>
 </head>
 <body onload="main()">
