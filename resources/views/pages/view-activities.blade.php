@@ -8,12 +8,17 @@
     <div class="row justify-content-end">
       
       {{-- Program Activities --}}
-      <div class="col-xl-3" style='width: auto'>
+      <div class="col-3" style='width: auto'>
           <a href={!! route('view.activities.catalogue') !!} class="btn btn-outline-success">Programar Actividades</a>
       </div>
 
+      {{-- Search Activity --}}
+      <div class="col-1">
+        <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
+      </div>
+
       {{-- Generate docs --}}
-      <div class="col-xl-2" style='width: auto'>
+      <div class="col-2" style='width: auto'>
         <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
             Formatos
@@ -76,6 +81,53 @@
 
   @include('partials.messages')
   <div class="card-body"><br>
+
+    {{-- Form for search --}}
+    <div id="search-div" style="display:none;">
+      <form method="GET" action="{!! route('search.activities') !!}">
+        @csrf
+        @method('get')
+        <div class="row">
+          <label class="form-label" for="search-type-form">Buscar por:</label>
+          <div class="col-3" id="search-type-form">
+            <select class="form-select" name="search_type" id="search_type" onchange="changeSearchDiv()">
+              <option selected value='name'>Nombre</option>
+              <option value='instructor'>Instructor</option>
+              <option value='period'>Periodo</option>
+            </select>
+          </div>
+          <div class="col-2">
+            <input type="submit" id='search-btn' class="btn btn-outline-success" value='Buscar'>
+          </div>
+        </div>
+        <div class="row" id="words-form">
+            <label>Buscar:</label>
+            <div class="col-6">
+              <input class="form-control" placeholder="Ingrese texto" type="text" name="words" id="words" value="{!! old('words') !!}">
+            </div>
+          </div>
+          <div class="row" style="display:none" id="period-form">
+            <label>Buscar:</label>
+            <div class="col-2">
+              <input  min=2000 class="form-control" type="number" name="sem_year" id="sem_year" value="{!! old('sem_year') !!}" placeholder="Año">
+            </div>
+            <div class="col-2">
+              <select required class="form-control" name="sem_type" id="sem_type" value="{!! old('sem_type') !!}">
+                <option value="i">Intersemestral</option>
+                <option value="s">Semestral</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <select class="form-control" name="sem_number" id="sem_number" value="{!! old('sem_number') !!}">
+                <option value=1>1</option>
+                <option value=2>2</option>
+              </select>
+            </div>
+          </div>
+        <hr>
+      </form>
+    </div>
+
     @if($activities->isNotEmpty())
       
       <div class="row">
@@ -93,8 +145,8 @@
       @foreach ($activities as $activity)
         <div class="row row-list">
           {{-- Nombre de la actividad --}}
-          <div class="col-xl-4 mt-auto mb-auto">
-            {!! $activity->catalogue_name !!}
+          <div class="col-xl-4">
+            {!! $activity->activity_catalogue->name !!}
           </div>
           {{-- Instructores de la actividad --}}
           <div class="col-xl-4 mt-auto mb-auto">

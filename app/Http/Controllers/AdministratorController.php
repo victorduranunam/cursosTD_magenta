@@ -70,6 +70,54 @@ class AdministratorController extends Controller
       }
   }
 
+  public function search(Request $req)
+  {
+    try {
+
+      $query = NULL;
+      
+      if ( $req->search_type === 'name' ) {
+
+        $words = str_replace(' ','',$req->words);
+
+        $query = 'unaccent(concat(name,last_name,mothers_last_name)) ILIKE '.
+                 'unaccent(\'%'.$words.'%\') OR '.
+                 'unaccent(concat(last_name,mothers_last_name,name)) ILIKE '.
+                 'unaccent(\'%'.$words.'%\')';
+
+      } elseif ( $req->search_type === 'username' ) {
+
+        $query = 'username LIKE \'%'.$req->words.'%\'';
+
+      }
+
+      if ( $query ) {
+        
+        $administrators = Administrator::whereRaw($query)
+          ->orderByRaw( 'unaccent(lower(concat(' .
+                          'name, last_name, mothers_last_name' .
+                        ')))'
+                      )
+          ->get();
+
+      } else {
+        
+        $administrators = collect();
+
+      }
+  
+      return view("pages.view-administrators")
+          ->with("administrators", $administrators);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+
+      return redirect()
+              ->route('home')
+              ->with('danger', 'Problema con la base de datos.');
+
+    }
+  }
+
   public function create() {
 
     return view ("pages.create-administrator")

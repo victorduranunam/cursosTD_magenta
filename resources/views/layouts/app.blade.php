@@ -42,7 +42,7 @@
                 <li class="nav-header">
                     <div class="link"><i class="bi bi-journals"></i>Actividades<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.activity.catalogue') !!}>Alta Catálogo</a></li>
+                        <li><a href={!! route('create.activity.catalogue') !!}>Alta de Actividad</a></li>
                         <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de Actividades</a></li>
                         <li><a href={!! route('view.activities') !!}>Actividades programadas</a></li>
                         <li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>
@@ -52,7 +52,7 @@
                 <li class="nav-header">
                     <div class="link"><i class="bi bi-person-lines-fill"></i>Profesores<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.professor') !!}>Alta Profesor</a></li>
+                        <li><a href={!! route('create.professor') !!}>Alta de Profesor</a></li>
                         <li><a href={!! route('view.professors') !!}>Consulta de profesores</a></li>
                     </ul>
                 </li>
@@ -65,10 +65,10 @@
                 </li>
 
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-building"></i>Salones<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-building"></i>Sedes<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.venue') !!}>Alta de Salón</a></li>
-                        <li><a href={!! route('view.venues') !!}>Consulta Salones</a></li>
+                        <li><a href={!! route('create.venue') !!}>Alta de Sede</a></li>
+                        <li><a href={!! route('view.venues') !!}>Consulta de Sedes</a></li>
                     </ul>
                 </li>
 

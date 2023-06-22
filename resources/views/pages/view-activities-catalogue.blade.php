@@ -7,15 +7,45 @@
     <h3>Ver Actividades en el Catálogo <i class="bi bi-journals"></i></h3>
     <div class="row justify-content-end">
       <div class="col-xl-3" style='width: auto'>
-          <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-success">Alta de Catálogo de Actividades</a>
+          <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-success">Alta de Actividad</a>
+      </div>
+      <div class="col-xl-1">
+        <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
       </div>
       <div class="col-xl-2">
         <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
     </div>
   </div>
+
   @include('partials.messages')
     <div class="card-body"><br>
+
+      {{-- Form for search --}}
+      <div id="search-div" style="display:none;">
+        <form method="GET" action="{!! route('search.activity.catalogue') !!}">
+          @csrf
+          @method('get')
+          <div class="row">
+            <div class="col-xl-6">
+              <label class="form-label" for="words">Buscar actividad en catálogo:</label>
+              <input placeholder="Ingrese texto" required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
+            </div>
+            <div class="col-xl-3">
+              <label class="form-label" for="search-type">Buscar por:</label>
+              <select class="form-select" name="search_type" id="search_type">
+                <option selected value='name'>Nombre</option>
+                <option value='key'>Clave</option>
+              </select>
+            </div>
+            <div class="col-xl-2 mt-auto">
+              <input type="submit" id='search-btn' class="btn btn-outline-success" value='Buscar'>
+            </div>
+          </div>
+          <hr>
+        </form>
+      </div>
+
       @if($activities_cat->isNotEmpty())
         <div class="row">
           <div class="col-xl-2">
@@ -78,7 +108,7 @@
       @elseif($activities_cat->isEmpty())
         <div class="row">
           <div class="col-xl-6">
-            No hay actividades en la base de datos.
+            No hay actividades para mostrar.
           </div>
         </div>
         @endif

@@ -30,6 +30,7 @@ class Activity extends Model
     protected $primaryKey = 'activity_id';
     public $timestamps = false;
 
+    //TODO: Implementar relaciones
     public function getName(){
       $activity = ActivityCatalogue::where('activity_catalogue_id',$this->activity_catalogue_id)
                                   ->first();
@@ -148,5 +149,18 @@ class Activity extends Model
                       ->select('professor.name')
                       ->get()
                       ->sortBy('name', SORT_NATURAL);
+    }
+    
+    /**
+     * Get the instructor of the activity
+     */
+    public function instructors() {
+
+      return $this->hasMany(Instructor::class, 'activity_id');
+    }
+
+    public function activity_catalogue() {
+
+      return $this->belongsTo(ActivityCatalogue::class, 'activity_catalogue_id');
     }
 }

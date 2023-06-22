@@ -4,7 +4,7 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Crear Salón <i class="bi bi-building"></i></h3>
+    <h3>Crear Sede <i class="bi bi-building"></i></h3>
   </div>
   @include('partials.messages')
   <div class="card-body"><br>

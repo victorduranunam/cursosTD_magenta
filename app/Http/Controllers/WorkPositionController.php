@@ -26,7 +26,43 @@ class WorkPositionController extends Controller
     }
   }
 
-  public function store(Request $req)
+  public function search (Request $req) {
+    try {
+
+      $query = NULL;
+
+      if ( $req->search_type === 'name' OR 
+           $req->search_type === 'abbreviation' )
+
+        $query = 'unaccent('.$req->search_type.') ILIKE unaccent(\'%'
+               . $req->words . '%\')';
+
+      if ( $query ) {
+
+        $work_positions = WorkPosition::whereRaw($query)
+          ->orderByRaw('unaccent(lower(name))')
+          ->get();
+
+      } else {
+
+        $work_positions = collect();
+
+      }
+
+      return view("pages.view-work-positions")
+           ->with("work_positions", $work_positions);
+      
+    } catch (\Illuminate\Database\QueryException $th) {
+      
+      return redirect()
+              ->route('home')
+              ->with('danger', 'Problema con la base de datos.');
+
+    }
+
+  }
+
+  public function store (Request $req)
   {
     try {
       $work_position = new WorkPosition();
@@ -100,7 +136,7 @@ class WorkPositionController extends Controller
       else
         return redirect()
           ->back()
-          ->with('warning', 'Error al eliminar el salón.');
+          ->with('warning', 'Error al eliminar la sede.');
     }
   }
 }

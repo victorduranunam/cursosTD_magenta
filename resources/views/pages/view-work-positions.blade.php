@@ -11,6 +11,9 @@
       <div class="col-xl-3">
         <a class="btn btn-outline-success" onclick="blockCreateDiv()">Crear</a>
       </div>
+      <div class="col-xl-3">
+        <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
+      </div>
       <div class="col-xl-2">
         <a href={!! route('home') !!} class="btn btn-outline-warning">Regresar</a>
       </div>
@@ -19,6 +22,31 @@
 
   @include('partials.messages')
   <div class="card-body"><br>
+
+    {{-- Form for search --}}
+    <div id="search-div" style="display:none;">
+      <form method="GET" action="{!! route('search.work-positions') !!}">
+        @csrf
+        @method('get')
+        <div class="row">
+          <div class="col-xl-6">
+            <label class="form-label" for="words">Buscar puesto de trabajo:</label>
+            <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
+          </div>
+          <div class="col-xl-3">
+            <label class="form-label" for="search-type">Buscar por:</label>
+            <select class="form-select" name="search_type" id="search_type">
+              <option selected value='name'>Nombre</option>
+              <option value='abbreviation'>Abreviación</option>
+            </select>
+          </div>
+          <div class="col-xl-2 mt-auto">
+            <input type="submit" id='search-btn' class="btn btn-outline-success" value='Buscar'>
+          </div>
+        </div>
+        <hr>
+      </form>
+    </div>
 
     {{-- Form for create --}}
     <div id="create-div" style="display:none;">
@@ -131,7 +159,7 @@
 
       @endforeach
 
-    @elseif($departments->isEmpty())
+    @elseif($work_positions->isEmpty())
 
       <div class="row">
         <div class="col-xl-6">

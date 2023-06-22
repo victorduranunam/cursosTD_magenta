@@ -37,6 +37,7 @@ Route::group( ['middleware' => 'guest'], function() {
   //Route Activity Catalogue
   Route::get('catalogo-actividades', 'ActivityCatalogueController@index')->name('view.activities.catalogue');
   Route::get('catalogo-actividades/crear', 'ActivityCatalogueController@create')->name('create.activity.catalogue');
+  Route::get('catalogo-actividades/buscar', 'ActivityCatalogueController@search')->name('search.activity.catalogue');
   Route::post('catalogo-actividades/almacenar', 'ActivityCatalogueController@store')->name('store.activity.catalogue');
   Route::get('catalogo-actividades/actualizar/{activity_catalogue_id}', 'ActivityCatalogueController@edit')->name('edit.activity.catalogue');
   Route::put('catalogo-actividades/guardar/{activity_catalogue_id}', 'ActivityCatalogueController@update')->name('update.activity.catalogue');
@@ -44,6 +45,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Activity
   Route::get('actividades','ActivityController@index')->name('view.activities');
+  Route::get('actividades/buscar','ActivityController@search')->name('search.activities');
   Route::get('actividades/crear/{activity_catalogue_id}','ActivityController@create')->name('create.activity');
   Route::post('actividades/almacenar','ActivityController@store')->name('store.activity');
   Route::get('actividades/actualizar/{activity_id}','ActivityController@edit')->name('edit.activity');
@@ -72,6 +74,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Administrator
   Route::get('administradores', 'AdministratorController@index')->name('view.administrators');
+  Route::get('administradores/buscar', 'AdministratorController@search')->name('search.administrators');
   Route::get('administrador/crear', 'AdministratorController@create')->name('create.administrator');
   Route::post('administrador/almacenar', 'AdministratorController@store')->name('store.administrator');
   Route::get('administrador/actualizar/{administrator_id}', 'AdministratorController@edit')->name('edit.administrator');
@@ -80,12 +83,14 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Work Position
   Route::get('puestos-trabajo', "WorkPositionController@index")->name("view.work-positions");
+  Route::get('puestos-trabajo/buscar', "WorkPositionController@search")->name("search.work-positions");
   Route::post('puesto-trabajo/almacenar', "WorkPositionController@store")->name("store.work-position");
   Route::put('puesto-trabajo/guardar/{work_position_id}', "WorkPositionController@update")->name('update.work-position');
   Route::delete('puesto-trabajo/eliminar/{work_position_id}', "WorkPositionController@delete")->name("delete.work-position");
   
   //Route Department
   Route::get('departamentos', "DepartmentController@index")->name("view.departments");
+  Route::get('departamentos/buscar', "DepartmentController@search")->name("search.departments");
   Route::get('departamentos/crear', "DepartmentController@create")->name("create.department");
   Route::post('departamentos/almacenar', "DepartmentController@store")->name("store.department");
   Route::get('departamentos/actualizar/{department_id}', "DepartmentController@edit")->name("edit.department");
@@ -105,12 +110,14 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Division
   Route::get('divisiones', "DivisionController@index")->name("view.divisions");
+  Route::get('divisiones/buscar', "DivisionController@search")->name("search.divisions");
   Route::post('divisiones/almacenar', "DivisionController@store")->name("store.division");
   Route::put('divisiones/guardar/{division_id}', "DivisionController@update")->name('update.division');
   Route::delete('divisiones/eliminar/{division_id}', "DivisionController@delete")->name("delete.division");
   
   //Route Instructor
   Route::get('instructores/{activity_id}', "InstructorController@index")->name("view.instructors");
+  Route::get('instructores/buscar/{activity_id}',"InstructorController@search")->name("search.instructors");
   Route::post('instructores/almacenar/{professor_id}', "InstructorController@store")->name("store.instructor");
   Route::delete('instructores/eliminar/{instructor_id}', "InstructorController@delete")->name("delete.instructor");
   
@@ -121,6 +128,7 @@ Route::group( ['middleware' => 'guest'], function() {
 
   //Route Participant
   Route::get('participantes/{activity_id}',"ParticipantController@index")->name("view.participants");
+  Route::get('participantes/buscar/{activity_id}',"ParticipantController@search")->name("search.participants");
   Route::get('participantes/crear/{activity_id}', "ParticipantController@create")->name("create.participant");
   Route::post('participantes/almacenar/{professor_id}', "ParticipantController@store")->name("store.participant");
   Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->name('edit.participant');
@@ -131,6 +139,7 @@ Route::group( ['middleware' => 'guest'], function() {
   
   //Route Professor
   Route::get('profesores', "ProfessorController@index")->name("view.professors");
+  Route::get('profesores/buscar', "ProfessorController@search")->name("search.professors");
   Route::get('profesores/crear', "ProfessorController@create")->name("create.professor");
   Route::get('profesor/descargar/reporte-actividades/{professor_id}', "ProfessorController@downloadRecord")->name("download.professor-record");
   Route::post('profesores/almacenar', "ProfessorController@store")->name("store.professor");
@@ -151,11 +160,12 @@ Route::group( ['middleware' => 'guest'], function() {
   //Route Seminar Topic
   
   //Route Venue
-  Route::get('salones', "VenueController@index")->name("view.venues");
-  Route::get('salones/crear', "VenueController@create")->name("create.venue");
-  Route::post('salones/almacenar', "VenueController@store")->name("store.venue");
-  Route::get('salones/actualizar/{venue_id}', "VenueController@edit")->name("edit.venue");
-  Route::put('salones/guardar/{venue_id}', "VenueController@update")->name('update.venue');
-  Route::delete('salones/eliminar/{venue_id}', "VenueController@delete")->name("delete.venue");
+  Route::get('sedes', "VenueController@index")->name("view.venues");
+  Route::get('sedes/buscar', "VenueController@search")->name("search.venues");
+  Route::get('sedes/crear', "VenueController@create")->name("create.venue");
+  Route::post('sedes/almacenar', "VenueController@store")->name("store.venue");
+  Route::get('sedes/actualizar/{venue_id}', "VenueController@edit")->name("edit.venue");
+  Route::put('sedes/guardar/{venue_id}', "VenueController@update")->name('update.venue');
+  Route::delete('sedes/eliminar/{venue_id}', "VenueController@delete")->name("delete.venue");
 
 });

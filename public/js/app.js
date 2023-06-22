@@ -222,6 +222,33 @@ function blockCreateDiv() {
   document.getElementById('create-div').style.display = "block";
 }
 
+function blockSearchDiv() {
+  document.getElementById('search-div').style.display = "block";
+}
+
+function changeSearchDiv() {
+  
+  const searchdiv = document.getElementById('search_type').value;
+  const words = document.getElementById('words-form');
+  const period = document.getElementById('period-form');
+
+
+
+  if (searchdiv === 'name' || searchdiv === 'instructor') {
+    
+    console.log('Por nombre');
+    words.style.display = "flex";
+    period.style.display = "none";
+
+  } else if (searchdiv === 'period') {
+
+    console.log('Por periodo');
+    words.style.display = "none";
+    period.style.display = "flex";
+
+  }
+}
+
 function openNav() {
   document.getElementsByClassName("sidebar")[0].style.display='block';
   document.getElementsByClassName("sidebar")[0].style.width = "100%";

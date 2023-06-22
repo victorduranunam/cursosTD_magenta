@@ -21,6 +21,42 @@ class VenueController extends Controller
     }
   }
 
+  public function search (Request $req)
+  {
+    try {
+
+      $query = NULL;
+
+      if ( $req->search_type === 'name' OR 
+           $req->search_type === 'location' )
+
+        $query = 'unaccent('.$req->search_type.') ILIKE unaccent(\'%'
+               . $req->words . '%\')';
+
+      if ( $query ) {
+
+        $venues = Venue::whereRaw($query)
+          ->orderByRaw('unaccent(lower(name))')
+          ->get();
+
+      } else {
+
+        $venues = collect();
+
+      }
+
+      return view("pages.view-venues")
+          ->with("venues",$venues);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+
+      return redirect()
+          ->route('home')
+          ->with('danger', 'Problema con la base de datos.');
+
+    }
+  }
+
   public function create(){
     return view ("pages.create-venue");
   }
@@ -36,7 +72,7 @@ class VenueController extends Controller
 
         return redirect()
           ->route('view.venues')
-          ->with('success', 'Salón creado correctamente');
+          ->with('success', 'Sede creada correctamente');
 
     } catch (\Illuminate\Database\QueryException $th) {
       if($th->getCode() == 7)
@@ -106,7 +142,7 @@ class VenueController extends Controller
       else
         return redirect()
           ->back()
-          ->with('warning', 'Error al eliminar el salón.');
+          ->with('warning', 'Error al eliminar la sede.');
     }
   }
 }

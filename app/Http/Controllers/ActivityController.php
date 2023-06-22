@@ -10,8 +10,10 @@ use App\Models\SeminarTopic;
 use App\Models\Venue;
 use App\Exports\DBExport;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
 use PDF;
 use ZipArchive;
 use App\Exports\KeysExport;
@@ -20,113 +22,171 @@ use Exception;
 
 class ActivityController extends Controller
 {
-    public function index(){
-        try {
-          $activities = Activity::join(
-                                        'activity_catalogue', 
-                                        'activity_catalogue.activity_catalogue_id', 
-                                        '=', 
-                                        'activity.activity_catalogue_id'
-                                      )
-                                ->select(
-                                          'activity.*', 
-                                          'activity_catalogue.name as catalogue_name'
-                                        )
-                                ->orderByRaw('unaccent(lower(activity_catalogue.name))')
-                                ->get();
+  public function index(){
+    try {
+      
+      $activities = Activity::all()->sortBy(function ($activity) {
+        return $activity->activity_catalogue->name;
+      });
 
-          return view("pages.view-activities")
-            ->with("activities", $activities);
-    
-        } catch (\Illuminate\Database\QueryException $th) {
-          if ($th->getCode() == 7)
-            return redirect()
-              ->route('home')
-              ->with('danger', 'No hay conexión con la base de datos.');
-          else
-            return redirect()
-              ->route('home')
-              ->with('danger', 'Problema con la base de datos.');
-        }
+      return view("pages.view-activities")
+        ->with("activities", $activities);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+      if ($th->getCode() == 7)
+        return redirect()
+          ->route('home')
+          ->with('danger', 'No hay conexión con la base de datos.');
+      else
+        return redirect()
+          ->route('home')
+          ->with('danger', 'Problema con la base de datos.');
     }
+  }
 
-    public function create($activity_catalogue_id){  
-      try{
+  public function search (Request $request)
+  {
 
-      $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
-      $venues = Venue::all();
+    $activities = NULL;
 
-      return view('pages.create-activity')
-          ->with("activity_cat", $activity_cat)
-          ->with("venues",$venues);
+    try {
 
-      } catch (\Illuminate\Database\QueryException $th){
-          
-        if ($th->getCode() == 7)
-          return redirect()
-            ->route('home')
-            ->with('danger', 'No hay conexión con la base de datos.');
-        
-        else
-          return redirect()
-            ->route('view.activities.catalogue')
-            ->with('danger','Problema con la base de datos.');
+      if ( $request->search_type === 'name' ) {
+
+        $str_query = "unaccent(name) ILIKE
+                      unaccent('%".$request->words."%')";
+
+        $activities = Activity::whereHas('activity_catalogue',
+          function (Builder $query) use ($str_query) {
+            $query->whereRaw($str_query);
+        })->get();
+
+      }
+  
+      elseif ( $request->search_type === 'instructor' ) {
+  
+        $str_query = "unaccent(name||last_name||mothers_last_name) 
+                      ilike unaccent('%".
+                      str_replace(' ', '', $request->words)
+                      ."%')";
+
+        $activities = Activity::whereHas('instructors.professor',
+          function (Builder $query) use ($str_query) {
+            $query->whereRaw($str_query);
+        })->get();
       }
 
-  }
+      elseif( $request->search_type === 'period' and (
+        $request->sem_year == '' or $request->sem_year == NULL
+      ))
 
-  public function store(Request $req){
-      try{
-        
-        // Verify if doesn't exist another modules 
-        // for the same year and catalogue
-        if(ActivityCatalogue::findOrFail($req->activity_catalogue_id)->type === 'DI'){
+        $activities = Activity::where('num', $request->sem_number)
+                              ->where('type', $request->sem_type)
+                              ->get();
 
-          if(Activity::where('year', $req->year)
-                      ->where('activity_catalogue_id', $req->activity_catalogue_id)
-                      ->get()
-                      ->isNotEmpty())
-            return redirect()
-                  ->back()
-                  ->with('warning', 'No es posible programar un módulo de '
-                                  .'diplomado ya programado para el mismo año');
-        }
+      elseif( $request->search_type === 'period' )
 
-        // Store the activity
-          $activity = new Activity(); 
-          $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
-          $activity->year = $req->year;
-          $activity->num = $req->num;
-          $activity->type = $req->type;
-          $activity->start_time = $req->start_time;
-          $activity->end_time = $req->end_time;
-          $activity->manual_date = $req->manual_date;
-          $activity->days_week = implode('', $req->days_week);
-          $activity->ctc = $req->ctc;
-          $activity->cost = $req->cost;
-          $activity->max_quota = $req->max_quota;
-          $activity->min_quota = $req->min_quota;
-          $activity->activity_catalogue_id = $req->activity_catalogue_id;
-          $activity->venue_id = $req->venue_id;
-          $activity->save();
-          
-          return redirect()
-              ->route('view.activities')
-              ->with('success', 'Actividad creada correctamente');
-      }catch (\Illuminate\Database\QueryException $th) {
-          if ($th->getCode() == 7)
-            return redirect()
+        $activities = Activity::where('year', $request->sem_year)
+                              ->where('num', $request->sem_number)
+                              ->where('type', $request->sem_type)
+                              ->get();
+
+      return view("pages.view-activities")
+        ->with("activities", $activities);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+
+      return redirect()
               ->route('home')
-              ->with('danger', 'No hay conexión con la base de datos.');
-          else
-          //23502->not nulls
-            return dd($th);   
-        }
+              ->with('danger', 'Problema con la base de datos.');
+
+    }
+  }
+
+  public function create ($activity_catalogue_id) 
+  {
+
+    try{
+
+    $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
+    $venues = Venue::all();
+
+    return view('pages.create-activity')
+        ->with("activity_cat", $activity_cat)
+        ->with("venues",$venues);
+
+    } catch (\Illuminate\Database\QueryException $th){
+        
+      if ($th->getCode() == 7)
+        return redirect()
+          ->route('home')
+          ->with('danger', 'No hay conexión con la base de datos.');
+      
+      else
+        return redirect()
+          ->route('view.activities.catalogue')
+          ->with('danger','Problema con la base de datos.');
+    }
 
   }
 
-  public function edit($activity_id){
-    try{
+  public function store (Request $req)
+  {
+    try {
+      
+      // Verify if doesn't exist another modules
+      // for the same year and catalogue
+
+      if(ActivityCatalogue::findOrFail($req->activity_catalogue_id)->type === 'DI'){
+
+        if(Activity::where('year', $req->year)
+                    ->where('activity_catalogue_id', $req->activity_catalogue_id)
+                    ->get()
+                    ->isNotEmpty())
+          return redirect()
+                ->back()
+                ->with('warning', 'No es posible programar un módulo de '
+                                .'diplomado ya programado para el mismo año');
+      }
+
+      // Store the activity
+      $activity = new Activity(); 
+      $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
+      $activity->year = $req->year;
+      $activity->num = $req->num;
+      $activity->type = $req->type;
+      $activity->start_time = $req->start_time;
+      $activity->end_time = $req->end_time;
+      $activity->manual_date = $req->manual_date;
+      $activity->days_week = implode('', $req->days_week);
+      $activity->ctc = $req->ctc;
+      $activity->cost = $req->cost;
+      $activity->max_quota = $req->max_quota;
+      $activity->min_quota = $req->min_quota;
+      $activity->activity_catalogue_id = $req->activity_catalogue_id;
+      $activity->venue_id = $req->venue_id;
+      $activity->save();
+        
+      return redirect()
+        ->route('view.activities')
+        ->with('success', 'Actividad creada correctamente');
+
+    } catch (\Illuminate\Database\QueryException $th) {
+
+      if ($th->getCode() == 7)
+        return redirect()
+          ->route('home')
+          ->with('danger', 'No hay conexión con la base de datos.');
+      else
+        return dd($th);
+
+    }
+  }
+
+  public function edit ($activity_id)
+  {
+    try {
+
       $activity = Activity::findOrFail($activity_id);
       $activity->group_key = $activity->getKey().'-'.$activity->activity_id;
       $venues = Venue::all();
@@ -134,16 +194,18 @@ class ActivityController extends Controller
       return view("pages.update-activity")
         ->with("activity",$activity)
         ->with("venues",$venues);
-    }catch (\Illuminate\Database\QueryException $th) {
+
+    } catch (\Illuminate\Database\QueryException $th) {
+
       return redirect()
         ->route('view.activities')
         ->with('danger', 'Problema con la base de datos.');
     }
-
   }
 
-  public function update(Request $req, $activity_id){
-    try{
+  public function update (Request $req, $activity_id) 
+  {
+    try {
 
       $activity = Activity::findOrFail($activity_id);
       $activity->year = $req->year;
@@ -164,7 +226,8 @@ class ActivityController extends Controller
       ->route('edit.activity', $activity->activity_id)
       ->with('success', 'Cambios realizados.');
 
-    }catch (\Illuminate\Database\QueryException $th) {
+    } catch (\Illuminate\Database\QueryException $th) {
+
       if ($th->getCode() == 7)
         return redirect()
           ->route('home')
@@ -174,10 +237,12 @@ class ActivityController extends Controller
           ->back()
           ->with('activity', $activity)
           ->with('warning', 'Error al almacenar, verifique sus datos.');
+
     }
   }
 
-  public function delete($activity_id){
+  public function delete ($activity_id)
+  {
     try {
     
       $activity = Activity::findOrFail($activity_id);
@@ -201,8 +266,9 @@ class ActivityController extends Controller
   }
 
   
-  public function createCertificates($activity_id){
-    try{
+  public function createCertificates ($activity_id)
+  {
+    try {
       
       $activity = Activity::findOrFail($activity_id);
 
@@ -221,8 +287,9 @@ class ActivityController extends Controller
     }
   }
   
-  public function createRecognitions($activity_id){
-    try{
+  public function createRecognitions ($activity_id) 
+  {
+    try {
       
       $activity = Activity::findOrFail($activity_id);
       $activity->catalogue_type = ActivityCatalogue::findOrFail($activity->activity_catalogue_id)
@@ -243,7 +310,8 @@ class ActivityController extends Controller
     }
   }
 
-  public function downloadCertificates(Request $req, $activity_id){
+  public function downloadCertificates (Request $req, $activity_id)
+  {
     
     try {
 
@@ -321,7 +389,8 @@ class ActivityController extends Controller
     }
   }
   
-  public function downloadRecognitions(Request $req, $activity_id){
+  public function downloadRecognitions (Request $req, $activity_id)
+  {
 
     try {
 
@@ -413,7 +482,8 @@ class ActivityController extends Controller
   }
   
   
-  public function downloadPromo($activity_id){
+  public function downloadPromo ($activity_id)
+  {
     try {
       
       $activity = Activity::findOrFail($activity_id);
@@ -440,15 +510,18 @@ class ActivityController extends Controller
     }
   }
 
-  public function downloadExport(){
+  public function downloadExport()
+  {
     return Excel::download(new DBExport, 'exportacion_magestic.xlsx');
   }
 
-  public function downloadKeysBook(){
+  public function downloadKeysBook()
+  {
     return Excel::download(new KeysExport, 'libro_folios.xlsx');
   }
 
-  public function downloadGeneralReport(Request $req){
+  public function downloadGeneralReport(Request $req)
+  {
 
     try{
       $activities = Activity::where('activity.type', $req->type_search)
@@ -497,8 +570,9 @@ class ActivityController extends Controller
 
   }
 
-  public function downloadSuggestionsReport(Request $req){
-    try{
+  public function downloadSuggestionsReport(Request $req)
+  {
+    try {
 
       $departments = Department::all();
 
@@ -559,7 +633,8 @@ class ActivityController extends Controller
     }
   }
 
-  public function downloadIdentifiers($activity_id){
+  public function downloadIdentifiers ($activity_id)
+  {
     
     try {
 
@@ -595,7 +670,8 @@ class ActivityController extends Controller
             ->with('warning', 'Error al generar el reporte.');
     }
   }
-  public function downloadVerifyDataSheet($activity_id){
+  public function downloadVerifyDataSheet ($activity_id)
+  {
 
     try {
 
@@ -619,7 +695,7 @@ class ActivityController extends Controller
       return $pdf->download('Verificacion_Datos_'.$activity->getFileName().'.pdf');
 
 
-    } catch(\Illuminate\Database\QueryException $th){
+    } catch(\Illuminate\Database\QueryException $th) {
 
       if($th->getCode() == 7)
           return redirect()
@@ -632,7 +708,8 @@ class ActivityController extends Controller
     }
   }
 
-  public function downloadAttendanceSheet($activity_id){
+  public function downloadAttendanceSheet ($activity_id)
+  {
     try {
 
       $activity = Activity::findOrFail($activity_id);
@@ -662,7 +739,7 @@ class ActivityController extends Controller
       return $pdf->download('Hoja_Asistencia_'.$activity->getFileName().'.pdf');
 
 
-    } catch(\Illuminate\Database\QueryException $th){
+    } catch(\Illuminate\Database\QueryException $th) {
 
       if($th->getCode() == 7)
           return redirect()
@@ -676,10 +753,11 @@ class ActivityController extends Controller
     }
   }
 
-  public function downloadEvaluationReport($activity_id){
+  public function downloadEvaluationReport ($activity_id)
+  {
 
     try{
-//------------------------------- QUERIES --------------------------------------
+        
       $activity = DB::table('activity AS a')
         ->join(
                 'activity_catalogue AS ac', 
@@ -726,7 +804,6 @@ class ActivityController extends Controller
                   'pr.mothers_last_name', 'ie.*'
                 )
         ->get();
-// -----------------------------------------------------------------------------
 
 // ---------------------------- COUNTERS ---------------------------------------
       // Participants count
@@ -973,7 +1050,8 @@ class ActivityController extends Controller
     }
   }
 
-  public function downloadInstructorsEvaluationReport($activity_id){
+  public function downloadInstructorsEvaluationReport ($activity_id)
+  {
     try {
 
       $activity = Activity::findOrFail($activity_id);

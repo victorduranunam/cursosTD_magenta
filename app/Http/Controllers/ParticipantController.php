@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Instructor;
 use App\Models\Activity;
 use App\Models\Professor;
 use App\Models\Participant;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ParticipantController extends Controller
 {
@@ -41,25 +44,107 @@ class ParticipantController extends Controller
       }
     }
 
-    public function create($activity_id){
+    public function search(Request $req, $activity_id) {
+
+      try {
+
+        $instructors = Instructor::where('instructor.activity_id',$activity_id)
+          ->get();
+
+        $activity = Activity::findOrFail($activity_id);
+
+        $count = Participant::select('participant_id')
+          ->where('activity_id', $activity_id)
+          ->where('canceled',false)
+          ->count();
+
+        $query = NULL;
+        $words = str_replace(' ','',$req->words);
+
+        if ( $req->search_type === 'name' )
+          $query = 'unaccent(concat(name,last_name,mothers_last_name)) ILIKE '.
+                   'unaccent(\'%'.$words.'%\') OR '.
+                   'unaccent(concat(last_name,mothers_last_name,name)) ILIKE '.
+                   'unaccent(\'%'.$words.'%\')';
+  
+        elseif ( $req->search_type === 'email' )
+          $query = 'email LIKE \'%'.$words.'%\'';
+          
+        elseif ( $req->search_type === 'rfc' )
+          $query = 'rfc LIKE \'%'.$words.'%\'';
+  
+        elseif ( $req->search_type === 'worker_number' )
+          $query = 'worker_number LIKE \'%'.$words.'%\'';
+  
+        if ( $query ) {
+          
+          // Get participants and instructors, they can't be part of the result
+          $professorsNotAvailable = DB::select(
+            'select pr.professor_id
+            from participant pa
+            join professor pr on pr.professor_id = pa.professor_id 
+            where pa.activity_id = :activity_id
+            union
+            select pr.professor_id
+            from instructor i
+            join professor pr on pr.professor_id = i.professor_id 
+            where i.activity_id = :activity_id', ['activity_id' => $activity_id]
+          );
+
+          // Get professors - professorsNotAvailable
+          $professors = Professor::whereNotIn('professor_id', 
+            array_map( function ($professor) {
+              return (int)$professor->professor_id;
+            } ,$professorsNotAvailable))
+            ->whereRaw($query)
+            ->get();
+
+        } else
+          $professors = collect();
+
+        return view("pages.create-participant")
+        ->with("professors",$professors)
+        ->with("instructors",$instructors)
+        ->with('activity',$activity)
+        // ->with('max_count',$max_count)
+        ->with('count',$count);
+
+      } catch(\Illuminate\Database\QueryException $th) {
+
+        return dd($th);
+        return redirect()
+              ->route('home')
+              ->with('danger', 'Problema con la base de datos.');
+      }
+    }
+
+    public function create($activity_id) {
         try{   
-            $professors = Professor::whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
-                                    ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
-                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                    ->get(['professor_id','name','last_name','mothers_last_name','email','rfc','worker_number']);
+          
+          $professorsNotAvailable = DB::select(
+            'select pr.professor_id
+            from participant pa
+            join professor pr on pr.professor_id = pa.professor_id 
+            where pa.activity_id = :activity_id
+            union
+            select pr.professor_id
+            from instructor i
+            join professor pr on pr.professor_id = i.professor_id 
+            where i.activity_id = :activity_id', ['activity_id' => $activity_id]
+          );
 
-            $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-                                    ->where('instructor.activity_id',$activity_id)
-                                    ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-                                    ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
-           
-            $activity = Activity::join('activity_catalogue','activity_catalogue.activity_catalogue_id','=','activity.activity_catalogue_id')
-                                ->where('activity.activity_id',$activity_id)
-                                ->first(['activity.activity_id','activity_catalogue.name']);
+          // Get professors - professorsNotAvailable
+          $professors = Professor::whereNotIn('professor_id', 
+            array_map( function ($professor) {
+              return (int)$professor->professor_id;
+            } ,$professorsNotAvailable))
+            ->get();
 
-            $max_count = Activity::select('max_quota')
-                ->where('activity_id',$activity_id)
-                ->get()->first();
+            $instructors = Instructor::where('instructor.activity_id',$activity_id)
+              ->get();
+
+            $activity = Activity::findOrFail($activity_id);
+
             $count = Participant::select('participant_id')
                 ->where('activity_id', $activity_id)
                 ->count() - Participant::select('participant_id')
@@ -71,7 +156,6 @@ class ParticipantController extends Controller
               ->with("professors",$professors)
               ->with("instructors",$instructors)
               ->with('activity',$activity)
-              ->with('max_count',$max_count)
               ->with('count',$count);
 
         }catch (\Illuminate\Database\QueryException $th) {

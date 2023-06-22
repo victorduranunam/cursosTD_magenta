@@ -43,4 +43,8 @@ class Instructor extends Model
                                ->full_name;
       
     }
+
+    public function professor() {
+      return $this->belongsTo(Professor::class, 'professor_id');
+    }
 }
