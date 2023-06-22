@@ -48,12 +48,9 @@ class ParticipantController extends Controller
 
       try {
 
-        // $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-        //   ->where('instructor.activity_id',$activity_id)
-        //   ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-        //   ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
-                                  
-        // TODO: Arreglar este join, usar relaciones
+        $instructors = Instructor::where('instructor.activity_id',$activity_id)
+          ->get();
+
         $activity = Activity::findOrFail($activity_id);
 
         $count = Participant::select('participant_id')
@@ -64,7 +61,6 @@ class ParticipantController extends Controller
         $query = NULL;
         $words = str_replace(' ','',$req->words);
 
-        // Todo: asegurar que esto no permita SQL injection
         if ( $req->search_type === 'name' )
           $query = 'unaccent(concat(name,last_name,mothers_last_name)) ILIKE '.
                    'unaccent(\'%'.$words.'%\') OR '.
@@ -108,7 +104,7 @@ class ParticipantController extends Controller
 
         return view("pages.create-participant")
         ->with("professors",$professors)
-        // ->with("instructors",$instructors)
+        ->with("instructors",$instructors)
         ->with('activity',$activity)
         // ->with('max_count',$max_count)
         ->with('count',$count);
@@ -124,17 +120,29 @@ class ParticipantController extends Controller
 
     public function create($activity_id) {
         try{   
-            // ¿Conservar?
-            // $professors = Professor::whereNotIn('professor_id',Instructor::select('professor_id')->where('activity_id',$activity_id)->get())
-            //                         ->whereNotIn('professor_id',Participant::select('professor_id')->where('activity_id',$activity_id)->get())
-            //                         ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-            //                         ->get(['professor_id','name','last_name','mothers_last_name','email','rfc','worker_number']);
+          
+          $professorsNotAvailable = DB::select(
+            'select pr.professor_id
+            from participant pa
+            join professor pr on pr.professor_id = pa.professor_id 
+            where pa.activity_id = :activity_id
+            union
+            select pr.professor_id
+            from instructor i
+            join professor pr on pr.professor_id = i.professor_id 
+            where i.activity_id = :activity_id', ['activity_id' => $activity_id]
+          );
 
-            $instructors = Instructor::join('professor','professor.professor_id','=','instructor.professor_id')
-              ->where('instructor.activity_id',$activity_id)
-              ->orderByRaw('unaccent(lower(name || last_name || mothers_last_name))')
-              ->get(['professor.name', 'professor.last_name', 'professor.mothers_last_name']);
-           
+          // Get professors - professorsNotAvailable
+          $professors = Professor::whereNotIn('professor_id', 
+            array_map( function ($professor) {
+              return (int)$professor->professor_id;
+            } ,$professorsNotAvailable))
+            ->get();
+
+            $instructors = Instructor::where('instructor.activity_id',$activity_id)
+              ->get();
+
             $activity = Activity::findOrFail($activity_id);
 
             $count = Participant::select('participant_id')
@@ -145,7 +153,7 @@ class ParticipantController extends Controller
                 ->count();
 
             return view("pages.create-participant")
-              ->with("professors",collect())
+              ->with("professors",$professors)
               ->with("instructors",$instructors)
               ->with('activity',$activity)
               ->with('count',$count);

@@ -79,7 +79,7 @@
     @elseif($instructors->isEmpty())
       <div class="row">
         <div class="col-xl-6">
-          No hay instructores para {!! $activity->name !!}.
+          No hay instructores asignados.
         </div>
       </div>
     @endif
