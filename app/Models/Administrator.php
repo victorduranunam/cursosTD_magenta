@@ -20,7 +20,7 @@ class Administrator extends Authenticatable
         'gender',
         'username',
         'password',
-        'admin',
+        'rol',
         'department_id'
     ];
 

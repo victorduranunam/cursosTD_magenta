@@ -49,19 +49,18 @@
           <input required max=60 min=8 class="form-control" type="password" name="password" id="password" placeholder="Máximo 60 caracteres.">
         </div>
         <div class="col-xl-4 mt-auto">
-          <label class="form-label" for="admin">*¿Cuenta con todos los privilegios?</label>
-          <select class="form-select" name="admin" id="admin">
-            <option value="TRUE"> Sí </option>
-            <option value="FALSE" selected> No </option>
+          <label class="form-label" for="role">*¿Cuál será el rol del administrador?</label>
+          <select class="form-select" name="role" id="role">
+            <option value="J"> Jefe del Departamento </option>
+            <option value="A" selected> Ayudante del Departamento </option>
           </select>
         </div>
       </div>
       <div class="row">
         
         <div class="col-xl-5">
-          <label class="form-label" for="admin">Departamento</label>
-          <select class="form-select" name="department_id" id="department_id">
-            <option selected value=''> Ninguno </option>
+          <label class="form-label" for="department_id">Departamento</label>
+          <select class="form-select" name="department_id" id="department_id" required>
             @foreach ($departments as $department)
               <option value={!! $department->department_id !!}> 
                 {!! $department->name !!} 

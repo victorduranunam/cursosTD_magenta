@@ -139,14 +139,10 @@ class AdministratorController extends Controller
       $administrator->last_name = $req->last_name;
       $administrator->username = $req->username;
       $administrator->password = Hash::make($req->password);
-      $administrator->admin = $req->admin;
+      $administrator->role = $req->role;
       $administrator->mothers_last_name = $req->mothers_last_name;
       $administrator->degree = $req->degree;
-      
-      if($administrator->depertment_id === '')
-        $administrator->department_id  = NULL;
-      else
-        $administrator->department_id  = $req->department_id;
+      $administrator->department_id  = $req->department_id;
 
       if($administrator->gender === '')
         $administrator->gender  = NULL;
@@ -203,7 +199,7 @@ class AdministratorController extends Controller
       $administrator->degree = $req->degree;
       $administrator->username = $req->username;
       $administrator->password = Hash::make($req->password, ['rounds'=> 10]);
-      $administrator->admin = $req->admin;
+      $administrator->role = $req->role;
 
       if($administrator->depertment_id === '')
         $administrator->department_id  = NULL;

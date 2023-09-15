@@ -52,10 +52,10 @@
             <input required max=60 min=8 class="form-control" type="password" name="password" id="password" placeholder="Máximo 60 caracteres.">
           </div>
           <div class="col-xl-4 mt-auto">
-            <label class="form-label" for="admin">*¿Cuenta con todos los privilegios?</label>
-            <select class="form-select" name="admin" id="admin">
-              <option {!! $administrator->admin == TRUE ? "selected" : "" !!} value="TRUE">Sí</option>
-              <option {!! $administrator->admin == FALSE ? "selected" : "" !!} value="FALSE">No</option>
+            <label class="form-label" for="role">*¿Cuál es el rol del administrador?</label>
+            <select class="form-select" name="role" id="role">
+              <option {!! $administrator->role == 'J' ? "selected" : "" !!} value="J">Jefe del Departamento</option>
+              <option {!! $administrator->role == 'A' ? "selected" : "" !!} value="A">Ayudante del Departamento</option>
             </select>
           </div>
         </div>
