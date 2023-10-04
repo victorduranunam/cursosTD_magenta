@@ -57,21 +57,23 @@
                     </ul>
                 </li>
 
+                <li class="nav-header">
+                  <div class="link"><i class="bi bi-building"></i>Sedes<i class="bi bi-chevron-down"></i></div>
+                  <ul class="submenu">
+                    <li><a href={!! route('create.venue') !!}>Alta de Sede</a></li>
+                    <li><a href={!! route('view.venues') !!}>Consulta de Sedes</a></li>
+                  </ul>
+                </li>
+                
+                @if(Auth::user()->role === 'J')
+
                 <li class="nav-bar">
                   <div class="link"><i class="bi bi-newspaper"></i>Puestos de trabajo <i class="bi bi-chevron-down"></i></div>
                   <ul class="submenu">
                     <li><a href={!! route('view.work-positions') !!}>Consulta de Puestos de trabajo</a></li>
                   </ul>
                 </li>
-
-                <li class="nav-header">
-                    <div class="link"><i class="bi bi-building"></i>Sedes<i class="bi bi-chevron-down"></i></div>
-                    <ul class="submenu">
-                        <li><a href={!! route('create.venue') !!}>Alta de Sede</a></li>
-                        <li><a href={!! route('view.venues') !!}>Consulta de Sedes</a></li>
-                    </ul>
-                </li>
-
+                
                 <li class="nav-header">
                     <div class="link"><i class="bi bi-bank"></i>Departamentos<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
@@ -81,14 +83,15 @@
                         <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
                     </ul>
                 </li>
-
+                
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
-                    <ul class="submenu">
-                        <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
-                    </ul>
+                  <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
+                  <ul class="submenu">
+                    <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
+                  </ul>
                 </li>
-
+                @endif
+                
               </ul>
             </aside>
            
