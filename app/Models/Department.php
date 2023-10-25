@@ -22,4 +22,9 @@ class Department extends Model
       $department = Department::findOrFail($this->department_id);
       return str_replace(' ', '_',$department->name);
     }
+
+    public function activitiesCatalogue() {
+
+      return $this->hasMany(ActivityCatalogue::class, 'department_id');
+    }
 }

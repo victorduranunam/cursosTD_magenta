@@ -24,8 +24,10 @@
             Formatos
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-            <li><a class="dropdown-item" href="{!! route('download.activities-export') !!}">Exportación</a></li>
-            <li><a class="dropdown-item" href="{!! route('download.activities-keys-book') !!}">Libro de Folios</a></li>
+            @if(Auth::user()->role == 'J')
+              <li><a class="dropdown-item" href="{!! route('download.activities-export') !!}">Exportación</a></li>
+              <li><a class="dropdown-item" href="{!! route('download.activities-keys-book') !!}">Libro de Folios</a></li>
+            @endif
             <li><a class="dropdown-item" id="generalReportRoute" name="{!! route('download.activities-general-record') !!}" onclick='selectGeneralReportRouteActivityDocs()' data-bs-toggle="modal" data-bs-target="#myModalDocs">Reporte General</a></li>
             <li><a class="dropdown-item" id="suggetionsReportRoute" name="{!! route('download.activities-suggestions-record') !!}" onclick='selectSuggestionsReportRouteActivityDocs()' data-bs-toggle="modal" data-bs-target="#myModalDocs">Reporte de Sugerencias</a></li>
           </ul>

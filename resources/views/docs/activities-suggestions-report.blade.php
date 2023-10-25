@@ -81,7 +81,6 @@ th, td{
     </div>
 
     <div id="body">
-      @foreach($departments as $department)
       <hr>
       <b class="dep">{!! $department->name !!}</b>
       <hr>
@@ -98,7 +97,6 @@ th, td{
           @endforeach
         @endforeach
       </table>
-      @endforeach
     </div>
 
   </div>

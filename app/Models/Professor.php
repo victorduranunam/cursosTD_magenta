@@ -23,7 +23,6 @@ class Professor extends Model
         'email',
         'gender',
         'semblance',
-        'facebook',
         'is_instructor',
         'provenance'
     ];
