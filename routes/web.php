@@ -134,7 +134,7 @@ Route::group(['middleware' => 'guest'], function () {
   Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->middleware('verifyUserDepartment')->name('edit.participant');
   Route::put('participantes/guardar/{participant_id}', "ParticipantController@update")->middleware('verifyUserDepartment')->name('update.participant');
   Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@delete")->middleware('verifyUserDepartment')->name("delete.participant");
-  Route::get('participantes/buscar/encuesta', "ParticipantController@searchEvaluation")->name("search.evaluation")->withoutMiddleware(['guest']);
+  Route::get('participantes/encuesta/buscar', "ParticipantController@searchEvaluation")->name("search.evaluation")->withoutMiddleware(['guest']);
 
   //Route Professor
   Route::get('profesores', "ProfessorController@index")->name("view.professors");
