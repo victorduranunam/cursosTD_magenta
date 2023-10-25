@@ -6,16 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\ActivityCatalogue;
 use App\Models\Diploma;
 use App\Models\Department;
+use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityCatalogueController extends Controller
 {
+
   public function index()
   {
     try {
-
-      $activities_cat = ActivityCatalogue::orderByRaw('unaccent(lower(key))')
-          ->get();
+      
+      $activities_cat = ActivityCatalogue
+                      ::where('department_id', Auth::user()->department_id)
+                      ->orderByRaw('unaccent(lower(key))')
+                      ->get();
 
       return view("pages.view-activities-catalogue")
         ->with("activities_cat", $activities_cat);
@@ -39,13 +44,15 @@ class ActivityCatalogueController extends Controller
       
       if ( $req->search_type === 'name' ) {
         $activities_cat = ActivityCatalogue::whereRaw(
-            'unaccent(lower(name)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))'
+            'unaccent(lower(name)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))
+            and department_id = '.Auth::user()->department_id
           )
           ->orderByRaw('unaccent(lower(key))')
           ->get();
       } elseif ( $req->search_type === 'key' ) {
         $activities_cat = ActivityCatalogue::whereRaw(
-          'unaccent(lower(key)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))'
+          'unaccent(lower(key)) ILIKE unaccent(lower(\'%'.$req->words.'%\'))
+          and department_id = '.Auth::user()->department_id
         )
         ->orderByRaw('unaccent(lower(key))')
         ->get();
@@ -73,7 +80,8 @@ class ActivityCatalogueController extends Controller
   {
     $diplomas = Diploma::all()
       ->sortBy('name');
-    $departments = Department::all()
+    $departments = Department::where('department_id',Auth::user()->department_id)
+      ->get()
       ->sortBy('name');
     if($departments->isEmpty())
       return redirect()
@@ -89,7 +97,8 @@ class ActivityCatalogueController extends Controller
     try {
 
       $activity_cat = new ActivityCatalogue();
-      $activity_cat->activity_catalogue_id = DB::select("select nextval('activity_catalogue_seq')")[0]->nextval;
+      $activity_cat->activity_catalogue_id = DB::select(
+        "select nextval('activity_catalogue_seq')")[0]->nextval;
       $activity_cat->key = $req->key;
       $activity_cat->name = $req->name;
       $activity_cat->hours = $req->hours;
@@ -137,12 +146,12 @@ class ActivityCatalogueController extends Controller
         return redirect()
           ->back()
           ->with('activity_cat', $activity_cat)
-          ->with('warning', 'Error al almacenar, recuerde que la clave debe ser única para cada Catálogo de Actividades.');
+          ->with('warning', 'Error al almacenar, recuerde que la clave debe ser'
+          .' única para cada Catálogo de Actividades.');
       else
         return redirect()
             ->back()
             ->with('danger', 'Problema al almacenar datos.');
-        
     }
   }
 
@@ -153,10 +162,11 @@ class ActivityCatalogueController extends Controller
       $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
 
       $diplomas = Diploma::all()
-                         ->sortBy('name');
+        ->sortBy('name');
 
-      $departments = Department::all()
-                               ->sortBy('name');
+      $departments = Department::where(
+          'department_id',$activity_cat->department_id
+        )->get()->sortBy('name');
 
       return view("pages.update-activity-catalogue")
         ->with("activity_cat", $activity_cat)
@@ -249,6 +259,7 @@ class ActivityCatalogueController extends Controller
     try {
       
       $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
+
       $activity_cat->delete();
 
       return redirect()

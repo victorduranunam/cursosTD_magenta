@@ -19,13 +19,18 @@ use ZipArchive;
 use App\Exports\KeysExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ActivityController extends Controller
 {
   public function index(){
     try {
       
-      $activities = Activity::all()->sortBy(function ($activity) {
+      $activities = Activity::all()
+      ->filter(function ($activity) {
+        return $activity->activity_catalogue->department_id == Auth::user()->department_id;
+      })
+      ->sortBy(function ($activity) {
         return $activity->activity_catalogue->name;
       });
 
@@ -91,6 +96,10 @@ class ActivityController extends Controller
                               ->where('type', $request->sem_type)
                               ->get();
 
+      $activities = $activities->filter(function ($activity) {
+        return $activity->activity_catalogue->department_id == Auth::user()->department_id;
+      });
+
       return view("pages.view-activities")
         ->with("activities", $activities);
 
@@ -107,13 +116,17 @@ class ActivityController extends Controller
   {
 
     try{
+    
+      $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
+      if($activity_cat->department_id != Auth::user()->department_id)
+        throw new Exception(
+          "No es posible crear una actividad para otro departamento"
+        );
+      $venues = Venue::all();
 
-    $activity_cat = ActivityCatalogue::findOrFail($activity_catalogue_id);
-    $venues = Venue::all();
-
-    return view('pages.create-activity')
-        ->with("activity_cat", $activity_cat)
-        ->with("venues",$venues);
+      return view('pages.create-activity')
+          ->with("activity_cat", $activity_cat)
+          ->with("venues",$venues);
 
     } catch (\Illuminate\Database\QueryException $th){
         
@@ -126,6 +139,10 @@ class ActivityController extends Controller
         return redirect()
           ->route('view.activities.catalogue')
           ->with('danger','Problema con la base de datos.');
+    } catch (Exception $th) {
+      return redirect()
+          ->route('home')
+          ->with('danger', $th->getMessage());
     }
 
   }
@@ -133,6 +150,11 @@ class ActivityController extends Controller
   public function store (Request $req)
   {
     try {
+
+      if(ActivityCatalogue::findOrFail($req->activity_catalogue_id)->department_id != Auth::user()->department_id)
+        throw new Exception(
+          "No es posible crear una actividad para otro departamento"
+        );
       
       // Verify if doesn't exist another modules
       // for the same year and catalogue
@@ -180,14 +202,21 @@ class ActivityController extends Controller
       else
         return dd($th);
 
+    } catch (Exception $th) {
+      return redirect()
+          ->route('home')
+          ->with('danger', $th->getMessage());
     }
   }
 
   public function edit ($activity_id)
   {
     try {
-
       $activity = Activity::findOrFail($activity_id);
+      if($activity->activity_catalogue->department_id != Auth::user()->department_id)
+        throw new Exception(
+          "No es posible editar una actividad para otro departamento"
+        );
       $activity->group_key = $activity->getKey().'-'.$activity->activity_id;
       $venues = Venue::all();
 
@@ -200,6 +229,10 @@ class ActivityController extends Controller
       return redirect()
         ->route('view.activities')
         ->with('danger', 'Problema con la base de datos.');
+    } catch (Exception $th) {
+      return redirect()
+          ->route('home')
+          ->with('danger', $th->getMessage());
     }
   }
 
@@ -208,6 +241,12 @@ class ActivityController extends Controller
     try {
 
       $activity = Activity::findOrFail($activity_id);
+
+      if($activity->activity_catalogue->department_id != Auth::user()->department_id)
+        throw new Exception(
+          "No es posible editar una actividad para otro departamento"
+        );
+
       $activity->year = $req->year;
       $activity->num = $req->num;
       $activity->type = $req->type;
@@ -238,6 +277,10 @@ class ActivityController extends Controller
           ->with('activity', $activity)
           ->with('warning', 'Error al almacenar, verifique sus datos.');
 
+    } catch (Exception $th) {
+      return redirect()
+          ->route('home')
+          ->with('danger', $th->getMessage());
     }
   }
 
@@ -246,6 +289,12 @@ class ActivityController extends Controller
     try {
     
       $activity = Activity::findOrFail($activity_id);
+
+      if($activity->activity_catalogue->department_id != Auth::user()->department_id)
+        throw new Exception(
+          "No es posible eliminar una actividad para otro departamento"
+        );
+
       $activity->delete();
 
       return redirect()
@@ -262,6 +311,10 @@ class ActivityController extends Controller
         return redirect()
           ->back()
           ->with('warning', 'Error al eliminar la Actividad.');
+    } catch (Exception $th) {
+      return redirect()
+          ->route('home')
+          ->with('danger', $th->getMessage());
     }
   }
 
@@ -527,7 +580,10 @@ class ActivityController extends Controller
       $activities = Activity::where('activity.type', $req->type_search)
                               ->where('activity.num', $req->num_search)
                               ->where('activity.year', $req->year_search)
-                              ->get();
+                              ->get()
+                              ->filter(function ($activity) {
+                                return $activity->activity_catalogue->department_id == Auth::user()->department_id;
+                              });
       
       if($activities->isEmpty())
         return redirect()
@@ -574,41 +630,32 @@ class ActivityController extends Controller
   {
     try {
 
-      $departments = Department::all();
+      $department = Department::findOrFail(Auth::user()->department_id);
 
-      foreach($departments as $key_dept => $department){
-        $department->activities = Activity::join('activity_catalogue as ac', 'ac.activity_catalogue_id', '=', 'activity.activity_catalogue_id')
-                                          ->where('ac.department_id', $department->department_id)
-                                          ->where('activity.type', $req->type_search)
-                                          ->where('activity.num', $req->num_search)
-                                          ->where('activity.year', $req->year_search)
-                                          ->get();
+      $department->activities = Activity::join('activity_catalogue as ac', 'ac.activity_catalogue_id', '=', 'activity.activity_catalogue_id')
+                                        ->where('ac.department_id', $department->department_id)
+                                        ->where('activity.type', $req->type_search)
+                                        ->where('activity.num', $req->num_search)
+                                        ->where('activity.year', $req->year_search)
+                                        ->get();
 
-        foreach($department->activities as $key_act => $activity ){
-          $activity->suggestions = $activity->getParticipantsSuggestions();
-          if($activity->suggestions->isEmpty()){
-            $department->activities->pull($key_act);
-            continue;
-          }
-          $activity->name = $activity->getName();
-        }
-
-        if($department->activities->isEmpty()){
-          $departments->pull($key_dept);
+      foreach($department->activities as $key_act => $activity ) {
+        $activity->suggestions = $activity->getParticipantsSuggestions();
+        if($activity->suggestions->isEmpty()){
+          $department->activities->pull($key_act);
           continue;
         }
-        
+        $activity->name = $activity->getName();
       }
 
-      if($departments->isEmpty())
+      if($department->activities->isEmpty())
         return redirect()
               ->back()
               ->with('danger', 'No se encontraron actividades con sugerencias en el periodo seleccionado.');
 
-      
       $pdf = PDF::loadView('docs.activities-suggestions-report',
         [
-          'departments' => $departments,
+          'department' => $department,
           'year' => $req->year_search,
           'num' => $req->num_search,
           'type' => $req->type_search
