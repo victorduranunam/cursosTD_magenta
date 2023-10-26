@@ -66,11 +66,11 @@
       @foreach ($venues as $venue)
         <div class="row row-list" style="margin: 1%">
           
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $venue->name !!}
           </div>
 
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $venue->location !!}
           </div>
 

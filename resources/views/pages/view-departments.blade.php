@@ -60,11 +60,11 @@
           <div class="row row-list">
 
             {{-- Name of the department --}}
-            <div class="col-xl-3">
+            <div class="col-xl-3 mt-auto mb-auto">
               {!! $department->name !!}
             </div>
 
-            <div class="col-xl-3">
+            <div class="col-xl-3 mt-auto mb-auto">
               {!! $department->abbreviation !!}
             </div>
 

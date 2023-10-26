@@ -58,8 +58,8 @@
       </div>
       <div class="row">
         <div class="col-xl-6">
-          <label for="aimed_at" class="form-label">Dirijido a:</label>
-          <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirijido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos">{!! old('aimed_at') !!}</textarea>
+          <label for="aimed_at" class="form-label">Dirigido a:</label>
+          <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirigido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos">{!! old('aimed_at') !!}</textarea>
         </div>
         <div class="col-xl-6">
           <label for="objective" class="form-label">Objetivo:</label>
@@ -101,8 +101,8 @@
       @endif
 
       <div class="row">
-        <div class="col-xl-2 mt-auto" id='btn_save' style="visibility: visible">
-          <input type="submit" id='save-btn' class="btn btn-outline-success" value='Guardar'>
+        <div class="d-grid gap-2 col-xl-2 mt-auto">
+          <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
         <div class="col-xl-2">
           <a href="{!! route("view.activities.catalogue") !!}" class="btn btn-outline-warning">Cancelar</a>
