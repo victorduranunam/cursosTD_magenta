@@ -110,7 +110,7 @@
                             <div class="col-6">
                               <select class="form-select" name="type_search" id="type_search">
                                 <option value="s">Semestral</option>
-                                <option value="s">Intersemestral</option>
+                                <option value="i">Intersemestral</option>
                               </select>
                             </div>
                           </div>

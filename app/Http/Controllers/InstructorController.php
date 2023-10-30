@@ -131,6 +131,10 @@ class InstructorController extends Controller
               return redirect()
                 ->route('home')
                 ->with('danger', 'No hay conexión con la base de datos.');
+            elseif ($th->getCode() == 23505)
+              return redirect()
+                ->back()
+                ->with('warning', 'El instructor ya está asignado.');
             else
               return dd($th);
           }
