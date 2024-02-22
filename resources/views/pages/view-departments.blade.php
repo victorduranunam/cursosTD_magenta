@@ -60,11 +60,11 @@
           <div class="row row-list">
 
             {{-- Name of the department --}}
-            <div class="col-xl-3">
+            <div class="col-xl-3 mt-auto mb-auto">
               {!! $department->name !!}
             </div>
 
-            <div class="col-xl-3">
+            <div class="col-xl-3 mt-auto mb-auto">
               {!! $department->abbreviation !!}
             </div>
 
@@ -110,7 +110,7 @@
                             <div class="col-6">
                               <select class="form-select" name="type_search" id="type_search">
                                 <option value="s">Semestral</option>
-                                <option value="s">Intersemestral</option>
+                                <option value="i">Intersemestral</option>
                               </select>
                             </div>
                           </div>

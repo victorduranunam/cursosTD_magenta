@@ -59,7 +59,7 @@
       <div class="row">
         <div class="col-xl-6">
           <label for="aimed_at" class="form-label">Dirigido a:</label>
-          <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirijido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos">{!! $activity_cat->aimed_at !!}</textarea>
+          <textarea rows="4" max="500" name="aimed_at" id="aimed_at" class="form-control" placeholder="Ej. Dirigido a docentes con la experiencia en la ingeniería civil con necesidad de reforzar temas básicos">{!! $activity_cat->aimed_at !!}</textarea>
         </div>
         <div class="col-xl-6">
           <label for="objective" class="form-label">Objetivo:</label>

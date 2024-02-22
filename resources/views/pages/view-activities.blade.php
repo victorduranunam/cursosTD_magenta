@@ -147,7 +147,7 @@
       @foreach ($activities as $activity)
         <div class="row row-list">
           {{-- Nombre de la actividad --}}
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $activity->activity_catalogue->name !!}
           </div>
           {{-- Instructores de la actividad --}}

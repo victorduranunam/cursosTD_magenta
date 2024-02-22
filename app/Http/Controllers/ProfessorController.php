@@ -100,7 +100,6 @@ class ProfessorController extends Controller
           $professor->email = $req->email;
           $professor->gender = $req->gender;
           $professor->semblance = $req->semblance;
-          $professor->facebook = $req->facebook;
           $professor->is_instructor = $req->is_instructor;
           $professor->provenance = $req->provenance;
           $professor->save();
@@ -148,7 +147,6 @@ class ProfessorController extends Controller
           $professor->email = $req->email;
           $professor->gender = $req->gender;
           $professor->semblance = $req->semblance;
-          $professor->facebook = $req->facebook;
           $professor->is_instructor = $req->is_instructor;
           $professor->provenance = $req->provenance;
           $professor->save();

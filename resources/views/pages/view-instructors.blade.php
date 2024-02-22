@@ -62,16 +62,16 @@
 
       @foreach ($instructors as $instructor)
         <div class="row row-list">
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $instructor->professor->getFullName() !!}
           </div>
-          <div class="col-xl-3">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $instructor->professor->email !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $instructor->professor->rfc !!}
           </div>
-          <div class="col-xl-2">
+          <div class="col-xl-2 mt-auto mb-auto">
             {!! $instructor->professor->worker_number !!}
           </div>
           
@@ -153,7 +153,7 @@
       <div class="row row-list">
         @csrf
         @method('post')
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $professor->getFullName() !!}
           </div>
           <div class="col-xl-3 mt-auto mb-auto">

@@ -36,7 +36,6 @@ class ProfessorExport implements FromCollection, WithTitle, WithHeadings, Should
         'Email',
         'Género',
         'Semblanza',
-        'Facebook',
         'Es instructor',
         'Proveniencia'
     ];

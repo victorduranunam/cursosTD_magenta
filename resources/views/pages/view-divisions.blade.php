@@ -88,12 +88,12 @@
         <div class="row row-list" style="margin: 1%">
 
           {{-- Name of the element --}}
-          <div class="col-xl-5">
+          <div class="col-xl-5  mt-auto mb-auto">
             {!! $division->name !!}
           </div>
 
           {{-- Abbreviation of the element --}}
-          <div class="col-xl-3">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $division->abbreviation !!}
           </div>
 

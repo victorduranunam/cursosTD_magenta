@@ -8,10 +8,10 @@
   <div class="card-header"><br>
     <h3>Ver Puestos de Trabajo <i class="bi bi-mortarboard"></i></h3>
     <div class="row justify-content-end">
-      <div class="col-xl-3">
+      <div class="col-xl-1">
         <a class="btn btn-outline-success" onclick="blockCreateDiv()">Crear</a>
       </div>
-      <div class="col-xl-3">
+      <div class="col-xl-1">
         <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
       </div>
       <div class="col-xl-2">

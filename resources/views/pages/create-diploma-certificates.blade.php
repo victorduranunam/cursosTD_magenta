@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-3">
+        <div class="col-xl-1">
           <button type="submit" class="btn btn-outline-success">Generar</button>
         </div>
         <div class="col-xl-2">

@@ -22,6 +22,9 @@ class InstructorEvaluationController extends Controller
         $instructor->evaluation = InstructorEvaluation::where('instructor_id', 
                                                         $instructor->instructor_id
                                                       )->first();
+      if(!$instructor->evaluation){
+        return redirect()->back()->with('warning', 'El participante aún no ha evaluado a los instructores.');
+      }
       return view('pages.view-instructor-evaluation')
             ->with('participant', $participant)
             ->with('instructors',$instructors);

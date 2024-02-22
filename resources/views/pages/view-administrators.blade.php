@@ -58,7 +58,7 @@
 
       @foreach ($administrators as $administrator)
         <div class="row row-list" style="margin: 1%">
-          <div class="col-xl-4">
+          <div class="col-xl-4 mt-auto mb-auto">
             {!! $administrator->name.' '.$administrator->last_name.' '.$administrator->mothers_last_name !!}
           </div>
           <div class="col-xl-4 mt-auto mb-auto">

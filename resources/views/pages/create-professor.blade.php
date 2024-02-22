@@ -51,17 +51,14 @@
           <input required class="form-control" type="text" name="email" id="email" placeholder="Ej. ejemplo@gmail.com" value="{!! old('email') !!}">
         </div>
         <div class="col-xl-4">
-          <label class="form-label" for="facebook">Facebook:</label>
-          <input required class="form-control" type="text" name="facebook" id="facebook"  value="{!! old('facebook') !!}">
+          <label class="form-label" for="degree">Abriaviatura de Grado:</label>
+          <input class="form-control" value="{!! old('degree') !!}" type="text" name="degree" id="degree" placeholder="Ej. M.I.">
         </div>
     </div>
 
     <div class="row">
 
-        <div class="col-xl-4">
-          <label class="form-label" for="degree">Abriaviatura de Grado:</label>
-          <input class="form-control" value="{!! old('degree') !!}" type="text" name="degree" id="degree" placeholder="Ej. M.I.">
-        </div>
+        
 
         <div class="col-xl-4">
           <label class="form-label" for="is_instructor">Es instructor:</label>

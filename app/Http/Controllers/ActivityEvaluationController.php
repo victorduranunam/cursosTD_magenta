@@ -125,6 +125,9 @@ class ActivityEvaluationController extends Controller
 
     try {
       $activity_evaluation = ActivityEvaluation::where('participant_id', $participant_id)->first();
+      if(!$activity_evaluation){
+        return redirect()->back()->with('warning', 'El participante aún no ha evaluado la actividad.');
+      }
 
       $participant = DB::table('participant as pt')
         ->join('professor as p', 'p.professor_id', 'pt.professor_id')
