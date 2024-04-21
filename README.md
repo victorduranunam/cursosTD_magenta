@@ -1,6 +1,6 @@
 <p align="center"> <a href="https://www.ingenieria.unam.mx/unica/"><img src="./public/img/mg-font.png" width="400"></a></p>
 
-# Magestic
+# magenta
 
 Management and control system in updating activities for the training and professional development of teachers.
 
@@ -9,18 +9,18 @@ For this project you will need:
 
 1. [PHP 7](https://windows.php.net/download/) 
 2. [Composer](https://getcomposer.org)
-3. [Magestic-DB](https://github.com/MauRamos334455/magestic-db)
+3. [magenta-DB](https://github.com/MauRamos334455/magenta-db)
 ## Deploy
 ### Connect 
-Connect this Laravel project to any database created via [Magestic-DB](https://github.com/MauRamos334455/magestic-db) with the .env file.
+Connect this Laravel project to a database created via [magenta-DB](https://github.com/MauRamos334455/magenta-db) with the .env file.
 
 Example
 ```shell
 DB_CONNECTION = pgsql
 DB_HOST = <ip address or hosting URL>
 DB_PORT = 5432
-DB_DATABASE = magestic
-DB_USERNAME = magestic
+DB_DATABASE = magenta
+DB_USERNAME = magenta
 DB_PASSWORD = <your password>
 ```
 

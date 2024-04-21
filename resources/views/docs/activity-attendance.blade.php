@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Hoja de Asistencia | MAGESTICD</title>
+  <title>Hoja de Asistencia | MAGENTAD</title>
 </head>
 <style>
 html{
@@ -83,7 +83,7 @@ th, td{
   <div>
     <div id='header'>
       <div class="left-header">
-        <img class="img-escudo mg" src={!! public_path('img/logo-MAGESTIC.png') !!} align=left>
+        <img class="img-escudo mg" src={!! public_path('img/logo-MAGENTA.png') !!} align=left>
       </div>
 
       <div class="right-header">
@@ -91,7 +91,7 @@ th, td{
       </div>
 
       <div class="center-header">
-        <h2>MAGESTIC</h2>
+        <h2>MAGENTA</h2>
         <h3>Facultad de Ingeniería</h3>
         <h3>Hoja de Asistencia</h3>
       </div>

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <title>MAGESTIC | Capacitación Docente</title>
+  <title>MAGENTA | Capacitación Docente</title>
 </head>
 <body onload="main()">
     <div class="wrap">
@@ -19,7 +19,7 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
-                    <a class="navbar-brand" href={!! route('home') !!}>MAGESTIC</a>
+                    <a class="navbar-brand" href={!! route('home') !!}>MAGENTA</a>
                     
                     <!-- User Dashboard -->
                     <div class="dropdown">

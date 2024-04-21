@@ -60,14 +60,14 @@ th, td{
     <div id="header">
 
       <div class="left-header">
-        <img class="img-escudo mg" src={!! public_path('img/logo-MAGESTIC.png') !!} align=left>
+        <img class="img-escudo mg" src={!! public_path('img/logo-MAGENTA.png') !!} align=left>
       </div>
       <div class="right-header">
         <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
       </div>
 
       <div class="center-header">
-        <h2>MAGESTIC</h2>
+        <h2>MAGENTA</h2>
         <h3>Facultad de Ingeniería</h3>
         <h3>Historial de Actividades del Profesor</h3> 
       </div>

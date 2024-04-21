@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-  <title>MAGESTIC | Capacitación Docente</title>
+  <title>MAGENTA | Capacitación Docente</title>
 </head>
 <body class="home">
 
@@ -22,7 +22,7 @@
       @method('get')
     <div class="content">
       <div class="title m-b-md">
-        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">MAGESTIC</a> 
+        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">MAGENTA</a> 
       </div>
       <div class="subtitle m-b-md">
         Contestar Encuesta
