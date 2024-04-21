@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Reporte de Evaluación | MAGESTIC </title>
+  <title>Reporte de Evaluación | MAGENTA </title>
 </head>
 
 <style>
@@ -77,7 +77,7 @@ table{
   <div id='header'>
 
     <div class="left-header">
-      <img class="img-escudo mg" src={!! public_path('img/logo-magestic.png') !!} align=left>
+      <img class="img-escudo mg" src={!! public_path('img/logo-magenta.png') !!} align=left>
     </div>
 
     <div class="right-header">
@@ -85,7 +85,7 @@ table{
     </div>
 
     <div class="center-header">
-      <h2>MAGESTIC</h2>
+      <h2>MAGENTA</h2>
       <h3>Facultad de Ingeniería</h3>
       <h3>Reporte de Evaluación</h3> 
     </div>

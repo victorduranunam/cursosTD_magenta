@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Reporte de Instructores | MAGESTIC </title>
+  <title>Reporte de Instructores | MAGENTA </title>
 </head>
 
 <style>
@@ -63,7 +63,7 @@ th, td{
 
   <div id='header'>
     <div class="left-header">
-      <img class="img-escudo mg" src={!! public_path('img/logo-magestic.png') !!} align=left>
+      <img class="img-escudo mg" src={!! public_path('img/logo-magenta.png') !!} align=left>
     </div>
 
     <div class="right-header">
@@ -71,7 +71,7 @@ th, td{
     </div>
 
     <div class="center-header">
-      <h2>MAGESTIC</h2>
+      <h2>MAGENTA</h2>
       <h2>Facultad de Ingeniería</h2>
       <h2>Reporte de Instructores</h2> 
     </div>

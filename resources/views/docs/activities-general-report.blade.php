@@ -63,7 +63,7 @@ th, td{
       <div id='header'>
 
         <div class="left-header">
-          <img class="img-escudo mg" src={!! public_path('img/logo-MAGESTIC.png') !!} align=left>
+          <img class="img-escudo mg" src={!! public_path('img/logo-MAGENTA.png') !!} align=left>
         </div>
 
         <div class="right-header">
@@ -71,7 +71,7 @@ th, td{
         </div>
 
         <div class="center-header">
-          <h2>MAGESTIC</h2>
+          <h2>MAGENTA</h2>
           <h3>Facultad de Ingeniería</h3>
           <h3>Reporte General de Actividades</h3> 
           <h3>{!! $year.'-'.$num.$type !!}</h3>

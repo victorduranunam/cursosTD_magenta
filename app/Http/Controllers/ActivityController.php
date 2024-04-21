@@ -565,7 +565,7 @@ class ActivityController extends Controller
 
   public function downloadExport()
   {
-    return Excel::download(new DBExport, 'exportacion_magestic.xlsx');
+    return Excel::download(new DBExport, 'exportacion_magenta.xlsx');
   }
 
   public function downloadKeysBook()

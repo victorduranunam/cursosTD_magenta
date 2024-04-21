@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Stop the container
-docker stop magestic
+docker stop magenta
 
-docker rm magestic
+docker rm magenta
 
-docker run -d --name=magestic -p 8080:8080 -v $PWD:/var/www/html php:7.2-apache
+docker run -d --name=magenta -p 8080:8080 -v $PWD:/var/www/html php:7.2-apache
 
-docker exec -it magestic bash
+docker exec -it magenta bash

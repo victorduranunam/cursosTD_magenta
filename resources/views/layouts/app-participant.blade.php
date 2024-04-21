@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
 
-    <title>MAGESTIC | Evaluaciones</title>
+    <title>MAGENTA | Evaluaciones</title>
   </head>
   <body onload="main()">
     <div class="wrap">
@@ -18,7 +18,7 @@
       <div class="header">
           <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-              <a href="{!! route('home') !!}" class="navbar-brand">MAGESTIC</a>
+              <a href="{!! route('home') !!}" class="navbar-brand">MAGENTA</a>
               <a href="{!! route('home') !!}" class="navbar-brand">Salir</a>
             </div>
           </nav>

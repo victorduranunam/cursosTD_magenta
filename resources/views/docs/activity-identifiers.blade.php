@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Identificadores | MAGESTIC</title>
+  <title>Identificadores | MAGENTA</title>
 </head>
 <style>
 html{
@@ -18,7 +18,7 @@ table{
   width:100%;
   height: 4.9cm;
   text-align:center;
-  background-image: url({!! public_path('img/logo-MAGESTIC.png') !!});
+  background-image: url({!! public_path('img/logo-MAGENTA.png') !!});
   background-size:16%;
   background-position: 450px 65px;
   background-repeat: no-repeat;
