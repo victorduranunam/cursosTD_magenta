@@ -1,10 +1,18 @@
 #!/bin/bash
 
-# Stop the container
-docker stop magenta
+CONTAINER="magenta-web"
+HOST_PORT=8080
+CONTAINER_PORT=8080
+NETWORK="magenta-network"
 
-docker rm magenta
+echo Stopping container...
+docker stop ${CONTAINER}
 
-docker run -d --name=magenta -p 8080:8080 -v $PWD:/var/www/html php:7.2-apache
+echo Deleting previous CONTAINER...
+docker rm ${CONTAINER}
 
-docker exec -it magenta bash
+echo Building new container...
+docker build -t custom-php:7.4.33-cli .
+
+echo Creating new CONTAINER...
+docker run -it --name ${CONTAINER} --network ${NETWORK} -p ${HOST_PORT}:${CONTAINER_PORT} custom-php:7.4.33-cli
