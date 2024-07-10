@@ -50,10 +50,6 @@
           <label class="form-label" for="email">Email:</label>
           <input required class="form-control" type="text" name="email" id="email" placeholder="Ej. ejemplo@gmail.com" value="{!!$professor->email !!}">
         </div>
-        <div class="col-xl-4">
-          <label class="form-label" for="facebook">Facebook:</label>
-          <input required class="form-control" type="text" name="facebook" id="facebook"  value="{!!$professor->facebook !!}">
-        </div>
     </div>
 
     <div class="row">

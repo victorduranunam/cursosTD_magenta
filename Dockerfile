@@ -4,9 +4,12 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libpng-dev \
     libzip-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     libonig-dev \
     zip \
     unzip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install pdo pdo_pgsql mbstring

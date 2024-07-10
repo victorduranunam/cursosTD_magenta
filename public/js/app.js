@@ -274,7 +274,7 @@ function closeNav() {
 
 function viewRowDiploma(){
   const type = document.getElementById('type')
-  const btn = document.getElementById('btn_save')
+  const btn = document.getElementById('save-btn')
   if(type.value === 'DI'){
     if(document.getElementById('row_diploma_advice')){
       diploma = document.getElementById('row_diploma_advice')

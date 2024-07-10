@@ -63,7 +63,7 @@ th, td{
       <div id='header'>
 
         <div class="left-header">
-          <img class="img-escudo mg" src={!! public_path('img/logo-MAGENTA.png') !!} align=left>
+          <img class="img-escudo mg" src={!! public_path('img/logo-magenta.png') !!} align=left>
         </div>
 
         <div class="right-header">

@@ -70,7 +70,7 @@ table.contenido th, table.contenido td{
   <div id="header">
 
     <div class="left-header">
-      <img class="img-escudo mg" src={!! public_path('img/logo-MAGENTA.png') !!} align=left>
+      <img class="img-escudo mg" src={!! public_path('img/logo-magenta.png') !!} align=left>
     </div>
     <div class="right-header">
       <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
@@ -101,7 +101,6 @@ table.contenido th, table.contenido td{
       <tr>
         <td width=210px>{!! $participant->name.' '.$participant->last_name.' '.$participant->mothers_last_name !!}</td>
         <td width=210px>{!! $participant->email !!}</td>
-        <td>{!! $participant->facebook !!}</td>
         <td width=100px>{!! $participant->phone_number !!}</td>
         <td class="datos2"><img height='25' src={!! public_path('img/checkbox.png') !!}></td>
       </tr>

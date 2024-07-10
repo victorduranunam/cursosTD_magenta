@@ -18,7 +18,7 @@ table{
   width:100%;
   height: 4.9cm;
   text-align:center;
-  background-image: url({!! public_path('img/logo-MAGENTA.png') !!});
+  background-image: url({!! public_path('img/logo-magenta.png') !!});
   background-size:16%;
   background-position: 450px 65px;
   background-repeat: no-repeat;

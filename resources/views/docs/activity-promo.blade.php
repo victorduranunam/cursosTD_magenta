@@ -12,7 +12,7 @@ html{
 }
 body{
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url({!! public_path('img/logo-MAGENTA.png') !!});
+  background-image: url({!! public_path('img/logo-magenta.png') !!});
   background-size:45%;
   background-position: right bottom;
   background-repeat: no-repeat;
