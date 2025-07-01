@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <title>MAGENTA | Capacitación Docente</title>
+  <title>Cursos transformación digital</title>
 </head>
 <body onload="main()">
     <div class="wrap">
@@ -19,7 +19,7 @@
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container-fluid">
                     <button class="btn btn-dark btn-sm mobile" href="" onclick=openNav();><i class="bi bi-list"></i></button>
-                    <a class="navbar-brand" href={!! route('home') !!}>MAGENTA</a>
+                    <a class="navbar-brand" href={!! route('home') !!}>CURSOS -Transformación Digital</a>
                     
                     <!-- User Dashboard -->
                     <div class="dropdown">
@@ -45,37 +45,48 @@
                         <li><a href={!! route('create.activity.catalogue') !!}>Alta de Actividad</a></li>
                         <li><a href={!! route('view.activities.catalogue') !!}>Catálogo de Actividades</a></li>
                         <li><a href={!! route('view.activities') !!}>Actividades programadas</a></li>
-                        <li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>
+                        <!--<li><a href="{!! route('view.diplomas') !!}">Ver Diplomados</a></li>-->
                     </ul>
                 </li>
 
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-person-lines-fill"></i>Profesores<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-person-lines-fill"></i>Instructores<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
-                        <li><a href={!! route('create.professor') !!}>Alta de Profesor</a></li>
-                        <li><a href={!! route('view.professors') !!}>Consulta de profesores</a></li>
+                        <li><a href={!! route('create.professor') !!}>Alta de Instructor</a></li>
+                        <li><a href={!! route('view.professors') !!}>Consulta de Instructores</a></li>
                     </ul>
                 </li>
 
+                
                 <li class="nav-header">
-                  <div class="link"><i class="bi bi-building"></i>Sedes<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-person-lines-fill"></i>Estudiantes<i class="bi bi-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href={!! route('create.student') !!}>Alta de Estudiante</a></li>
+                        <li><a href={!! route('view.student') !!}>Consulta de estudiantes</a></li>
+                    </ul>
+                </li>
+
+            
+                <li class="nav-header">
+                  <div class="link"><i class="bi bi-building"></i>Aulas<i class="bi bi-chevron-down"></i></div>
                   <ul class="submenu">
-                    <li><a href={!! route('create.venue') !!}>Alta de Sede</a></li>
-                    <li><a href={!! route('view.venues') !!}>Consulta de Sedes</a></li>
+                    <li><a href={!! route('create.venue') !!}>Alta de aula</a></li>
+                    <li><a href={!! route('view.venues') !!}>Consulta de aula</a></li>
                   </ul>
                 </li>
                 
                 @if(Auth::user()->role === 'J')
 
+                <!--
                 <li class="nav-bar">
                   <div class="link"><i class="bi bi-newspaper"></i>Puestos de trabajo <i class="bi bi-chevron-down"></i></div>
                   <ul class="submenu">
                     <li><a href={!! route('view.work-positions') !!}>Consulta de Puestos de trabajo</a></li>
                   </ul>
                 </li>
-                
+                -->
                 <li class="nav-header">
-                    <div class="link"><i class="bi bi-bank"></i>Departamentos<i class="bi bi-chevron-down"></i></div>
+                    <div class="link"><i class="bi bi-bank"></i>Administración<i class="bi bi-chevron-down"></i></div>
                     <ul class="submenu">
                         <li><a href={!! route('create.department') !!}>Alta de Departamento</a></li>
                         <li><a href={!! route('view.departments') !!}>Consulta de departamentos</a></li>
@@ -83,13 +94,14 @@
                         <li><a href={!! route('view.administrators') !!}>Consulta de administradores</a></li>
                     </ul>
                 </li>
-                
+               <!-- 
                 <li class="nav-header">
                   <div class="link"><i class="bi bi-briefcase"></i>Divisiones<i class="bi bi-chevron-down"></i></div>
                   <ul class="submenu">
                     <li><a href={!! route('view.divisions') !!}>Consulta de Divisiones</a></li>
                   </ul>
                 </li>
+            -->
                 @endif
                 
               </ul>
@@ -111,13 +123,13 @@
                 <div class="row text-center d-flex justify-content-center pt-5">
                     <div class="col-md-2">
                     <p class="text-uppercase font-weight-bold">
-                        <a class="nav-link footer-link" href="https://www.ingenieria.unam.mx/centrodedocencia/centro.html">Sobre nosotros</a>
+                        <a class="nav-link footer-link" href="https://www.ingenieria.unam.mx/transformaciondigital/">Sobre nosotros</a>
                     </p>
                     </div>
 
                     <div class="col-md-2">
                     <p class="text-uppercase font-weight-bold">
-                        <a class="nav-link footer-link" href="https://www.ingenieria.unam.mx/centrodedocencia/directorio.html">Contacto</a>
+                        <a class="nav-link footer-link" href="https://www.ingenieria.unam.mx/transformaciondigital/">Contacto</a>
                     </p>
                     </div>
                 </div>
@@ -130,12 +142,11 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                     <p>
-                        <img class="unica-logo" src="{!! url("/img/unica.png") !!}" alt="unica-logo.png">
+                        <img class="unica-logo" src="{!! url("/img/logo_td.jpg") !!}" alt="unica-td.jpg">
                         Hecho en México, Universidad Nacional Autónoma de México,
                         Facultad de Ingeniería,
-                        <a href="https://www.ingenieria.unam.mx/unica/" class="nav-link">Unidad de Servicios de Cómputo Académico,</a>
-                        Departamento de Investigación y Desarrollo.
-                        Todos los derechos reservados 2022.
+                        <a href="https://www.ingenieria.unam.mx/unica/" class="nav-link">Transformación Digital
+                        Todos los derechos reservados 2025.
                     </p>
                     </div>
                 </div>

@@ -32,7 +32,7 @@
           @method('get')
           <div class="row">
             <div class="col-xl-6">
-              <label class="form-label" for="words">Buscar profesor:</label>
+              <label class="form-label" for="words">Buscar estudiante:</label>
               <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
             </div>
             <div class="col-xl-3">
@@ -41,6 +41,7 @@
                 <option selected value='name'>Nombre</option>
                 <option value='email'>Email</option>
                 <option value='rfc'>RFC</option>
+                <option value='student_number'>Número de cuenta</option>
                 <option value='worker_number'>Número de trabajador</option>
               </select>
             </div>
@@ -63,51 +64,47 @@
   @endif
     <div class="card-body"><br>
     
-        @if($professors->isNotEmpty())
+        @if($students->isNotEmpty())
         <div class="row">
             <div class="col-xl-4">
                 <h6>Nombre</h6>
             </div>
-            <div class="col-xl-3">
+            <div class="col-xl-4">
                 <h6>Email</h6>
             </div>
             <div class="col-xl-2">
                 <h6>RFC</h6>
             </div>
-            <div class="col-xl-2">
-                <h6>Número Trabajador</h6>
-            </div>
+
         </div>
 
-      @foreach ($professors as $professor)
-    <form action="{!! route('store.participant', $professor->professor_id) !!}" method="POST">
+      @foreach ($students as $student)
+    <form action="{!! route('store.participant', $student->student_id) !!}" method="POST">
       
       <input id="activity_id" type="hidden" class="form-control" name="activity_id" value="{!! $activity->activity_id !!}" required>  
         <div class="row row-list">
             @csrf
             @method('post')
             <div class="col-xl-4">
-                {!! $professor->name." ".$professor->last_name." ".$professor->mothers_last_name !!}
+                {!! $student->name." ".$student->last_name." ".$student->mothers_last_name !!}
             </div>
-            <div class="col-xl-3">
-                {!! $professor->email !!}
-            </div>
-            <div class="col-xl-2">
-                {!! $professor->rfc !!}
+            <div class="col-xl-4">
+                {!! $student->email !!}
             </div>
             <div class="col-xl-2">
-                {!! $professor->worker_number !!}
+                {!! $student->rfc !!}
             </div>
-            <div class="col-xl-1">
+
+            <div class="col-xl-2">
                 <button type="submit" id='save-btn' class="btn btn-outline-success"><i class="bi bi-person-plus"></i></button>
             </div>
         </div>
     </form>
       @endforeach
-    @elseif($professors->isEmpty())
+    @elseif($students->isEmpty())
       <div class="row">
         <div class="col-xl-6">
-          No hay profesores en la base de datos.
+          No hay estudiantes que cumplan con el criterio seleccionado.
         </div>
       </div>
     @endif

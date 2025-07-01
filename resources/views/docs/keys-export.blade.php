@@ -26,4 +26,5 @@
     @endforeach
   </table>
 </body>
+
 </html>

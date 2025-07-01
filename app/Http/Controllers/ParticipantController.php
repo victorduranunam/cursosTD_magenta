@@ -6,6 +6,7 @@ use App\Models\Instructor;
 use App\Models\Activity;
 use App\Models\Professor;
 use App\Models\Participant;
+use App\Models\Student;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -20,10 +21,11 @@ class ParticipantController extends Controller
                               ->where('activity.activity_id', $activity_id)
                               ->first(['activity.activity_id','activity_catalogue.name']);
         
-        $participants = Participant::join('professor','professor.professor_id','=','participant.professor_id')
-                                    ->where('participant.activity_id', $activity_id)
-                                    ->orderByRaw('unaccent(lower(professor.name || professor.last_name || professor.mothers_last_name))')
-                                    ->get(['participant.*', 'professor.name', 'professor.last_name', 'professor.mothers_last_name']);
+        $participants = Participant::join('student','student.student_id','=','participant.student_id')
+                                  ->where('participant.activity_id', $activity_id)
+                                  ->orderByRaw('unaccent(lower(student.name || student.last_name || student.mothers_last_name))')
+                                  ->get(['participant.*', 'student.name', 'student.last_name', 'student.mothers_last_name']);
+
         
         foreach($participants as $participant)
           $participant->summary = $participant->getGradeSummary();
@@ -72,38 +74,39 @@ class ParticipantController extends Controller
           
         elseif ( $req->search_type === 'rfc' )
           $query = 'rfc LIKE \'%'.$words.'%\'';
+
+         elseif ( $req->search_type === 'student_number' )
+          $query = 'student_number LIKE \'%'.$words.'%\'';
   
         elseif ( $req->search_type === 'worker_number' )
           $query = 'worker_number LIKE \'%'.$words.'%\'';
   
         if ( $query ) {
           
-          // Get participants and instructors, they can't be part of the result
-          $professorsNotAvailable = DB::select(
-            'select pr.professor_id
-            from participant pa
-            join professor pr on pr.professor_id = pa.professor_id 
-            where pa.activity_id = :activity_id
-            union
-            select pr.professor_id
-            from instructor i
-            join professor pr on pr.professor_id = i.professor_id 
-            where i.activity_id = :activity_id', ['activity_id' => $activity_id]
+          // Obtener IDs de estudiantes ya asignados como participantes 
+          $studentsNotAvailable = DB::select(
+              'select st.student_id
+              from participant pa
+              join student st on st.student_id = pa.student_id 
+              where pa.activity_id = :activity_id', 
+              ['activity_id' => $activity_id]
           );
 
-          // Get professors - professorsNotAvailable
-          $professors = Professor::whereNotIn('professor_id', 
-            array_map( function ($professor) {
-              return (int)$professor->professor_id;
-            } ,$professorsNotAvailable))
-            ->whereRaw($query)
-            ->get();
+
+          // Obtener estudiantes disponibles (que no están ya como participantes )
+          $students = Student::whereNotIn('student_id', 
+              array_map(function ($student) {
+                  return (int)$student->student_id;
+              }, $studentsNotAvailable))
+              ->whereRaw($query)
+              ->get();
+
 
         } else
-          $professors = collect();
+          $students = collect();
 
         return view("pages.create-participant")
-        ->with("professors",$professors)
+        ->with("students", $students)
         ->with("instructors",$instructors)
         ->with('activity',$activity)
         // ->with('max_count',$max_count)
@@ -118,99 +121,120 @@ class ParticipantController extends Controller
       }
     }
 
-    public function create($activity_id) {
-        try{   
-          
-          $professorsNotAvailable = DB::select(
-            'select pr.professor_id
-            from participant pa
-            join professor pr on pr.professor_id = pa.professor_id 
-            where pa.activity_id = :activity_id
-            union
-            select pr.professor_id
-            from instructor i
-            join professor pr on pr.professor_id = i.professor_id 
-            where i.activity_id = :activity_id', ['activity_id' => $activity_id]
-          );
 
-          // Get professors - professorsNotAvailable
-          $professors = Professor::whereNotIn('professor_id', 
-            array_map( function ($professor) {
-              return (int)$professor->professor_id;
-            } ,$professorsNotAvailable))
-            ->get();
+public function create($activity_id) {
+    try {
+        // Estudiantes ya registrados como participantes en esta actividad
+        $studentsNotAvailable = DB::table('participant')
+            ->where('activity_id', $activity_id)
+            ->pluck('student_id')
+            ->toArray();
 
-            $instructors = Instructor::where('instructor.activity_id',$activity_id)
-              ->get();
+        // Obtener todos los estudiantes que aún no están inscritos en la actividad
+        $students = Student::whereNotIn('student_id', $studentsNotAvailable)->get();
 
-            $activity = Activity::findOrFail($activity_id);
+        // Obtener la actividad
+        $activity = Activity::findOrFail($activity_id);
 
-            $count = Participant::select('participant_id')
-                ->where('activity_id', $activity_id)
-                ->count() - Participant::select('participant_id')
-                ->where('activity_id', $activity_id)
-                ->where('canceled',true)
-                ->count();
+        // Obtener instructores de la actividad
+        $instructors = Instructor::where('activity_id', $activity_id)->get();
 
-            return view("pages.create-participant")
-              ->with("professors",$professors)
-              ->with("instructors",$instructors)
-              ->with('activity',$activity)
-              ->with('count',$count);
+        // Contar participantes (excluyendo cancelados)
+        $count = Participant::where('activity_id', $activity_id)
+            ->where('canceled', false)
+            ->count();
 
-        }catch (\Illuminate\Database\QueryException $th) {
-          return dd($th);
-          return redirect()
+        return view("pages.create-participant")
+            ->with("students", $students)
+            ->with('activity', $activity)
+            ->with('instructors', $instructors)
+            ->with('count', $count);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+        return redirect()
             ->route('home')
             ->with('danger', 'Problema con la base de datos.');
-        }
-      }
+    }
+}
 
-    public function edit($participant_id){
+
+   
+   
+      public function edit($participant_id){
 
       $participant = Participant::findOrFail($participant_id);
+
+      //dd($participant); // Muestra el objeto y detiene la ejecución
 
       return view('pages.update-participant')
         ->with('participant', $participant);
     }
 
-    public function store(Request $re, $professor_id){
-        try{
-            $participant = new Participant();
-            $participant->participant_id = DB::select("select nextval('participant_seq')")[0]->nextval;
-            $participant->professor_id = $professor_id;
-            $participant->activity_id = $re->activity_id;
 
-            $max_count = Activity::select('max_quota')
-                ->where('activity_id',$re->activity_id)
-                ->get()->first();
-            
-            $count = Participant::select('participant_id')
-                ->where('activity_id', (int)$re->activity_id)
-                ->count() - Participant::select('participant_id')
-                ->where('activity_id', (int)$re->activity_id)
-                ->where('canceled',true)
-                ->count();
+public function store(Request $re, $student_id) {
+    try {
 
-            if ($count >= $max_count->max_quota)
-              $participant->additional = true;
-            $participant->save();
+      //dd($student_id);
 
+
+        // Validar que el estudiante no esté ya inscrito
+        $alreadyParticipant = Participant::where('activity_id', $re->activity_id)
+            ->where('student_id', $student_id)
+            ->where('canceled', false)
+            ->exists();
+
+        if ($alreadyParticipant) {
             return redirect()
                 ->back()
-                ->with('success', 'Participante inscrito correctamente');
-        }catch (\Illuminate\Database\QueryException $th) {
+                ->with('warning', 'Este estudiante ya está registrado como participante.');
+        }
 
-            if ($th->getCode() == 7)
-                return redirect()
+        // Crear nuevo participante
+        $participant = new Participant();
+        $participant->participant_id = DB::select("select nextval('participant_seq')")[0]->nextval;
+        $participant->student_id = $student_id;
+        $participant->activity_id = $re->activity_id;
+
+        // Obtener cupo máximo
+        $max_count = Activity::select('max_quota')
+            ->where('activity_id', $re->activity_id)
+            ->first();
+
+        // Calcular inscritos reales (sin cancelados)
+        $count = Participant::where('activity_id', $re->activity_id)
+            ->where('canceled', false)
+            ->count();
+
+        // Marcar como adicional si excede el cupo
+        if ($count >= $max_count->max_quota) {
+            $participant->additional = true;
+        }
+
+        $participant->save();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Participante inscrito correctamente');
+
+    } catch (\Illuminate\Database\QueryException $th) {
+        if ($th->getCode() == 7) {
+            return redirect()
                 ->route('home')
                 ->with('danger', 'No hay conexión con la base de datos.');
-            else
-              return redirect()
+        } else {
+            
+           $errorMessage = $th->getMessage();  // O también: $th->getPrevious()->getMessage();
+            return redirect()
                 ->back()
-                ->with('danger', 'Error al almacenar participante.');
+                ->with('danger', 'Error al almacenar participante: ' . $errorMessage);
         }
     }
+
+
+}
+
+
+
 
     public function update(Request $re, $participant_id){
       try{

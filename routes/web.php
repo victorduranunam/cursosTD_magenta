@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\StudentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +48,16 @@ Route::group(['middleware' => 'guest'], function () {
   Route::delete('catalogo-actividades/eliminar/{activity_catalogue_id}', 'ActivityCatalogueController@delete')->middleware('verifyUserDepartment')->name('delete.activity.catalogue');
 
   //Route Activity
+
   Route::get('actividades', 'ActivityController@index')->name('view.activities');
   Route::get('actividades/buscar', 'ActivityController@search')->name('search.activities');
   Route::get('actividades/crear/{activity_catalogue_id}', 'ActivityController@create')->middleware('verifyUserDepartment')->name('create.activity');
-  Route::post('actividades/almacenar', 'ActivityController@store')->middleware('verifyUserDepartment')->name('store.activity');
+
+  Route::post('actividades/almacenar', [ActivityController::class, 'store'])->middleware('verifyUserDepartment')->name('store.activity');
+
+
+  
+  
   Route::get('actividades/actualizar/{activity_id}', 'ActivityController@edit')->middleware('verifyUserDepartment')->name('edit.activity');
   Route::put('actividades/guardar/{activity_id}', 'ActivityController@update')->middleware('verifyUserDepartment')->name('update.activity');
   Route::delete('actividades/eliminar/{activity_id}', 'ActivityController@delete')->middleware('verifyUserDepartment')->name('delete.activity');
@@ -58,8 +67,16 @@ Route::group(['middleware' => 'guest'], function () {
   Route::post('actividades/descargar/constancias/{activity_id}', 'ActivityController@downloadCertificates')->middleware('verifyUserDepartment')->name('download.activity-certificates');
   Route::post('actividades/descargar/reconocimientos/{activity_id}', 'ActivityController@downloadRecognitions')->middleware('verifyUserDepartment')->name('download.activity-recognitions');
   Route::get('actividades/descargar/verificacion-datos/{activity_id}', "ActivityController@downloadVerifyDataSheet")->middleware('verifyUserDepartment')->name('download.activities-verify-data-sheet');
-  Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->middleware('verifyUserDepartment')->name('download.activities-identifiers');
-  Route::get('actividades/descargar/hoja-asistencia/{activity_id}', "ActivityController@downloadAttendanceSheet")->middleware('verifyUserDepartment')->name('download.activities-attendance-sheet');
+  
+  //Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->middleware('verifyUserDepartment')->name('download.activities-identifiers');
+  Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->name('download.activities-identifiers');
+
+  
+  //Route::get('actividades/descargar/hoja-asistencia/{activity_id}', "ActivityController@downloadAttendanceSheet")->middleware('verifyUserDepartment')->name('download.activities-attendance-sheet');
+  Route::get('actividades/descargar/hoja-asistencia/{activity_id}', 'ActivityController@downloadAttendanceSheet')->name('download.activities-attendance-sheet');
+
+
+
   Route::get('actividades/descargar/exportacion', 'ActivityController@downloadExport')->middleware('verifyUserPrivileges')->name('download.activities-export');
   Route::get('actividades/descargar/libro-de-folios', 'ActivityController@downloadKeysBook')->middleware('verifyUserPrivileges')->name('download.activities-keys-book');
   Route::get('actividades/descargar/reporte-general', 'ActivityController@downloadGeneralReport')->name('download.activities-general-record');
@@ -127,14 +144,27 @@ Route::group(['middleware' => 'guest'], function () {
   Route::post('evaluacion-instructor/almacenar/{instructor_id}', 'InstructorEvaluationController@store')->name('store.instructor-evaluation')->withoutMiddleware(['guest']);
 
   //Route Participant
-  Route::get('participantes/{activity_id}', "ParticipantController@index")->middleware('verifyUserDepartment')->name("view.participants");
+  //Route::get('participantes/{activity_id}', "ParticipantController@index")->middleware('verifyUserDepartment')->name("view.participants");
+  Route::get('participantes/{activity_id}', "ParticipantController@index")->name("view.participants");
   Route::get('participantes/buscar/{activity_id}', "ParticipantController@search")->middleware('verifyUserDepartment')->name("search.participants");
   Route::get('participantes/crear/{activity_id}', "ParticipantController@create")->middleware('verifyUserDepartment')->name("create.participant");
-  Route::post('participantes/almacenar/{professor_id}', "ParticipantController@store")->middleware('verifyUserDepartment')->name("store.participant");
-  Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->middleware('verifyUserDepartment')->name('edit.participant');
-  Route::put('participantes/guardar/{participant_id}', "ParticipantController@update")->middleware('verifyUserDepartment')->name('update.participant');
+  //Route::post('participantes/almacenar/{student_id}', "ParticipantController@store")->middleware('verifyUserDepartment')->name("store.participant");
+  Route::post('participantes/almacenar/{student_id}', "ParticipantController@store")->name("store.participant");
+
+  //Route::post('participantes/almacenar/{student_id}', [ParticipantController::class, 'store'])->name('participantes.almacenar');
+  //Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->middleware('verifyUserDepartment')->name('edit.participant');
+    Route::get('participantes/actualizar/{participant_id}', 'ParticipantController@edit')->name('edit.participant');
+  //Route::put('participantes/guardar/{participant_id}', "ParticipantController@update")->middleware('verifyUserDepartment')->name('update.participant');
+    Route::put('participantes/guardar/{participant_id}', 'ParticipantController@update')->name('update.participant');
+
+
   Route::delete('participantes/eliminar/{participant_id}', "ParticipantController@delete")->middleware('verifyUserDepartment')->name("delete.participant");
   Route::get('participantes/encuesta/buscar', "ParticipantController@searchEvaluation")->name("search.evaluation")->withoutMiddleware(['guest']);
+
+
+  
+
+
 
   //Route Professor
   Route::get('profesores', "ProfessorController@index")->name("view.professors");
@@ -146,6 +176,7 @@ Route::group(['middleware' => 'guest'], function () {
   Route::put('profesores/guardar/{professor_id}', "ProfessorController@update")->name('update.professor');
   Route::delete('profesores/eliminar/{professor_id}', "ProfessorController@delete")->name("delete.professor");
 
+
   //Route Professor Position
   Route::get('puestos/profesor/{professor_id}', "ProfessorPositionController@index")->name("view.professor-positions");
   Route::post('puestos/profesor/crear/{professor_id}', "ProfessorPositionController@store")->name("store.professor-position");
@@ -155,6 +186,19 @@ Route::group(['middleware' => 'guest'], function () {
   Route::get('divisiones/profesor/{profesor_id}', "ProfessorDivisionController@index")->name("view.professor-divisions");
   Route::post('divisiones/profesor/crear/{professor_id}', "ProfessorDivisionController@store")->name("store.professor-division");
   Route::delete('divisiones/profesor/eliminar/{professor_division_id}', "ProfessorDivisionController@delete")->name("delete.professor-division");
+
+
+  //Route Student
+  Route::get('estudiantes', [StudentController::class, 'index'])->name('view.student');
+  Route::get('/estudiantes/buscar', [StudentController::class, 'search'])->name('search.student');
+  Route::get('/estudiantes/crear', [StudentController::class, 'create'])->name('create.student');
+  Route::post('/estudiantes/almacenar', [StudentController::class, 'store'])->name('store.student');
+  Route::delete('/estudiantes/eliminar/{student_id}', "StudentController@delete")->name("delete.student");
+  Route::get('/estudiantes/descargar/reporte-actividades/{student_id}', "StudentController@downloadRecord")->name("download.student-record");
+  Route::get('/estudiantes/actualizar/{student_id}', [StudentController::class, 'edit'])->name('edit.student');
+  Route::put('/estudiantes/guardar/{student_id}', "StudentController@update")->name('update.student');
+  Route::delete('/estudiantes/eliminar/{student_id}', "StudentController@delete")->name("delete.student");
+
 
   //Route Venue
   Route::get('sedes', "VenueController@index")->name("view.venues");

@@ -29,14 +29,14 @@ class KeysExport implements FromView, ShouldAutoSize
                          ->get();
 
         $participants = DB::table('participant AS p')
-                          ->join('professor AS pr', 'pr.professor_id', 'p.professor_id')
+                          ->join('student AS st', 'st.student_id', 'p.student_id')
                           ->join('activity AS a', 'a.activity_id', 'p.activity_id')
                           ->join('activity_catalogue AS ac', 
                                 'ac.activity_catalogue_id', 
                                 'a.activity_catalogue_id')
                           ->select('ac.key AS key_catalogue', 'a.year', 'a.num',
-                                  'a.type', 'pr.name', 'pr.last_name', 
-                                  'pr.mothers_last_name', 'p.key')
+                                  'a.type', 'st.name', 'st.last_name', 
+                                  'st.mothers_last_name', 'p.key')
                           ->get();
 
         $data = $instructors->merge($participants);

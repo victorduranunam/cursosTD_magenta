@@ -147,6 +147,12 @@ class ActivityController extends Controller
 
   }
 
+
+  public function store2() {
+    dd('Entró en store');
+  }
+
+
   public function store (Request $req)
   {
     try {
@@ -565,7 +571,7 @@ class ActivityController extends Controller
 
   public function downloadExport()
   {
-    return Excel::download(new DBExport, 'exportacion_magenta.xlsx');
+    return Excel::download(new DBExport, 'exportacion_cursosTD.xlsx');
   }
 
   public function downloadKeysBook()
@@ -706,6 +712,8 @@ class ActivityController extends Controller
 
 
     } catch(\Illuminate\Database\QueryException $th){
+
+      dd($th);
 
       if($th->getCode() == 7)
           return redirect()

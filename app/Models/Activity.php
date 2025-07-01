@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Activity extends Model
 {
     use HasFactory;
@@ -108,20 +110,13 @@ class Activity extends Model
     }
 
     public function getParticipantsSuggestions(){
-      $participants = Participant::join('activity_evaluation as ae', 
-                                        'ae.participant_id',
-                                        '=',
-                                        'participant.participant_id')
-                                 ->join('professor as p',
-                                        'p.professor_id',
-                                        '=',
-                                        'participant.professor_id')
-                                 ->where('activity_id', $this->activity_id)
-                                 ->whereNotNull('ae.question_6_2')
-                                 ->select('p.name', 'p.last_name', 
-                                          'p.mothers_last_name', 
-                                          'ae.question_6_2')
-                                 ->get();
+            $participants = Participant::from('participant as pt')
+                ->join('activity_evaluation as ae', 'ae.participant_id', '=', 'pt.participant_id')
+                ->join('student as a', 'a.student_id', '=', 'pt.student_id')
+                ->where('pt.activity_id', $this->activity_id)
+                ->whereNotNull('ae.question_6_2')
+                ->select('a.name', 'a.last_name', 'a.mothers_last_name', 'ae.question_6_2')
+                ->get();
       return $participants;
     }
 
@@ -135,7 +130,7 @@ class Activity extends Model
     }
 
     public function getParticipants(){
-      return Professor::join('participant','participant.professor_id','=','professor.professor_id')
+      return Student::join('participant','participant.student_id','=','student.student_id')
                       ->where('participant.activity_id',$this->activity_id)
                       ->get()
                       ->sortBy(function($value){
@@ -143,10 +138,12 @@ class Activity extends Model
                         }, SORT_NATURAL);
     }
 
+
+
     public function getParticipantsNames(){
-      return Professor::join('participant','participant.professor_id','=','professor.professor_id')
+      return Student::join('participant','participant.student_id','=','student.student_id')
                       ->where('participant.activity_id',$this->activity_id)
-                      ->select('professor.name')
+                      ->select('student.name')
                       ->get()
                       ->sortBy('name', SORT_NATURAL);
     }

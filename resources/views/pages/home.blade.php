@@ -9,8 +9,8 @@
   @include('partials.messages')
     <div class="card-body"><br>
       <div class="logos col-center">
-        <img class="img-escudo" src={!! asset('img/logo-magenta.png') !!} alt="">
-        &nbsp; Manejo y Gestión de actividades para la capacitación docente.
+        <img class="img-escudo" src={!! asset('img/logo_td.jpg') !!} alt="">
+        &nbsp; Cursos Transformación Digital
         <hr>
         <h5>¿Qué desea hacer?</h5>
         <div class="row" style="margin: 1%" style="margin: 1%">
@@ -21,7 +21,7 @@
             <a href="{!! route('view.departments') !!}" class="btn btn-outline-dark">Ver departamentos</a>
           </div>
           <div class="col-4">
-            <a href={!! route('create.professor') !!} class="btn btn-outline-dark">Dar de alta profesor</a>
+            <a href={!! route('create.professor') !!} class="btn btn-outline-dark">Dar de alta instructor</a>
           </div>
         </div>
         <div class="row" style="margin: 1%">
@@ -29,10 +29,10 @@
             <a href={!! route('view.activities') !!} class="btn btn-outline-dark">Ver Actividades programadas</a>
           </div>
           <div class="col-4">
-            <a href={!! route('view.diplomas') !!} class="btn btn-outline-dark">Ver diplomados</a>
+            <a href={!! route('view.student') !!} class="btn btn-outline-dark">Ver alumnos</a>
           </div>
           <div class="col-4">
-            <a href={!! route('view.professors') !!} class="btn btn-outline-dark">Ver profesores</a>
+            <a href={!! route('view.professors') !!} class="btn btn-outline-dark">Ver instructorres</a>
           </div>
         </div>
         <div class="row" style="margin: 1%">
@@ -40,7 +40,7 @@
             <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-dark">Crear nuevo Catálogo de Actividades</a>
           </div>
           <div class="col-4">
-            <a href={!! route('view.venues') !!} class="btn btn-outline-dark">Ver sedes</a>
+            <a href={!! route('view.venues') !!} class="btn btn-outline-dark">Ver aulas</a>
           </div>
           <div class="col-4">
             <a href="{!! route('view.administrators') !!}" class="btn btn-outline-dark">Consultar Administradores</a>

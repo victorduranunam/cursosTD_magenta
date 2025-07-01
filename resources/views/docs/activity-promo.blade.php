@@ -12,7 +12,7 @@ html{
 }
 body{
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url({!! public_path('img/logo-magenta.png') !!});
+  background-image: url({!! public_path('img/logo_td.jpg') !!});
   background-size:45%;
   background-position: right bottom;
   background-repeat: no-repeat;
@@ -44,7 +44,7 @@ th, td{
   <body>
     <div>
       <div id='header'>
-        <h2>MAGENTA</h2>
+        <h2>Transformación Digital</h2>
         <h3>Facultad de Ingeniería</h3>
       </div>
       <div id="body">

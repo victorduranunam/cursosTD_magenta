@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-  <title>MAGENTA | Capacitación Docente</title>
+  <title>Cursos TD </title>
 </head>
 <body class="home">
 
@@ -22,7 +22,7 @@
       @method('post')
     <div class="content">
       <div class="title m-b-md">
-        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">MAGENTA</a>
+        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">Cursos TD</a>
       </div>
     </div>
     @include('partials.messages')

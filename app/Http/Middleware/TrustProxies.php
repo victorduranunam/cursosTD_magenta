@@ -12,7 +12,14 @@ class TrustProxies extends Middleware
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies;
+
+      protected $proxies = '**';
+       // protected $proxies = [
+       //     'IP_DEL_PROXY_DE_UNAM', // Si conoces la IP exacta
+            // O si no la conoces y estás seguro de que tu aplicación solo recibe tráfico a través de ese proxy
+            // (Usar con extrema precaución, ya que confiaría en cualquier proxy)
+            // '**',
+       // ];
 
     /**
      * The headers that should be used to detect proxies.
@@ -26,3 +33,12 @@ class TrustProxies extends Middleware
         Request::HEADER_X_FORWARDED_PROTO |
         Request::HEADER_X_FORWARDED_AWS_ELB;
 }
+
+
+
+
+
+
+
+
+

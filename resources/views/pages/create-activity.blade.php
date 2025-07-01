@@ -10,14 +10,15 @@
   @include('partials.messages')
 
   <div class="card-body"><br>
-    <form method="POST" action="{!! route('store.activity') !!}">
+    <form method="POST" action="{{ route('store.activity') }}">
       @csrf
       @method('post')
       <div class="row">
         <input id="activity_catalogue_id" type="hidden" class="form-control" name="activity_catalogue_id" value="{{ $activity_cat->activity_catalogue_id}}" required>
         <div class="col-xl-2">
           <label for="year" class="form-label">*Periodo:</label>
-          <input type="text" required class="form-control" name="year" id="year" placeholder="Ej. 2022" value="{!! old('year') !!}">
+          <input type="number" required  class="form-control" name="year" id="year" placeholder="Ej. 2024"   value="{!! old('year') !!}">
+        
         </div>
         <div class="col-xl-2 mt-auto">
           <label for="num" class="form-label"></label>
@@ -100,6 +101,7 @@
         <div class="col-xl-3">
           <label for="max_quota" class="form-label">Cupo máximo:</label>
           <input required type="number" min="1" class="form-control" name="max_quota" id="max_quota" placeholder="Ej. 30" value="{!! old('max_quota') !!}">
+        
         </div>
         <div class="col-xl-3">
           <label for="ctc" class="form-label">Acreditación:</label>
@@ -107,7 +109,8 @@
         </div>
         <div class="col-xl-3">
           <label for="cost" class="form-label">Costo:</label>
-          <input type="text" required class="form-control" name="cost" id="cost" placeholder="Ej. 799.99" value="{!! old('cost') !!}">
+          <input type="number" required class="form-control" name="cost" id="cost" placeholder="Ej. 799.99" value="{!! old('cost') !!}">
+        
         </div>
       </div>
       

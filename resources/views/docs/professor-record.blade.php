@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Historial de Actividades del Profesor</title>
+    <title>Historial de Actividades del Instructor</title>
   </head>
 
 <style>
@@ -60,16 +60,16 @@ th, td{
     <div id="header">
 
       <div class="left-header">
-        <img class="img-escudo mg" src={!! public_path('img/logo-magenta.png') !!} align=left>
+        <img class="img-escudo mg" src={!! public_path('img/escudofi_color.jpg') !!} align=left>
       </div>
       <div class="right-header">
-        <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
+        <img class="img-escudo" src={!! public_path('img/logo_td.jpg') !!} align=right>
       </div>
 
       <div class="center-header">
-        <h2>MAGENTA</h2>
+        <h2>Cursos Transformación Digital</h2>
         <h3>Facultad de Ingeniería</h3>
-        <h3>Historial de Actividades del Profesor</h3> 
+        <h3>Historial de Actividades del Instructor</h3> 
       </div>
       
     </div>
@@ -81,7 +81,7 @@ th, td{
           <th>{!! $professor->getFullName() !!}</th>
         </tr>
         <tr>
-          <td>Cursos Acreditados:    <b>{!! $professor->activities->count() !!}</b></td>
+          <td>Cursos Impartidos:    <b>{!! $professor->activities->count() !!}</b></td>
           <td>Total de horas:    <b>{!! $professor->activities->sum('hours') !!}h</b></td>
         </tr>    
       </table>
@@ -90,7 +90,7 @@ th, td{
 
         <thead>
           <tr>
-            <th class="rubro">Cursos Acreditados</th>
+            <th class="rubro">Cursos Impartidos</th>
             <th class="contenido">Periodo</th>
             <th class="contenido">Duración(h)</th>
           </tr>

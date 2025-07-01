@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professor;
+use App\Http\Requests\StoreProfessorRequest;
+
 use DB;
 use PDF;
 
@@ -85,41 +87,27 @@ class ProfessorController extends Controller
       return view ("pages.create-professor");
   }
 
-  public function store(Request $req){
-      try {
-          $professor = new professor();
-          $professor->professor_id = DB::select("select nextval('professor_seq')")[0]->nextval;
-          $professor->name = $req->name;
-          $professor->last_name = $req->last_name;
-          $professor->mothers_last_name = $req->mothers_last_name;
-          $professor->rfc = $req->rfc;
-          $professor->worker_number = $req->worker_number;
-          $professor->birthdate = $req->birthdate;
-          $professor->phone_number = $req->phone_number;
-          $professor->degree = $req->degree;
-          $professor->email = $req->email;
-          $professor->gender = $req->gender;
-          $professor->semblance = $req->semblance;
-          $professor->is_instructor = $req->is_instructor;
-          $professor->provenance = $req->provenance;
-          $professor->save();
+public function store(StoreProfessorRequest $request)
+{
+    try {
+        $professor = new \App\Models\Professor(); // Ajusta si el namespace es distinto
+        $professor->professor_id = DB::select("select nextval('professor_seq')")[0]->nextval;
 
-          return redirect()
+        // Asignar los datos validados
+        $professor->fill($request->validated());
+        $professor->save();
+
+        return redirect()
             ->route('view.professors')
             ->with('success', 'Profesor creado correctamente');
+    } catch (\Illuminate\Database\QueryException $e) {
+        return back()
+            ->with('error', 'Error al guardar el profesor: ' . $e->getMessage())
+            ->withInput();
+    }
+}
 
-      } catch (\Illuminate\Database\QueryException $th) {
-          if($th->getCode() == 7)
-              return redirect()
-                ->route('home')
-                ->with('danger', 'No hay conexión con la base de datos.');
-          else
-              return redirect()
-                ->back()
-                ->with('warning', 'Error al almacenar, verifique sus datos.')
-                ->withInput();
-      }
-  }
+
 
   public function edit($professor_id){
       try {
@@ -213,6 +201,7 @@ class ProfessorController extends Controller
       return $pdf->download('HistorialProfesor'.$professor_id.'.pdf');
 
     } catch(\Illuminate\Database\QueryException $th) {
+      dd('Error: '.$th->getMessage());
       if($th->getCode() == 7)
           return redirect()
             ->route('home')
@@ -223,4 +212,6 @@ class ProfessorController extends Controller
             ->with('warning', 'Error al generar el reporte.');
     }
   }
+
+
 }

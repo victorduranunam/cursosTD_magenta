@@ -183,7 +183,7 @@
             <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
         </div>
         <div class="col-2">
-          <a href="{!! route("view.participants", $participant->activity_id) !!}" class="btn btn-outline-warning">Cancelar</a>
+          <a href="{!! route("view.participants", $participant->activity_id) !!}" class="btn btn-outline-warning">Regresar</a>
         </div>
     </div>
     </form>

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\ActivityCatalogue;
 use App\Models\Activity;
@@ -13,41 +14,74 @@ use App\Models\Instructor;
 
 class VerifyUserDepartment
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
     public function handle(Request $request, Closure $next)
     {
-      
-      $user = Auth::user();
-      if ($request->has('department_id')) {
-        $department_id = $request->input('department_id');
-      }elseif ($request->has('activity_catalogue_id')) {
-        $department_id = ActivityCatalogue::findOrFail($request->has('activity_catalogue_id'))->department_id;
-      }elseif ($request->has('activity_id')) {
-        $department_id = Activity::findOrFail($request->has('activity_id'))->activity_catalogue->department_id;
-      } elseif ($request->route()->hasParameter('activity_catalogue_id')) {
-        $department_id = ActivityCatalogue::findOrFail($request->route('activity_catalogue_id'))->department_id;
-      } elseif ($request->route()->hasParameter('activity_id')) {
-        $department_id = Activity::findOrFail($request->route('activity_id'))->activity_catalogue->department_id;
-      } elseif ($request->route()->hasParameter('participant_id')) {
-        $department_id = Participant::findOrFail($request->route('participant_id'))
-          ->activity->activity_catalogue->department_id;
-      } elseif ($request->route()->hasParameter('instructor_id')) {
-        $department_id = Instructor::findOrFail($request->route('instructor_id'))
-          ->activity->activity_catalogue->department_id;
-      } else {
-          return redirect()->route('home')->with('danger', 'Error al verificar departamento del usuario');
-      }
+        $user = Auth::user();
 
-    if ($user->department_id !== $department_id) {
-        return redirect()->route('home')->with('danger', 'No es posible almacenar u obtener información no asociada al departamento del usuario');
-    }
+        $department_id = null;
 
-    return $next($request);
+        // Revisión por inputs directos
+        if ($request->filled('department_id')) {
+            $department_id = $request->input('department_id');
+
+        } elseif ($request->filled('activity_catalogue_id')) {
+            $activityCatalogue = ActivityCatalogue::find($request->input('activity_catalogue_id'));
+            if ($activityCatalogue) {
+                $department_id = $activityCatalogue->department_id;
+            }
+
+        } elseif ($request->filled('activity_id')) {
+            $activity = Activity::with('activity_catalogue')->find($request->input('activity_id'));
+            if ($activity && $activity->activity_catalogue) {
+                $department_id = $activity->activity_catalogue->department_id;
+            }
+
+        // Revisión por parámetros de ruta
+        } elseif ($request->route()?->hasParameter('activity_catalogue_id')) {
+            $activityCatalogue = ActivityCatalogue::find($request->route('activity_catalogue_id'));
+            if ($activityCatalogue) {
+                $department_id = $activityCatalogue->department_id;
+            }
+
+        } elseif ($request->route()?->hasParameter('activity_id')) {
+            $activity = Activity::with('activity_catalogue')->find($request->route('activity_id'));
+            if ($activity && $activity->activity_catalogue) {
+                $department_id = $activity->activity_catalogue->department_id;
+            }
+
+        } elseif ($request->route()?->hasParameter('participant_id')) {
+            $participant = Participant::with('activity.activity_catalogue')->find($request->route('participant_id'));
+            if ($participant && $participant->activity && $participant->activity->activity_catalogue) {
+                $department_id = $participant->activity->activity_catalogue->department_id;
+            }
+
+        } elseif ($request->route()?->hasParameter('instructor_id')) {
+            $instructor = Instructor::with('activity.activity_catalogue')->find($request->route('instructor_id'));
+            if ($instructor && $instructor->activity && $instructor->activity->activity_catalogue) {
+                $department_id = $instructor->activity->activity_catalogue->department_id;
+            }
+        }
+
+        // Si no se pudo obtener el departamento
+        if (is_null($department_id)) {
+            Log::warning('No se pudo verificar el departamento en la solicitud.', [
+                'request_data' => $request->all(),
+                'route_parameters' => $request->route()?->parameters() ?? [],
+                'user_id' => $user->id,
+            ]);
+            return redirect()->route('home')->with('danger', 'Error al verificar el departamento del usuario');
+        }
+
+        // Comparar con el departamento del usuario
+        if ($user->department_id !== $department_id) {
+            Log::warning('Usuario no autorizado a acceder a departamento.', [
+                'user_department_id' => $user->department_id,
+                'target_department_id' => $department_id,
+                'user_id' => $user->id,
+            ]);
+            return redirect()->route('home')->with('danger', 'No puedes acceder a información de otro departamento.');
+        }
+
+        return $next($request);
     }
 }

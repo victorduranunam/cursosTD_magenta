@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Reporte de Participantes | MAGENTA </title>
+  <title>Reporte de Participantes | Transformación Digital </title>
 </head>
 <style>
 html{
@@ -59,11 +59,11 @@ th, td{
 <body>
   <div id="header">
     <div class="left-header">
-      <img class="img-escudo mg" src={!! public_path('img/logo-magenta.png') !!} align=left>
+      <img class="img-escudo mg" src={!! public_path('img/escudofi_color.jpg') !!} align=left>
     </div>
 
     <div class="right-header">
-      <img class="img-escudo" src={!! public_path('img/unica2.png') !!} align=right>
+      <img class="img-escudo" src={!! public_path('img/ulogo_td.jpg') !!} align=right>
     </div>
 
     <div class="center-header">

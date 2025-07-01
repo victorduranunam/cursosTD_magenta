@@ -4,10 +4,10 @@
 
 <div class="card">
   <div class="card-header"><br>
-    <h3>Ver Profesores <i class="bi bi-person-lines-fill"></i></h3>
+    <h3>Ver Instructor <i class="bi bi-person-lines-fill"></i></h3>
     <div class="row justify-content-end">
       <div class="col-2">
-        <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de profesor</a>
+        <a href={!! route('create.professor') !!} class="btn btn-outline-success">Alta de Instructor</a>
       </div>
       <div class="col-1">
         <a class="btn btn-outline-primary" onclick="blockSearchDiv()">Buscar</a>
@@ -27,7 +27,7 @@
           @method('get')
           <div class="row">
             <div class="col-xl-6">
-              <label class="form-label" for="words">Buscar profesor:</label>
+              <label class="form-label" for="words">Buscar Instructores:</label>
               <input required class="form-control" type="text" name="words" id="words" value="{!! old('words') !!}">
             </div>
             <div class="col-xl-3">
@@ -93,7 +93,7 @@
                     
                     <li><a class="dropdown-item" href="{!! route('view.professor-divisions', $professor->professor_id) !!}">Divisiones</a></li>
                     <li><a class="dropdown-item" href="{!! route('view.professor-positions', $professor->professor_id) !!}">Puestos de Trabajo</a></li>
-                    <li><a class="dropdown-item" href="{!! route('download.professor-record', $professor->professor_id) !!}">Historial</a></li>
+                    <!--<li><a class="dropdown-item" href="{!! route('download.professor-record', $professor->professor_id) !!}">Historial</a></li>-->
                     <li><a class="dropdown-item" href={!! route('edit.professor', $professor->professor_id) !!}>Actualizar</a></li>
                     <li><a data-bs-toggle="modal" data-bs-target="#myModal{!! $professor->professor_id !!}" class="dropdown-item">Eliminar</a></li>
                 
@@ -104,7 +104,7 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Eliminar profesor</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Eliminar Alumno</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -113,6 +113,7 @@
                           </p>
                         </div>
                       <div class="modal-footer">
+                        <input type="hidden"  name="is_instructor" id="is_instructor" value="1">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <input type="submit" value="Eliminar" class="btn btn-outline-danger">
                       </div>
@@ -129,7 +130,7 @@
       @elseif( $professors->isEmpty() )
         <div class="row">
           <div class="col-xl-6">
-            No hay profesores en la base de datos.
+            No hay Profesores en la base de datos.
           </div>
         </div>
       @endif
