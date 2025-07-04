@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href={!! url("/img/favicon.ico") !!} type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-  <title>MAGENTA | Capacitación Docente</title>
+  <title>CURSOS - TD </title>
 </head>
 <body class="home">
 
@@ -22,10 +22,10 @@
       @method('get')
     <div class="content">
       <div class="title m-b-md">
-        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">MAGENTA</a> 
+        <a style='text-decoration: none; color:#636b6f;' href="{!! route('home') !!}">CURSOS - TD  </a> 
       </div>
       <div class="subtitle m-b-md">
-        Contestar Encuesta
+        Encuestas de Evaluación 
       </div>
     </div>
     @include('partials.messages')
@@ -35,7 +35,7 @@
         <input type="text" class="form-control" name='email' id="email" placeholder="Ej. armando@ejemplo.com" required>
       </div>
       <div class="mb-3">
-        <label for="group_key" class="form-label">Clave de Grupo:</label>
+        <label for="group_key" class="form-label">Clave de Grupo (Proporcionada por el instructor):</label>
         <input type="text" class="form-control" id="group_key" name='group_key' placeholder="Ej. DICU001-12" required>
       </div>
       <button type="submit" class="btn btn-primary">Continuar</button>

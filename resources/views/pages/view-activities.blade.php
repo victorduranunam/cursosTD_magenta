@@ -133,30 +133,38 @@
     @if($activities->isNotEmpty())
       
       <div class="row">
-        <div class="col-xl-4">
+        <div class="col-xl-3">
           <h6>Nombre</h6>
         </div>
-        <div class="col-xl-4">
+        <div class="col-xl-3">
           <h6>Instructor</h6>
         </div>
         <div class="col-xl-2">
           <h6>Periodo</h6>
         </div>
+        <div class="col-xl-2">
+          <h6>Grupo</h6>
+        </div>
       </div>
 
       @foreach ($activities as $activity)
+
         <div class="row row-list">
           {{-- Nombre de la actividad --}}
-          <div class="col-xl-4 mt-auto mb-auto">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $activity->activity_catalogue->name !!}
           </div>
           {{-- Instructores de la actividad --}}
-          <div class="col-xl-4 mt-auto mb-auto">
+          <div class="col-xl-3 mt-auto mb-auto">
             {!! $activity->getInstructorsName() !!}
           </div>
           {{-- Semestre de la actividad --}}
           <div class="col-xl-2 mt-auto mb-auto">
             {!! $activity->getPeriod() !!}
+          </div>
+
+          <div class="col-xl-2 mt-auto mb-auto">
+            {!! $activity->clave_grupo !!}
           </div>
           
           {{-- Opciones de la actividad --}}

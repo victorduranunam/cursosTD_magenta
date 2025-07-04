@@ -51,28 +51,37 @@ Route::group(['middleware' => 'guest'], function () {
 
   Route::get('actividades', 'ActivityController@index')->name('view.activities');
   Route::get('actividades/buscar', 'ActivityController@search')->name('search.activities');
-  Route::get('actividades/crear/{activity_catalogue_id}', 'ActivityController@create')->middleware('verifyUserDepartment')->name('create.activity');
-  Route::post('actividades/almacenar', [ActivityController::class, 'store'])->middleware('verifyUserDepartment')->name('store.activity');
+  
+  
+//Route::get('actividades/crear/{activity_catalogue_id}', 'ActivityController@create')->middleware('verifyUserDepartment')->name('create.activity');
+//Route::post('actividades/almacenar', [ActivityController::class, 'store'])->middleware('verifyUserDepartment')->name('store.activity');
+//Route::get('actividades/actualizar/{activity_id}', 'ActivityController@edit')->middleware('verifyUserDepartment')->name('edit.activity');
+//Route::put('actividades/guardar/{activity_id}', 'ActivityController@update')->middleware('verifyUserDepartment')->name('update.activity');
+//Route::delete('actividades/eliminar/{activity_id}', 'ActivityController@delete')->middleware('verifyUserDepartment')->name('delete.activity');
+ 
+//Route::get('actividades/crear/constancias/{activity_id}', 'ActivityController@createCertificates')->middleware('verifyUserDepartment')->name('create.activity-certificates');
+//Route::get('actividades/crear/reconocimientos/{activity_id}', 'ActivityController@createRecognitions')->middleware('verifyUserDepartment')->name('create.activity-recognitions');
+//Route::get('actividades/descargar/publicidad/{activity_id}', 'ActivityController@downloadPromo')->middleware('verifyUserDepartment')->name('download.activity-promo');
+//Route::post('actividades/descargar/constancias/{activity_id}', 'ActivityController@downloadCertificates')->middleware('verifyUserDepartment')->name('download.activity-certificates');
+//Route::post('actividades/descargar/reconocimientos/{activity_id}', 'ActivityController@downloadRecognitions')->middleware('verifyUserDepartment')->name('download.activity-recognitions');
+//Route::get('actividades/descargar/verificacion-datos/{activity_id}', "ActivityController@downloadVerifyDataSheet")->middleware('verifyUserDepartment')->name('download.activities-verify-data-sheet');
+//Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->middleware('verifyUserDepartment')->name('download.activities-identifiers');
+//Route::get('actividades/descargar/hoja-asistencia/{activity_id}', "ActivityController@downloadAttendanceSheet")->middleware('verifyUserDepartment')->name('download.activities-attendance-sheet');
+ 
 
-
-  
-  
-  Route::get('actividades/actualizar/{activity_id}', 'ActivityController@edit')->middleware('verifyUserDepartment')->name('edit.activity');
-  Route::put('actividades/guardar/{activity_id}', 'ActivityController@update')->middleware('verifyUserDepartment')->name('update.activity');
-  Route::delete('actividades/eliminar/{activity_id}', 'ActivityController@delete')->middleware('verifyUserDepartment')->name('delete.activity');
-  Route::get('actividades/crear/constancias/{activity_id}', 'ActivityController@createCertificates')->middleware('verifyUserDepartment')->name('create.activity-certificates');
-  Route::get('actividades/crear/reconocimientos/{activity_id}', 'ActivityController@createRecognitions')->middleware('verifyUserDepartment')->name('create.activity-recognitions');
-  Route::get('actividades/descargar/publicidad/{activity_id}', 'ActivityController@downloadPromo')->middleware('verifyUserDepartment')->name('download.activity-promo');
-  Route::post('actividades/descargar/constancias/{activity_id}', 'ActivityController@downloadCertificates')->middleware('verifyUserDepartment')->name('download.activity-certificates');
-  Route::post('actividades/descargar/reconocimientos/{activity_id}', 'ActivityController@downloadRecognitions')->middleware('verifyUserDepartment')->name('download.activity-recognitions');
-  Route::get('actividades/descargar/verificacion-datos/{activity_id}', "ActivityController@downloadVerifyDataSheet")->middleware('verifyUserDepartment')->name('download.activities-verify-data-sheet');
-  
-  //Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->middleware('verifyUserDepartment')->name('download.activities-identifiers');
-  Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->name('download.activities-identifiers');
-
-  
-  //Route::get('actividades/descargar/hoja-asistencia/{activity_id}', "ActivityController@downloadAttendanceSheet")->middleware('verifyUserDepartment')->name('download.activities-attendance-sheet');
-  Route::get('actividades/descargar/hoja-asistencia/{activity_id}', 'ActivityController@downloadAttendanceSheet')->name('download.activities-attendance-sheet');
+Route::get('actividades/crear/{activity_catalogue_id}', 'ActivityController@create')->name('create.activity');
+Route::post('actividades/almacenar', [ActivityController::class, 'store'])->name('store.activity');
+Route::get('actividades/actualizar/{activity_id}', 'ActivityController@edit')->name('edit.activity');
+Route::put('actividades/guardar/{activity_id}', 'ActivityController@update')->name('update.activity');
+Route::delete('actividades/eliminar/{activity_id}', 'ActivityController@delete')->name('delete.activity');
+Route::get('actividades/crear/constancias/{activity_id}', 'ActivityController@createCertificates')->name('create.activity-certificates');
+Route::get('actividades/crear/reconocimientos/{activity_id}', 'ActivityController@createRecognitions')->name('create.activity-recognitions');
+Route::get('actividades/descargar/publicidad/{activity_id}', 'ActivityController@downloadPromo')->name('download.activity-promo');
+Route::post('actividades/descargar/constancias/{activity_id}', 'ActivityController@downloadCertificates')->name('download.activity-certificates');
+Route::post('actividades/descargar/reconocimientos/{activity_id}', 'ActivityController@downloadRecognitions')->name('download.activity-recognitions');
+Route::get('actividades/descargar/verificacion-datos/{activity_id}', "ActivityController@downloadVerifyDataSheet")->name('download.activities-verify-data-sheet');
+Route::get('actividades/descargar/identificadores/{activity_id}', "ActivityController@downloadIdentifiers")->name('download.activities-identifiers');
+Route::get('actividades/descargar/hoja-asistencia/{activity_id}', 'ActivityController@downloadAttendanceSheet')->name('download.activities-attendance-sheet');
 
 
 

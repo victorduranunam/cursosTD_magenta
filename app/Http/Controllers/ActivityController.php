@@ -245,6 +245,9 @@ class ActivityController extends Controller
         }
 
         // Guardar la nueva actividad
+
+        //dd($req);
+        
         $activity = new Activity(); 
         $activity->activity_id = DB::select("select nextval('activity_seq')")[0]->nextval;
         $activity->year = $req->year;
@@ -260,6 +263,12 @@ class ActivityController extends Controller
         $activity->min_quota = $req->min_quota;
         $activity->activity_catalogue_id = $req->activity_catalogue_id;
         $activity->venue_id = $req->venue_id;
+
+
+        $activity->clave_grupo = $req->clave_grupo;
+        $activity->fecha_inicial = $req->fecha_inicial;
+        $activity->fecha_final = $req->fecha_final;
+
         $activity->save();
         
         return redirect()
@@ -334,6 +343,11 @@ class ActivityController extends Controller
       $activity->max_quota = $req->max_quota;
       $activity->min_quota = $req->min_quota;
       $activity->venue_id = $req->venue_id;
+
+      $activity->clave_grupo = $req->clave_grupo;
+      $activity->fecha_inicial = $req->fecha_inicial;
+      $activity->fecha_final = $req->fecha_final;
+
       $activity->save();
 
       return redirect()

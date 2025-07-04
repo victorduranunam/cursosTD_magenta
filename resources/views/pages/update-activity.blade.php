@@ -53,6 +53,29 @@
         </div>
       </div>
 
+            <div class="row"> 
+        
+          <div class="col-xl-4">
+              <label for="clave_grupo" class="form-label">*Clave del grupo:</label>
+              <input type="text" required  class="form-control" name="clave_grupo" id="clave_grupo" placeholder="clave del grupo"  value="{!! $activity->clave_grupo !!}"   >
+          </div>
+        <div class="col-xl-4">
+              <label for="fecha_inicial" class="form-label">*Fecha de inicio:</label>
+              <input type="date" class="form-control" required name="fecha_inicial" 
+                id="fecha_inicial" placeholder="22/07/22" 
+                value="{!! $activity->fecha_inicial !!}"
+              >
+        </div>
+
+        <div class="col-xl-4">
+              <label for="fecha_final" class="form-label">*Fecha de termino:</label>
+              <input type="date" class="form-control" required name="fecha_final" 
+                id="fecha_final" placeholder="22/07/22" 
+                value="{!! $activity->fecha_final !!}"
+              >
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-xl-12">
           <label for="days_week" class="form-label">*Días de la semana:</label><br>
@@ -152,13 +175,15 @@
         <input type="text" required class="form-control" name="cost" id="cost" placeholder="Ej. 799.99" value="{!! $activity->cost !!}">
       </div>
     </div>
+
+    <!--
     <div class="row">
       <div class="col-xl-3">
         <label for="group_key">Clave de grupo:</label>
         <input type="text" name="group_key" id="group_key" class="form-control" disabled value="{!! $activity->group_key !!}">
       </div>
     </div>
-
+  -->
     <div class="row">
         <div class="d-grid gap-2 col-xl-2">
             <button type="submit" id='save-btn' class="btn btn-outline-success"> Guardar </button>
@@ -171,7 +196,7 @@
       @method('delete')
       <div class="row">
         <div class="col-2">
-          <a href="{!! route("view.activities") !!}" class="btn btn-outline-warning">Cancelar</a>
+          <a href="{!! route("view.activities") !!}" class="btn btn-outline-warning">Regresar</a>
         </div>
         <div class="col-2">
           <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#myModal{!! $activity->activity_id !!}">Eliminar</button>

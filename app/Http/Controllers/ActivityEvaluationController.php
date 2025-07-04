@@ -18,6 +18,107 @@ class ActivityEvaluationController extends Controller
 {
 
   public function create(Request $req) {
+
+
+
+    try {
+
+        $student = Student::where("email", $req->email)->get()->first();
+        if(!$student){
+            return redirect()->back()->with(
+              'danger', " Email no registrado."
+            );
+          }
+
+        $participant = DB::table('participant AS p')
+        ->join('student AS s', 's.student_id', '=', 'p.student_id')
+        ->join('activity AS a', 'a.activity_id', '=', 'p.activity_id')
+        ->where('s.email', $req->email)
+        ->where('a.clave_grupo', $req->group_key)
+        ->select('p.*', 's.*', 'a.*')
+        ->first();
+
+        if(!$participant){
+            return redirect()->back()->with(
+              'danger', "Clave de grupo incorrecta."
+            );
+        }
+
+
+
+      //$actividad = Activity::where("clave_grupo", $req->group_key)->get()->first();
+      
+      
+      $activity_catalogue = ActivityCatalogue::where('activity_catalogue_id', $participant->activity_catalogue_id)->first();
+      $activity = Activity::where('activity_catalogue_id', $activity_catalogue->activity_catalogue_id)->first();
+      //dd($activity);
+      
+      $evaluation = ActivityEvaluation::where('participant_id', $participant->participant_id)
+        ->get()
+        ->first();
+
+      if($evaluation)
+        return redirect()->route('create.instructor-evaluation', $participant->participant_id)->with(
+          'warning', "Evaluación de actividad contestada anteriormente. Continue con los instructores."
+        );
+
+      if($activity_catalogue->type == 'CO'){
+        $activity_string_1 = 'de la conferencia';
+        $activity_string_2 = 'la conferencia';
+      } else if($activity_catalogue->type == 'SE') {
+        $activity_string_1 = 'del seminario';
+        $activity_string_2 = 'el seminario';
+      } else if($activity_catalogue->type == 'CU') {
+        $activity_string_1 = 'del curso';
+        $activity_string_2 = 'el curso';
+      } else if($activity_catalogue->type == 'CT') {
+        $activity_string_1 = 'del curso-taller';
+        $activity_string_2 = 'el curso-taller';
+      } else if($activity_catalogue->type == 'TA') {
+        $activity_string_1 = 'del taller';
+        $activity_string_2 = 'el taller';
+      } else if($activity_catalogue->type == 'EV') {
+        $activity_string_1 = 'del evento';
+        $activity_string_2 = 'el evento';
+      } else if($activity_catalogue->type == 'FO') {
+        $activity_string_1 = 'del foro';
+        $activity_string_2 = 'el foro';
+      } else if($activity_catalogue->type == 'DI') {
+        $activity_string_1 = 'del módulo de diplomado';
+        $activity_string_2 = 'el módulo de diplomado';
+      } else {
+        return redirect()->back()->with('danger', 'Error con el tipo de actividad.');
+      }
+
+      $data = array(
+        'participant_name'  => $student->name.' '.
+                               $student->last_name.' '.
+                               $student->mothers_last_name,
+        'activity_string_1' => $activity_string_1,
+        'activity_string_2' => $activity_string_2,
+        'activity_id'       => $activity->activity_id,
+        'activity_name'     => $activity_catalogue->name,
+        'participant_id'    => $participant->participant_id
+      );
+      
+      return view('pages.create-activity-evaluation')
+           ->with('data', $data);
+
+    } catch (\Illuminate\Database\QueryException $th) {
+      if ($th->getCode() == 7)
+        return redirect()
+          ->back()
+          ->with('danger', 'No hay conexión con la base de datos.');
+      else
+        return redirect()
+          ->back()
+          ->with('danger', 'Problema con la base de datos.');
+    }
+  }
+
+  public function create2(Request $req) {
+
+   
     try {
       $professor = Student::where("email", $req->email)->get()->first();
       
@@ -26,22 +127,24 @@ class ActivityEvaluationController extends Controller
           'danger', " Email no registrado."
         );
       }
-      try{
+      
+      //try{
         //$group_key = explode("-", $req->group_key);
         //$key = $group_key[0];
         //$activity_id = $group_key[1];
-      } catch(Exception $e){
-        return redirect()->back()->with(
-          'danger', "Formato de clave inválido."
-        );
-      }
+      //} catch(Exception $e){
+      //  return redirect()->back()->with(
+      //    'danger', "Formato de clave inválido."
+      //  );
+      //}
 
 
-      
+
 
       $key=$req->group_key;
       $activity_catalogue = ActivityCatalogue::where('key', $key)->first();
-      
+
+      dd($activity_catalogue);
       
 
       if(!$activity_catalogue)

@@ -18,7 +18,6 @@
         <div class="col-xl-2">
           <label for="year" class="form-label">*Periodo:</label>
           <input type="number" required  class="form-control" name="year" id="year" placeholder="Ej. 2024"   value="{!! old('year') !!}">
-        
         </div>
         <div class="col-xl-2 mt-auto">
           <label for="num" class="form-label"></label>
@@ -41,6 +40,28 @@
         <div class="col-xl-3">
           <label for="end_time" class="form-label">*Hora de fin:</label>
           <input type="time" required class="form-control" name="end_time" id="end_time" value="{!! old('end_time') !!}">
+        </div>
+      </div>
+      <div class="row"> 
+        
+          <div class="col-xl-4">
+              <label for="clave_grupo" class="form-label">*Clave del grupo:</label>
+              <input type="text" required  class="form-control" name="clave_grupo" id="clave_grupo" placeholder="clave del grupo"   value="{!! old('clave_grupo') !!}">
+          </div>
+        <div class="col-xl-4">
+              <label for="fecha_inicial" class="form-label">*Fecha de inicio:</label>
+              <input type="date" class="form-control" required name="fecha_inicial" 
+                id="fecha_inicial" placeholder="22/07/22" 
+                value="{!! old('fecha_inicial') !!}"
+              >
+        </div>
+
+        <div class="col-xl-4">
+              <label for="fecha_final" class="form-label">*Fecha de termino:</label>
+              <input type="date" class="form-control" required name="fecha_final" 
+                id="fecha_final" placeholder="22/07/22" 
+                value="{!! old('fecha_final') !!}"
+              >
         </div>
       </div>
       <div class="row">
