@@ -42,7 +42,7 @@ class ParticipantController extends Controller
       else
         return redirect()
               ->route('home')
-              ->with('danger', 'Problema con la base de datos.');
+              ->with('danger', 'Problema con la base de datosss.');
       }
     }
 

@@ -48,18 +48,18 @@
       </div>
 
       <div class="row">
-        <div class="col-xl-3">
+        <div class="col-xl-5">
           <h6>Nombre</h6>
         </div>
-        <div class="col-xl-3">
+        <div class="col-xl-5">
           <h6>Email</h6>
         </div>
-        <div class="col-xl-2">
+        <!--<div class="col-xl-2">
           <h6>RFC</h6>
         </div>
         <div class="col-xl-2">
           <h6>Número de trabajador</h6>
-        </div>
+        </div>-->
       </div>
 
       @if( $professors->isNotEmpty() )
@@ -68,18 +68,20 @@
       
           <div class="row row-list" style="margin: 1%">
 
-            <div class="col-xl-3 mt-auto mb-auto">
+            <div class="col-xl-5 mt-auto mb-auto">
               {!! $professor->getFullName() !!}
             </div>
-            <div class="col-xl-3 mt-auto mb-auto">
+            <div class="col-xl-5 mt-auto mb-auto">
               {!! $professor->email !!}
             </div>
+            {{-- 
             <div class="col-xl-2 mt-auto mb-auto">
               {!! $professor->rfc !!}
             </div>
             <div class="col-xl-2 mt-auto mb-auto">
               {!! $professor->worker_number !!}
             </div>
+            --}}
             
             <div class="col-xl-2 mt-auto mb-auto">
               <div class="dropdown">

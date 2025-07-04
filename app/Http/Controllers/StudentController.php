@@ -97,6 +97,7 @@ class StudentController extends Controller
  
 public function store(StoreStudentRequest $req)
 {
+  //dd("Entro");
     try {
         $Student = new Student();
         $Student->student_id = DB::select("select nextval('Student_seq')")[0]->nextval;

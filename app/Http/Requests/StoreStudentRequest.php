@@ -17,7 +17,7 @@ class StoreStudentRequest extends FormRequest
             'name' => 'required|string|max:100',
             'last_name' => 'required|string|max:50',
             'mothers_last_name' => 'nullable|string|max:50',
-            'rfc' => 'required|string|regex:/^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$/i',
+            'rfc' => 'nullable|string|regex:/^[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}$/i',
             'worker_number' => 'nullable|string|max:30|unique:student,worker_number',
             'student_number' => 'nullable|string|max:30|unique:student,student_number',
             'phone_number' => 'nullable|string|max:15',

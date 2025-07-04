@@ -52,7 +52,6 @@ Route::group(['middleware' => 'guest'], function () {
   Route::get('actividades', 'ActivityController@index')->name('view.activities');
   Route::get('actividades/buscar', 'ActivityController@search')->name('search.activities');
   Route::get('actividades/crear/{activity_catalogue_id}', 'ActivityController@create')->middleware('verifyUserDepartment')->name('create.activity');
-
   Route::post('actividades/almacenar', [ActivityController::class, 'store'])->middleware('verifyUserDepartment')->name('store.activity');
 
 

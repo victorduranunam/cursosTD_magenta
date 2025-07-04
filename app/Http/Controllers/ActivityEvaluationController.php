@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ActivityEvaluation;
 use App\Models\Participant;
 use App\Models\Professor;
+use App\Models\Student;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -18,42 +19,58 @@ class ActivityEvaluationController extends Controller
 
   public function create(Request $req) {
     try {
-      $professor = Professor::where("email", $req->email)->get()->first();
+      $professor = Student::where("email", $req->email)->get()->first();
+      
       if(!$professor){
         return redirect()->back()->with(
           'danger', " Email no registrado."
         );
       }
       try{
-        $group_key = explode("-", $req->group_key);
-        $key = $group_key[0];
-        $activity_id = $group_key[1];
+        //$group_key = explode("-", $req->group_key);
+        //$key = $group_key[0];
+        //$activity_id = $group_key[1];
       } catch(Exception $e){
         return redirect()->back()->with(
           'danger', "Formato de clave inválido."
         );
       }
 
+
+      
+
+      $key=$req->group_key;
       $activity_catalogue = ActivityCatalogue::where('key', $key)->first();
+      
+      
+
       if(!$activity_catalogue)
         return redirect()->back()->with(
           'danger', "Clave de grupo incorrecta."
         );
 
+
+      //dd($activity_catalogue->activity_catalogue_id);
+     
+     // $activity = Activity::where('activity_catalogue_id', $activity_catalogue->activity_catalogue_id)
+     //                     ->where('activity_id', $activity_id)
+     //                     ->first();
+
       $activity = Activity::where('activity_catalogue_id', $activity_catalogue->activity_catalogue_id)
-                          ->where('activity_id', $activity_id)
                           ->first();
+
 
       if(!$activity)
         return redirect()->back()->with(
           'danger', "Clave de grupo incorrecta."
         );
 
-      $participant = Participant::where('professor_id', 
-        $professor->professor_id)
+      $participant = Participant::where('student_id', 
+        $professor->student_id)
       ->where('activity_id', $activity->activity_id)
       ->get()
       ->first();
+
 
       if(!$participant)
         return redirect()->back()->with('danger', 'Participante no encontrado');
@@ -125,21 +142,45 @@ class ActivityEvaluationController extends Controller
 
     try {
       $activity_evaluation = ActivityEvaluation::where('participant_id', $participant_id)->first();
+      
+     
       if(!$activity_evaluation){
-        return redirect()->back()->with('warning', 'El participante aún no ha evaluado la actividad.');
+        return redirect()->back()->with('warning', 'El estudiante aún no ha evaluado la actividad.');
       }
 
+
+      // $participant = DB::table('participant as pt')
+      //  ->join('professor as p', 'p.professor_id', 'pt.professor_id')
+      //  ->join('activity as a', 'a.activity_id', 'pt.activity_id')
+      //  ->join('activity_catalogue as ac', 'ac.activity_catalogue_id',
+      //          'a.activity_catalogue_id')
+      //  ->select('pt.participant_id', 'pt.activity_id','p.name', 'p.last_name',
+      //            'p.mothers_last_name','ac.name as activity_name', 
+      //            'ac.type as activity_type')
+      //  ->where('pt.participant_id', $activity_evaluation->participant_id)
+      //  ->get()
+      //  ->first();
+
+
       $participant = DB::table('participant as pt')
-        ->join('professor as p', 'p.professor_id', 'pt.professor_id')
-        ->join('activity as a', 'a.activity_id', 'pt.activity_id')
-        ->join('activity_catalogue as ac', 'ac.activity_catalogue_id',
-                'a.activity_catalogue_id')
-        ->select('pt.participant_id', 'pt.activity_id','p.name', 'p.last_name',
-                  'p.mothers_last_name','ac.name as activity_name', 
-                  'ac.type as activity_type')
-        ->where('pt.participant_id', $activity_evaluation->participant_id)
-        ->get()
-        ->first();
+          ->join('student as s', 's.student_id', 'pt.student_id') // Cambio aquí
+          ->join('activity as a', 'a.activity_id', 'pt.activity_id')
+          ->join('activity_catalogue as ac', 'ac.activity_catalogue_id', 'a.activity_catalogue_id')
+          ->select(
+              'pt.participant_id',
+              'pt.activity_id',
+              's.name',                // Cambio aquí
+              's.last_name',           // Cambio aquí
+              's.mothers_last_name',   // Cambio aquí
+              'ac.name as activity_name',
+              'ac.type as activity_type'
+          )
+          ->where('pt.participant_id', $activity_evaluation->participant_id)
+          ->get()
+          ->first();
+
+
+      //dd($participant);
 
       if(!$participant)
         return redirect()->back()->with('warning', 'Participante no encontrado');

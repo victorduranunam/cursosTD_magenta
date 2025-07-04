@@ -28,9 +28,14 @@
 
     <div class="row">
         <div class="col-xl-4">
-            <label class="form-label" for="rfc">*RFC:</label>
-            <input class="form-control" type="text" name="rfc" id="rfc"  minlength="10" maxlength="13" pattern="^[A-Za-zÑñ&]{4}\d{6}[A-Za-z0-9]{0,3}$"  placeholder="Ej. RAVV900101FC4 " value="{!!$professor->rfc !!}">
-          </div>
+            <label class="form-label" for="rfc">RFC:</label>
+             <input class="form-control" type="text" name="rfc" id="rfc"  minlength="10" maxlength="13" placeholder="Ej. RAVV900101FC4" value="{!!$professor->rfc !!}" pattern="^[A-Za-zÑñ&]{4}\d{6}[A-Za-z0-9]{0,3}$"   > 
+            {{--       <input class="form-control" type="text" name="rfc" id="rfc"  minlength="10" maxlength="13" placeholder="Ej. RAVV900101FC4" value="{!!$professor->rfc !!}"> --}}
+        </div>
+
+
+        
+
         <div class="col-xl-4">
             <label class="form-label" for="worker_number">Número de trabajador UNAM</label>
             <input  class="form-control" type="text" name="worker_number" id="worker_number" placeholder="Ej. 962264" value="{!!$professor->worker_number !!}">
@@ -44,8 +49,8 @@
 
     <div class="row">
         <div class="col-xl-4">
-          <label class="form-label" for="phone_number">*Número de teléfono:</label>
-          <input  required class="form-control" type="text" name="phone_number" id="phone_number" placeholder="Ej. 5539752674" value="{!!$professor->phone_number !!}">
+          <label class="form-label" for="phone_number">Número de teléfono:</label>
+          <input   class="form-control" type="text" name="phone_number" id="phone_number" placeholder="Ej. 5539752674" value="{!!$professor->phone_number !!}">
         </div>
         <div class="col-xl-4">
           <label class="form-label" for="email">*Email:</label>

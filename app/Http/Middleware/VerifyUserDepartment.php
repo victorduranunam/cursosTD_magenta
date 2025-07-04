@@ -79,7 +79,8 @@ class VerifyUserDepartment
                 'target_department_id' => $department_id,
                 'user_id' => $user->id,
             ]);
-            return redirect()->route('home')->with('danger', 'No puedes acceder a información de otro departamento.');
+            //return redirect()->route('home')->with('danger', 'No puedes acceder a información de otro departamento.');
+            return $next($request);
         }
 
         return $next($request);

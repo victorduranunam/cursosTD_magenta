@@ -61,8 +61,8 @@
 
       <div class="row">
           <div class="col-xl-4">
-            <label class="form-label" for="phone_number">*Número de teléfono:</label>
-            <input required class="form-control" type="text" name="phone_number" id="phone_number" placeholder="Ej. 5539752674" value="{{ old('phone_number') }}">
+            <label class="form-label" for="phone_number">Número de teléfono:</label>
+            <input class="form-control" type="text" name="phone_number" id="phone_number" placeholder="Ej. 5539752674" value="{{ old('phone_number') }}">
           </div>
           <div class="col-xl-4">
             <label class="form-label" for="email">*Email:</label>

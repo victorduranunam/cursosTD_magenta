@@ -37,7 +37,7 @@
         </div>
         <div class="row" style="margin: 1%">
           <div class="col-4">
-            <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-dark">Crear nuevo Catálogo de Actividades</a>
+            <a href={!! route('create.activity.catalogue') !!} class="btn btn-outline-dark">Crear nueva Actividad</a>
           </div>
           <div class="col-4">
             <a href={!! route('view.venues') !!} class="btn btn-outline-dark">Ver aulas</a>
